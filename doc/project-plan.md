@@ -26,11 +26,12 @@ Common examples include command-line shells such as Bash and Python's REPL.
 The deliverable for this project, then, is to create such a REPL generator for
 the Spoofax Language Workbench. This REPL should provide the following features:
 
-* TODO: discuss with Eelco and Gabriel
+* TODO: based on the research report, make our own list of features that we will
+  propose to Eelco and Gabriel.
 
 Non-features (e.g. features that should *not* be implemented) are:
 
-* TODO: discuss with Eelco and Gabriel
+* TODO: see above.
 
 If the above turns out to be (too) easy, the REPL can be extended into a
 language playground such as the one offered by the Swift programming language.
@@ -40,17 +41,18 @@ the client.
 ## Methodologies and tooling
 
 During this project we will work using the SCRUM methodology with weekly
-sprints. We propose to meet weekly with the TU coach to discuss the past and
-next weeks and the overall progress of the project.
+sprints. We propose to meet weekly (on mondays at 11.00) with the TU coach
+to discuss the past and next weeks and the overall progress of the project.
 
 Our backlog, current and completed sprints will be managed using Trello. Trello
 will also be used to communicate documents to the client and the TU coach.
 
 We will use pull-based development using GitHub. GitHub Issues will be used to
 track issues (all of this will be linked to Trello in one way or another). To
-facilitate this, an organization will be created on GitHub which will fork the
-relevant Spoofax repositories. Each of us will then fork these repositories to
-our private GitHub accounts.
+facilitate this, we will be given our own repository within the Metaborg
+organization. Each of us will then fork this repository to our private GitHub
+accounts. We will also use one private repository to hold all the documents
+(e.g. this document, the research project, et cetera) supporting our project.
 
 Since Spoofax is an already existing project, we will use whichever tools are
 already being used. This means that we will use:
