@@ -26,8 +26,8 @@ Common examples include command-line shells such as Bash and Python's REPL.
 The deliverable for this project, then, is to create such a REPL generator for
 the Spoofax Language Workbench. This REPL should provide the following features:
 
-* TODO: based on the research report, make our own list of features that we will
-  propose to Eelco and Gabriel.
+* TODO: based on the research report and the minutes of meeting 2016-04-19,
+  make our own list of features that we will propose to Eelco and Gabriel.
 
 Non-features (e.g. features that should *not* be implemented) are:
 
@@ -41,11 +41,9 @@ the client.
 ## Methodologies and tooling
 
 During this project we will work using the SCRUM methodology with weekly
-sprints. We propose to meet weekly (on mondays at 11.00) with the TU coach
-to discuss the past and next weeks and the overall progress of the project.
-
-Our backlog, current and completed sprints will be managed using Trello. Trello
-will also be used to communicate documents to the client and the TU coach.
+sprints. Our backlog, current and completed sprints will be managed using
+Trello. Trello will also be used to communicate documents to the client
+and the TU coach.
 
 We will use pull-based development using GitHub. GitHub Issues will be used to
 track issues (all of this will be linked to Trello in one way or another). To
@@ -59,15 +57,26 @@ already being used. This means that we will use:
 
 * the Java programming language;
 * Maven for the build environment;
-* JUnit for unit tests. TODO: discuss other testing frameworks (Mockito,
-  integration tests, etc.)
+* JUnit for unit tests.
 
 ## What TU Delft expects from us
 
+This section's purpose is to document additional agreements between the TU coach
+and us. For the regular project deadlines, please see the end of this section.
+
+Weekly meetings will be held on mondays at 11.00 to discuss the past and next week.
+and the overall progress of the project. Documents (such as the meeting topics)
+that will be discussed will be emailed to the TU coach at its latest the evening
+before the day of the meeting.
+
+Minutes will be made of every meeting, whether with the client, the TU coach or both.
+These minutes shall be sent to the TU coach as well.
+
 Regular project deadlines:
+
 * 19-04-2016: Project Plan
 * 29-04-2016: Research Report
-* 20-05-2016/27-05-2016: mid project meeting (coordinator + team + client)
+* 20-05-2016 - 27-05-2016: mid-project meeting (coordinator + team + client)
 * 27-05-2016: SIG 1st submission
 * 17-06-2016: Final Report
 * 17-06-2016: BEP infosheet
