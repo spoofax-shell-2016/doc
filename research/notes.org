@@ -24,9 +24,9 @@ the lecture slides related to language specification (Formal Grammars,
 :END:
 Dynamic semantics[fn:lecture-dynsem: Relevant lecture:
 http://tudelft-in4303.github.io/lectures/specification/dynamic-semantics]
-(also known as /execution semantics/) and refer to the semantics of
-what a program in some language does when executed
-[fn:dynamic-semantics: Reference?].
+(also known as /execution semantics/) refer to the semantics of what a
+program in some language does when executed [fn:dynamic-semantics:
+Reference?].
 
 There are multiple approaches to formally specify the dynamic
 semantics of a language. Among those approaches are /small-step style/
