@@ -3,8 +3,25 @@
 These are notes for the research report. The relevant papers for each
 subject are linked. A useful course by the Spoofax team with relevant
 lecture slides can be found here:
-[[http://tudelft-in4303.github.io/lectures/]].
-* Dynamic Semantics
+[[http://tudelft-in4303.github.io/lectures/specification/]]. These are all
+the lecture slides related to language specification (Formal Grammars,
+[[#sec-syntax-def][Syntax Definition]], [[#sec-static-analysis][Static Analysis]], [[#sec-term-rewrite][Term Rewriting]], [[#sec-dynamic-semantics][Dynamic Semantics]])
+* TODO Syntax Definition
+:PROPERTIES:
+:CUSTOM_ID: sec-syntax-def
+:END:
+* TODO Static Analysis
+:PROPERTIES:
+:CUSTOM_ID: sec-static-analysis
+:END:
+* TODO Term Rewriting
+:PROPERTIES:
+:CUSTOM_ID: sec-term-rewrite
+:END:
+* IN-PROGRESS Dynamic Semantics
+:PROPERTIES:
+:CUSTOM_ID: sec-dynamic-semantics
+:END:
 Dynamic semantics[fn:lecture-dynsem: Relevant lecture:
 http://tudelft-in4303.github.io/lectures/specification/dynamic-semantics]
 (also known as /execution semantics/) and refer to the semantics of
