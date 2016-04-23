@@ -1,0 +1,62 @@
+\documentclass[a4paper]{article}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{todonotes}
+\presetkeys{todonotes}{inline, noline}{}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+% For footref command
+\usepackage{scrextend}
+
+\title{}
+\author{%
+Gerlof Fokkema \and
+Jente Hidskes \and
+Skip Lentz}
+\date{}
+
+%% Comment out to show headerinfo.
+%\pagestyle{headings}
+
+\begin{document}
+
+%\frontmatter
+\maketitle
+
+\input{00-abstract}
+
+%\tableofcontents{}
+
+%\mainmatter
+
+\input{00-introduction}
+
+\input{01-problem}
+
+\input{02-analysis}
+
+\input{03-requirements}
+
+\input{04-realisation}
+
+\input{05-conclusion}
+
+%\appendix
+
+\bibliographystyle{plain}
+\bibliography{references}{}
+
+%% Comment out for glossaries
+%\glossarystyle{altlistgroup}
+%\printglossaries{}
+
+%\backmatter
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
