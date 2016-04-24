@@ -1,4 +1,5 @@
-\documentclass[a4paper]{article}
+\documentclass{tudelft-report}
+\usepackage[english]{babel}
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage{cleveref}
@@ -7,29 +8,26 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{enumitem}
-% For footref command
-\usepackage{scrextend}
+\usepackage{graphicx}
+\graphicspath{{img/}}
 
-\title{}
-\author{%
-Gerlof Fokkema \and
-Jente Hidskes \and
-Skip Lentz}
-\date{}
-
+\input{title_preamble}
 %% Comment out to show headerinfo.
 %\pagestyle{headings}
 
+% Don't show chapter numbers, we don't use chapters for the research
+% report.
+\renewcommand\thesection{\arabic{section}}
+
 \begin{document}
 
-%\frontmatter
-\maketitle
+\frontmatter
 
-\input{00-abstract}
+\input{title}
 
-%\tableofcontents{}
+\tableofcontents{}
 
-%\mainmatter
+\mainmatter
 
 \input{00-introduction}
 
@@ -43,7 +41,7 @@ Skip Lentz}
 
 \input{05-conclusion}
 
-%\appendix
+\appendix
 
 \bibliographystyle{plain}
 \bibliography{references}{}
@@ -52,7 +50,7 @@ Skip Lentz}
 %\glossarystyle{altlistgroup}
 %\printglossaries{}
 
-%\backmatter
+\backmatter
 
 \end{document}
 

@@ -1,2 +1,2 @@
 $pdf_mode = 1;
-$pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode %O %S';
+$pdflatex = 'xelatex -synctex=1 -interaction=nonstopmode %O %S';
