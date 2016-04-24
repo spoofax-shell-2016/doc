@@ -5,12 +5,12 @@ subject are linked. A useful course by the Spoofax team with relevant
 lecture slides can be found here:
 [[http://tudelft-in4303.github.io/lectures/specification/]]. These are all
 the lecture slides related to language specification (Formal Grammars,
-[[#sec-syntax-def][Syntax Definition]], [[#sec-static-analysis][Static Analysis]], [[#sec-term-rewrite][Term Rewriting]], [[#sec-dynamic-semantics][Dynamic Semantics]])
+[[#sec-syntax-def][Syntax Definition]], [[#sec-static-analysis][Static Semantics]], [[#sec-term-rewrite][Term Rewriting]], [[#sec-dynamic-semantics][Dynamic Semantics]])
 * TODO Syntax Definition
 :PROPERTIES:
 :CUSTOM_ID: sec-syntax-def
 :END:
-* TODO Static Analysis
+* TODO Static Semantics
 :PROPERTIES:
 :CUSTOM_ID: sec-static-analysis
 :END:
@@ -33,8 +33,14 @@ semantics of a language. Among those approaches are /small-step style/
 semantics[fn:lecture-ucolorado: See for example
 [[http://ecee.colorado.edu/~siek/ecen5013/spring10/lecture3.pdf]]],
 /big-step style/ semantics and translating to a different language.
-** TODO Dynamic Semantics using Stratego (possible?)
+** Dynamic Semantics using Stratego
+The dynamic semantics of a language used to be specified with
+Stratego, but the Spoofax team has developed a more higher level way
+to declare the semantics of a language, using [[#ssec-dynsem][DynSem]].
 ** DynSem
+:PROPERTIES:
+:CUSTOM_ID: ssec-dynsem
+:END:
 DynSem[fn:dynsem: Relevant paper: [[http://swerl.tudelft.nl/twiki/pub/Main/TechnicalReports/TUD-SERG-2015-003.pdf][DynSem: A DSL for Dynamic Semantics
 Specification]].] is a DSL for specifying the /dynamic semantics/ of a
 language.  Often the formal specification of the dynamic semantics of
@@ -42,7 +48,7 @@ a program are separate from the implementation of the language. The
 goal of DynSem is to unify both of these, by providing a syntax that
 is readable as a formal specification, and can also serve as the
 source for generating the execution engine of a programming language.
-** Reduction Rules
+** IN-PROGRESS Reduction Rules
 With DynSem, the dynamic semantics are specified by reduction rules in
 either small-step style or big-step style[fn:prefer-big-step: DynSem
 prefers big-step style, as it can optimize rules of that type better.].
