@@ -384,14 +384,14 @@
         \else
           \ifKV@cover@back
               \node at (current page.south west)[anchor=south west,inner sep=20pt]{
-                  \includegraphics{cover/logo_black}
+                  \includegraphics{TU_Delft_logo_Black.eps}
               };
               \node at (current page.south east)[anchor=south east,inner sep=20pt]{
-                  \includegraphics{cover/logo_black}
+                  \includegraphics{TU_Delft_logo_Black.eps}
               };
           \else
               \node at (current page.south west)[anchor=south west,inner sep=20pt]{
-                  \includegraphics{cover/logo_black}
+                  \includegraphics{TU_Delft_logo_Black.eps}
               };
           \fi
         \fi
