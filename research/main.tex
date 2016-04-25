@@ -1,0 +1,58 @@
+\documentclass{tudelft-report}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{todonotes}
+\presetkeys{todonotes}{inline, noline}{}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\graphicspath{{img/}}
+\PassOptionsToPackage{sectionbib}{natbib}
+
+\input{title_preamble}
+%% Comment out to show headerinfo.
+%\pagestyle{headings}
+
+% Don't show chapter numbers, we don't use chapters for the research
+% report.
+\renewcommand\thesection{\arabic{section}}
+
+\begin{document}
+
+\frontmatter
+
+\input{title}
+
+\tableofcontents{}
+
+\mainmatter
+
+\input{00-introduction}
+
+\input{01-problem}
+
+\input{02-analysis}
+
+\input{03-requirements}
+
+\input{04-realisation}
+
+\input{05-conclusion}
+
+\appendix
+
+\bibliography{references}{}
+
+%% Comment out for glossaries
+%\glossarystyle{altlistgroup}
+%\printglossaries{}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
