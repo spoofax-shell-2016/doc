@@ -88,7 +88,7 @@ node in the above example.
 Again, in line 5, interplay can be seen between TS an NaBL. Here the
 type of a variable can be accessed, which is set in the NaBL
 specification (see previous section).
-* IN-PROGRESS Term Rewriting and Program Transformation
+* Term Rewriting and Program Transformation
 :PROPERTIES:
 :CUSTOM_ID: sec-term-rewrite
 :END:
