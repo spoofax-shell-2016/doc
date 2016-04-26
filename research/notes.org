@@ -3,6 +3,17 @@
 These are notes for the research report. The relevant papers for each
 subject are linked.
 * What is Spoofax?
+:PROPERTIES:
+:EXPORT_FILE_NAME: spoofax-org-export
+:END:
+#+LATEX_CLASS: article-shifted
+#+LATEX_CLASS_OPTIONS:
+#+LATEX_HEADER:
+#+LATEX_HEADER_EXTRA:
+#+DESCRIPTION:
+#+KEYWORDS:
+#+SUBTITLE:
+#+DATE: \today
 Spoofax is an environment that allows for the completely /declarative/
 definition of a programming language. The definition is done using
 high-level /meta-languages/ for each aspect of the programming
