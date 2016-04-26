@@ -161,7 +161,7 @@ strategies
 For example, =innermost= is a strategy to apply the strategy given as
 parameter (a composition of rewrite rules) on the innermost AST node,
 and repeats doing this until it is done.
-** IN-PROGRESS Dynamic Semantics
+** Dynamic Semantics
 :PROPERTIES:
 :CUSTOM_ID: sec-dynamic-semantics
 :END:
@@ -175,10 +175,10 @@ semantics of a language. Among those approaches are /small-step style/
 semantics[fn:lecture-ucolorado: See for example
 [[http://ecee.colorado.edu/~siek/ecen5013/spring10/lecture3.pdf]]],
 /big-step style/ semantics and translating to a different language.
-*** Dynamic Semantics using Stratego
+
 The dynamic semantics of a language used to be specified with
 Stratego, but the Spoofax team has developed a more higher level way
-to declare the semantics of a language, using [[#ssec-dynsem][DynSem]].
+to declare the semantics of a language, using a DSL called [[#ssec-dynsem][DynSem]].
 *** DynSem
 :PROPERTIES:
 :CUSTOM_ID: ssec-dynsem
@@ -190,7 +190,33 @@ a program are separate from the implementation of the language. The
 goal of DynSem is to unify both of these, by providing a syntax that
 is readable as a formal specification, and can also serve as the
 source for generating the execution engine of a programming language.
-*** IN-PROGRESS Reduction Rules
+*** Reduction Rules
 With DynSem, the dynamic semantics are specified by reduction rules in
 either small-step style or big-step style[fn:prefer-big-step: DynSem
 prefers big-step style, as it can optimize rules of that type better.].
+
+A simple example is used to show how reduction rules can define the
+dynamic semantics of a language. Consider the classic example of the
+\beta-reduction of the lambda calculus, which defines function
+application. It replaces all the occurences of $x$ with $e_2$, within
+the expression $e_1$:
+
+\begin{equation}
+(\lambda x.e_1) e_2 \rightarrow e_1[x := e_2]
+\end{equation}
+
+In the same way, dynamic semantics can be specified in DynSem using
+reduction rules, in a syntax very similar to the formal syntax. Take
+here the example of method calling in paplj:
+
+#+BEGIN_EXAMPLE
+rules
+  Call(o, m, vs: List(V)) --> v'
+    where lookupMethod(o, m) --> Method(_, _, params, e);
+          This o, Env bindVars(params, vs) |- e --> v'.
+#+END_EXAMPLE
+
+The bottom line represents the reduction rule of the method body, $e$,
+evaluating to a value $v'$, by binding the argument values to the
+parameter in the environment and bringing the object on which the
+method is called into scope as the =this= variable
