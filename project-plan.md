@@ -10,7 +10,7 @@ this document is updated accordingly (perhaps simply by referring to said
 emails) such that this document is the one document required to track our
 progress.
 
-## The deliverable: what the client expects from us
+# Project goal
 
 From Spoofax's website:
 
@@ -24,50 +24,79 @@ for programming because they facilitate exploratory programming and debugging.
 Common examples include command-line shells such as Bash and Python's REPL.
 
 The deliverable for this project, then, is to create such a REPL generator for
-the Spoofax Language Workbench. This REPL should provide the following features:
+the Spoofax Language Workbench.
 
-* TODO: based on the research report and the minutes of meeting 2016-04-19,
-  make our own list of features that we will propose to Eelco and Gabriel.
+# The final product
+The final product will meet the following requirements and demands,
+as specified following the MoSCoW method:
 
-Non-features (e.g. features that should *not* be implemented) are:
-
-* TODO: see above.
+* Must-have
+  * Interactive REPL
+    * Generated from language definition
+    * Should be language definition agnostic
+    * Syntax checked expressions
+  * Indication of errors
+  * Integration with Eclipse
+* Should-have
+  * Syntax highlighting
+  * Save and load shell state
+* Could-have
+  * Integration with other IDE's (IntelliJ)
+    * Hover over variables to see value, type and others
+  * GDB style interaction with context / environment
+  * Literate programming
+* Won't-have
 
 If the above turns out to be (too) easy, the REPL can be extended into a
 language playground such as the one offered by the Swift programming language.
 If we decide to extend the project, new agreements will be made between us and
 the client.
 
-## Methodologies and tooling
+# Methodologies and tooling
 
 During this project we will work using the SCRUM methodology with weekly
 sprints. Our backlog, current and completed sprints will be managed using
-Trello. Trello will also be used to communicate documents to the client
-and the TU coach.
+[Trello](https://trello.com/b/u2aKQ12y/bachelor-project-spoofax-repl).
+Trello will also be used to communicate documents to the client and the TU coach.
 
 We will use pull-based development using GitHub. GitHub Issues will be used to
-track issues (all of this will be linked to Trello in one way or another). To
-facilitate this, we will be given our own repository within the Metaborg
-organization. Each of us will then fork this repository to our private GitHub
-accounts. We will also use one private repository to hold all the documents
+track issues (all of this will be linked to Trello in one way or another).
+To facilitate this, we will use repositories from our GitHub organization
+[spoofax-shell](https://github.com/spoofax-shell).
+Each of us will then fork this repository to our private GitHub
+accounts. We will also use one repository to hold all the documents
 (e.g. this document, the research project, et cetera) supporting our project.
 
-Since Spoofax is an already existing project, we will use whichever tools are
+A pull request will be designated a status tag WIP, RFC or RDY:
+
+* WIP: Work in progress
+* RFC: Request for comments
+* RDY: Ready
+
+A pull request can be changed from WIP to RFC as soon as it is 'done',
+which means it contains sufficient documentation and test coverage.
+Pull requests with status RFC should be reviewed by at least one other member
+of the development team. Once reviewed, the pull request can be changed
+to RDY, after which it can be merged.
+This process ensures that all code has been reviewed and tested before
+being merged into the final product, thereby always ensuring a working product.
+
+Since Spoofax is an already existing project, we will reuse whichever tooling is
 already being used. This means that we will use:
 
 * the Java programming language;
 * Maven for the build environment;
 * JUnit for unit tests.
 
-## What TU Delft expects from us
+# What TU Delft expects from us
 
 This section's purpose is to document additional agreements between the TU coach
 and us. For the regular project deadlines, please see the end of this section.
 
-Weekly meetings will be held on mondays at 11.00 to discuss the past and next week.
-and the overall progress of the project. Documents (such as the meeting topics)
-that will be discussed will be emailed to the TU coach at its latest the evening
-before the day of the meeting.
+Weekly meetings with the TU coach will be held on mondays at 11.00 to discuss
+the past and next week, and the overall progress of the project.
+Documents (such as the meeting topics) that will be discussed will be emailed
+to the TU coach at its latest the evening before the day of the meeting.
 
 Minutes will be made of every meeting, whether with the client, the TU coach or both.
 These minutes shall be sent to the TU coach as well.
@@ -82,3 +111,5 @@ Regular project deadlines:
 * 17-06-2016: BEP infosheet
 * 17-06-2016: SIG 2nd submission
 * 24-06-2016: Final presentation
+
+# Quality assurance
