@@ -31,21 +31,21 @@ The final product will meet the following requirements and demands,
 as specified following the MoSCoW method:
 
 * Must-have
-  * Interactive REPL
-    * Generated from language definition
-    * Should be language definition agnostic
-    * Syntax checked expressions
-  * Indication of errors
-  * Integration with Eclipse
-  * Syntax highlighting
+	* Interactive REPL
+		* Generated from language definition
+		* Should be language definition agnostic
+		* Syntax checked expressions
+	* Indication of errors
+	* Integration with Eclipse
+	* Syntax highlighting
 * Should-have
-  * Save and load shell state
+	* Save and load shell state
 * Could-have
-  * Integration with other IDE's (IntelliJ)
-  * Hover over variables to see value, type and others
-  * GDB style interaction with context / environment
-    * Ability to partially change or update environment
-  * Literate programming
+	* Integration with other IDE's (IntelliJ)
+	* Hover over variables to see value, type and others
+	* GDB style interaction with context / environment
+		* Ability to partially change or update environment
+	* Literate programming
 * Won't-have
 
 If the above turns out to be (too) easy, the REPL can be extended into a
