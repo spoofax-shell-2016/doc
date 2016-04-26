@@ -24,7 +24,7 @@ a language using Spoofax:
 2. [[#sec-static-analysis][Static Semantics]]: Describing the static analysis part of a
    language: type checking, name binding and variable scoping.
 3. [[#sec-term-rewrite][Term Rewriting and Program Transformation]]: Rewriting ASTs to new
-   ASTs.
+   ASTs, for example to declare desugaring rules.
 4. [[#sec-dynamic-semantics][Dynamic Semantics]]: Defining what the language does upon execution.
 
 The structure of this section follows that of the language
