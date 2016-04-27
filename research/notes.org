@@ -52,11 +52,11 @@ a parser generated from a SDF3 specification.
 :PROPERTIES:
 :CUSTOM_ID: sec-static-analysis
 :END:
-Static semantics refer to the meaning of what is a well-formed
-program[fn:missing-ref:Reference?] for a particular language. This
-imposes more constraints than syntax definition, such as name binding,
-scoping rules, and type checking. These cannot be specified by a
-syntax definition alone, and is thus considered separately.
+Static semantics refer to the meaning of what is a well-formed program
+for a particular language\nbsp\cite{Milner97}. This imposes more
+constraints than syntax definition, such as name binding, scoping
+rules, and type checking. These cannot be specified by a syntax
+definition alone, and are thus considered separately.
 *** Declarative Static Semantics Specification in Spoofax
 In Spoofax, all the static semantics as well as the dynamic semantics
 used to be specified with the Stratego transformation language (which
@@ -170,10 +170,8 @@ this correct?].
 :PROPERTIES:
 :CUSTOM_ID: sec-dynamic-semantics
 :END:
-Dynamic semantics[fn:lecture-dynsem: Relevant lecture:
-http://tudelft-in4303.github.io/lectures/specification/dynamic-semantics]
-(also known as /execution semantics/) refer to the semantics of what a
-program in some language does when executed [fn:missing-ref].
+Dynamic semantics (also known as /execution semantics/) refers to how
+a program in some language is to be executed\nbsp\cite{Harper12}.
 
 There are multiple approaches to formally specify the dynamic
 semantics of a language. Among those approaches are /small-step style/
