@@ -75,7 +75,8 @@ used to be specified with the \emph{Stratego} transformation language
 (which will be discussed in \hyperref[sec-term-rewrite]{Term Rewriting}). Nowadays, two high-level
 DSLs exist for specifying static semantic declaratively: NaBL and
 TS. The two DSLs can work together: for instance, the type of a
-variable can be set in NaBL, so that TS can make assertions on it.
+variable can be set with NaBL, so that TS can be used to make
+assertions on the type of that variable.
 \subsubsection{NaBL: the Name Binding Language}
 \label{sec:orgheadline3}
 With \emph{NaBL} (pronounced \emph{enable}), name binding and scoping rules can
@@ -144,12 +145,12 @@ to specify desugaring rules for a language.
 
 Stratego is based on the notions of \emph{term rewrite rules} and so called
 \emph{strategies}.
-\subsubsection{Rewrite rules}
+\subsubsection{Term rewrite rules}
 \label{sec:orgheadline5}
-A rewrite rule is a transformation on a term, in which
-the left-hand side allows for pattern matching and variable binding,
-and the right hand side instantiates new replacement terms. An example
-of a rewrite rule is given below.
+A rewrite rule is a transformation on a term, in which the left-hand
+side allows for pattern matching and variable binding, and the right
+hand side instantiates new replacement terms. An example of a rewrite
+rule is given below.
 \begin{verbatim}
 rules
   desugar-let :

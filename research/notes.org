@@ -84,7 +84,8 @@ used to be specified with the /Stratego/ transformation language
 (which will be discussed in [[#sec-term-rewrite][Term Rewriting]]). Nowadays, two high-level
 DSLs exist for specifying static semantic declaratively: NaBL and
 TS. The two DSLs can work together: for instance, the type of a
-variable can be set in NaBL, so that TS can make assertions on it.
+variable can be set with NaBL, so that TS can be used to make
+assertions on the type of that variable.
 *** NaBL: the Name Binding Language
 With /NaBL/ (pronounced /enable/), name binding and scoping rules can
 be specified declaratively\nbsp\cite{KonatKWV12}. Here is an example
@@ -154,11 +155,11 @@ to specify desugaring rules for a language.
 
 Stratego is based on the notions of /term rewrite rules/ and so called
 /strategies/.
-*** Rewrite rules
-A rewrite rule is a transformation on a term, in which
-the left-hand side allows for pattern matching and variable binding,
-and the right hand side instantiates new replacement terms. An example
-of a rewrite rule is given below.
+*** Term rewrite rules
+A rewrite rule is a transformation on a term, in which the left-hand
+side allows for pattern matching and variable binding, and the right
+hand side instantiates new replacement terms. An example of a rewrite
+rule is given below.
 #+BEGIN_EXAMPLE
 rules
   desugar-let :
