@@ -1,5 +1,4 @@
 #+TITLE:Research Report Notes
-#+HTML_HEAD_EXTRA: <style type="text/css"> #bibliography {margin-left: -100px;} </style>
 * Preface
 These are notes for the research report. The relevant papers for each
 subject are linked.
@@ -225,4 +224,8 @@ The bottom line represents the reduction rule of the method body, $e$,
 evaluating to a value $v'$, by binding the argument values to the
 parameter in the environment and bringing the object on which the
 method is called into scope as the =this= variable.
+* References
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
 #+BIBLIOGRAPHY: references plain
