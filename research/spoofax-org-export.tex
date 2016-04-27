@@ -1,0 +1,214 @@
+Spoofax is an environment that allows for the completely \emph{declarative}
+definition of a programming language. The definition is done using
+high-level \emph{meta-languages} for each aspect of the programming
+language.
+
+To define a language declaratively means that one uses the
+meta-languages to specify \emph{what} the properties of a language are, and
+not \emph{how} these properties are
+implemented\footnote{Reference: Declare your language book
+preface}. For example, instead of asking "How do I implement a
+tokenizer and parser for my language?", one asks "What is the syntax
+of my language?". From such a description in a meta-language, the
+tokenizer and parser can be derived, without the designer of the
+language ever having to care about its implementation.
+
+This section goes over the elements that make up the specification of
+a language using Spoofax:
+\begin{enumerate}
+\item \hyperref[sec-syntax-def]{Syntax Definition}: Specifying the syntax of a language.
+\item \hyperref[sec-static-analysis]{Static Semantics}: Describing the static analysis part of a
+language: type checking, name binding and variable scoping.
+\item \hyperref[sec-term-rewrite]{Term Rewriting and Program Transformation}: Rewriting ASTs to new
+ASTs, for example to declare desugaring rules.
+\item \hyperref[sec-dynamic-semantics]{Dynamic Semantics}: Defining what the language does upon execution.
+\end{enumerate}
+
+The structure of this section follows that of the language
+specification portion of the compiler construction course. The slides
+of this portion of the course can be found here:
+\url{http://tudelft-in4303.github.io/lectures/specification/}.
+\subsection{Syntax Definition}
+\label{sec-syntax-def}
+The first part of Spoofax to consider is Syntax Definition. To specify
+a syntax definition declaratively, a DSL called SDF3 is used. The
+syntax definition can be used to make parsers which parse text to AST
+and pretty-printers for mapping ASTs back to text. Furthermore, it can
+be used for error recovery rules, syntax highlighting rules and
+folding rules for editors.
+
+All the other parts of Spoofax operate on the AST that is produced by
+a parser generated from a SDF3 specification.
+\subsection{Static Semantics}
+\label{sec-static-analysis}
+Static semantics refer to the meaning of what is a well-formed
+program\footnote{Reference?} for a particular language. This
+imposes more constraints than syntax definition, such as name binding,
+scoping rules, and type checking. These cannot be specified by a
+syntax definition alone, and is thus considered separately.
+\subsubsection{Declarative Static Semantics Specification in Spoofax}
+\label{sec:orgheadline1}
+In Spoofax, all the static semantics as well as the dynamic semantics
+used to be specified with the Stratego transformation language (which
+will be discussed in \hyperref[sec-term-rewrite]{Term Rewriting}). Nowadays, two higher level DSLs
+exist for specifying static semantic declaratively: NaBL and TS. The
+two DSLs can work together: for instance, the type of a variable can
+be set in NaBL, so that TS can make assertions on it.
+\subsubsection{NaBL: the Name Binding Language}
+\label{sec:orgheadline2}
+With NaBL (pronounced \emph{enable}), name binding and scoping rules can be
+specified. Here is an example of the name binding and scoping rules
+for a class, from the paplj language:
+\begin{verbatim}
+namespaces Program Class Field Method Variable
+// ...
+binding rules
+  Class(c, _, _, _) :
+    defines Class c of type ClassT(c)
+    // Declare new scope
+    scopes Field, Method, Variable
+    implicitly defines Variable This() of type ClassT(c)
+
+  Extends(c) :
+    // Import namespaces from superclass
+    imports Field, Method from Class c
+\end{verbatim}
+The first line declares the namespaces to
+consider. Then for each node in the AST resulting from the parsing,
+for example a \texttt{Class} node, the name binding and scoping rules can be
+defined. In the example, each \texttt{Class} node declares a new scope for
+its fields, methods and variables. It also implicitly defines the
+\texttt{this} variable. The \texttt{Extends} node can then import the fields and
+methods into its scope.
+
+As can be seen from line 8, it can also associate type information
+with names, to interplay with TS. The type annotations can also be
+used for instance when desugaring or rewriting with Stratego (see \hyperref[sec-term-rewrite]{Term
+Rewriting}).
+\subsubsection{TS: the Type Specification Language}
+\label{sec:orgheadline3}
+Type checking can be done with the TS DSL. Again an example of the
+paplj language:
+\begin{verbatim}
+type rules
+  Class(c1, Extends(c2), _, _) :-
+    where store ClassT(c1) <sub: ClassT(c2)
+
+  x@This() : t
+    where definition of x : t
+// ...
+type rules
+  Add(e1, e2) : NumT()
+    where e1 : NumT() else error "number expected" on e1
+      and e2 : NumT() else error "number expected" on e2
+\end{verbatim}
+Rules can recursively set constraints on AST-nodes, such as the \texttt{Add}
+node in the above example.
+
+Again, in line 5, interplay can be seen between TS an NaBL. Here the
+type of a variable can be accessed, which is set in the NaBL
+specification (see previous section).
+\subsection{Term Rewriting and Program Transformation}
+\label{sec-term-rewrite}
+Spoofax offers a high level declarative DSL called Stratego for program
+transformation. Stratego operates on ASTs, and is the most general
+part of Spoofax: it can be used for static semantics (name binding,
+type checking), desugaring and for the dynamic semantics of a
+language.
+
+As the static semantics can now be done using NaBL and TS, and the
+dynamic semantics with DynSem (see next section), Stratego can be used
+to specify desugaring rules for a language.
+
+Stratego is based on the notions of \emph{term rewrite rules} and so called
+\emph{strategies}.
+\subsubsection{Rewrite rules}
+\label{sec:orgheadline4}
+A rewrite rule is a transformation on a term, in which
+the left-hand side allows for pattern matching and variable binding,
+and the right hand side instantiates new replacement terms. An example
+of a rewrite rule is given below.
+\begin{verbatim}
+rules
+  desugar-let :
+  	Let([], e) -> e
+
+  desugar-let :
+  	Let([b1, b2 | bs], e) -> Let([b1], Let([b2 | bs], e))
+\end{verbatim}
+This desugars a \texttt{let} expression with multiple bindings into multiple
+nested \texttt{let} expressions each having just one binding.
+\subsubsection{Strategies}
+\label{sec:orgheadline5}
+Strategies are used to select and apply term rewrite rules, to
+construct the main algorithm of the program transformation. One can
+use multiple combinators to compose rewrite rules and other
+strategies. An example is given below:
+\begin{verbatim}
+strategies
+  pre-desugar =
+    innermost(desugar-let <+ desugar-do)
+
+  post-desugar =
+    innermost(desugar-do <+ desugar-get <+ desugar-set);
+    resugar
+\end{verbatim}
+For example, \texttt{innermost} is a strategy to apply the strategy given as
+parameter (a composition of rewrite rules) on the innermost AST node,
+and repeats this until the strategy is no longer applicable\footnote{Is
+this correct?}.
+\subsection{Dynamic Semantics}
+\label{sec-dynamic-semantics}
+Dynamic semantics\footnote{Relevant lecture:
+\url{http://tudelft-in4303.github.io/lectures/specification/dynamic-semantics}}
+(also known as \emph{execution semantics}) refer to the semantics of what a
+program in some language does when executed \footnotemark[2]{}.
+
+There are multiple approaches to formally specify the dynamic
+semantics of a language. Among those approaches are \emph{small-step style}
+semantics\footnote{See for example
+\url{http://ecee.colorado.edu/~siek/ecen5013/spring10/lecture3.pdf}},
+\emph{big-step style} semantics and translating to a different language.
+
+The dynamic semantics of a language used to be specified with
+Stratego, but the Spoofax team has developed a more higher level way
+to declare the semantics of a language, using a DSL called \hyperref[ssec-dynsem]{DynSem}.
+\subsubsection{DynSem}
+\label{ssec-dynsem}
+DynSem~\cite{VerguNV15} is a DSL for specifying the \emph{dynamic semantics} of a
+language.  Often the formal specification of the dynamic semantics of
+a program are separate from the implementation of the language. The
+goal of DynSem is to unify both of these, by providing a syntax that
+is readable as a formal specification, and can also serve as the
+source for generating the execution engine of a programming language.
+\subsubsection{Reduction Rules}
+\label{sec:orgheadline6}
+With DynSem, the dynamic semantics are specified by reduction rules in
+either small-step style or big-step style\footnote{DynSem
+prefers big-step style, as it can optimize rules of that type better.}.
+
+A simple example is used to show how reduction rules can define the
+dynamic semantics of a language. Consider the classic example of the
+\(\beta\)-reduction of the lambda calculus, which defines function
+application. It replaces all the occurences of \(x\) with \(e_2\), within
+the expression \(e_1\):
+
+\begin{equation}
+(\lambda x.e_1) e_2 \rightarrow e_1[x := e_2]
+\end{equation}
+
+In the same way, dynamic semantics can be specified in DynSem using
+reduction rules, in a syntax very similar to the formal syntax. Take
+here the example of method calling in paplj:
+
+\begin{verbatim}
+rules
+  Call(o, m, vs: List(V)) --> v'
+    where lookupMethod(o, m) --> Method(_, _, params, e);
+          This o, Env bindVars(params, vs) |- e --> v'.
+\end{verbatim}
+
+The bottom line represents the reduction rule of the method body, \(e\),
+evaluating to a value \(v'\), by binding the argument values to the
+parameter in the environment and bringing the object on which the
+method is called into scope as the \texttt{this} variable.
