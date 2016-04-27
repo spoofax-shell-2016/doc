@@ -21,8 +21,13 @@ in a meta-language, the tokenizer and parser can be derived, without
 the designer of the language ever having to care about its
 implementation.
 
-This section goes over the elements that make up the specification of
-a language using Spoofax:
+This section goes over the parts that make up the specification of a
+language, and for each part the relevant part of Spoofax is
+given[fn:comp-constr-course:This section follows the structure of the
+language specification portion of the compiler construction course at
+the TU Delft. The slides of this portion of the course can be found
+here: [[http://tudelft-in4303.github.io/lectures/specification/]].]. The
+parts of a language specification are:
 1. [[#sec-syntax-def][Syntax Definition]]: Specifying the syntax of a language.
 2. [[#sec-static-analysis][Static Semantics]]: Describing the static analysis part of a
    language: type checking, name binding and variable scoping.
@@ -30,10 +35,6 @@ a language using Spoofax:
    ASTs, for example to declare desugaring rules.
 4. [[#sec-dynamic-semantics][Dynamic Semantics]]: Defining what the language does upon execution.
 
-This section follows the structure of the language specification
-portion of the compiler construction course. The slides of this
-portion of the course can be found here:
-[[http://tudelft-in4303.github.io/lectures/specification/]].
 ** Syntax Definition
 :PROPERTIES:
 :CUSTOM_ID: sec-syntax-def
