@@ -7,20 +7,19 @@ subject are linked.
 :EXPORT_FILE_NAME: spoofax-org-export
 :END:
 #+LATEX_CLASS: article-shifted
-Spoofax is an environment that allows for the completely /declarative/
-definition of a programming language. The definition is done using
-high-level /meta-languages/ for each aspect of the programming
-language.
+Spoofax is platform that allows for the completely /declarative/
+definition of a programming language and accompanying IDE
+support\nbsp\cite{KatsV10}. The definition is done using high-level
+/meta-languages/ for each aspect of the programming language.
 
 To define a language declaratively means that one uses the
 meta-languages to specify /what/ the properties of a language are, and
-not /how/ these properties are
-implemented[fn:decl-your-lang:Reference: Declare your language book
-preface]. For example, instead of asking "How do I implement a
-tokenizer and parser for my language?", one asks "What is the syntax
-of my language?". From such a description in a meta-language, the
-tokenizer and parser can be derived, without the designer of the
-language ever having to care about its implementation.
+not /how/ these properties are implemented. For example, instead of
+asking "How do I implement a tokenizer and parser for my language?",
+one asks "What is the syntax of my language?". From such a description
+in a meta-language, the tokenizer and parser can be derived, without
+the designer of the language ever having to care about its
+implementation.
 
 This section goes over the elements that make up the specification of
 a language using Spoofax:
@@ -60,7 +59,7 @@ definition alone, and are thus considered separately.
 *** Declarative Static Semantics Specification in Spoofax
 In Spoofax, all the static semantics as well as the dynamic semantics
 used to be specified with the Stratego transformation language (which
-will be discussed in [[#sec-term-rewrite][Term Rewriting]]). Nowadays, two higher level DSLs
+will be discussed in [[#sec-term-rewrite][Term Rewriting]]). Nowadays, two high-level DSLs
 exist for specifying static semantic declaratively: NaBL and TS. The
 two DSLs can work together: for instance, the type of a variable can
 be set in NaBL, so that TS can make assertions on it.
@@ -170,7 +169,7 @@ this correct?].
 :PROPERTIES:
 :CUSTOM_ID: sec-dynamic-semantics
 :END:
-Dynamic semantics refers to how a program in some language
+Dynamic semantics refers to how a program written in some language
 behaves\nbsp\cite{Winskel93}. There are multiple approaches to
 formally specify the dynamic semantics of a programming language (for
 an extensive treatment, see\nbsp\cite{Winskel93}). For this section

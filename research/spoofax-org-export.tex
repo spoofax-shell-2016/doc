@@ -1,17 +1,16 @@
-Spoofax is an environment that allows for the completely \emph{declarative}
-definition of a programming language. The definition is done using
-high-level \emph{meta-languages} for each aspect of the programming
-language.
+Spoofax is platform that allows for the completely \emph{declarative}
+definition of a programming language and accompanying IDE
+support~\cite{KatsV10}. The definition is done using high-level
+\emph{meta-languages} for each aspect of the programming language.
 
 To define a language declaratively means that one uses the
 meta-languages to specify \emph{what} the properties of a language are, and
-not \emph{how} these properties are
-implemented\footnote{Reference: Declare your language book
-preface}. For example, instead of asking "How do I implement a
-tokenizer and parser for my language?", one asks "What is the syntax
-of my language?". From such a description in a meta-language, the
-tokenizer and parser can be derived, without the designer of the
-language ever having to care about its implementation.
+not \emph{how} these properties are implemented. For example, instead of
+asking "How do I implement a tokenizer and parser for my language?",
+one asks "What is the syntax of my language?". From such a description
+in a meta-language, the tokenizer and parser can be derived, without
+the designer of the language ever having to care about its
+implementation.
 
 This section goes over the elements that make up the specification of
 a language using Spoofax:
@@ -50,7 +49,7 @@ definition alone, and are thus considered separately.
 \label{sec:orgheadline1}
 In Spoofax, all the static semantics as well as the dynamic semantics
 used to be specified with the Stratego transformation language (which
-will be discussed in \hyperref[sec-term-rewrite]{Term Rewriting}). Nowadays, two higher level DSLs
+will be discussed in \hyperref[sec-term-rewrite]{Term Rewriting}). Nowadays, two high-level DSLs
 exist for specifying static semantic declaratively: NaBL and TS. The
 two DSLs can work together: for instance, the type of a variable can
 be set in NaBL, so that TS can make assertions on it.
@@ -159,7 +158,7 @@ and repeats this until the strategy is no longer applicable\footnote{Is
 this correct?}.
 \subsection{Dynamic Semantics}
 \label{sec-dynamic-semantics}
-Dynamic semantics refers to how a program in some language
+Dynamic semantics refers to how a program written in some language
 behaves~\cite{Winskel93}. There are multiple approaches to
 formally specify the dynamic semantics of a programming language (for
 an extensive treatment, see~\cite{Winskel93}). For this section
