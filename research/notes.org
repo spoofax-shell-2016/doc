@@ -31,9 +31,9 @@ a language using Spoofax:
    ASTs, for example to declare desugaring rules.
 4. [[#sec-dynamic-semantics][Dynamic Semantics]]: Defining what the language does upon execution.
 
-The structure of this section follows that of the language
-specification portion of the compiler construction course. The slides
-of this portion of the course can be found here:
+This section follows the structure of the language specification
+portion of the compiler construction course. The slides of this
+portion of the course can be found here:
 [[http://tudelft-in4303.github.io/lectures/specification/]].
 ** Syntax Definition
 :PROPERTIES:
