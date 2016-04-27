@@ -175,10 +175,9 @@ strategies
     innermost(desugar-do <+ desugar-get <+ desugar-set);
     resugar
 \end{verbatim}
-For example, \texttt{innermost} is a strategy to apply the strategy given as
-parameter (a composition of rewrite rules) on the innermost AST node,
-and repeats this until the strategy is no longer applicable\footnote{Is
-this correct?}.
+For example, the strategy \texttt{innermost} is used to apply the strategy
+given as parameter (a composition of rewrite rules) in a specific
+traversal order on the AST nodes.
 \subsection{Dynamic Semantics}
 \label{sec-dynamic-semantics}
 Dynamic semantics refers to how a program written in some language

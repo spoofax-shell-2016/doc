@@ -183,10 +183,9 @@ strategies
     innermost(desugar-do <+ desugar-get <+ desugar-set);
     resugar
 #+END_EXAMPLE
-For example, =innermost= is a strategy to apply the strategy given as
-parameter (a composition of rewrite rules) on the innermost AST node,
-and repeats this until the strategy is no longer applicable[fn::Is
-this correct?].
+For example, the strategy =innermost= is used to apply the strategy
+given as parameter (a composition of rewrite rules) in a specific
+traversal order on the AST nodes.
 ** Dynamic Semantics
 :PROPERTIES:
 :CUSTOM_ID: sec-dynamic-semantics
