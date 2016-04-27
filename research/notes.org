@@ -80,11 +80,11 @@ rules, and type checking. These cannot be specified by a syntax
 definition alone, and are thus considered separately.
 *** Declarative static semantics specification in Spoofax
 In Spoofax, all the static semantics as well as the dynamic semantics
-used to be specified with the Stratego transformation language (which
-will be discussed in [[#sec-term-rewrite][Term Rewriting]]). Nowadays, two high-level DSLs
-exist for specifying static semantic declaratively: NaBL and TS. The
-two DSLs can work together: for instance, the type of a variable can
-be set in NaBL, so that TS can make assertions on it.
+used to be specified with the /Stratego/ transformation language
+(which will be discussed in [[#sec-term-rewrite][Term Rewriting]]). Nowadays, two high-level
+DSLs exist for specifying static semantic declaratively: NaBL and
+TS. The two DSLs can work together: for instance, the type of a
+variable can be set in NaBL, so that TS can make assertions on it.
 *** NaBL: the Name Binding Language
 With NaBL (pronounced /enable/), name binding and scoping rules can be
 specified. Here is an example of the name binding and scoping rules
@@ -142,11 +142,11 @@ specification (see previous section).
 :PROPERTIES:
 :CUSTOM_ID: sec-term-rewrite
 :END:
-Spoofax offers a high level declarative DSL called Stratego for program
-transformation. Stratego operates on ASTs, and is the most general
-part of Spoofax: it can be used for static semantics (name binding,
-type checking), desugaring and for the dynamic semantics of a
-language.
+Spoofax offers a high level declarative DSL called /Stratego/ for
+program transformation\nbsp\cite{Visser01}. Stratego operates on ASTs,
+and is the most general part of Spoofax: it can be used for static
+semantics (name binding, type checking), desugaring and for the
+dynamic semantics of a language.
 
 As the static semantics can now be done using NaBL and TS, and the
 dynamic semantics with DynSem (see next section), Stratego can be used
