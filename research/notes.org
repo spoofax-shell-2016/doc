@@ -9,7 +9,7 @@ subject are linked.
 #+LATEX_CLASS: article-shifted
 Spoofax is platform that allows for the completely /declarative/
 definition of a programming language and accompanying IDE
-support\nbsp\cite{KatsV10}. The definition is done using high-level
+support\nbsp\cite{Kats10a}. The definition is done using high-level
 /meta-languages/ for each aspect of the programming language.
 
 To define a language declaratively means that one uses the
@@ -39,15 +39,36 @@ parts of a language specification are:
 :PROPERTIES:
 :CUSTOM_ID: sec-syntax-def
 :END:
-The first part of Spoofax to consider is Syntax Definition. To specify
-a syntax definition declaratively, a DSL called SDF3 is used. The
-syntax definition can be used to make parsers which parse text to AST
-and pretty-printers for mapping ASTs back to text. Furthermore, it can
-be used for error recovery rules, syntax highlighting rules and
-folding rules for editors.
+The first part of the specification of a language is its syntax. The
+syntax of a language is often specified by means of a /lexical
+grammar/ and a /context-free grammar/, as can be seen in the
+specification of, for example, Standard ML\nbsp\cite{Milner97}. The
+lexical grammar is most often defined using regular expression. It
+defines the individual words made up of characters, such as
+identifiers and numeric constants. The context-free grammar then
+defines syntactically valid sentences made up of words.
 
-All the other parts of Spoofax operate on the AST that is produced by
-a parser generated from a SDF3 specification.
+*** SDF3: syntax definition in Spoofax
+To specify a syntax definition declaratively in Spoofax, a DSL called
+/SDF3/\nbsp\cite{Vollebregt12} is used, the third generation of the
+/Syntax Definition Formalism/ (SDF)\nbsp\cite{Heering89}. SDF3 uses
+context-free grammer productions for the specification of both the
+lexical syntax and the context-free syntax, a feature that was
+introduced in SDF2\nbsp\cite{Visser97}.
+
+The declarative nature of SDF3 allows for thinking in terms of the
+structure (the /what/), instead of in terms of parser algorithms (the
+/how/) as is the case with many current parsing
+algorithms\nbsp\cite{Kats10b}. The syntax definition can be used to
+make parsers which parse a textual representation to an AST, and
+pretty-printers for mapping ASTs back to text. However, due to its
+declarative nature, SDF3 is not limited to generating parsers and
+pretty printers: it can also be used for error recovery
+rules\nbsp\cite{deJonge12}, syntax highlighting rules and folding
+rules for editors.
+
+All of the other parts of Spoofax use the AST that is produced by a
+parser generated from a SDF3 specification.
 ** Static Semantics
 :PROPERTIES:
 :CUSTOM_ID: sec-static-analysis
@@ -57,7 +78,7 @@ for a particular language\nbsp\cite{Milner97}. This imposes more
 constraints than syntax definition, such as name binding, scoping
 rules, and type checking. These cannot be specified by a syntax
 definition alone, and are thus considered separately.
-*** Declarative Static Semantics Specification in Spoofax
+*** Declarative static semantics specification in Spoofax
 In Spoofax, all the static semantics as well as the dynamic semantics
 used to be specified with the Stratego transformation language (which
 will be discussed in [[#sec-term-rewrite][Term Rewriting]]). Nowadays, two high-level DSLs

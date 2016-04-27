@@ -1,6 +1,6 @@
 Spoofax is platform that allows for the completely \emph{declarative}
 definition of a programming language and accompanying IDE
-support~\cite{KatsV10}. The definition is done using high-level
+support~\cite{Kats10a}. The definition is done using high-level
 \emph{meta-languages} for each aspect of the programming language.
 
 To define a language declaratively means that one uses the
@@ -30,15 +30,37 @@ ASTs, for example to declare desugaring rules.
 
 \subsection{Syntax Definition}
 \label{sec-syntax-def}
-The first part of Spoofax to consider is Syntax Definition. To specify
-a syntax definition declaratively, a DSL called SDF3 is used. The
-syntax definition can be used to make parsers which parse text to AST
-and pretty-printers for mapping ASTs back to text. Furthermore, it can
-be used for error recovery rules, syntax highlighting rules and
-folding rules for editors.
+The first part of the specification of a language is its syntax. The
+syntax of a language is often specified by means of a \emph{lexical
+grammar} and a \emph{context-free grammar}, as can be seen in the
+specification of, for example, Standard ML~\cite{Milner97}. The
+lexical grammar is most often defined using regular expression. It
+defines the individual words made up of characters, such as
+identifiers and numeric constants. The context-free grammar then
+defines syntactically valid sentences made up of words.
 
-All the other parts of Spoofax operate on the AST that is produced by
-a parser generated from a SDF3 specification.
+\subsubsection{SDF3: syntax definition in Spoofax}
+\label{sec:orgheadline1}
+To specify a syntax definition declaratively in Spoofax, a DSL called
+\emph{SDF3}~\cite{Vollebregt12} is used, the third generation of the
+\emph{Syntax Definition Formalism} (SDF)~\cite{Heering89}. SDF3 uses
+context-free grammer productions for the specification of both the
+lexical syntax and the context-free syntax, a feature that was
+introduced in SDF2~\cite{Visser97}.
+
+The declarative nature of SDF3 allows for thinking in terms of the
+structure (the \emph{what}), instead of in terms of parser algorithms (the
+\emph{how}) as is the case with many current parsing
+algorithms~\cite{Kats10b}. The syntax definition can be used to
+make parsers which parse a textual representation to an AST, and
+pretty-printers for mapping ASTs back to text. However, due to its
+declarative nature, SDF3 is not limited to generating parsers and
+pretty printers: it can also be used for error recovery
+rules~\cite{deJonge12}, syntax highlighting rules and folding
+rules for editors.
+
+All of the other parts of Spoofax use the AST that is produced by a
+parser generated from a SDF3 specification.
 \subsection{Static Semantics}
 \label{sec-static-analysis}
 Static semantics refer to the meaning of what is a well-formed program
@@ -46,8 +68,8 @@ for a particular language~\cite{Milner97}. This imposes more
 constraints than syntax definition, such as name binding, scoping
 rules, and type checking. These cannot be specified by a syntax
 definition alone, and are thus considered separately.
-\subsubsection{Declarative Static Semantics Specification in Spoofax}
-\label{sec:orgheadline1}
+\subsubsection{Declarative static semantics specification in Spoofax}
+\label{sec:orgheadline2}
 In Spoofax, all the static semantics as well as the dynamic semantics
 used to be specified with the Stratego transformation language (which
 will be discussed in \hyperref[sec-term-rewrite]{Term Rewriting}). Nowadays, two high-level DSLs
@@ -55,7 +77,7 @@ exist for specifying static semantic declaratively: NaBL and TS. The
 two DSLs can work together: for instance, the type of a variable can
 be set in NaBL, so that TS can make assertions on it.
 \subsubsection{NaBL: the Name Binding Language}
-\label{sec:orgheadline2}
+\label{sec:orgheadline3}
 With NaBL (pronounced \emph{enable}), name binding and scoping rules can be
 specified. Here is an example of the name binding and scoping rules
 for a class, from the paplj language:
@@ -86,7 +108,7 @@ with names, to interplay with TS. The type annotations can also be
 used for instance when desugaring or rewriting with Stratego (see \hyperref[sec-term-rewrite]{Term
 Rewriting}).
 \subsubsection{TS: the Type Specification Language}
-\label{sec:orgheadline3}
+\label{sec:orgheadline4}
 Type checking can be done with the TS DSL. Again an example of the
 paplj language:
 \begin{verbatim}
@@ -123,7 +145,7 @@ to specify desugaring rules for a language.
 Stratego is based on the notions of \emph{term rewrite rules} and so called
 \emph{strategies}.
 \subsubsection{Rewrite rules}
-\label{sec:orgheadline4}
+\label{sec:orgheadline5}
 A rewrite rule is a transformation on a term, in which
 the left-hand side allows for pattern matching and variable binding,
 and the right hand side instantiates new replacement terms. An example
@@ -139,7 +161,7 @@ rules
 This desugars a \texttt{let} expression with multiple bindings into multiple
 nested \texttt{let} expressions each having just one binding.
 \subsubsection{Strategies}
-\label{sec:orgheadline5}
+\label{sec:orgheadline6}
 Strategies are used to select and apply term rewrite rules, to
 construct the main algorithm of the program transformation. One can
 use multiple combinators to compose rewrite rules and other
