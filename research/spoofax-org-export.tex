@@ -41,11 +41,11 @@ All the other parts of Spoofax operate on the AST that is produced by
 a parser generated from a SDF3 specification.
 \subsection{Static Semantics}
 \label{sec-static-analysis}
-Static semantics refer to the meaning of what is a well-formed
-program\footnote{Reference?} for a particular language. This
-imposes more constraints than syntax definition, such as name binding,
-scoping rules, and type checking. These cannot be specified by a
-syntax definition alone, and is thus considered separately.
+Static semantics refer to the meaning of what is a well-formed program
+for a particular language~\cite{Milner97}. This imposes more
+constraints than syntax definition, such as name binding, scoping
+rules, and type checking. These cannot be specified by a syntax
+definition alone, and are thus considered separately.
 \subsubsection{Declarative Static Semantics Specification in Spoofax}
 \label{sec:orgheadline1}
 In Spoofax, all the static semantics as well as the dynamic semantics
@@ -159,56 +159,50 @@ and repeats this until the strategy is no longer applicable\footnote{Is
 this correct?}.
 \subsection{Dynamic Semantics}
 \label{sec-dynamic-semantics}
-Dynamic semantics\footnote{Relevant lecture:
-\url{http://tudelft-in4303.github.io/lectures/specification/dynamic-semantics}}
-(also known as \emph{execution semantics}) refer to the semantics of what a
-program in some language does when executed \footnotemark[2]{}.
+Dynamic semantics refers to how a program in some language
+behaves~\cite{Winskel93}. There are multiple approaches to
+formally specify the dynamic semantics of a programming language (for
+an extensive treatment, see~\cite{Winskel93}). For this section
+only one sort of approach is relevant, namely \emph{rule-based operational}
+\emph{semantics} (see~\cite{Plotkin04} for a historical account of this
+approach).
 
-There are multiple approaches to formally specify the dynamic
-semantics of a language. Among those approaches are \emph{small-step style}
-semantics\footnote{See for example
-\url{http://ecee.colorado.edu/~siek/ecen5013/spring10/lecture3.pdf}},
-\emph{big-step style} semantics and translating to a different language.
-
-The dynamic semantics of a language used to be specified with
-Stratego, but the Spoofax team has developed a more higher level way
-to declare the semantics of a language, using a DSL called \hyperref[ssec-dynsem]{DynSem}.
-\subsubsection{DynSem}
+\subsubsection{DynSem: a rule-based dynamic semantics}
 \label{ssec-dynsem}
-DynSem~\cite{VerguNV15} is a DSL for specifying the \emph{dynamic semantics} of a
-language.  Often the formal specification of the dynamic semantics of
-a program are separate from the implementation of the language. The
-goal of DynSem is to unify both of these, by providing a syntax that
-is readable as a formal specification, and can also serve as the
-source for generating the execution engine of a programming language.
-\subsubsection{Reduction Rules}
-\label{sec:orgheadline6}
-With DynSem, the dynamic semantics are specified by reduction rules in
-either small-step style or big-step style\footnote{DynSem
-prefers big-step style, as it can optimize rules of that type better.}.
+In Spoofax, the dynamic semantics of a language used to be specified
+with Stratego. However, the Spoofax team has developed a more
+high-level way to declare the dynamic semantics of a language, namely
+a DSL called \emph{DynSem}~\cite{VerguNV15}. As with all DSLs in
+Spoofax, DynSem offers a declarative approach to generate the
+\emph{implementation} out of the \emph{specification}. Indeed, from a DynSem
+specification of a language, an interpreter for that language can be
+generated.
 
-A simple example is used to show how reduction rules can define the
-dynamic semantics of a language. Consider the classic example of the
-\(\beta\)-reduction of the lambda calculus, which defines function
-application. It replaces all the occurences of \(x\) with \(e_2\), within
-the expression \(e_1\):
+In DynSem, the dynamic semantics are specified by means of rules. To
+show how rules can define the dynamic semantics of a language,
+consider the classic example of the \(\beta\)-reduction, which defines
+function application in the lambda calculus. The rule replaces all the
+occurences of the parameter \(x\) with the argument \(e_2\), within the
+expression \(e_1\):
 
 \begin{equation}
 (\lambda x.e_1) e_2 \rightarrow e_1[x := e_2]
 \end{equation}
 
-In the same way, dynamic semantics can be specified in DynSem using
-reduction rules, in a syntax very similar to the formal syntax. Take
+In a similar way, dynamic semantics can be specified in DynSem, in a
+syntax very similar to the formal syntax used in the literature. Take
 here the example of method calling in paplj:
 
 \begin{verbatim}
 rules
+  // ...
   Call(o, m, vs: List(V)) --> v'
     where lookupMethod(o, m) --> Method(_, _, params, e);
           This o, Env bindVars(params, vs) |- e --> v'.
 \end{verbatim}
 
-The bottom line represents the reduction rule of the method body, \(e\),
-evaluating to a value \(v'\), by binding the argument values to the
-parameter in the environment and bringing the object on which the
-method is called into scope as the \texttt{this} variable.
+The bottom line represents the rule of the method body, \(e\),
+evaluating to the return value \(v'\), by binding the argument values to
+the parameter in the environment and binding the \texttt{this} variable to
+the object on which the method is called. Exactly how \(e\) evaluates to
+\(v'\) is defined using other rules, which are left out in this example.

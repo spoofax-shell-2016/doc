@@ -170,58 +170,55 @@ this correct?].
 :PROPERTIES:
 :CUSTOM_ID: sec-dynamic-semantics
 :END:
-Dynamic semantics (also known as /execution semantics/) refers to how
-a program in some language is to be executed\nbsp\cite{Harper12}.
+Dynamic semantics refers to how a program in some language
+behaves\nbsp\cite{Winskel93}. There are multiple approaches to
+formally specify the dynamic semantics of a programming language (for
+an extensive treatment, see\nbsp\cite{Winskel93}). For this section
+only one sort of approach is relevant, namely /rule-based operational/
+/semantics/ (see\nbsp\cite{Plotkin04} for a historical account of this
+approach).
 
-There are multiple approaches to formally specify the dynamic
-semantics of a language. Among those approaches are /small-step style/
-semantics[fn:lecture-ucolorado: See for example
-[[http://ecee.colorado.edu/~siek/ecen5013/spring10/lecture3.pdf]]],
-/big-step style/ semantics and translating to a different language.
-
-The dynamic semantics of a language used to be specified with
-Stratego, but the Spoofax team has developed a more higher level way
-to declare the semantics of a language, using a DSL called [[#ssec-dynsem][DynSem]].
-*** DynSem
+*** DynSem: a rule-based dynamic semantics
 :PROPERTIES:
 :CUSTOM_ID: ssec-dynsem
 :END:
-DynSem\nbsp\cite{VerguNV15} is a DSL for specifying the /dynamic semantics/ of a
-language.  Often the formal specification of the dynamic semantics of
-a program are separate from the implementation of the language. The
-goal of DynSem is to unify both of these, by providing a syntax that
-is readable as a formal specification, and can also serve as the
-source for generating the execution engine of a programming language.
-*** Reduction Rules
-With DynSem, the dynamic semantics are specified by reduction rules in
-either small-step style or big-step style[fn:prefer-big-step: DynSem
-prefers big-step style, as it can optimize rules of that type better.].
+In Spoofax, the dynamic semantics of a language used to be specified
+with Stratego. However, the Spoofax team has developed a more
+high-level way to declare the dynamic semantics of a language, namely
+a DSL called /DynSem/\nbsp\cite{VerguNV15}. As with all DSLs in
+Spoofax, DynSem offers a declarative approach to generate the
+/implementation/ out of the /specification/. Indeed, from a DynSem
+specification of a language, an interpreter for that language can be
+generated.
 
-A simple example is used to show how reduction rules can define the
-dynamic semantics of a language. Consider the classic example of the
-\beta-reduction of the lambda calculus, which defines function
-application. It replaces all the occurences of $x$ with $e_2$, within
-the expression $e_1$:
+In DynSem, the dynamic semantics are specified by means of rules. To
+show how rules can define the dynamic semantics of a language,
+consider the classic example of the \beta-reduction, which defines
+function application in the lambda calculus. The rule replaces all the
+occurences of the parameter $x$ with the argument $e_2$, within the
+expression $e_1$:
 
 \begin{equation}
 (\lambda x.e_1) e_2 \rightarrow e_1[x := e_2]
 \end{equation}
 
-In the same way, dynamic semantics can be specified in DynSem using
-reduction rules, in a syntax very similar to the formal syntax. Take
+In a similar way, dynamic semantics can be specified in DynSem, in a
+syntax very similar to the formal syntax used in the literature. Take
 here the example of method calling in paplj:
 
 #+BEGIN_EXAMPLE
 rules
+  // ...
   Call(o, m, vs: List(V)) --> v'
     where lookupMethod(o, m) --> Method(_, _, params, e);
           This o, Env bindVars(params, vs) |- e --> v'.
 #+END_EXAMPLE
 
-The bottom line represents the reduction rule of the method body, $e$,
-evaluating to a value $v'$, by binding the argument values to the
-parameter in the environment and bringing the object on which the
-method is called into scope as the =this= variable.
+The bottom line represents the rule of the method body, $e$,
+evaluating to the return value $v'$, by binding the argument values to
+the parameter in the environment and binding the =this= variable to
+the object on which the method is called. Exactly how $e$ evaluates to
+$v'$ is defined using other rules, which are left out in this example.
 * References
 :PROPERTIES:
 :UNNUMBERED: t
