@@ -71,16 +71,17 @@ definition alone, and are thus considered separately.
 \subsubsection{Declarative static semantics specification in Spoofax}
 \label{sec:orgheadline2}
 In Spoofax, all the static semantics as well as the dynamic semantics
-used to be specified with the Stratego transformation language (which
-will be discussed in \hyperref[sec-term-rewrite]{Term Rewriting}). Nowadays, two high-level DSLs
-exist for specifying static semantic declaratively: NaBL and TS. The
-two DSLs can work together: for instance, the type of a variable can
-be set in NaBL, so that TS can make assertions on it.
+used to be specified with the \emph{Stratego} transformation language
+(which will be discussed in \hyperref[sec-term-rewrite]{Term Rewriting}). Nowadays, two high-level
+DSLs exist for specifying static semantic declaratively: NaBL and
+TS. The two DSLs can work together: for instance, the type of a
+variable can be set in NaBL, so that TS can make assertions on it.
 \subsubsection{NaBL: the Name Binding Language}
 \label{sec:orgheadline3}
-With NaBL (pronounced \emph{enable}), name binding and scoping rules can be
-specified. Here is an example of the name binding and scoping rules
-for a class, from the paplj language:
+With \emph{NaBL} (pronounced \emph{enable}), name binding and scoping rules can
+be specified declaratively~\cite{KonatKWV12}. Here is an example
+of the name binding and scoping rules for a class, from the paplj
+language:
 \begin{verbatim}
 namespaces Program Class Field Method Variable
 // ...
@@ -95,13 +96,12 @@ binding rules
     // Import namespaces from superclass
     imports Field, Method from Class c
 \end{verbatim}
-The first line declares the namespaces to
-consider. Then for each node in the AST resulting from the parsing,
-for example a \texttt{Class} node, the name binding and scoping rules can be
-defined. In the example, each \texttt{Class} node declares a new scope for
-its fields, methods and variables. It also implicitly defines the
-\texttt{this} variable. The \texttt{Extends} node can then import the fields and
-methods into its scope.
+The first line declares the namespaces to consider. Then for each node
+in the AST resulting from the parsing, for example a \texttt{Class} node, the
+name binding and scoping rules can be defined. In the example, each
+\texttt{Class} node declares a new scope for its fields, methods and
+variables. It also implicitly defines the \texttt{this} variable. The
+\texttt{Extends} node can then import the fields and methods into its scope.
 
 As can be seen from line 8, it can also associate type information
 with names, to interplay with TS. The type annotations can also be
@@ -109,8 +109,8 @@ used for instance when desugaring or rewriting with Stratego (see \hyperref[sec-
 Rewriting}).
 \subsubsection{TS: the Type Specification Language}
 \label{sec:orgheadline4}
-Type checking can be done with the TS DSL. Again an example of the
-paplj language:
+Type checking can be done by specifying typing rules with the \emph{TS}
+DSL. Again an example of the paplj language:
 \begin{verbatim}
 type rules
   Class(c1, Extends(c2), _, _) :-
@@ -132,11 +132,11 @@ type of a variable can be accessed, which is set in the NaBL
 specification (see previous section).
 \subsection{Term Rewriting and Program Transformation}
 \label{sec-term-rewrite}
-Spoofax offers a high level declarative DSL called Stratego for program
-transformation. Stratego operates on ASTs, and is the most general
-part of Spoofax: it can be used for static semantics (name binding,
-type checking), desugaring and for the dynamic semantics of a
-language.
+Spoofax offers a high level declarative DSL called \emph{Stratego} for
+program transformation~\cite{Visser01}. Stratego operates on ASTs,
+and is the most general part of Spoofax: it can be used for static
+semantics (name binding, type checking), desugaring and for the
+dynamic semantics of a language.
 
 As the static semantics can now be done using NaBL and TS, and the
 dynamic semantics with DynSem (see next section), Stratego can be used

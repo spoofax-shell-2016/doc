@@ -86,9 +86,10 @@ DSLs exist for specifying static semantic declaratively: NaBL and
 TS. The two DSLs can work together: for instance, the type of a
 variable can be set in NaBL, so that TS can make assertions on it.
 *** NaBL: the Name Binding Language
-With NaBL (pronounced /enable/), name binding and scoping rules can be
-specified. Here is an example of the name binding and scoping rules
-for a class, from the paplj language:
+With /NaBL/ (pronounced /enable/), name binding and scoping rules can
+be specified declaratively\nbsp\cite{KonatKWV12}. Here is an example
+of the name binding and scoping rules for a class, from the paplj
+language:
 #+BEGIN_EXAMPLE
 namespaces Program Class Field Method Variable
 // ...
@@ -103,21 +104,20 @@ binding rules
     // Import namespaces from superclass
     imports Field, Method from Class c
 #+END_EXAMPLE
-The first line declares the namespaces to
-consider. Then for each node in the AST resulting from the parsing,
-for example a =Class= node, the name binding and scoping rules can be
-defined. In the example, each =Class= node declares a new scope for
-its fields, methods and variables. It also implicitly defines the
-=this= variable. The =Extends= node can then import the fields and
-methods into its scope.
+The first line declares the namespaces to consider. Then for each node
+in the AST resulting from the parsing, for example a =Class= node, the
+name binding and scoping rules can be defined. In the example, each
+=Class= node declares a new scope for its fields, methods and
+variables. It also implicitly defines the =this= variable. The
+=Extends= node can then import the fields and methods into its scope.
 
 As can be seen from line 8, it can also associate type information
 with names, to interplay with TS. The type annotations can also be
 used for instance when desugaring or rewriting with Stratego (see [[#sec-term-rewrite][Term
 Rewriting]]).
 *** TS: the Type Specification Language
-Type checking can be done with the TS DSL. Again an example of the
-paplj language:
+Type checking can be done by specifying typing rules with the /TS/
+DSL. Again an example of the paplj language:
 #+BEGIN_EXAMPLE
 type rules
   Class(c1, Extends(c2), _, _) :-
