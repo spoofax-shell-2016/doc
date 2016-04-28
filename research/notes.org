@@ -7,75 +7,77 @@ subject are linked.
 :EXPORT_FILE_NAME: spoofax-org-export
 :END:
 #+LATEX_CLASS: article-shifted
-Spoofax is a platform that allows for the completely /declarative/
-definition of a programming language and accompanying IDE
-support\nbsp\cite{Kats10a}. Such a platform is called a /language
+Spoofax is a platform that allows for giving a completely
+/declarative/ definition of a programming language and accompanying
+IDE support\nbsp\cite{Kats10a}. Such a platform is called a /language
 workbench/. The definition of a programming language is done using
 high-level /meta-languages/ for each aspect of the programming
 language.
 
 To define a language declaratively means that one uses the
-meta-languages to specify /what/ the properties of a language are, and
-not /how/ these properties are implemented. For example, instead of
-asking "How do I implement a tokenizer and parser for my language?",
-one asks "What is the syntax of my language?". From such a description
-in a meta-language, the tokenizer and parser can be derived, without
+meta-languages to specify /what/ the properties of a language are, not
+/how/ these properties are implemented. For example, instead of asking
+/​"How do I implement a tokenizer and parser for my language?"​/, one
+asks /​"What is the syntax of my language?"​/. From such a description
+in a meta-language, the tokenizer and parser can be derived without
 the designer of the language ever having to care about its
 implementation.
 
-This section goes over the parts that make up the specification of a
-language, and for each part the relevant part of Spoofax is
+This section goes over the elements that make up the specification of
+a language, and for each element the relevant part of Spoofax is
 given[fn:comp-constr-course:This section follows the structure of the
 language specification portion of the compiler construction course at
 the TU Delft. The slides can be found here:
 [[http://tudelft-in4303.github.io/lectures/specification/]].]. The parts
 of a language specification are:
-1. [[#sec-syntax-def][Syntax Definition]]: Specifying the syntax of a language.
-2. [[#sec-static-analysis][Static Semantics]]: Describing the static analysis part of a
-   language: type checking, name binding and variable scoping.
-3. [[#sec-term-rewrite][Term Rewriting and Program Transformation]]: Rewriting ASTs to new
-   ASTs, for example to declare desugaring rules.
-4. [[#sec-dynamic-semantics][Dynamic Semantics]]: Defining what the language does upon execution.
+1. [[#sec:syntax-def][Syntax Definition]]: Specifying the syntax of a language.
+2. [[#sec:static-analysis][Static Semantics]]: Describing the static analysis part of a
+   language (type checking, name binding and variable scoping).
+3. [[#sec:term-rewrite][Term Rewriting and Program Transformation]]: Rewriting abstract
+   syntax trees (ASTs) to new ASTs, for example to declare desugaring
+   rules.
+4. [[#sec:dynamic-semantics][Dynamic Semantics]]: Defining what the language does upon execution.
 
 ** Syntax Definition
 :PROPERTIES:
-:CUSTOM_ID: sec-syntax-def
+:CUSTOM_ID: sec:syntax-def
 :END:
 The first part of the specification of a language is its syntax. The
 syntax of a language is often specified by means of a /lexical
 grammar/ and a /context-free grammar/, as can be seen in the
 specification of, for example, Standard ML\nbsp\cite{Milner97}. The
-lexical grammar is most often defined using regular expression. It
+lexical grammar is most often defined using regular expressions. It
 defines the individual words made up of characters, such as
 identifiers and numeric constants. The context-free grammar then
 defines syntactically valid sentences made up of words.
 
 *** SDF3: syntax definition in Spoofax
-To specify a syntax definition declaratively in Spoofax, a DSL called
-/SDF3/\nbsp\cite{Vollebregt12} is used, the third generation of the
-/Syntax Definition Formalism/ (SDF)\nbsp\cite{Heering89}. SDF3 uses
-context-free grammer productions for the specification of both the
-lexical syntax and the context-free syntax, a feature that was
-introduced in SDF2\nbsp\cite{Visser97}.
+To specify a syntax definition declaratively in Spoofax, a domain
+specific language (DSL) called /SDF3/\nbsp\cite{Vollebregt12} is used.
+SDF3 is the third generation of the /Syntax Definition Formalism/
+(SDF)\nbsp\cite{Heering89}. It uses only context-free grammer
+productions for the specification of both the lexical syntax and the
+context-free syntax, a feature that was introduced in
+SDF2\nbsp\cite{Visser97}.
 
 The declarative nature of SDF3 allows for thinking in terms of the
 structure (the /what/), instead of in terms of parser algorithms (the
 /how/) as is the case with many current parsing
-algorithms\nbsp\cite{Kats10b}. The syntax definition can be used to
-make parsers which parse a textual representation to an AST, and
-pretty-printers for mapping ASTs back to text. However, due to its
+algorithms\nbsp\cite{Kats10b}. The syntax definition is used to make
+parsers that parse a textual representation of a program into its AST,
+and pretty-printers for mapping ASTs back to text. However, due to its
 declarative nature, SDF3 is not limited to generating parsers and
 pretty printers: it can also be used for error recovery
 rules\nbsp\cite{deJonge12}, syntax highlighting rules and folding
 rules for editors.
 
 All of the other parts of Spoofax use the AST that is produced by a
-parser generated from a SDF3 specification.
+parser generated from an SDF3 specification.
 ** Static Semantics
 :PROPERTIES:
-:CUSTOM_ID: sec-static-analysis
+:CUSTOM_ID: sec:static-analysis
 :END:
-Static semantics refer to the meaning of what is a well-formed program
+Static semantics refer to the meaning of what a well-formed program is
 for a particular language\nbsp\cite{Milner97}. This imposes more
 constraints than syntax definition, such as name binding, scoping
 rules, and type checking. These cannot be specified by a syntax
@@ -83,12 +85,15 @@ definition alone, and are thus considered separately.
 *** Declarative static semantics specification in Spoofax
 In Spoofax, all the static semantics as well as the dynamic semantics
 used to be specified with the /Stratego/ transformation language
-(which is discussed in section [[#sec-term-rewrite]]). Nowadays, two
+(which is discussed in section [[#sec:term-rewrite]]). Nowadays, two
 high-level DSLs exist for specifying static semantics declaratively:
 NaBL and TS. The two DSLs can work together: for instance, the type of
 a variable can be set with NaBL, so that TS can be used to make
 assertions on the type of that variable.
 *** NaBL: the Name Binding Language
+:PROPERTIES:
+:CUSTOM_ID: sec:nabl
+:END:
 With /NaBL/ (pronounced /enable/), name binding and scoping rules can
 be specified declaratively\nbsp\cite{KonatKWV12}. Here is an example
 of the name binding and scoping rules for a class, from the /paplj/
@@ -96,6 +101,8 @@ language[fn:paplj:paplj is used as an exercise language for the
 "Declare Your Language" book, which is a work-in-progress at the time
 of writing. More information can be found here:
 https://github.com/MetaBorgCube/declare-your-language]
+#+LATEX: \lstset{language=nabl}
+#+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
 namespaces Program Class Field Method Variable
 // ...
@@ -110,20 +117,24 @@ binding rules
     // Import namespaces from superclass
     imports Field, Method from Class c
 #+END_EXAMPLE
-The first line declares the namespaces to consider. Then for each node
-in the AST resulting from the parsing, for example a =Class= node, the
-name binding and scoping rules can be defined. In the example, each
-=Class= node declares a new scope for its fields, methods and
-variables. It also implicitly defines the =this= variable. The
-=Extends= node can then import the fields and methods into its scope.
+The first line declares the /namespaces/ to consider. A namespace is a
+way to distinguish different kinds of
+names\nbsp\cite{KonatKWV12}. Then for each node in the AST resulting
+from the parsing, for example a =Class= node, the name binding and
+scoping rules can be defined. In the example, each =Class= node
+declares a new scope for its fields, methods and variables. It also
+implicitly defines the =this= variable. The =Extends= node can then
+import the fields and methods into its scope.
 
 As can be seen from line 8, it can also associate type information
-with names, to interplay with TS. The type annotations can also be
-used for instance when desugaring or rewriting with Stratego (see
-section [[#sec-term-rewrite]]).
-*** TS: the Type Specification Language
+with names to interplay with TS. The type annotations can also be used
+for instance when desugaring or rewriting with Stratego (see section
+[[#sec:term-rewrite]]).
+*** TS: the Type Specification language
 Type checking can be done by specifying typing rules with the /TS/
 DSL. Again an example of the paplj language:
+#+LATEX: \lstset{language=type-spec}
+#+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
 type rules
   Class(c1, Extends(c2), _, _) :-
@@ -143,27 +154,30 @@ node in the above example.
 
 Again, in line 5, interplay can be seen between TS an NaBL. Here the
 type of a variable can be accessed, which is set in the NaBL
-specification (see previous section).
+specification (see the previous section [[#sec:nabl]]).
 ** Term Rewriting and Program Transformation
 :PROPERTIES:
-:CUSTOM_ID: sec-term-rewrite
+:CUSTOM_ID: sec:term-rewrite
 :END:
 Spoofax offers a high level declarative DSL called /Stratego/ for
 program transformation\nbsp\cite{Visser01}. Stratego operates on ASTs,
-and is the most general part of Spoofax: it can be used for static
-semantics (name binding, type checking), desugaring and for the
-dynamic semantics of a language. As the static semantics can now be
-done using NaBL and TS, and the dynamic semantics with DynSem (section
-[[#sec-dynamic-semantics]]), Stratego can be used to specify desugaring
-rules for a language.
+and is the most general part of Spoofax: it can be used for specifying
+the static semantics (name binding, type checking), desugaring rules
+and the dynamic semantics of a language. As the static semantics can
+now be done using NaBL and TS, and the dynamic semantics with DynSem
+(section [[#sec:dynamic-semantics]]), Stratego is now used to specify
+desugaring rules for a language, as well as optimizations such as
+constant folding and other applications of AST transformations.
 
-Stratego is based on the notions of /term rewrite rules/ and so called
+Stratego is based on the notions of /term rewrite rules/ and so-called
 /strategies/.
 *** Term rewrite rules
 A rewrite rule is a transformation on a term, in which the left-hand
 side allows for pattern matching and variable binding, and the right
 hand side instantiates new replacement terms. An example of a rewrite
 rule for paplj is given below.
+#+LATEX: \lstset{language=stratego}
+#+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
 rules
   desugar-let :
@@ -179,6 +193,8 @@ Strategies are used to select and apply term rewrite rules, to
 construct the main algorithm of the program transformation. One can
 use multiple combinators to compose rewrite rules and other
 strategies. Another example from paplj is given below:
+#+LATEX: \lstset{language=stratego}
+#+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
 strategies
   pre-desugar =
@@ -193,7 +209,7 @@ given as parameter (a composition of rewrite rules) in a specific
 traversal order on the AST nodes.
 ** Dynamic Semantics
 :PROPERTIES:
-:CUSTOM_ID: sec-dynamic-semantics
+:CUSTOM_ID: sec:dynamic-semantics
 :END:
 Dynamic semantics refers to how a program written in some language
 behaves\nbsp\cite{Winskel93}. There are multiple approaches to
@@ -203,14 +219,14 @@ only one sort of approach is relevant, namely /rule-based operational/
 /semantics/ (see\nbsp\cite{Plotkin04} for a historical account of this
 approach).
 
-*** DynSem: a rule-based dynamic semantics
+*** DynSem: rule-based dynamic semantics
 :PROPERTIES:
-:CUSTOM_ID: ssec-dynsem
+:CUSTOM_ID: ssec:dynsem
 :END:
 In Spoofax, the dynamic semantics of a language used to be specified
 with Stratego. However, the Spoofax team has developed a more
-high-level way to declare the dynamic semantics of a language, namely
-a DSL called /DynSem/\nbsp\cite{VerguNV15}. As with all DSLs in
+high-level method to declare the dynamic semantics of a language,
+namely a DSL called /DynSem/\nbsp\cite{VerguNV15}. As with all DSLs in
 Spoofax, DynSem offers a declarative approach to generate the
 /implementation/ out of the /specification/. Indeed, from a DynSem
 specification of a language, an interpreter for that language can be
@@ -230,7 +246,8 @@ expression $e_1$:
 In a similar way, dynamic semantics can be specified in DynSem, in a
 syntax very similar to the formal syntax used in the literature. Take
 here the example of defining method calling in paplj:
-
+#+LATEX: \lstset{language=dynsem}
+#+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
 rules
   // ...
@@ -238,7 +255,6 @@ rules
     where lookupMethod(o, m) --> Method(_, _, params, e);
           This o, Env bindVars(params, vs) |- e --> v'.
 #+END_EXAMPLE
-
 The bottom line represents the rule of the method body, $e$,
 evaluating to the return value $v'$, by binding the argument values to
 the parameter in the environment and binding the =this= variable to

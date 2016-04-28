@@ -12,6 +12,7 @@
 \usepackage{graphicx}
 \graphicspath{{img/}}
 \PassOptionsToPackage{sectionbib}{natbib}
+\usepackage{listings}
 
 % Source code listing style.
 \lstset{%
@@ -51,6 +52,62 @@
 % Don't show chapter numbers, we don't use chapters for the research
 % report.
 \renewcommand\thesection{\arabic{section}}
+\lstdefinelanguage{nabl}{
+  % list of keywords
+  morekeywords={
+    namespaces,
+    binding, rules,
+    imports,
+    from,
+    implicitly, defines,
+    of, type,
+    scopes
+  },
+  sensitive=false, % keywords are not case-sensitive
+  morecomment=[l]{//}, % l is for line comment
+  morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+  morestring=[b]" % defines that strings are enclosed in double quotes
+}
+\lstdefinelanguage{type-spec}{
+  % list of keywords
+  morekeywords={
+    type, rules,
+    where, store, definition, of,
+    and, else, on, error
+  },
+  otherkeywords={@},
+  sensitive=false, % keywords are not case-sensitive
+  morecomment=[l]{//}, % l is for line comment
+  morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+  morestring=[b]" % defines that strings are enclosed in double quotes
+}
+\lstdefinelanguage{stratego}{
+  % list of keywords
+  morekeywords={
+    rules, strategies
+  },
+  otherkeywords={
+    =, <+, ->, +, ;, |, \[, \]
+  },
+  sensitive=false, % keywords are not case-sensitive
+  morecomment=[l]{//}, % l is for line comment
+  morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+  morestring=[b]" % defines that strings are enclosed in double quotes
+}
+\lstdefinelanguage{dynsem}{
+  % list of keywords
+  morekeywords={
+    rules,
+    where
+  },
+  otherkeywords={
+    |-, -->
+  },
+  sensitive=false, % keywords are not case-sensitive
+  morecomment=[l]{//}, % l is for line comment
+  morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+  morestring=[b]" % defines that strings are enclosed in double quotes
+}
 
 \begin{document}
 
