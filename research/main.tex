@@ -12,7 +12,6 @@
 \usepackage{graphicx}
 \graphicspath{{img/}}
 \PassOptionsToPackage{sectionbib}{natbib}
-\usepackage{listings}
 
 % Source code listing style.
 \lstset{%
@@ -20,10 +19,10 @@
   backgroundcolor=\color{white},
   breaklines=true,
   captionpos=b,
-  commentstyle=\color{tudelft-purple},
+  commentstyle=\it\ttfamily,
   frame=none,
   keepspaces=true,
-  keywordstyle=\color{tudelft-fuchsia},
+  keywordstyle=\bf\ttfamily\color{tudelft-purple},
 }
 
 % Use “\cite{NEEDED}” to get Wikipedia-style “citation needed”.
@@ -87,7 +86,7 @@
     rules, strategies
   },
   otherkeywords={
-    =, <+, ->, +, ;, |, \[, \]
+    <+, ->, ;, |, \[, \]
   },
   sensitive=false, % keywords are not case-sensitive
   morecomment=[l]{//}, % l is for line comment
