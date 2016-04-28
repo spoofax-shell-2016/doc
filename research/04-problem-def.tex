@@ -1,32 +1,35 @@
 \section{Problem Definition}
 \label{sec:problem-definition}
 
-The previous sections provided the necessary background knowledge of the problem
-domain. Now that the background knowledge has been discussed,
-this section will give the problem definition of the client.
+The previous sections provided the necessary background knowledge of
+the problem domain. Now that the background knowledge has been
+discussed, this section will discuss the problem definition of the
+client.
 
-Spoofax offers a wide variety of tools to develop DSLs and accompanying IDE support.
-Precisely because Spoofax is concerned with developing DSLs, rapid prototyping
-of syntax and grammar is a convenient addition to the product.
-Section 2 showed that REPLs provide precisely this rapid prototyping ability
-for other languages like LISP and Python. Therefore, the client has expressed
-their interest in REPLs that are generated from language definitions created with
-Spoofax. Such a REPL would aid both the developer of the language, and its
-end-user.
+Spoofax offers a wide variety of tools to develop DSLs and
+accompanying IDE support. Precisely because Spoofax is concerned with
+developing DSLs, rapid prototyping of syntax and grammar is a
+convenient addition to the product. \Cref{sec:read-eval-print} showed
+that REPLs provide precisely this rapid prototyping ability for other
+languages like Lisp and Python. Therefore, the client has expressed
+their interest in REPLs that are generated from language definitions
+created with Spoofax. Such a REPL would aid both the developer of the
+language, and its end-user.
 
-Since a lot of language services are already provided by Spoofax,
-the REPL should try to hook in to existing services as much as possible.
-Besides exposing already existing Spoofax functionality in an interactive shell,
-our product should also expose additional features geared towards interactive
-exploration of programs in the generated languages.
-Examples include displaying and editing the contents of current program context,
-saving and loading program context and keeping a history of executed expressions.
+Since a lot of language services are already provided by Spoofax, the
+REPL should try to hook into existing services as much as possible.
+Besides exposing already existing Spoofax services in an interactive
+shell, the product should also expose additional features geared
+towards interactive exploration of programs in the generated
+languages.  Examples include displaying and editing the contents of
+current program context, saving and loading program context and
+keeping a history of executed expressions.
 
-When a REPL is realized, the product could be further extended to add support
-for literate programming, allowing for rapid prototyping and documentation at
-the same time~\cite{org-mode}. This would allow developers of new DSLs to
-document and explain their language in an interactive manner that directly
-allows experimentation.
+When a REPL is realized, the product could be further extended to add
+support for literate programming, allowing for rapid prototyping and
+documentation at the same time~\cite{schulte2012}. This would allow
+developers of new DSLs to document and explain their language in an
+interactive manner that directly allows experimentation.
 
 %%% Local Variables:
 %%% mode: latex
