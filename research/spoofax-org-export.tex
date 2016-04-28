@@ -18,9 +18,9 @@ This section goes over the parts that make up the specification of a
 language, and for each part the relevant part of Spoofax is
 given\footnote{This section follows the structure of the
 language specification portion of the compiler construction course at
-the TU Delft. The slides of this portion of the course can be found
-here: \url{http://tudelft-in4303.github.io/lectures/specification/}.}. The
-parts of a language specification are:
+the TU Delft. The slides can be found here:
+\url{http://tudelft-in4303.github.io/lectures/specification/}.}. The parts
+of a language specification are:
 \begin{enumerate}
 \item \hyperref[sec-syntax-def]{Syntax Definition}: Specifying the syntax of a language.
 \item \hyperref[sec-static-analysis]{Static Semantics}: Describing the static analysis part of a
@@ -83,8 +83,11 @@ assertions on the type of that variable.
 \label{sec:orgheadline3}
 With \emph{NaBL} (pronounced \emph{enable}), name binding and scoping rules can
 be specified declaratively~\cite{KonatKWV12}. Here is an example
-of the name binding and scoping rules for a class, from the paplj
-language:
+of the name binding and scoping rules for a class, from the \emph{paplj}
+language\footnote{paplj is used as an exercise language for the
+"Declare Your Language" book, which is a work-in-progress at the time
+of writing. More information can be found here:
+\url{https://github.com/MetaBorgCube/declare-your-language}}
 \begin{verbatim}
 namespaces Program Class Field Method Variable
 // ...

@@ -27,9 +27,9 @@ This section goes over the parts that make up the specification of a
 language, and for each part the relevant part of Spoofax is
 given[fn:comp-constr-course:This section follows the structure of the
 language specification portion of the compiler construction course at
-the TU Delft. The slides of this portion of the course can be found
-here: [[http://tudelft-in4303.github.io/lectures/specification/]].]. The
-parts of a language specification are:
+the TU Delft. The slides can be found here:
+[[http://tudelft-in4303.github.io/lectures/specification/]].]. The parts
+of a language specification are:
 1. [[#sec-syntax-def][Syntax Definition]]: Specifying the syntax of a language.
 2. [[#sec-static-analysis][Static Semantics]]: Describing the static analysis part of a
    language: type checking, name binding and variable scoping.
@@ -91,8 +91,11 @@ assertions on the type of that variable.
 *** NaBL: the Name Binding Language
 With /NaBL/ (pronounced /enable/), name binding and scoping rules can
 be specified declaratively\nbsp\cite{KonatKWV12}. Here is an example
-of the name binding and scoping rules for a class, from the paplj
-language:
+of the name binding and scoping rules for a class, from the /paplj/
+language[fn:paplj:paplj is used as an exercise language for the
+"Declare Your Language" book, which is a work-in-progress at the time
+of writing. More information can be found here:
+https://github.com/MetaBorgCube/declare-your-language]
 #+BEGIN_EXAMPLE
 namespaces Program Class Field Method Variable
 // ...
