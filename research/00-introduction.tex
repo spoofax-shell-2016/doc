@@ -2,6 +2,30 @@
 \label{sec:introduction}
 \addcontentsline{toc}{section}{Introduction}
 
+Spoofax is a language workbench developed by TU Delft over the course of several
+years. During those years it has grown to `a platform for developing textual
+domain-specific languages with full-featured Eclipse editor plugins'.
+Today languages in Spoofax are constructed using the meta-languages `SDF3',
+`NABL', `TS' and `Stratego', where each meta-language has a specific purpose.
+These meta-languages in turn are used to provide several language services,
+such as syntax highlighting, code transformation and error marking.
+
+Since Spoofax is used to develop new domain-specific languages, the ability
+for rapid prototyping using a read-eval-print loop would be very convenient.
+In this research report we first aim to get a better overview of the scope
+of Spoofax and each of its meta-languages. Afterwards we will explore
+REPLs and literate programming in order to clarify what functionality
+a good implementation should have.
+
+After having explored the domain of our project, we will give a concise
+problem definition. This problem definition will then be analyzed in the context
+of the services that Spoofax already provides to clarify potential problems
+and their solutions in creating a REPL that works generically across all
+generated languages.
+
+At last the requirements for the product will be analyzed, as well as the
+methods that will be used in order to realize these requirements.
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "main"
