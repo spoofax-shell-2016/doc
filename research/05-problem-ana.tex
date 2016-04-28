@@ -1,6 +1,25 @@
 \section{Problem Analysis}
 \label{sec:problem-analysis}
 
+To achieve a solid working REPL across all generated languages,
+some Spoofax concepts have to be carefully considered.
+Since every language that will be used in the REPL will be unique,
+the REPL should not be constrained to language specific constructs like
+classes or structs, but rather should operate on them in a generic way.
+Therefore the implementation and particularly interaction with the user needs
+to be thought of carefully, for example when implementing functionality to
+alter the contents of namespaces.
+
+\todo{FIXME: Just noting possible solutions we might want to elaborate}
+We could add ...
+\begin{itemize}
+\item a special prefix for shell specific commands, and then...
+\item a command to enumerate all possible namespaces as detected by spoofax
+\item a command to switch to a namespace from this list
+\item a command to list entries in the current namespace
+\item expressions typed will be added to the selected namespace
+\item all language agnostic, since we won't care what to call the namespace
+\end{itemize}
 
 \subsection{Incorporating REPL generation within Spoofax}
 \label{ssec:architecture}
