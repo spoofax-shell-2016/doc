@@ -8,9 +8,41 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{enumitem}
+\usepackage{listings}
 \usepackage{graphicx}
 \graphicspath{{img/}}
 \PassOptionsToPackage{sectionbib}{natbib}
+
+% Source code listing style.
+\lstset{%
+  basicstyle=\ttfamily,
+  backgroundcolor=\color{white},
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{tudelft-purple},
+  frame=none,
+  keepspaces=true,
+  keywordstyle=\color{tudelft-fuchsia},
+}
+
+% Use “\cite{NEEDED}” to get Wikipedia-style “citation needed”.
+\usepackage{ifthen}
+\let\oldcite=\cite
+\renewcommand\cite[1]{
+  \ifthenelse{\equal{#1}{NEEDED}}
+    {\ensuremath{^\texttt{[citation~needed]}}}
+    {\oldcite{#1}}
+}
+
+% Table markup:
+% 1. Rotate column heads.
+% 2. Define check- and crossmarks.
+% 3. Top and bottom rules.
+\newcommand*\rot{\rotatebox{-50}}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\usepackage{booktabs}
 
 \input{title_preamble}
 %% Comment out to show headerinfo.
