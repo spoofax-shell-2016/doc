@@ -10,7 +10,7 @@ this document is updated accordingly (perhaps simply by referring to said
 emails) such that this document is the one document required to track our
 progress.
 
-# Project goal
+## Project goal
 
 From Spoofax's website:
 
@@ -26,7 +26,8 @@ Common examples include command-line shells such as Bash and Python's REPL.
 The deliverable for this project, then, is to create such a REPL generator for
 the Spoofax Language Workbench.
 
-# The final product
+## The final product
+
 The final product will have to meet the following requirements and demands,
 as specified following the MoSCoW method:
 
@@ -56,7 +57,7 @@ language playground such as the one offered by the Swift programming language.
 If we decide to extend the project, new agreements will be made between us and
 the client.
 
-# Methodologies and tooling
+## Methodologies and tooling
 
 During this project we will work using the SCRUM methodology with weekly
 sprints. Our backlog, current and completed sprints will be managed using
@@ -109,9 +110,38 @@ already being used. This means that we will use:
 * JUnit for unit tests;
 * TravisCI for continuous integration.
 
-# Quality assurance
+## Quality assurance
 
-# What TU Delft expects from us
+There are two types of quality to be assured:
+
+1. Quality of the code;
+2. Quality of the end product.
+
+### Quality of the code
+
+The quality of the code will be assured by applying proper software development
+practices, such as unit testing, continuous integration, code reviews and static
+analysis. We will strive to uphold an architecture TODO supported by proper
+application of the (correct) design patterns, resulting in low coupling and high
+cohesion. For more information on how our development is organised, please see
+the CONTRIBUTING file in our code repositories.
+
+### Quality of the end product
+
+The quality of the product will be assured by asking regularly for feedback from
+the clients. This will be done by discussing status updates, preferably with
+working demos to illustrate and support the progress.
+
+Further towards the end of the development period, we will ask one or two
+members of the client's research group to use the REPL for one of the existing
+(simple) languages implemented in Spoofax, perhaps while slightly changing the
+language to see how a REPL assists with this task. This is to gather feedback
+from someone who has not been involved in the development but who will be an end
+user. Results from these tests will then be discussed with the client to see
+where the product still needs improvement. This way, we hope to deliver a
+product that satisfies both the client and the people actually working with it.
+
+## What TU Delft expects from us
 
 This section's purpose is to document additional agreements between the TU coach
 and us. For the regular project deadlines, please see the end of this section.
