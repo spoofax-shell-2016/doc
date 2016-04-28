@@ -163,7 +163,7 @@ Stratego is based on the notions of /term rewrite rules/ and so called
 A rewrite rule is a transformation on a term, in which the left-hand
 side allows for pattern matching and variable binding, and the right
 hand side instantiates new replacement terms. An example of a rewrite
-rule is given below.
+rule for paplj is given below.
 #+BEGIN_EXAMPLE
 rules
   desugar-let :
@@ -178,7 +178,7 @@ nested =let= expressions each having just one binding.
 Strategies are used to select and apply term rewrite rules, to
 construct the main algorithm of the program transformation. One can
 use multiple combinators to compose rewrite rules and other
-strategies. An example is given below:
+strategies. Another example from paplj is given below:
 #+BEGIN_EXAMPLE
 strategies
   pre-desugar =
@@ -229,7 +229,7 @@ expression $e_1$:
 
 In a similar way, dynamic semantics can be specified in DynSem, in a
 syntax very similar to the formal syntax used in the literature. Take
-here the example of method calling in paplj:
+here the example of defining method calling in paplj:
 
 #+BEGIN_EXAMPLE
 rules
