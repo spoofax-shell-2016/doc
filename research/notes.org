@@ -101,7 +101,7 @@ language[fn:paplj:paplj is used as an exercise language for the
 "Declare Your Language" book, which is a work-in-progress at the time
 of writing. More information can be found here:
 https://github.com/MetaBorgCube/declare-your-language]
-#+LATEX: \lstset{language=nabl}
+#+LATEX: \lstset{language=nabl,numbers=left}
 #+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
 namespaces Program Class Field Method Variable
@@ -133,7 +133,7 @@ for instance when desugaring or rewriting with Stratego (see section
 *** TS: the Type Specification language
 Type checking can be done by specifying typing rules with the /TS/
 DSL. Again an example of the paplj language:
-#+LATEX: \lstset{language=type-spec}
+#+LATEX: \lstset{language=type-spec,numbers=left}
 #+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
 type rules
@@ -176,7 +176,7 @@ A rewrite rule is a transformation on a term, in which the left-hand
 side allows for pattern matching and variable binding, and the right
 hand side instantiates new replacement terms. An example of a rewrite
 rule for paplj is given below.
-#+LATEX: \lstset{language=stratego}
+#+LATEX: \lstset{language=stratego,numbers=left}
 #+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
 rules
@@ -193,7 +193,7 @@ Strategies are used to select and apply term rewrite rules, to
 construct the main algorithm of the program transformation. One can
 use multiple combinators to compose rewrite rules and other
 strategies. Another example from paplj is given below:
-#+LATEX: \lstset{language=stratego}
+#+LATEX: \lstset{language=stratego,numbers=left}
 #+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
 strategies
@@ -246,7 +246,7 @@ expression $e_1$:
 In a similar way, dynamic semantics can be specified in DynSem, in a
 syntax very similar to the formal syntax used in the literature. Take
 here the example of defining method calling in paplj:
-#+LATEX: \lstset{language=dynsem}
+#+LATEX: \lstset{language=dynsem,numbers=left}
 #+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
 rules
@@ -260,6 +260,7 @@ evaluating to the return value $v'$, by binding the argument values to
 the parameter in the environment and binding the =this= variable to
 the object on which the method is called. Exactly how $e$ evaluates to
 $v'$ is defined using other rules, which are left out in this example.
+#+LATEX: \lstset{numbers=none}
 * References
 :PROPERTIES:
 :UNNUMBERED: t
