@@ -43,6 +43,46 @@ We could add ...
 \subsubsection{Detecting unfinished expressions for multiline editing}
 \label{sec:detect-unfin-expr}
 
+\subsubsection{Language specific additional commands}
+\label{sec:lang-spec-addit}
+Another problem is when some additional command can be useful for a
+REPL of a particular language, but would not make any sense within the
+context of other languages. For example, some languages such as Java
+have the notion of a ``module'' or ``package'', which declares a
+separate namespace for the definitions in it. An additional command to
+list all of the currently loaded modules is useful, but would not make
+any sense in languages that have no concept of a module.
+
+This problem could be solved by the language designer by extending his
+or her language with reflective capabilities. However in that case it
+would not be an additional command, but just an expression like any
+other expression in that language. Moreover, the language designer
+might not want to extend the language with reflective capabilities
+outside of the context of a REPL, for example when the language is a
+DSL. It is clear therefore that a different approach should be
+considered.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{menu-actions.png}
+  \caption{A menu action for the paplj language defined using
+    Spoofax. The bottom window shows the menu definition, the top
+    window shows a program written in paplj.}
+  \label{fig:menu-actions}
+\end{figure}
+
+One possible solution is to allow for language specific configurations
+that are loaded and used during the generation process of a REPL for
+that language. This is similar to something that currently exists in
+Spoofax: when one creates a language, there is the possibility to
+define menu buttons and bind them to Stratego strategies
+(\cref{sec:orgheadline5}). For example, one can define a menu button
+``Run'' to run the expression that is currently selected (see
+\cref{fig:menu-actions}), or a ``Desugar'' button to desugar the
+program that is currently open. In the same way, one may define a
+``list-modules'' command for a REPL which is bound to a Stratego
+strategy.
+
 \subsection{Extending the product with literate programming}
 \label{sec:extend-prod-with}
 
