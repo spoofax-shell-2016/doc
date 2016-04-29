@@ -1,14 +1,53 @@
-\section{Realisation of the Product}
+\section{Frameworks and Tools}
 \label{sec:realisation-product}
 
-\subsection{Methodologies used during the project}
-\label{ssec:methodologies}
+The previous section analysed the requirements for the product as set in
+\cref{sec:requirement-analysis}. The purpose of this section is to discuss the
+frameworks and tools used during the development of the product.
+
+\subsection{Development frameworks}
+\label{ssec:frameworks}
+
+Spoofax is an already existing project. In order for the product to be as easily
+integrated as possible, most of the tooling used by Spoofax will be reused. This
+means that the Java programming language is to be used, together with Maven for
+the build environment, JUnit for unit tests and TravisCI for continuous
+integration. On top of this, Spoofax uses a few open source Java libraries as
+can be seen in the list below. It is most likely that these will be used in the
+product as well.
+
+\begin{itemize}
+  \item Guice, a lightweight dependency injection framework;
+  \item Guava, provides general utilities missing in the JDK;
+  \item RxJava, a library for composing asynchronous and event-based programs
+    using observable sequences;
+  \item Apache VFS, a library for accessing various different file systems;
+  \item EhCache, a standards-based cache that boosts performance;
+  \item Apache's logging library.
+\end{itemize}
+
+If new libraries are to be used during the development of the project, it is
+important that these are under a license compatible with the Apache license
+under which Spoofax is licensed. Compatible licenses include, but are not
+limited to, the LGPL, MIT, BSD and Apache licenses.
 
 \subsection{Development tools}
 \label{ssec:tools}
 
-\subsection{Available APIs from Spoofax}
-\label{ssec:available-apis-from}
+To manage the source code, the git version control system is used. Pull-based
+development~\cite{Gousios14} is the paradigm chosen, in order for each member of
+the team to work on their assigned tasks without interfering with each other.
+To facilitate this, the GitHub platform is used because if offers an easy
+interface to pull-based development: it automatically discovers the commits to
+be merged, it facilitaties code review and discussion, new commits are
+automatically added to the pull-request so that the discussion can continue and
+GitHub automatically verifies whether commits can be merged. On top of this,
+GitHub also provides an integrated issue tracker.
+
+Furthermore, the tools FindBugs and PMD will be used to assist in delivering
+quality code. Checkstyle will be used to guarantee a coherent style throughout
+the code. These three static analysis tools will help ensure the design goal of
+maintainability, as highlighted in \cref{ssec:goals}.
 
 %%% Local Variables:
 %%% mode: latex
