@@ -1,15 +1,34 @@
 \section{Problem Analysis}
 \label{sec:problem-analysis}
+This section gives an analysis of the problem as defined in the
+previous section \ref{sec:problem-definition}. More specifically, this
+section describes the problems that are expected and to be solved
+during the implementation process of the product. The first part of
+this section describes the process of incorporating REPL generation
+within the larger context of Spoofax. The second part analyzes the
+part of the problem concerned with literate programming, but this part
+will be analyzed in less detail than generating REPLs as it is unsure
+whether this will be present in the final product.
 
-To achieve a solid working REPL across all generated languages,
-some Spoofax concepts have to be carefully considered.
-Since every language that will be used in the REPL will be unique,
-the REPL should not be constrained to language specific constructs like
-classes or structs, but rather should operate on them in a generic way.
-Therefore the implementation and particularly interaction with the user needs
-to be thought of carefully, for example when implementing functionality to
-alter the contents of namespaces.
+\subsection{Incorporating REPL generation within Spoofax}
+\label{ssec:incorp-repl-gener}
+To generate solidly working REPLs for any language defined in Spoofax,
+some Spoofax concepts have to be carefully considered. Since every
+language can have many different language constructs, generating REPLs
+should not be constrained to language specific constructs like
+classes, but should rather be done generically. Therefore the
+implementation and particularly the interaction with the user needs to
+be thought of carefully.
 
+This section lists the problems that are expected when trying to
+implement generating REPLs generically. For each problem, their
+solution approaches that should be explored during the implementation
+process are given, as well as the parts of Spoofax that are relevant
+for that problem.
+
+\subsubsection{Redefining the contents bound to names}
+\label{sec:redef-cont-bound}
+% TODO: Is "content" the right terminology here?
 \todo{FIXME: Just noting possible solutions we might want to elaborate}
 We could add ...
 \begin{itemize}
@@ -21,14 +40,11 @@ We could add ...
 \item all language agnostic, since we won't care what to call the namespace
 \end{itemize}
 
-\subsection{Incorporating REPL generation within Spoofax}
-\label{ssec:architecture}
+\subsubsection{Detecting unfinished expressions for multiline editing}
+\label{sec:detect-unfin-expr}
 
-\subsubsection{The relevant parts of Spoofax}
-\label{sec:which-parts-spoofax}
-
-\subsubsection{The available APIs from Spoofax}
-\label{sec:what-are-available}
+\subsection{Extending the product with literate programming}
+\label{sec:extend-prod-with}
 
 \subsection{Plug-in development in Eclipse}
 \label{ssec:eclipse-plugins}
