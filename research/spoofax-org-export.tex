@@ -21,6 +21,7 @@ language specification portion of the compiler construction course at
 the TU Delft. The slides can be found here:
 \url{http://tudelft-in4303.github.io/lectures/specification/}.}. The parts
 of a language specification are:
+
 \begin{enumerate}
 \item \hyperref[sec:syntax-def]{Syntax Definition}: Specifying the syntax of a language.
 \item \hyperref[sec:static-analysis]{Static Semantics}: Describing the static analysis part of a
@@ -31,6 +32,8 @@ rules.
 \item \hyperref[sec:dynamic-semantics]{Dynamic Semantics}: Defining what the language does upon execution.
 \end{enumerate}
 
+After that, the section concludes with a description of \hyperref[sec:editor-serv]{Editor
+Services in Spoofax}.
 \subsection{Syntax Definition}
 \label{sec:syntax-def}
 The first part of the specification of a language is its syntax. The
@@ -61,7 +64,7 @@ and pretty-printers for mapping ASTs back to text. However, due to its
 declarative nature, SDF3 is not limited to generating parsers and
 pretty printers: it can also be used for error recovery
 rules~\cite{deJonge12}, syntax highlighting rules and folding
-rules for editors.
+rules for editors (see section \ref{sec:editor-serv}).
 
 All of the other parts of Spoofax use the AST that is produced by a
 parser generated from an SDF3 specification.
@@ -241,3 +244,33 @@ the parameter in the environment and binding the \texttt{this} variable to
 the object on which the method is called. Exactly how \(e\) evaluates to
 \(v'\) is defined using other rules, which are left out in this example.
 \lstset{numbers=none}
+
+\subsection{Editor Services}
+\label{sec:editor-serv}
+This section concludes with a brief description of editor services,
+which provide the IDE support for languages defined in
+Spoofax. Examples of such services include an outline view, menus in
+which one can bind actions to menu buttons (see figure
+\ref{fig:menu-actions}), but also syntax highlighting and code folding
+rules\footnote{More services are listed on the Spoofax
+website: \url{http://www.metaborg.org/spoofax/editor-services/}}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.6\textwidth]{./img/menu-actions.png}
+\caption{\label{fig:menu-actions}
+A menu action for the paplj language defined using Spoofax. The bottom window shows the menu definition, the top window shows a program written in paplj.}
+\end{figure}
+
+Editor services are defined using a DSL, shown in the bottom window of
+figure \ref{fig:menu-actions}. In the case of menus, their actions are
+specified using Stratego, and via Stratego the actions can even be
+specified in Java. As such, Spoofax allows for defining arbitrarily
+complex IDE actions.
+
+Many of these editor services such as syntax highlighting and code
+folding rules can be derived from the syntax
+definition~\cite{Kats10c}, and can be further customized if
+needed. Taken together with the language definition, the editor
+services provide a language with a complete and state-of-the-art IDE
+experience~\cite{Kats10a}.

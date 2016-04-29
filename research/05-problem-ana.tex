@@ -47,26 +47,13 @@ capabilities outside of the context of a REPL, for example when the
 language is a DSL. It is clear therefore that a different approach
 should be considered.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.5\textwidth]{menu-actions.png}
-  \caption{A menu action for the paplj language defined using
-    Spoofax. The bottom window shows the menu definition, the top
-    window shows a program written in paplj.}
-  \label{fig:menu-actions}
-\end{figure}
-
 One possible solution is to allow for language specific configurations
 that are loaded and used during the generation process of a REPL for
-that language. This is similar to something that currently exists in
-Spoofax: when one creates a language, there is the possibility to
-define menu buttons and bind them to Stratego strategies
-(\cref{sec:orgheadline5}). For example, one can define a menu button
-``Run'' to run the expression that is currently selected (see
-\cref{fig:menu-actions}), or a ``Desugar'' button to desugar the
-program that is currently open. In the same way, one may define a
-``load-file'' command for a REPL which is bound to a Stratego
-strategy.
+that language. This can be done by extending the editor services
+discussed in \cref{sec:editor-serv} with REPL commands: similar to
+menu actions, where one can define menu button ``Run'' to run a
+program, one may define a ``load-file'' command and bind it to an
+action.
 
 \subsubsection{Redefining terms bound to names}
 \label{sec:redef-cont-bound}
