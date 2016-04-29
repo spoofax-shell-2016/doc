@@ -28,6 +28,11 @@ for that problem.
 
 \subsubsection{Detecting unfinished expressions for multiline editing}
 \label{sec:detect-unfin-expr}
+To support multiline editing, the generated REPL should detect that
+the expression is unfinished when the user presses ``enter'' for the
+next line, instead of trying to parse and execute the unfinished
+expression. An obvious part of Spoofax that is relevant for this
+problem, is the syntax definition in SDF3 (\cref{sec:orgheadline1}).
 
 \subsubsection{Language specific additional commands}
 \label{sec:lang-spec-addit}
