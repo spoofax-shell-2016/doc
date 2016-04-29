@@ -1,10 +1,131 @@
 \section{Problem Analysis}
 \label{sec:problem-analysis}
+This section gives an analysis of the problem defined in the previous
+section. More specifically, this section describes the problems that
+are expected and have to be solved during the implementation process
+of the product. The first part of this section describes the process
+of incorporating REPL generation within the larger context of
+Spoofax. The second part analyzes the part of the problem concerned
+with literate programming. This part will be analyzed in less detail
+than generating REPLs as it is unsure whether it will be present in
+the final product.
 
-\subsection{How does REPL generation fit within Spoofax}
-\label{ssec:architecture}
+\subsection{Incorporating REPL generation within Spoofax}
+\label{ssec:incorp-repl-gener}
+To generate properly working REPLs for any language defined in
+Spoofax, some Spoofax concepts have to be carefully considered. Every
+language can have many different language constructs. Generating
+REPLs, however, should not be constrained to any particular language
+constructs like classes, but should rather be done generically. For
+this reason the implementation and particularly the interaction with
+the user needs to be carefully considered. This sections lists some of
+the problems that are expected to arise from this.
 
-\subsection{How are plugins developed for Eclipse?}
+\subsubsection{Detecting unfinished expressions for multiline editing}
+\label{sec:detect-unfin-expr}
+To support multiline editing, the generated REPL should detect that
+the expression or statement is unfinished when the user presses the
+``Return'' key for the next line, instead of trying to parse and
+execute it. An obvious part of Spoofax that is relevant for this
+problem, is the syntax definition in SDF3 (see
+\cref{sec:orgheadline1}).
+
+\subsubsection{Language specific additional commands}
+\label{sec:lang-spec-addit}
+Another problem is when some additional command can be useful for a
+REPL of a particular language, but would not make any sense within the
+context of other languages. For example, some languages such as Python
+allow for loading a file, which brings all of the definitions inside
+of it into scope. An additional command to load a file could in that
+case be useful, but would not make any sense in languages that have no
+concept of definitions that can be imported.
+
+This problem could be solved by the language designer by extending
+their language with reflective capabilities. However, the language
+designer might not want to extend the language with reflective
+capabilities outside of the context of a REPL, for example when the
+language is a DSL. It is clear therefore that a different approach
+should be considered.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{menu-actions.png}
+  \caption{A menu action for the paplj language defined using
+    Spoofax. The bottom window shows the menu definition, the top
+    window shows a program written in paplj.}
+  \label{fig:menu-actions}
+\end{figure}
+
+One possible solution is to allow for language specific configurations
+that are loaded and used during the generation process of a REPL for
+that language. This is similar to something that currently exists in
+Spoofax: when one creates a language, there is the possibility to
+define menu buttons and bind them to Stratego strategies
+(\cref{sec:orgheadline5}). For example, one can define a menu button
+``Run'' to run the expression that is currently selected (see
+\cref{fig:menu-actions}), or a ``Desugar'' button to desugar the
+program that is currently open. In the same way, one may define a
+``load-file'' command for a REPL which is bound to a Stratego
+strategy.
+
+\subsubsection{Redefining terms bound to names}
+\label{sec:redef-cont-bound}
+When the user is prototyping methods inside the REPL, they would
+likely want to be able to redefine that method to be of a different
+implementation. However, this poses a similar problem as in the
+previous section: for some languages it may not be possible nor
+desirable to do so outside of the context of a REPL. Thus requiring
+the language designer to extend the language with such abilities is
+again an inadequate solution.
+
+One could propose the same solution as in the previous section, namely
+to define an additional command for redefining a class or
+method. However, in this case this is not an adequate solution either,
+since binding terms to names is a common feature among programming
+languages. The fact that Spoofax comes with the NaBL DSL for
+specifying name binding rules illustrates this. Name binding is in
+fact the very feature which enables one to create abstractions.
+
+A possible and more adequate solution for redefining a term bound to a
+name, is to allow the user to give the name and the new term. The name
+can then be used to find the old term, so that it can be replaced with
+the new one.
+
+\subsubsection{Partially replacing the AST of the current program}
+When given an identifier to bind a new term to, the term in the AST
+corresponding to the identifier has to be replaced with the new term.
+This implies that the REPL needs to able parse single terms that might
+not be valid programs, and then update the AST of the program accordingly.
+This requirement has certain effects when it comes to the build process
+used in the REPL.
+
+First of all, a REPL should always hold on to the AST representation of the
+executing program, in order to find the old term in the current program.
+Since Spoofax can just as well transform the AST back to original syntax,
+it is possible to alter this identifier either directly as a Stratego term or
+in the original syntax.
+
+Secondly, the build process in Eclipse uses a ``BuildInputBuilder'' to
+transform and build a (valid) program as a whole. While this is quite
+a convenient way to quickly create a compiled program, it is desirable
+that the REPL has a bigger influence on the way programs are built. A
+REPL should therefore be able to execute individual Spoofax stages as
+needed, instead of being limited to running the whole build process at
+once.
+%- wat er gebeurt als je een stuk AST transplanteert waardoor een method ineens invalid return type heeft
+
+\subsubsection{Persistent REPL environment}
+\label{sec:pers-repl-envir}
+% - schrijven over environment als stratego term naar file kunnen saven
+
+\subsubsection{Showing the contents of the environment}
+\label{sec:show-cont-envir}
+% - uberhaupt listen van environment is mssn een interessante vraag
+
+\subsection{Extending the product with literate programming}
+\label{sec:extend-prod-with}
+
+\subsection{Plug-in development in Eclipse}
 \label{ssec:eclipse-plugins}
 
 %%% Local Variables:
