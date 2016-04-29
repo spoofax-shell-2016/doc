@@ -15,7 +15,7 @@ the designer of the language ever having to care about its
 implementation.
 
 This section goes over the elements that make up the specification of
-a language, and for each element the relevant part of Spoofax is
+a language. For each element the relevant part of Spoofax is
 given\footnote{This section follows the structure of the
 language specification portion of the compiler construction course at
 the TU Delft. The slides can be found here:
@@ -59,7 +59,7 @@ The declarative nature of SDF3 allows for thinking in terms of the
 structure (the \emph{what}), instead of in terms of parser algorithms (the
 \emph{how}) as is the case with many current parsing
 algorithms~\cite{Kats10b}. The syntax definition is used to make
-parsers that parse a textual representation of a program into its AST,
+parsers that parse a textual representation of a program into its AST
 and pretty-printers for mapping ASTs back to text. However, due to its
 declarative nature, SDF3 is not limited to generating parsers and
 pretty printers: it can also be used for error recovery
@@ -73,8 +73,8 @@ parser generated from an SDF3 specification.
 Static semantics refer to the meaning of what a well-formed program is
 for a particular language~\cite{Milner97}. This imposes more
 constraints than syntax definition, such as name binding, scoping
-rules, and type checking. These cannot be specified by a syntax
-definition alone, and are thus considered separately.
+rules and type checking. These cannot be specified by a syntax
+definition alone and are thus considered separately.
 \subsubsection{Declarative static semantics specification in Spoofax}
 \label{sec:orgheadline2}
 In Spoofax, all the static semantics as well as the dynamic semantics
@@ -148,11 +148,11 @@ specification (see the previous section \ref{sec:nabl}).
 \subsection{Term Rewriting and Program Transformation}
 \label{sec:term-rewrite}
 Spoofax offers a high level declarative DSL called \emph{Stratego} for
-program transformation~\cite{Visser01}. Stratego operates on ASTs,
+program transformation~\cite{Visser01}. Stratego operates on ASTs
 and is the most general part of Spoofax: it can be used for specifying
 the static semantics (name binding, type checking), desugaring rules
 and the dynamic semantics of a language. As the static semantics can
-now be done using NaBL and TS, and the dynamic semantics with DynSem
+now be done using NaBL and TS and the dynamic semantics with DynSem
 (section \ref{sec:dynamic-semantics}), Stratego is now used to specify
 desugaring rules for a language, as well as optimizations such as
 constant folding and other applications of AST transformations.
@@ -162,7 +162,7 @@ Stratego is based on the notions of \emph{term rewrite rules} and so-called
 \subsubsection{Term rewrite rules}
 \label{sec:orgheadline4}
 A rewrite rule is a transformation on a term, in which the left-hand
-side allows for pattern matching and variable binding, and the right
+side allows for pattern matching and variable binding and the right
 hand side instantiates new replacement terms. An example of a rewrite
 rule for paplj is given below.
 \lstset{language=stratego,numbers=left}
@@ -264,13 +264,13 @@ A menu action for the paplj language defined using Spoofax. The bottom window sh
 
 Editor services are defined using a DSL, shown in the bottom window of
 figure \ref{fig:menu-actions}. In the case of menus, their actions are
-specified using Stratego, and via Stratego the actions can even be
+specified using Stratego. Via Stratego these actions can even be
 specified in Java. As such, Spoofax allows for defining arbitrarily
 complex IDE actions.
 
 Many of these editor services such as syntax highlighting and code
 folding rules can be derived from the syntax
-definition~\cite{Kats10c}, and can be further customized if
+definition~\cite{Kats10c} and can be further customized if
 needed. Taken together with the language definition, the editor
 services provide a language with a complete and state-of-the-art IDE
 experience~\cite{Kats10a}.
