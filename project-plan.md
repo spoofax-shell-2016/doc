@@ -51,6 +51,7 @@ as specified following the MoSCoW method:
 	* Literate programming
 	* Integration with other IDEs (IntelliJ)
 * Won't-have
+	* GDB-style debugging and nested REPLs
 
 If the above turns out to be (too) easy, the REPL can be extended into a
 language playground such as the one offered by the Swift programming language.
