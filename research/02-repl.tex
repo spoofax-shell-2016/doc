@@ -85,19 +85,19 @@ open columns}
 \begin{table}[]
 \centering
 \begin{tabular}{lccccccccc}
-                                  & \rot{Python} & \rot{IPython} & \rot{R} & \rot{\shortstack[c]{Common\\Lisp}} & \rot{Haskell} & \rot{Swift} & \rot{AutoCAD} \\
+                                  & \rot{Python} & \rot{R} & \rot{\shortstack[c]{Common\\Lisp}} & \rot{Haskell} & \rot{Swift} \\
 \toprule
-Executes single expressions       & \cmark       &               & \cmark  & \cmark                             & \cmark        & \cmark      &               \\
-Executes statements               & \cmark       &               & \cmark  & \cmark                             & \cmark        & \cmark      &               \\
-Input \& output history           & \cmark       &               & \cmark  & \cmark                             & \cmark        & \cmark      &               \\
-Persistent input history          & \cmark       &               & \cmark  & \xmark                             & \cmark        & \cmark      &               \\
-Multiline input editing           & \cmark       &               & \cmark  & \cmark                             & \cmark        & \cmark      &               \\
-Redefining identifiers            & \cmark       &               & \cmark  & N/A                                & \cmark        & \cmark      &               \\
-Error reporting                   & \cmark       &               & \cmark  & \cmark                             & \cmark        & \cmark      &               \\
-Context-sensitive code completion & \cmark       &               & \xmark  & N/A                                & \xmark        & \cmark      &               \\
-Help or documentation system      & \cmark       &               & \cmark  & \cmark                             & \xmark        & \xmark      &               \\
-Additional commands to the REPL   & \xmark       &               & \xmark  & \cmark                             & \cmark        & \cmark      &               \\
-Nested REPLs to enable debugging  & \xmark       &               & \xmark  & \cmark                             & \xmark        & \xmark      &               \\
+Executes single expressions       & \cmark       & \cmark  & \cmark                             & \cmark        & \cmark      \\
+Executes statements               & \cmark       & \cmark  & \cmark                             & \cmark        & \cmark      \\
+Input \& output history           & \cmark       & \cmark  & \cmark                             & \cmark        & \cmark      \\
+Persistent input history          & \cmark       & \cmark  & \xmark                             & \cmark        & \cmark      \\
+Multiline input editing           & \cmark       & \cmark  & \cmark                             & \cmark        & \cmark      \\
+Redefining identifiers            & \cmark       & \cmark  & N/A                                & \cmark        & \cmark      \\
+Error reporting                   & \cmark       & \cmark  & \cmark                             & \cmark        & \cmark      \\
+Context-sensitive code completion & \cmark       & \xmark  & N/A                                & \xmark        & \cmark      \\
+Help or documentation system      & \cmark       & \cmark  & \cmark                             & \xmark        & \xmark      \\
+Additional commands to the REPL   & \xmark       & \xmark  & \cmark                             & \cmark        & \cmark      \\
+Nested REPLs to enable debugging  & \xmark       & \xmark  & \cmark                             & \xmark        & \xmark      \\
 \bottomrule
 \end{tabular}
 \caption{A feature comparison of several well-known REPLs}
@@ -164,8 +164,6 @@ this error. This REPL then has additional commands (see the above feature) to
 enable debugging and inspection of the error state. When the user has
 resolved the error, the nested REPL exists and the user is returned to the
 parent REPL. This can go to arbitrary depths.
-\todo{Is this only Lisp REPLs? Is it \textit{all} Lisp REPLs or just a subset
-of them? Skip suggested Prolog.}
 
 %%% Local Variables:
 %%% mode: latex
