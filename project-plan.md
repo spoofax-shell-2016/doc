@@ -60,7 +60,7 @@ the client.
 
 ## Methodologies and tooling
 
-During this project we will work using the Scrum methodology with weekly
+During this project we will work using the Scrum methodology with biweekly
 sprints. Our backlog and current- and completed sprints will be managed using
 [Trello](https://trello.com/b/u2aKQ12y/bachelor-project-spoofax-repl). Trello
 will also be used to communicate documents to the client and the TU coach.
@@ -81,14 +81,14 @@ with the TU coach in the weekly meeting on monday at 11.00, where it might be
 slightly adjusted if the TU coach spots any issues.
 
 Sprints end on fridays with a short (10-15 minutes) meeting with the client in
-which this week's progress is demoed. After this meeting, we will meet privately
-for the sprint reflection, where we discuss to what degree we have achieved our
-sprint planning and how we can improve on that. As mentioned in the previous
-paragraph, we follow this meeting with a the planning of the next sprint.
+which this sprint's progress is demoed. After this meeting, we will meet
+privately for the sprint reflection, where we discuss to what degree we have
+achieved our sprint planning and how we can improve on that. As mentioned in the
+previous paragraph, we follow this meeting with the planning of the next sprint.
 
 During sprints, we will hold a daily scrum meeting in which we will discuss our
 progress of the previous day and our planning for today, as well as any issues
-that could be detrimental to the weekly sprint goal.
+that could be detrimental to the sprint goal.
 
 We will use a pull-based development model using GitHub. GitHub Issues will be
 used to track issues (all of this will be linked to Trello in one way or
