@@ -28,8 +28,8 @@ the Spoofax Language Workbench.
 
 ## The final product
 
-The final product will have to meet the following requirements and demands,
-as specified following the MoSCoW method:
+The final product will have to meet the following requirements and demands, as
+specified following the MoSCoW method:
 
 * Must-have
 	* Interactive shell
@@ -60,48 +60,61 @@ the client.
 
 ## Methodologies and tooling
 
-During this project we will work using the SCRUM methodology with weekly
-sprints. Our backlog, current and completed sprints will be managed using
-[Trello](https://trello.com/b/u2aKQ12y/bachelor-project-spoofax-repl).
-Trello will also be used to communicate documents to the client and the TU coach.
+During this project we will work using the Scrum methodology with biweekly
+sprints. Our backlog and current- and completed sprints will be managed using
+[Trello](https://trello.com/b/u2aKQ12y/bachelor-project-spoofax-repl). Trello
+will also be used to communicate documents to the client and the TU coach.
 Sprints will end on friday, coinciding with most deadlines according to the
 planning for this project as mandated by TU Delft.
 
-Each sprint will start with a "sprint planning event", in which user stories
-from the backlog will be assigned to project members, based on their
-prioritization and their feasibility for this sprint.
-Each sprint will end with a meeting in which we discuss to what degree
-we have achieved our sprint planning and how we can improve on that.
-A working demo should always be available at the time of the "sprint review".
-During sprints, the team will hold a daily scrum every day, where
-they will discuss their progress of the previous day and their planning for
-today, as well as any issues that could be detrimental to the weekly sprint goal.
+The Scrum methodology defines several roles to be attributed to members of the
+team. During the development of this project, the roles are divided as follows:
+
+* Product owner: Gerlof
+* Scrum master: Jente
+
+Each sprint will start with a sprint planning meeting (friday after the
+reflection of the previous sprint, see below), in which user stories from the
+backlog will be assigned to project members based on their prioritization and
+their feasibility for this sprint. The created sprint plan is then discussed
+with the TU coach in the weekly meeting on monday at 11.00, where it might be
+slightly adjusted if the TU coach spots any issues.
+
+Sprints end on fridays with a short (10-15 minutes) meeting with the client in
+which this sprint's progress is demoed. After this meeting, we will meet
+privately for the sprint reflection, where we discuss to what degree we have
+achieved our sprint planning and how we can improve on that. As mentioned in the
+previous paragraph, we follow this meeting with the planning of the next sprint.
+
+During sprints, we will hold a daily scrum meeting in which we will discuss our
+progress of the previous day and our planning for today, as well as any issues
+that could be detrimental to the sprint goal.
 
 We will use a pull-based development model using GitHub. GitHub Issues will be
 used to track issues (all of this will be linked to Trello in one way or
 another). To facilitate this, we will use repositories from our GitHub
-organization [spoofax-shell](https://github.com/spoofax-shell). Each of us
-will then fork these repositories to our private GitHub accounts. We will also
-use one repository to hold all the documents (e.g. this document, the research
+organization [spoofax-shell](https://github.com/spoofax-shell). Each of us will
+then fork these repositories to our private GitHub accounts. We will also use
+one repository to hold all the documents (e.g. this document, the research
 project, et cetera) supporting our project.
 
 A pull request will be designated a status tag **WIP**, **RFC** or **RDY**:
 
 * WIP - Work In Progress: a PR tagged WIP is there to gather feedback; it will
   still change so it should not be reviewed in-depth.
-* RFC - Ready for Comments: a PR tagged RFC is done as far as the
-  implementor is concerned: the functionality is there, it is tested, documented
-  and only a (thorough) review is left. If there are comments that
-  cannot be resolved within reasonable time, the PR should be demoted to WIP.
-  Before changing a PR to RFC, all test cases should pass on TravisCI,
-  the continuous integration platform.
-* RDY - Ready: a PR tagged RDY has been reviewed by at least one other
-  reviewer, who deems it ready for merge. It is left open a short while to give
-  the remaining team member time to review, after which it is merged.
+* RFC - Ready for Comments: a PR tagged RFC is done as far as the implementor is
+  concerned: the functionality is there, it is tested, documented and only a
+  (thorough) review is left. If there are comments that cannot be resolved
+  within reasonable time, the PR should be demoted to WIP. Before changing a PR
+  to RFC, all test cases should pass on TravisCI, the continuous integration
+  platform.
+* RDY - Ready: a PR tagged RDY has been reviewed by at least one other reviewer,
+  who deems it ready for merge. It is left open a short while to give the
+  remaining team member time to review, after which it is merged.
 
-This process ensures that all code has been reviewed and tested before
-being merged into the final product, thereby always ensuring a working product.
-By using continuous integration we aim to reduce code regression.
+This process ensures that all code has been reviewed and tested before being
+merged into the final product, thereby always ensuring a working product. By
+using continuous integration we aim to reduce code regression.
 
 Since Spoofax is an already existing project, we will reuse most tooling that is
 already being used. This means that we will use:
@@ -122,10 +135,18 @@ There are two types of quality to be assured:
 
 The quality of the code will be assured by applying proper software development
 practices, such as unit testing, continuous integration, code reviews and static
-analysis. We will strive to uphold an architecture TODO supported by proper
-application of the (correct) design patterns, resulting in low coupling and high
-cohesion. For more information on how our development is organised, please see
-the CONTRIBUTING file in our code repositories.
+analysis. We will strive to uphold a clear and fitting architecture supported by
+proper application of the (correct) design patterns, resulting in low coupling
+and high cohesion. For more information on how our development is organised,
+please see the CONTRIBUTING file in our code repositories.
+
+From this file, the definition of done can be extracted which we explicitly
+repeat here. An item is considered done, when:
+
+* The feature as explained in the user story has been implemented;
+* The code has been properly tested, with both unit and integration tests;
+* The code has been properly documented;
+* All other tests (TravisCI, FindBugs, PMD, Checkstyle) also pass.
 
 ### Quality of the end product
 
@@ -148,12 +169,12 @@ This section's purpose is to document additional agreements between the TU coach
 and us. For the regular project deadlines, please see the end of this section.
 
 Weekly meetings with the TU coach will be held on mondays at 11.00 to discuss
-the past and next week, and the overall progress of the project.
-Documents (such as the meeting topics) that will be discussed will be emailed
-to the TU coach at its latest the evening before the day of the meeting.
+the past and next week, and the overall progress of the project. Documents
+(such as the meeting topics) that will be discussed will be emailed to the TU
+coach at its latest the evening before the day of the meeting.
 
-Minutes will be made of every meeting, whether with the client, the TU coach or both.
-These minutes shall be sent to the TU coach as well.
+Minutes will be made of every meeting, whether with the client, the TU coach or
+both. These minutes shall be sent to the TU coach as well.
 
 Regular project deadlines:
 
