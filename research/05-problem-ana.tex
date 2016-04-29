@@ -71,7 +71,6 @@ strategy.
 
 \subsubsection{Redefining terms bound to names}
 \label{sec:redef-cont-bound}
-% TODO: Is "content" the right terminology here?
 When the user is prototyping methods inside the REPL, he or she would
 probably want to be able to redefine that method to be of a different
 implementation. However, this poses a similar problem as in the
@@ -86,23 +85,12 @@ method. However, in this case this is not an adequate solution either,
 since binding terms to names is a common feature among programming
 languages. The fact that Spoofax comes with the NaBL DSL for
 specifying name binding rules illustrates this. Name binding is in
-fact the very feature which enables one to perform abstractions.
+fact the very feature which enables one to create abstractions.
 
 A possible and more adequate solution for redefining a term bound to a
 name, is to allow the user to give the name and the new term. The name
 can then be used to find the old term, so that it can be replaced with
 the new one.
-
-% Old stuff.
-We could add ...
-\begin{itemize}
-\item a special prefix for shell specific commands, and then...
-\item a command to enumerate all possible namespaces as detected by spoofax
-\item a command to switch to a namespace from this list
-\item a command to list entries in the current namespace
-\item expressions typed will be added to the selected namespace
-\item all language agnostic, since we won't care what to call the namespace
-\end{itemize}
 
 \subsubsection{Partially replacing the AST of the current program}
 When given an identifier to bind a new term to, the leaves in the AST
