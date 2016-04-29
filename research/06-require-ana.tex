@@ -13,7 +13,7 @@ deliverable. These requirements are listed in this section.
 the design goals need to be moved down.}
 
 The client has expressed some high-level requirements, which are listed in this
-subsection as design goals in order of prioroty. The design goals serve as an
+subsection as design goals in order of priority. The design goals serve as an
 important guideline when defining and implement the invidual requirements. As
 such, they can be considered the bounds within which all requirements must fit.
 
@@ -21,9 +21,10 @@ such, they can be considered the bounds within which all requirements must fit.
 defined with Spoofax. This means that no assumptions can be made about any
 language constructs or syntax.
 
-\paragraph{Autogeneration} The REPLs should be automatically generated, just as
-all of Spoofax's services. This means that it should be integrated into
-Spoofax's build system and not require additional steps from the user.
+\paragraph{Autogeneration} The REPLs should be automatically generated, just
+like all of Spoofax's other services. This means that generating a shell should
+be integrated into Spoofax's build system and should not require any additional
+steps from the user.
 
 \paragraph{Maintainability} Spoofax is an already existing, open source project
 managed by several people. When the product is delivered, it will have to be
@@ -99,7 +100,7 @@ previously yieled results) should be syntax highlighted.
 REPLs should integrate with Eclipse to provide an interface to the users. It is
 important to note that while integration with Eclipse is a requirement, Spoofax
 itself is moving to be IDE-agnostic. As such, the implementation of the REPL's
-core should be generic and not be tied to Eclipse.
+core should be generic and should not be tied to Eclipse.
 
 \subsubsection{Should have}
 
@@ -110,9 +111,9 @@ a working product.
 REPLs provide the ability to explore unknown problem domains. It is not a
 far-fetched idea that a developer would want to change function implementations
 or the types of certain variables. To support this, a REPL should allow users to
-redefine identifiers. This might mean that the REPL needs different
-semantics than the language it operates on, slightly contrasting to the
-requirement that the REPLs should be language-agnostic.
+redefine identifiers. This might mean that the REPL needs different semantics
+than the language it operates on, slightly contrasting the requirement that the
+REPLs should be language-agnostic.
 
 \paragraph{Environment inspection} The argument of the previous requirements can
 be repeated for this one: the exploratory and interactive nature of REPLs call
@@ -176,8 +177,9 @@ The design goals and requirements listed in the previous subsections give a good
 idea of what the deliverable should look like. It is possible, however, that due
 to unforeseen problems, not all the listed requirements and design goals can be
 met. It is important to therefore define a minimal subset of the design goals
-and requirements that \emph{must} be present in the final deliverable: the ``must
-have'' requirements have to be implemented, as do the first two design goals.
+and requirements that \emph{must} be present in the final deliverable: the
+``must have'' requirements have to be implemented, whilst adhering to the first
+two design goals.
 
 %%% Local Variables:
 %%% mode: latex
