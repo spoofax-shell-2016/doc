@@ -608,7 +608,7 @@
 %% Section titles start with the number in bold, followed by the name printed
 %% in the title color.
 \titleformat{\section}
-    {\Large\sectitlestyle}
+    {\LARGE\sectitlestyle}
     {\bfseries\thesection.\ }
     {0pt}
     {\color{title}}
@@ -621,7 +621,7 @@
 %% Subsection titles have the same layout as section titles, except in a smaller
 %% font.
 \titleformat{\subsection}
-    {\large\sectitlestyle}
+    {\Large\sectitlestyle}
     {\bfseries\thesubsection.\ }
     {0pt}
     {\color{title}}
@@ -631,7 +631,7 @@
 %% Subsubsections have the same font and color as sections and subsections, but
 %% are not preceded by a number.
 \titleformat{\subsubsection}
-    {\sectitlestyle}
+    {\large\sectitlestyle}
     {\bfseries\thesubsubsection.\ }
     {0pt}
     {\color{title}}
