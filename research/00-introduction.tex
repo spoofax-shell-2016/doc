@@ -2,30 +2,36 @@
 \label{sec:introduction}
 \addcontentsline{toc}{section}{Introduction}
 
-Spoofax is a language workbench developed by Delft University of Technology over
-the course of several years. During those years it has grown to be \textit{``a
-language workbench for efficient, agile development of textual domain-specific
-languages with state-of-the-art IDE support''}~\cite{Kats10a}.
+Spoofax is a language workbench developed by Delft University of
+Technology over the course of several years. During those years it has
+grown to be \textit{``a language workbench for efficient, agile
+  development of textual domain-specific languages with
+  state-of-the-art IDE support''}~\cite{Kats10a}.
 
-Since Spoofax is used to develop new domain-specific languages, the ability for
-rapid prototyping using a read-eval-print loop would be very convenient.  The
-first aim of this research report is to get a better overview of the scope of
-Spoofax and each of its meta-languages. Afterwards, it will explore REPLs and
-literate programming in order to clarify what functionality a good
-implementation should have.
+When developing new domain-specific languages using Spoofax, the
+ability for rapid prototyping using a read-eval-print loop (REPL)
+would be very convenient. This report describes the initial research
+phase for this project: extending Spoofax with generating REPLs for the
+languages defined with it.
 
-After having explored the domain of the project, a concise problem definition
-will be given. This problem definition will then be analyzed in the context of
-the services that Spoofax already provides to clarify potential problems and
-their generic solutions to generate REPLs that work with languages defined in
-Spoofax.
+The first three sections of this research report give an overview of
+the problem domain. \Cref{sec:spoofax} gives the scope of Spoofax and
+each of its meta-languages. In \cref{sec:repl}, REPLs are explained in
+more detail. After that \cref{sec:literate-programming} introduces
+literate programming.
 
-Next, a list of design goals will be formalized to guide the development of the
-deliverable. From these design goals and the problem definition and analysis, a
-list of requirements for the product will be compiled.
-
-Lastly, an account will be given of the development frameworks and tools to be
-used during the development of the project.
+The remaining four sections concern the problem and the project. In
+\cref{sec:problem-definition}, a short problem definition is
+given. \Cref{sec:problem-analysis} then gives an analysis of this
+problem definition in the context of the services that Spoofax already
+provides, to clarify potential problems and their solutions to
+generate REPLs that work with languages defined in Spoofax. Next, in
+\cref{sec:requirement-analysis}, a list of design goals will be
+formalized to guide the development of the deliverable. From these
+design goals and the problem definition and analysis, a list of
+requirements for the product will be compiled. Lastly,
+\cref{sec:realisation-product} gives an account of the development
+frameworks and tools to be used during the development of the project.
 
 %%% Local Variables:
 %%% mode: latex

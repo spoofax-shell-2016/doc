@@ -23,28 +23,35 @@
 
 \LoadClass[10pt]{book}
 
+\RequirePackage{ifxetex}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
+
 %% English is the default language, but this can be changed to Dutch by
 %% specifying the 'dutch' option to the document class.
-\if@dutch
-    \RequirePackage[dutch]{babel}
+\ifxetex
+    \RequirePackage{polyglossia}
+    \if@dutch
+        \setdefaultlanguage{dutch}
+    \else
+        \setdefaultlanguage{english}
+        \setotherlanguage{dutch}
+    \fi
 \else
-    %% Even for English reports, some sections might be in Dutch, for example on
-    %% the title page.
-    \RequirePackage[dutch,english]{babel}
+    \if@dutch
+        \RequirePackage[dutch]{babel}
+    \else
+        \RequirePackage[dutch,english]{babel}
+    \fi
 \fi
 \RequirePackage[nooneline,footnotesize]{caption}
 \RequirePackage{fancyhdr}
 \RequirePackage[flushmargin,hang]{footmisc}
 \RequirePackage{ifpdf}
-\RequirePackage{ifxetex}
 \ifxetex
-    \RequirePackage[xetex]{geometry}
-    \RequirePackage[xetex]{graphicx}
-    \RequirePackage[xetex]{hyperref}
+    \RequirePackage{geometry}
+    \RequirePackage{hyperref}
     \RequirePackage{fontspec}
-    \RequirePackage{xltxtra}
     \defaultfontfeatures{Ligatures=TeX}
 \else
     \ifpdf
@@ -608,7 +615,7 @@
 %% Section titles start with the number in bold, followed by the name printed
 %% in the title color.
 \titleformat{\section}
-    {\Large\sectitlestyle}
+    {\LARGE\sectitlestyle}
     {\bfseries\thesection.\ }
     {0pt}
     {\color{title}}
@@ -621,7 +628,7 @@
 %% Subsection titles have the same layout as section titles, except in a smaller
 %% font.
 \titleformat{\subsection}
-    {\large\sectitlestyle}
+    {\Large\sectitlestyle}
     {\bfseries\thesubsection.\ }
     {0pt}
     {\color{title}}
@@ -631,7 +638,7 @@
 %% Subsubsections have the same font and color as sections and subsections, but
 %% are not preceded by a number.
 \titleformat{\subsubsection}
-    {\sectitlestyle}
+    {\large\sectitlestyle}
     {\bfseries\thesubsubsection.\ }
     {0pt}
     {\color{title}}

@@ -1,5 +1,4 @@
 \documentclass{tudelft-report}
-\usepackage[english]{babel}
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage[noabbrev]{cleveref}
@@ -9,7 +8,6 @@
 \usepackage{subcaption}
 \usepackage{enumitem}
 \usepackage{listings}
-\usepackage{graphicx}
 \graphicspath{{img/}}
 \PassOptionsToPackage{sectionbib}{natbib}
 
@@ -20,15 +18,6 @@
   frame=none,
   keepspaces=true,
   numberstyle=\ttfamily
-}
-
-% Use “\cite{NEEDED}” to get Wikipedia-style “citation needed”.
-\usepackage{ifthen}
-\let\oldcite=\cite
-\renewcommand\cite[1]{
-  \ifthenelse{\equal{#1}{NEEDED}}
-    {\ensuremath{^\texttt{[citation~needed]}}}
-    {\oldcite{#1}}
 }
 
 % Table markup:
