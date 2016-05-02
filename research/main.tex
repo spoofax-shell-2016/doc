@@ -21,15 +21,6 @@
   numberstyle=\ttfamily
 }
 
-% Use “\cite{NEEDED}” to get Wikipedia-style “citation needed”.
-\usepackage{ifthen}
-\let\oldcite=\cite
-\renewcommand\cite[1]{
-  \ifthenelse{\equal{#1}{NEEDED}}
-    {\ensuremath{^\texttt{[citation~needed]}}}
-    {\oldcite{#1}}
-}
-
 % Table markup:
 % 1. Rotate column heads.
 % 2. Define check- and crossmarks.
