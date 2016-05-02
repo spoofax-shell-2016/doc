@@ -33,8 +33,9 @@ specified following the MoSCoW method:
 
 * Must-have
 	* Interactive shell
-	* Generated from language definition
-		* Generator should be language definition agnostic
+	* Works with any language defined in Spoofax
+	  * Optionally recognizes language-specific REPL commands defined in an
+	    esv file
 	* Input & output history
 	* Multiline input editing
 	* Error reporting
@@ -57,6 +58,9 @@ If the above turns out to be (too) easy, the REPL can be extended into a
 language playground such as the one offered by the Swift programming language.
 If we decide to extend the project, new agreements will be made between us and
 the client.
+
+Copyright for the final product will belong to TU Delft. It will be distributed
+under the Apache license version 2.0.
 
 ## Methodologies and tooling
 
@@ -117,12 +121,11 @@ merged into the final product, thereby always ensuring a working product. By
 using continuous integration we aim to reduce code regression.
 
 Since Spoofax is an already existing project, we will reuse most tooling that is
-already being used. This means that we will use:
-
-* the Java programming language;
-* Maven for the build environment;
-* JUnit for unit tests;
-* TravisCI for continuous integration.
+already being used. This means that we will use the Java programming language,
+Maven for the build environment and JUnit for unit tests. Dependencies used by
+Spoofax (such as Guice and RxJava) will be used if needed. Additional tools to
+assist in maintaining quality code include TravisCI for continuous integration,
+Checkstyle for a coherent code style and FindBugs and PMD for static analysis.
 
 ## Quality assurance
 
