@@ -88,9 +88,14 @@ its declarative nature, SDF3 is not limited to generating parsers and
 pretty printers: it can also be used for error recovery
 rules\nbsp\cite{deJonge12}, syntax highlighting rules and folding
 rules for editors (see section [[#sec:editor-serv]]).
-
-All of the other parts of Spoofax use the AST that is produced by a
-parser generated from an SDF3 specification.
+*** AST-based rules
+The meta-languages that will be discussed in the coming sections all
+have one property in common: all of them use /rules/ based on the AST
+in order to specify one of the parts of a language definition. The
+rules are said to be /syntax-directed/: the specification for one AST
+node (whether it be a static semantics, rewriting or dynamic semantics
+specification) is done by the specification of the children of that
+AST node\nbsp\cite{Winskel93}.
 ** Static Semantics
 :PROPERTIES:
 :CUSTOM_ID: sec:static-analysis
@@ -112,9 +117,10 @@ assertions on the type of that variable.
 :PROPERTIES:
 :CUSTOM_ID: sec:nabl
 :END:
-With /NaBL/ (pronounced /enable/), name binding and scoping rules can
-be specified declaratively\nbsp\cite{KonatKWV12}. Here is an example
-of the name binding and scoping rules for a class, from the /paplj/
+With /NaBL/ (pronounced /enable/), name binding and scoping can be
+specified declaratively using AST-based
+rules\nbsp\cite{KonatKWV12}. Here is an example of the name binding
+and scoping rules for a class, from the /paplj/
 language[fn:paplj:paplj is used as an exercise language for the
 "Declare Your Language" book, which is a work-in-progress at the time
 of writing. More information can be found here:
@@ -135,14 +141,10 @@ binding rules
     // Import namespaces from superclass
     imports Field, Method from Class c
 #+END_EXAMPLE
-The first line declares the /namespaces/ to consider. A namespace is a
-way to distinguish different kinds of
-names\nbsp\cite{KonatKWV12}. Then for each node in the AST resulting
-from the parsing, for example a =Class= node, the name binding and
-scoping rules can be defined. In the example, each =Class= node
-declares a new scope for its fields, methods and variables. It also
-implicitly defines the =this= variable. The =Extends= node can then
-import the fields and methods into its scope.
+The most important concept to take away from this example is the way
+the rules are specified on the AST: new scopes for names can be
+defined on the level of an AST node, and can be imported again by
+referring back to the scope definition.
 
 As can be seen from line 8, it can also associate type information
 with names to interplay with TS. The type annotations can also be used
@@ -167,10 +169,12 @@ type rules
       and e2 : NumT() else error "number expected" on e2
 
 #+END_EXAMPLE
-Rules can recursively set constraints on AST-nodes, such as the =Add=
-node in the above example.
+This example shows how in TS, the rules are syntax-directed: The
+typing rule of the =Add= node is specified by the types of its
+children $e_1$ and $e_2$, on which the typing rules will be applied
+recursively.
 
-Again, in line 5, interplay can be seen between TS an NaBL. Here the
+Again, in line 6, interplay can be seen between TS an NaBL. Here the
 type of a variable can be accessed, which is set in the NaBL
 specification (see the previous section [[#sec:nabl]]).
 ** Term Rewriting and Program Transformation
@@ -203,7 +207,9 @@ rules
   	Let([b1, b2 | bs], e) -> Let([b1], Let([b2 | bs], e))
 #+END_EXAMPLE
 This desugars a =let= expression with multiple bindings into multiple
-nested =let= expressions each having just one binding.
+nested =let= expressions each having just one binding. Again it can be
+seen that these are syntax-directed rules, from the way the rules are
+specified using the AST.
 
 To construct the main algorithm of the program transformation,
 Stratego has the notion of /strategies/. A strategy is used to specify
@@ -242,12 +248,12 @@ called /DynSem/\nbsp\cite{VerguNV15}. DynSem allows for an operational
 semantics specification from which a Java-based AST interpreter can be
 automatically generated.
 
-In DynSem, the dynamic semantics are specified by means of rules. To
-show how rules can define the dynamic semantics of a language,
-consider the classic example of the \beta-reduction, which defines
-function application in the lambda calculus. The rule replaces all the
-occurences of the parameter $x$ with the argument $e_2$, within the
-expression $e_1$:
+In DynSem, like other meta-languages in Spoofax, the dynamic semantics
+are specified by means of syntax-directed rules. To show how rules can
+define the dynamic semantics of a language, consider the classic
+example of the \beta-reduction, which defines function application in
+the lambda calculus. The rule replaces all the occurences of the
+parameter $x$ with the argument $e_2$, within the expression $e_1$:
 
 \begin{equation}
 (\lambda x.e_1) e_2 \rightarrow e_1[x := e_2]
