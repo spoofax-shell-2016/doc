@@ -11,8 +11,8 @@ grown to be \textit{``a language workbench for efficient, agile
 When developing new domain-specific languages using Spoofax, the
 ability for rapid prototyping using a read-eval-print loop (REPL)
 would be very convenient. This report describes the initial research
-phase for this project: extending Spoofax with generating REPLs for the
-languages defined with it.
+phase for this project: extending Spoofax with a REPL that works with
+all Spoofax defined languages.
 
 The first three sections of this research report give an overview of
 the problem domain. \Cref{sec:spoofax} gives the scope of Spoofax and
@@ -25,8 +25,8 @@ The remaining four sections concern the problem and the project. In
 given. \Cref{sec:problem-analysis} then gives an analysis of this
 problem definition in the context of the services that Spoofax already
 provides, to clarify potential problems and their solutions to
-generate REPLs that work with languages defined in Spoofax. Next, in
-\cref{sec:requirement-analysis}, a list of design goals will be
+create a REPL that works with all languages defined in Spoofax. Next,
+in \cref{sec:requirement-analysis}, a list of design goals will be
 formalized to guide the development of the deliverable. From these
 design goals and the problem definition and analysis, a list of
 requirements for the product will be compiled. Lastly,
