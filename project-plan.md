@@ -36,7 +36,8 @@ specified following the MoSCoW method:
 	* Works with any language defined in Spoofax
 	  * Optionally recognizes language-specific REPL commands defined in an
 	    esv file
-	* Input & output history
+	* Input history
+	* Automatic binding of previously yielded values
 	* Multiline input editing
 	* Error reporting
 	* Syntax checked expressions
@@ -47,7 +48,8 @@ specified following the MoSCoW method:
 	* Environment inspection
 	* Save and load shell state
 * Could-have
-	* Context-sensitive code completion
+	* (Syntactic) Code completion (Spoofax does not yet offer semantic
+	  completion)
 	* Hover over variables to see value, type and others
 	* Literate programming
 	* Integration with other IDEs (IntelliJ)
