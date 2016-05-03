@@ -2,7 +2,7 @@
 \label{sec:problem-analysis}
 This section gives an analysis of the problem defined in the previous
 section. More specifically, this section describes the problems that
-are expected and have to be solved during the implementation process
+are expected and that will have to be solved during the implementation process
 of the product. The first part of this section describes the process
 of incorporating a REPL within the larger context of
 Spoofax. The second part analyzes the part of the problem concerned
@@ -12,15 +12,13 @@ the final product.
 
 \subsection{Creating a REPL that works with any language defined in Spoofax}
 \label{ssec:incorp-repl-spoofax}
-To create a REPL that works with any language defined in Spoofax,
-some Spoofax concepts have to be carefully considered. Every language
-can have many different language constructs. The REPL for Spoofax,
-however, should not be constrained to any particular language
-constructs like classes, but should rather operate on any defined
-language. For this reason the implementation and particularly the
-interaction with the user needs to be carefully considered. This
-sections lists some of the problems that are expected to arise from
-this.
+
+Every language can have many different language constructs. The REPL for
+Spoofax, however, should not be constrained to any particular language
+constructs like classes. Rather, it should operate on any defined language. For
+this reason the implementation and particularly the interaction with the user
+needs to be carefully considered. This subsections lists some of the problems
+that are expected to arise from this.
 
 \subsubsection{Detecting unfinished expressions for multiline editing}
 \label{sec:detect-unfin-expr}
