@@ -27,6 +27,11 @@ steps from the user.
 managed by several people. When the product is delivered, it will have to be
 maintained by others. Therefore, it is important that the code is maintainable.
 
+\paragraph{IDE-agnostic} Current releases of Spoofax integrate solely with
+Eclipse. An effort is underway currently to make Spoofax IDE-agnostic and to
+provide separate modules to tie Spoofax to IDEs. The REPL should keep this in
+mind from the start and not tie itself to any IDE.
+
 \paragraph{Performance} Spoofax's developers already focus quite a bit on
 performance: both the generation and the use of the services are performant.
 This should be no different for the REPL.
@@ -90,10 +95,7 @@ currently being entered, displayed as previously entered input or displayed as
 previously yieled results) should be syntax highlighted.
 
 \paragraph{Integration with Eclipse} As first implementation, the REPL should
-integrate with Eclipse to provide an interface to the users. It is important to
-note that while integration with Eclipse is a requirement, Spoofax itself is
-moving to be IDE-agnostic. As such, the implementation of the REPL's core
-should not be tied to Eclipse.
+integrate with Eclipse to provide an interface to the users.
 
 \subsubsection{Should have}
 
@@ -141,10 +143,9 @@ Spoofax to document and illustrate their language simultaneously with the
 development: documentation and examples can never be outdated, because outdated
 example code will halt the execution.
 
-\paragraph{Integration with other IDEs (IntelliJ)} As mentioned before, Spoofax
-is currently undergoing a transition not to be tied to a specific IDE.
-Generating Spoofax's editor services for IntelliJ is currently a work in
-progress and it would be nice if the REPL works in IntelliJ from the start.
+\paragraph{Integration with other IDEs (IntelliJ)} Generating Spoofax's editor
+services for IntelliJ is currently a work in progress and it would be nice if
+the REPL works in IntelliJ from the start.
 
 \subsubsection{Won't have}
 
