@@ -14,6 +14,7 @@ subsection as design goals in order of priority. The design goals serve as an
 important guideline when defining and implement the invidual requirements. As
 such, they can be considered the bounds within which all requirements must fit.
 
+% TODO
 \paragraph{Language-agnostic} The REPL should work with all languages
 defined with Spoofax. This means that no assumptions can be made about any
 language constructs or syntax.
@@ -107,14 +108,13 @@ REPLs provide the ability to explore unknown problem domains. It is not a
 far-fetched idea that a developer would want to change function implementations
 or the types of certain variables. To support this, a REPL should allow users to
 redefine identifiers. This might mean that the REPL needs different semantics
-than the language it operates on, slightly contrasting the requirement that the
-REPLs should be language-agnostic.
+than the language it operates on, contrasting the requirement that the REPLs
+should be language-agnostic.
 
-\paragraph{Environment inspection} The argument of the previous requirements can
-be repeated for this one: the exploratory and interactive nature of REPLs call
-for the ability to inspect the current environment. This is to replace the files
-with source code that a developer could otherwise inspect and an initial step
-towards offering debugging features in a REPL.
+\paragraph{Environment inspection} The exploratory and interactive nature of
+REPLs call for the ability to inspect the current environment. This is to
+replace the files with source code that a developer could otherwise inspect and
+an initial step towards offering debugging features in a REPL.
 
 \paragraph{Save and load REPL state} Often, developers want to save the current
 state of their IDE and return to it later. As such, the REPLs should allow their
