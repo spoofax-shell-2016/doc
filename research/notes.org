@@ -177,23 +177,21 @@ specification (see the previous section [[#sec:nabl]]).
 :PROPERTIES:
 :CUSTOM_ID: sec:term-rewrite
 :END:
-Spoofax offers a high level declarative DSL called /Stratego/ for
-program transformation\nbsp\cite{Visser01}. Stratego operates on ASTs
-and is the most general part of Spoofax: it can be used for specifying
-the static semantics (name binding, type checking), desugaring rules
-and the dynamic semantics of a language. As the static semantics can
-now be done using NaBL and TS and the dynamic semantics with DynSem
-(section [[#sec:dynamic-semantics]]), Stratego is now used to specify
-desugaring rules for a language, as well as optimizations such as
-constant folding and other applications of AST transformations.
+Sometimes the AST needs some form of transformation before it is to be
+compiled or executed, for example to transform it to a canonical form,
+or to perform optimizations such as constant folding. Program
+transformations are specified by /term rewrite rules/: The left-hand
+side of a rule introduces a pattern (for example $x + x$), and the
+right-hand side specifies a replacement for it (e.g. $2\cdot x$).
+*** Rewriting using Stratego
+Spoofax offers a DSL called /Stratego/ for specifying program
+transformation with rewrite rules\nbsp\cite{Visser01}. Stratego can be
+seen as the most general part of Spoofax: before NaBL and TS, Stratego
+was used for specifying the static semantics. Moreover, being a
+program transformation language, it can also serve as a compiler and
+can thus be used to specify the dynamic semantics.
 
-Stratego is based on the notions of /term rewrite rules/ and so-called
-/strategies/.
-*** Term rewrite rules
-A rewrite rule is a transformation on a term, in which the left-hand
-side allows for pattern matching and variable binding and the right
-hand side instantiates new replacement terms. An example of a rewrite
-rule for paplj is given below.
+An example of a rewrite rule for the paplj language is given below.
 #+LATEX: \lstset{language=stratego,numbers=left}
 #+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
@@ -206,11 +204,11 @@ rules
 #+END_EXAMPLE
 This desugars a =let= expression with multiple bindings into multiple
 nested =let= expressions each having just one binding.
-*** Strategies
-Strategies are used to select and apply term rewrite rules, to
-construct the main algorithm of the program transformation. One can
-use multiple combinators to compose rewrite rules and other
-strategies. Another example from paplj is given below:
+
+To construct the main algorithm of the program transformation,
+Stratego has the notion of /strategies/. A strategy is used to specify
+where and in what order the rewrite rules are applied to an
+AST. Another example from paplj is given below:
 #+LATEX: \lstset{language=stratego,numbers=left}
 #+ATTR_LATEX: :environment lstlisting
 #+BEGIN_EXAMPLE
@@ -222,7 +220,7 @@ strategies
     innermost(desugar-do <+ desugar-get <+ desugar-set);
     resugar
 #+END_EXAMPLE
-For example, the strategy =innermost= is used to apply the strategy
+The strategy =innermost= in this example is used to apply the strategy
 given as parameter (a composition of rewrite rules) in a specific
 traversal order on the AST nodes.
 ** Dynamic Semantics
