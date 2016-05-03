@@ -59,20 +59,21 @@ them.
 from language definitions. It is evident that the REPL should work with these
 definitions if it is to fit within Spoofax.
 
-\paragraph{Input \& output history} Users should be able to retrieve previously
+\paragraph{Input history} Users should be able to retrieve previously
 typed expressions and statements to support the explorative and interactive
-nature of a REPL. In the same vein, previously yielded results should be
-implicitly bound to automatically generated names to make their values available
-in future expressions.
+nature of a REPL.
 
-\paragraph{Multiline input editing} Most, if not all, modern languages benefit
-by structuring their constructs over multine lines. Multiline input editing is
-therefore a crucial feature for user satisfaction. The input editor should
-start in single line editing mode and recognise when an expression or statement
-is part of a multiline construction. When it recognises this, it should
-automatically switch to its multiline input editing mode, wherein the
-prompt character indicates this new mode. This mode's behavior (e.g. keyboard
-shortcuts) is different from the single line editing mode.
+\paragraph{Automatic binding of previously yielded values} In the same vein,
+previously yielded results should be implicitly bound to automatically generated
+identifiers to make their values available in future expressions.
+
+\paragraph{Multiline input editing} Multiline input editing is a crucial feature
+for user satisfaction. The input editor should start in single line editing mode
+and recognise when an expression or statement is part of a multiline
+construction. When it recognises this, it should automatically switch to its
+multiline input editing mode, wherein the prompt character indicates this new
+mode. This mode's behavior (e.g. keyboard shortcuts) is different from the
+single line editing mode.
 
 \paragraph{Error reporting} To support the interactivity of the REPL, error
 reporting should be available in two ways: while typing an expression or a
@@ -123,12 +124,9 @@ Requirements listed under ``could-haves'' are desirable, but not necessary.
 These requirements often improve usability or customer satisfaction and are
 included only if time permits.
 
-\paragraph{Context-sensitive code completion} The multiline input editor should
-ideally function just like an IDE's editor. Context-sensitive code completion is
-therefore a nice feature to offer the users. Context-sensitive code-completion
-also helps with the discoverability of APIs and therefore is another step
-towards the explorative and interactive environment a REPL is supposed to
-provide.
+\paragraph{Code completion} The multiline input editor should ideally function
+just like an IDE's editor. Semantic code completion is not yet implemented in
+Spoofax, so the REPL should provide syntactic code completion instead.
 
 \paragraph{Hover over variables to see value, type and others} Another step
 towards debugging would be the ability to hover variables with the mouse in

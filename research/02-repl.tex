@@ -14,16 +14,16 @@ however, mostly of semantic value. In this report the term REPL is chosen,
 because it conveys the notion of such an interactive environment well.
 
 \subsection{Origin of REPLs}
-\label{repl-origin}
+\label{ssec:repl-origin}
 
-The Lisp programming language is one of the first programming
-languages offering such functionality~\cite{Noyes92}. The name REPL comes from
-the Lisp functions that implement it:
+The Lisp programming language is one of the first programming languages offering
+such an interactive environment~\cite{Noyes92}. The name REPL comes from the
+Lisp functions that implement it:
 
 \begin{enumerate}
   \item The \texttt{read} function takes a user's input, which often is just one
     or several expressions as opposed to a complete compilation unit. It then
-    parses this input and creates an abstract syntax tree (AST).
+    parses this input and creates an AST.
   \item The AST created in the previous step is then passed on to the
     \texttt{eval} function, which evaluates it.
   \item The result yielded by the previous function is then printed out to the
@@ -39,94 +39,118 @@ in a single line of code simply by combining the functions:
 (loop (print (eval (read))))
 \end{lstlisting}
 
-Part of the semantic differences between the different names for an interactive
-programming environment is Lisp's homoiconicity. In Lisp, the structure of
-expressions is represented directly in a data structure, resulting in the
-ability to infer a program's or data object's state simply by reading its
-textual representation. In Lisp REPLs, therefore, arbitrary data objects yielded
-from a previous expression can be used as input to the next expression. In
-modern programming languages that do not belong to the Lisp familiy,
-homoiconicity is an unusual feature. Interactive environments for these
-languages therefore often require additional steps to read and evaluate
-expressions. As said earlier, this difference is mostly semantic and therefore
-this report uses the more general interpretation of the name REPL.
+Lisp has a property called ``homoiconicity'': Lisp's syntax is similar to
+its internal representation, resulting in the ability to infer a program's or
+data object's state simply by reading its textual representation. Syntax and AST
+are thus isomorphic, allowing data and code to be accessed and transformed
+interchangeably.
+
+In Lisp REPLs, therefore, arbitrary data objects yielded from a previous
+expression can be used directly as input to the next expression. In programming
+languages that do not belong to the Lisp familiy, homoiconicity is an unusual
+feature. Interactive environments for these languages therefore often require
+additional steps to read and evaluate expressions. This is part of the semantic
+differences between the different names as mentioned in the introduction
 
 \subsection{Advantages of REPLs}
 \label{ssec:repl-advantages}
-REPLs offer several advantages that make them an often requested feature.
-Because of their nature, REPLs provide the ability to program interactively.
-Programming interactively has multiple applications.
 
-When creating software solutions for an as of yet not well understood domain,
-it is often not clear which data structures and algorithms are required. In such
-cases, REPLs offer the ability to interactively develop and debug software
-without having to apply the (oftentimes much slower) edit-compile-run-debug
-development style. This kind of programming is called exploratory
-programming~\cite{Fritzson86}. Related to this kind of exploration, REPLs also
-provide a means for rapid prototyping and bottom up programming~\cite{Graham93}.
+REPLs provide the ability to program interactively. Programming interactively
+has multiple advantages.
+
+When creating software solutions for an as of yet not well understood domain, it
+is often not clear which data structures and algorithms are required. In such
+cases, interactively developing and debugging software is an advantage over the
+(oftentimes much slower) edit-compile-run-debug development style. This kind of
+programming is called exploratory programming~\cite{Fritzson86}. Related to this
+kind of exploration, programming interactively also provides a means for rapid
+prototyping and bottom up programming~\cite{Graham93}.
 
 The explorative and interactive features of a REPL also make it an excellent
 tool for programmers to learn a new programming language. REPLs are also
 combined with what is called literate programming to offer notebooks or language
 playgrounds, as discussed in \cref{sec:literate-programming}.
 
-\subsection{Functionality}
-\label{sssec:repl-functionality}
+\subsection{Execution model}
+\label{ssec:execution-model}
 
-Every programming language providing a REPL has its own set of functionality.
-However, a core set of functionalities, shared between all REPL implementations,
-can be identified. To reach this core set of features, well-known REPLs have
-been investigated and their features have been compiled into a matrix as seen
-in \cref{table:feature-matrix}. These features are shortly discussed below.
+Every programming language defines an execution model, which specifies how
+programs written in that language are executed. Amongst others, it specifies
+what an indivisable amount of work is (a \emph{compilation unit}) and in what
+order these units are executed. The implementation of an execution model is a
+compiler and/or an interpreter, often accompanied with a runtime system to
+provide features such as garbage collection.
+
+The execution model as implemented by a REPL differs only slightly to that of an
+interpreter or compiler. A difference might be as to what is considered an
+indivisable unit of work: a REPL might accept singular expressions that a
+regular interpreter or compiler might not. 
+
+A compiler or an interpreter reads the files that make up a program’s source
+code, after which it will go through the steps as outlined in
+\cref{sec:spoofax}.  Usually the resulting program is executed as a whole,
+without the need for smaller blocks of execution. In contrast, when using a
+REPL, it might be desirable to be able to execute say only a function body as
+one unit of execution. However, breaking up a program into smaller blocks of
+execution might be quite challenging.
+
+Another contrast between a compiler or an interpreter and a REPL is that a REPL
+needs to dynamically maintain an environment such that each new expression can
+be evaluated within the environment of previously executed expressions. For
+every expression entered, it thus needs to apply the outlined steps again and
+update the environment it maintains in memory with the new results. This could
+result in a different order of evaluation than when say an interpreter executes
+a program as a whole.
+
+\subsection{Functionality}
+\label{ssec:repl-functionality}
+
+Every REPL provided with a programming language has its own set of
+functionality. However, a core set of functionalities, shared between all REPL
+implementations, can be identified. To reach this core set of features,
+well-known REPLs have been investigated and their features have been compiled
+into a matrix as seen in \cref{table:feature-matrix}. These features are shortly
+discussed below.
 
 \begin{table}[]
 \centering
 \begin{tabular}{lccccccccc}
-                                  & \rot{Python} & \rot{R} & \rot{\shortstack[c]{Common\\Lisp}} & \rot{Haskell} & \rot{Swift} \\
+                                  & \rot{Python} & \rot{R} & \rot{\shortstack[c]{Common\\Lisp}} & \rot{\shortstack[c]{Haskell\\(GHCi)}} & \rot{Swift} \\
 \toprule
-Executes single expressions       & \cmark       & \cmark  & \cmark                             & \cmark        & \cmark      \\
-Executes statements               & \cmark       & \cmark  & \cmark                             & \cmark        & \cmark      \\
-Input \& output history           & \cmark       & \cmark  & \cmark                             & \cmark        & \cmark      \\
-Persistent input history          & \cmark       & \cmark  & \xmark                             & \cmark        & \cmark      \\
-Multiline input editing           & \cmark       & \cmark  & \cmark                             & \cmark        & \cmark      \\
-Redefining identifiers            & \cmark       & \cmark  & N/A                                & \cmark        & \cmark      \\
-Error reporting                   & \cmark       & \cmark  & \cmark                             & \cmark        & \cmark      \\
-Context-sensitive code completion & \cmark       & \xmark  & N/A                                & \xmark        & \cmark      \\
-Help or documentation system      & \cmark       & \cmark  & \cmark                             & \xmark        & \xmark      \\
-Additional commands to the REPL   & \xmark       & \xmark  & \cmark                             & \cmark        & \cmark      \\
-Nested REPLs to enable debugging  & \xmark       & \xmark  & \cmark                             & \xmark        & \xmark      \\
+Executes single expressions       & \cmark       & \cmark  & \cmark                             & \cmark                                & \cmark      \\
+Executes statements               & \cmark       & \cmark  & \cmark                             & \cmark                                & \cmark      \\
+Input history                     & \cmark       & \cmark  & \cmark                             & \cmark                                & \cmark      \\
+Automatic binding of previously yielded values & \xmark & \xmark & N/A                          & \xmark                                & \cmark      \\
+Persistent input history          & \cmark       & \cmark  & \xmark                             & \cmark                                & \cmark      \\
+Multiline input editing           & \cmark       & \cmark  & \cmark                             & \cmark                                & \cmark      \\
+Redefining identifiers            & \cmark       & \cmark  & N/A                                & \cmark                                & \cmark      \\
+Error reporting                   & \cmark       & \cmark  & \cmark                             & \cmark                                & \cmark      \\
+Semantic code completion          & \cmark       & \xmark  & N/A                                & \xmark                                & \cmark      \\
+Help or documentation system      & \cmark       & \cmark  & \cmark                             & \xmark                                & \xmark      \\
+Additional commands to the REPL   & \xmark       & \xmark  & \cmark                             & \cmark                                & \cmark      \\
+Nested REPLs to enable debugging  & \xmark       & \xmark  & \cmark                             & \xmark                                & \xmark      \\
 \bottomrule
 \end{tabular}
 \caption{A feature comparison of several well-known REPLs}
 \label{table:feature-matrix}
 \end{table}
 
-\paragraph{Input \& output history} REPLs keep a history of inputs and outputs,
-such that previously entered expressions can be retrieved together with their
-(evaluated) results. This can be with, say, a keyboard shortcut to retrieve
-prevsiouly entered inputs and with variables bound to previously yielded values.
+\paragraph{Input history} REPLs keep a history of inputs, such that previously
+entered expressions can be retrieved.
+
+\paragraph{Automatic binding of previously yielded values} When an expression
+has been evaluated, the yielded result is bound to an
+automatically created identifier, such that it can be easily reused in future
+expressions.
 
 \paragraph{Persistent history} The input and output history as discussed
 previously can be recorded into a file (either per-project or globally) to
 enable a persistent history of input and output.
 
-\paragraph{Multiline input editing} Constructs in a programming language are
-not necessarily bound to one line; a method in Java for example often has the
-following structure:
-\begin{lstlisting}[language=java]
-boolean isEven(int number) {
-    return (number % 2) == 0;
-}
-\end{lstlisting}
-One should be able to type these constructs in their habitual way. Therefore,
-REPLs provide multiline input editors that recognise incomplete code and
-promptly switch to a multiline environment when required.
-
-A REPL is just another programming environment; just as in a regular editor or
-IDE, therefore, keyboard shortcuts should be present to improve the workflow of
-the programmer. This includes keyboard shortcuts to move over words, delete
-words (both in forward and backward directions) and jump to the beginning or
-end of the line.
+\paragraph{Multiline input editing} Some constructs in a programming language
+naturally span multiple lines. REPLs therefore provide multiline input editors
+that recognise incomplete code and promptly switch to a multiline environment
+when required.
 
 \paragraph{Redefining identifiers} When using a REPL in an exploratory manner,
 it is not uncommon to want to redefine an identifier's type or to completely
@@ -138,21 +162,20 @@ allow variable's values to change once initiated.
 capabilities as an IDE; preferably while typing input but at the very least it
 should be able to report errors during the reading and evaluation phases.
 
-\paragraph{Context-sensitive code completion} Context-sensitive code completion
-is a helpful tool to provide an overview of the often many APIs a developer
-works with, freeing them from having to remember everything. Note that this is
-distinct from general tab-completion, which is not context-sensitive and is
-offered by all the studied REPLs.
+\paragraph{Semantic code completion} Semantic code completion is a helpful tool
+to provide an overview of the often many APIs a developer works with, adding to
+the explorative nature of a REPL. Note that this is a restriction of syntactic
+completion, which is offered by all the studied REPLs.
 
 \paragraph{Help or documentation system} The exploratory nature of a REPL means
-that one will often see new methods. It would be helpful to read one or several
-lines of documentation in case it is required, so that the developer does not
-have to switch contexts.
+that one will often see new methods. Some REPLs (most notably Python's REPL with
+Python's docstrings) offer a documentation system, so that the developer does
+not have to exit the REPL to look up documentation.
 
-\paragraph{Additional commands to the REPL} Some REPLs offer additional
-commands to inspect the environment or to control their behavior. These commands
-are oftentimes not in the syntax of the language the REPL belongs to and are
-highly diverse REPL implementations. A notable example of a REPL offering such
+\paragraph{Additional commands to the REPL} Some REPLs offer additional commands
+to inspect the environment or to control their behavior. These commands are
+oftentimes not in the syntax of the language the REPL belongs to and are highly
+diverse between REPL implementations. A notable example of a REPL offering such
 commands is Haskell's GHCi~\cite{GHCi-commands}.
 
 \paragraph{Nested REPLs to enable debugging} A notable feature of (mostly) Lisp
