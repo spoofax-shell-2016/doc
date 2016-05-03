@@ -80,11 +80,11 @@ SDF2\nbsp\cite{Visser97}.
 
 The declarative nature of SDF3 allows for thinking in terms of the
 structure (the /what/), instead of in terms of parser algorithms (the
-/how/) as is the case with many current parsing
-algorithms\nbsp\cite{Kats10b}. The syntax definition is used to make
-parsers that parse a textual representation of a program into its AST
-and pretty-printers for mapping ASTs back to text. However, due to its
-declarative nature, SDF3 is not limited to generating parsers and
+/how/) as is the case with many current parser generators such as
+ANTLR and YACC\nbsp\cite{Kats10b}. The syntax definition is used to
+make parsers that parse a textual representation of a program into its
+AST and pretty-printers for mapping ASTs back to text. However, due to
+its declarative nature, SDF3 is not limited to generating parsers and
 pretty printers: it can also be used for error recovery
 rules\nbsp\cite{deJonge12}, syntax highlighting rules and folding
 rules for editors (see section [[#sec:editor-serv]]).
