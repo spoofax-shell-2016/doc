@@ -72,11 +72,11 @@ SDF2~\cite{Visser97}.
 
 The declarative nature of SDF3 allows for thinking in terms of the
 structure (the \emph{what}), instead of in terms of parser algorithms (the
-\emph{how}) as is the case with many current parsing
-algorithms~\cite{Kats10b}. The syntax definition is used to make
-parsers that parse a textual representation of a program into its AST
-and pretty-printers for mapping ASTs back to text. However, due to its
-declarative nature, SDF3 is not limited to generating parsers and
+\emph{how}) as is the case with many current parser generators such as
+ANTLR and YACC~\cite{Kats10b}. The syntax definition is used to
+make parsers that parse a textual representation of a program into its
+AST and pretty-printers for mapping ASTs back to text. However, due to
+its declarative nature, SDF3 is not limited to generating parsers and
 pretty printers: it can also be used for error recovery
 rules~\cite{deJonge12}, syntax highlighting rules and folding
 rules for editors (see section \ref{sec:editor-serv}).
@@ -210,20 +210,17 @@ traversal order on the AST nodes.
 \subsection{Dynamic Semantics}
 \label{sec:dynamic-semantics}
 Dynamic semantics refers to how a program written in some language
-behaves~\cite{Winskel93}. There are multiple approaches to
-formally specify the dynamic semantics of a programming language (for
-an extensive treatment, see~\cite{Winskel93}). For this section
-only one sort of approach is relevant, namely \emph{operational semantics}.
+behaves~\cite{Winskel93}. There are many approaches to formally
+specify the dynamic semantics of a programming language (for an
+extensive treatment, see~\cite{Winskel93}). For this section only
+one sort of approach called \emph{operational semantics} is relevant.
 \subsubsection{DynSem: rule-based dynamic semantics}
 \label{ssec:dynsem}
-In Spoofax, the dynamic semantics of a language used to be specified
-with Stratego. However, the Spoofax team has developed a more
-high-level method to declare the dynamic semantics of a language,
-namely a DSL called \emph{DynSem}~\cite{VerguNV15}. As with all DSLs in
-Spoofax, DynSem offers a declarative approach to generate the
-\emph{implementation} out of the \emph{specification}. Indeed, from a DynSem
-specification of a language, an interpreter for that language can be
-generated.
+Aside from Stratego, the Spoofax team has developed an additional
+method to declare the dynamic semantics of a language, namely a DSL
+called \emph{DynSem}~\cite{VerguNV15}. DynSem allows for an operational
+semantics specification from which a Java-based AST interpreter can be
+automatically generated.
 
 In DynSem, the dynamic semantics are specified by means of rules. To
 show how rules can define the dynamic semantics of a language,
@@ -238,20 +235,21 @@ expression \(e_1\):
 
 In a similar way, dynamic semantics can be specified in DynSem, in a
 syntax very similar to the formal syntax used in the literature. Take
-here the example of defining method calling in paplj:
+here the example of defining the behaviour of some boolean operators
+in paplj:
 \lstset{language=dynsem,numbers=left}
 \begin{lstlisting}
 rules
-  // ...
-  Call(o, m, vs: List(V)) --> v'
-    where lookupMethod(o, m) --> Method(_, _, params, e);
-          This o, Env bindVars(params, vs) |- e --> v'.
+  And(BoolV(false), _) --> BoolV(false). 
+  And(BoolV(true), e)  --> e.
+   
+  Or(BoolV(true), _)  --> BoolV(true).
+  Or(BoolV(false), e) --> e.
 \end{lstlisting}
-The bottom line represents the rule of the method body, \(e\),
-evaluating to the return value \(v'\), by binding the argument values to
-the parameter in the environment and binding the \texttt{this} variable to
-the object on which the method is called. Exactly how \(e\) evaluates to
-\(v'\) is defined using other rules, which are left out in this example.
+The example applies the standard rules for boolean operators, and is
+sufficient to specify the behaviour of these operators. The rules are
+recursively applied to the expression \(e\) on the right-hand side of
+the rule until it eventually converges.
 \lstset{numbers=none}
 
 \subsection{Editor Services}
