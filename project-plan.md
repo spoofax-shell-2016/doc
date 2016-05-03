@@ -17,14 +17,14 @@ From Spoofax's website:
 > Spoofax is a platform for developing textual domain-specific languages with
 > full-featured Eclipse editor plugins.
 
-A feature that Spoofax is lacking is a Read-Eval-Print Loop (REPL) service
-generator. A REPL is an interactive programming environment that takes single
-expressions, evaluates them and prints the result(s). REPLs are a popular tool
-for programming because they facilitate exploratory programming and debugging.
+A feature that Spoofax is lacking is a Read-Eval-Print Loop (REPL) service. A
+REPL is an interactive programming environment that takes single expressions,
+evaluates them and prints the result(s). REPLs are a popular tool for
+programming because they facilitate exploratory programming and debugging.
 Common examples include command-line shells such as Bash and Python's REPL.
 
-The deliverable for this project, then, is to create such a REPL generator for
-the Spoofax Language Workbench.
+The deliverable for this project, then, is to create such a REPL for the Spoofax
+Language Workbench.
 
 ## The final product
 
