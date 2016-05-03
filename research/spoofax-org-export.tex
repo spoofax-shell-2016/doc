@@ -162,24 +162,22 @@ type of a variable can be accessed, which is set in the NaBL
 specification (see the previous section \ref{sec:nabl}).
 \subsection{Term Rewriting and Program Transformation}
 \label{sec:term-rewrite}
-Spoofax offers a high level declarative DSL called \emph{Stratego} for
-program transformation~\cite{Visser01}. Stratego operates on ASTs
-and is the most general part of Spoofax: it can be used for specifying
-the static semantics (name binding, type checking), desugaring rules
-and the dynamic semantics of a language. As the static semantics can
-now be done using NaBL and TS and the dynamic semantics with DynSem
-(section \ref{sec:dynamic-semantics}), Stratego is now used to specify
-desugaring rules for a language, as well as optimizations such as
-constant folding and other applications of AST transformations.
-
-Stratego is based on the notions of \emph{term rewrite rules} and so-called
-\emph{strategies}.
-\subsubsection{Term rewrite rules}
+Sometimes the AST needs some form of transformation before it is to be
+compiled or executed, for example to transform it to a canonical form,
+or to perform optimizations such as constant folding. Program
+transformations are specified by \emph{term rewrite rules}: The left-hand
+side of a rule introduces a pattern (for example \(x + x\)), and the
+right-hand side specifies a replacement for it (e.g. \(2\cdot x\)).
+\subsubsection{Rewriting using Stratego}
 \label{sec:orgheadline4}
-A rewrite rule is a transformation on a term, in which the left-hand
-side allows for pattern matching and variable binding and the right
-hand side instantiates new replacement terms. An example of a rewrite
-rule for paplj is given below.
+Spoofax offers a DSL called \emph{Stratego} for specifying program
+transformation with rewrite rules~\cite{Visser01}. Stratego can be
+seen as the most general part of Spoofax: before NaBL and TS, Stratego
+was used for specifying the static semantics. Moreover, being a
+program transformation language, it can also serve as a compiler and
+can thus be used to specify the dynamic semantics.
+
+An example of a rewrite rule for the paplj language is given below.
 \lstset{language=stratego,numbers=left}
 \begin{lstlisting}
 rules
@@ -191,12 +189,11 @@ rules
 \end{lstlisting}
 This desugars a \texttt{let} expression with multiple bindings into multiple
 nested \texttt{let} expressions each having just one binding.
-\subsubsection{Strategies}
-\label{sec:orgheadline5}
-Strategies are used to select and apply term rewrite rules, to
-construct the main algorithm of the program transformation. One can
-use multiple combinators to compose rewrite rules and other
-strategies. Another example from paplj is given below:
+
+To construct the main algorithm of the program transformation,
+Stratego has the notion of \emph{strategies}. A strategy is used to specify
+where and in what order the rewrite rules are applied to an
+AST. Another example from paplj is given below:
 \lstset{language=stratego,numbers=left}
 \begin{lstlisting}
 strategies
@@ -207,7 +204,7 @@ strategies
     innermost(desugar-do <+ desugar-get <+ desugar-set);
     resugar
 \end{lstlisting}
-For example, the strategy \texttt{innermost} is used to apply the strategy
+The strategy \texttt{innermost} in this example is used to apply the strategy
 given as parameter (a composition of rewrite rules) in a specific
 traversal order on the AST nodes.
 \subsection{Dynamic Semantics}
@@ -216,10 +213,7 @@ Dynamic semantics refers to how a program written in some language
 behaves~\cite{Winskel93}. There are multiple approaches to
 formally specify the dynamic semantics of a programming language (for
 an extensive treatment, see~\cite{Winskel93}). For this section
-only one sort of approach is relevant, namely \emph{rule-based operational}
-\emph{semantics} (see~\cite{Plotkin04} for a historical account of this
-approach).
-
+only one sort of approach is relevant, namely \emph{operational semantics}.
 \subsubsection{DynSem: rule-based dynamic semantics}
 \label{ssec:dynsem}
 In Spoofax, the dynamic semantics of a language used to be specified

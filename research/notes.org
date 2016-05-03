@@ -231,10 +231,7 @@ Dynamic semantics refers to how a program written in some language
 behaves\nbsp\cite{Winskel93}. There are multiple approaches to
 formally specify the dynamic semantics of a programming language (for
 an extensive treatment, see\nbsp\cite{Winskel93}). For this section
-only one sort of approach is relevant, namely /rule-based operational/
-/semantics/ (see\nbsp\cite{Plotkin04} for a historical account of this
-approach).
-
+only one sort of approach is relevant, namely /operational semantics/.
 *** DynSem: rule-based dynamic semantics
 :PROPERTIES:
 :CUSTOM_ID: ssec:dynsem
