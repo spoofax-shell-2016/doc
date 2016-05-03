@@ -4,27 +4,28 @@ This section gives an analysis of the problem defined in the previous
 section. More specifically, this section describes the problems that
 are expected and have to be solved during the implementation process
 of the product. The first part of this section describes the process
-of incorporating REPL generation within the larger context of
+of incorporating a REPL within the larger context of
 Spoofax. The second part analyzes the part of the problem concerned
 with literate programming. This part will be analyzed in less detail
-than generating REPLs as it is unsure whether it will be present in
+than creating a REPL as it is unsure whether it will be present in
 the final product.
 
-\subsection{Incorporating REPL generation within Spoofax}
-\label{ssec:incorp-repl-gener}
-To generate properly working REPLs for any language defined in
-Spoofax, some Spoofax concepts have to be carefully considered. Every
-language can have many different language constructs. Generating
-REPLs, however, should not be constrained to any particular language
-constructs like classes, but should rather be done generically. For
-this reason the implementation and particularly the interaction with
-the user needs to be carefully considered. This sections lists some of
-the problems that are expected to arise from this.
+\subsection{Creating a REPL that works with any language defined in Spoofax}
+\label{ssec:incorp-repl-spoofax}
+To create a REPL that works with any language defined in Spoofax,
+some Spoofax concepts have to be carefully considered. Every language
+can have many different language constructs. The REPL for Spoofax,
+however, should not be constrained to any particular language
+constructs like classes, but should rather operate on any defined
+language. For this reason the implementation and particularly the
+interaction with the user needs to be carefully considered. This
+sections lists some of the problems that are expected to arise from
+this.
 
 \subsubsection{Detecting unfinished expressions for multiline editing}
 \label{sec:detect-unfin-expr}
-To support multiline editing, the generated REPL should detect that
-the expression or statement is unfinished when the user presses the
+To support multiline editing, the REPL should detect that the
+expression or statement is unfinished when the user presses the
 ``Return'' key for the next line, instead of trying to parse and
 execute it. An obvious part of Spoofax that is relevant for this
 problem, is the syntax definition in SDF3 (see
@@ -48,12 +49,11 @@ language is a DSL. It is clear therefore that a different approach
 should be considered.
 
 One possible solution is to allow for language specific configurations
-that are loaded and used during the generation process of a REPL for
-that language. This can be done by extending the editor services
-discussed in \cref{sec:editor-serv} with REPL commands: similar to
-menu actions, where one can define menu button ``Run'' to run a
-program, one may define a ``load-file'' command and bind it to an
-action.
+that are loaded with the language definition of that language. This
+can be done by extending the editor services discussed in
+\cref{sec:editor-serv} with REPL commands: similar to menu actions,
+where one can define menu button ``Run'' to run a program, one may
+define a ``load-file'' command and bind it to an action.
 
 \subsubsection{Redefining terms bound to names}
 \label{sec:redef-cont-bound}
