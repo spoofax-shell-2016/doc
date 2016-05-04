@@ -36,8 +36,8 @@ specification consists of the following conceptual steps:
    representations of a program are syntactically valid. A parser
    provides an implementation of this definition, by mapping a textual
    representation of a program to an abstract syntax tree (AST)
-   representation. In Spoofax, the syntax is declared with a DSL
-   called SDF.
+   representation. In Spoofax, the syntax is declared with a domain
+   specific language (DSL) called SDF.
 2. [[#sec:static-analysis][Static Semantics]]: The AST then goes through static analysis (type
    checking, name binding and variable scoping), to test if the
    program is well-formed. Static semantics describe the rules for the
@@ -70,13 +70,12 @@ identifiers and numeric constants. The context-free grammar then
 defines syntactically valid sentences made up of words.
 
 *** SDF3: syntax definition in Spoofax
-To specify a syntax definition declaratively in Spoofax, a domain
-specific language (DSL) called /SDF3/\nbsp\cite{Vollebregt12} is used.
-SDF3 is the third generation of the /Syntax Definition Formalism/
-(SDF)\nbsp\cite{Heering89}. It uses only context-free grammer
-productions for the specification of both the lexical syntax and the
-context-free syntax, a feature that was introduced in
-SDF2\nbsp\cite{Visser97}.
+To specify a syntax definition declaratively in Spoofax, a DSL called
+/SDF3/\nbsp\cite{Vollebregt12} is used.  SDF3 is the third generation
+of the /Syntax Definition Formalism/ (SDF)\nbsp\cite{Heering89}. It
+uses only context-free grammer productions for the specification of
+both the lexical syntax and the context-free syntax, a feature that
+was introduced in SDF2\nbsp\cite{Visser97}.
 
 The declarative nature of SDF3 allows for thinking in terms of the
 structure (the /what/), instead of in terms of parser algorithms (the
@@ -239,8 +238,12 @@ traversal order on the AST nodes.
 The Spoofax API provides the =TranformService= for performing program
 transformation. Internally the =TransformService= accesses the
 Stratego runtime, which is retrieved from the
-=StrategoRuntimeService=. Stratego also has support for /native/
-strategies, which are specified in Java instead.
+=StrategoRuntimeService=. The same holds for the =AnalysisService= of
+the previous section: it too uses the Stratego runtime.
+
+Stratego furthermore has support for /native/ strategies, which are
+specified in Java instead. Therefore the interface is bidirectional:
+Stratego can hook into Java, and Java can use the Stratego API.
 ** Dynamic Semantics
 :PROPERTIES:
 :CUSTOM_ID: sec:dynamic-semantics

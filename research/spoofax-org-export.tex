@@ -28,8 +28,8 @@ specification consists of the following conceptual steps:
 representations of a program are syntactically valid. A parser
 provides an implementation of this definition, by mapping a textual
 representation of a program to an abstract syntax tree (AST)
-representation. In Spoofax, the syntax is declared with a DSL
-called SDF.
+representation. In Spoofax, the syntax is declared with a domain
+specific language (DSL) called SDF.
 \item \hyperref[sec:static-analysis]{Static Semantics}: The AST then goes through static analysis (type
 checking, name binding and variable scoping), to test if the
 program is well-formed. Static semantics describe the rules for the
@@ -62,13 +62,12 @@ defines syntactically valid sentences made up of words.
 
 \subsubsection{SDF3: syntax definition in Spoofax}
 \label{sec:orgheadline1}
-To specify a syntax definition declaratively in Spoofax, a domain
-specific language (DSL) called \emph{SDF3}~\cite{Vollebregt12} is used.
-SDF3 is the third generation of the \emph{Syntax Definition Formalism}
-(SDF)~\cite{Heering89}. It uses only context-free grammer
-productions for the specification of both the lexical syntax and the
-context-free syntax, a feature that was introduced in
-SDF2~\cite{Visser97}.
+To specify a syntax definition declaratively in Spoofax, a DSL called
+\emph{SDF3}~\cite{Vollebregt12} is used.  SDF3 is the third generation
+of the \emph{Syntax Definition Formalism} (SDF)~\cite{Heering89}. It
+uses only context-free grammer productions for the specification of
+both the lexical syntax and the context-free syntax, a feature that
+was introduced in SDF2~\cite{Visser97}.
 
 The declarative nature of SDF3 allows for thinking in terms of the
 structure (the \emph{what}), instead of in terms of parser algorithms (the
@@ -224,8 +223,12 @@ traversal order on the AST nodes.
 The Spoofax API provides the \texttt{TranformService} for performing program
 transformation. Internally the \texttt{TransformService} accesses the
 Stratego runtime, which is retrieved from the
-\texttt{StrategoRuntimeService}. Stratego also has support for \emph{native}
-strategies, which are specified in Java instead.
+\texttt{StrategoRuntimeService}. The same holds for the \texttt{AnalysisService} of
+the previous section: it too uses the Stratego runtime.
+
+Stratego furthermore has support for \emph{native} strategies, which are
+specified in Java instead. Therefore the interface is bidirectional:
+Stratego can hook into Java, and Java can use the Stratego API.
 \subsection{Dynamic Semantics}
 \label{sec:dynamic-semantics}
 Dynamic semantics refers to how a program written in some language
