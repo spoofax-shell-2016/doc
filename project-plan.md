@@ -32,7 +32,7 @@ The final product will have to meet the following requirements and demands, as
 specified following the MoSCoW method:
 
 * Must-have
-	* Interactive shell
+	* Interactive REPL
 	* Works with any language defined in Spoofax
 	  * Optionally recognizes language-specific REPL commands defined in an
 	    esv file
@@ -46,7 +46,7 @@ specified following the MoSCoW method:
 * Should-have
 	* Ability to redefine identifiers
 	* Environment inspection
-	* Save and load shell state
+	* Save and load REPL state
 * Could-have
 	* (Syntactic) Code completion (Spoofax does not yet offer semantic
 	  completion)
