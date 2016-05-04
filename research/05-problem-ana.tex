@@ -20,6 +20,49 @@ this reason the implementation and particularly the interaction with the user
 needs to be carefully considered. This subsections lists some of the problems
 that are expected to arise from this.
 
+\subsubsection{Execution model of the REPL}
+\label{ssec:execution-model-repl}
+As illustrated in \cref{ssec:execution-model} a primary difference in the
+execution model of a non-interactive interpreter and a REPL is concerned with
+what an indivisable unit of execution is. The build process as implemented in
+Eclipse uses a ``BuildInputBuilder'' to transform and build a (valid) program
+as a whole. While this is quite a convenient way to quickly create a compiled
+program, for a REPL to really offer an interactive experience to the user, the
+REPL should be able to execute smaller units of work than a complete program.
+
+An example implementation that solves this problem is the JShell
+REPL~\cite{jshell-repl} currently under development by OpenJDK.  The OpenJDK
+team introduces a concept called ``wrapping'' to achieve this: \textit{``if X
+is an input that JShell accepts (as opposed to rejects with error) then there
+is an A and B such that AXB is a valid program in the Java programming
+language.''}. More specifically this says that when a user types in an
+expression, like ``int x = 2 + 2;'', JShell generates the surrounding class and
+method body needed for this expression to be valid.
+
+This technique cannot be directly applied to Spoofax, since the language
+constructs needed to sucessfully ``wrap'' constructs is not known in advance.
+A first approach to solve this problem could be to require that the language
+designer provides a program template in an esv file, in which he can indicate
+the various types of language constructs are valid from within the REPL, and
+where they would be inserted in this template.
+The REPL should then be able to distinguish the language constructs defined in the esv file
+as the user types them in.
+A template for paplj could look like this:
+\begin{lstlisting}
+program
+  \$classes
+run
+  \$expressions
+\end{lstlisting}
+
+The illustrated solution could later be extended to eliminate the need for manual specification,
+by reusing the syntax definitions for the language as specified in SDF.
+Given an invalid partial program as typed in by the user, the REPL could try to determine
+whether this partial program is valid anywhere within the parse tree specified by SDF.
+By doing a breadth-first search, starting from the context-free start symbols of the language,
+the REPL could prepend symbols from the syntax definition until the program is valid.
+This suggestion can then be shown to the user, after which the resulting program is executed.
+
 \subsubsection{Detecting unfinished expressions for multiline editing}
 \label{sec:detect-unfin-expr}
 To support multiline editing, the REPL should detect that the
@@ -75,29 +118,6 @@ A possible and more adequate solution for redefining a term bound to a
 name, is to allow the user to give the name and the new term. The name
 can then be used to find the old term, so that it can be replaced with
 the new one.
-
-\subsubsection{Partially replacing the AST of the current program}
-When given an identifier to bind a new term to, the term in the AST
-corresponding to the identifier has to be replaced with the new term.
-This implies that the REPL needs to able parse single terms that might
-not be valid programs and then update the AST of the program accordingly.
-This requirement has certain effects when it comes to the build process
-used in the REPL.
-
-First of all, a REPL should always hold on to the AST representation of the
-executing program, in order to find the old term in the current program.
-Since Spoofax can just as well transform the AST back to original syntax,
-it is possible to alter this identifier either directly as a Stratego term or
-in the original syntax.
-
-Secondly, the build process in Eclipse uses a ``BuildInputBuilder'' to
-transform and build a (valid) program as a whole. While this is quite
-a convenient way to quickly create a compiled program, it is desirable
-that the REPL has a bigger influence on the way programs are built. A
-REPL should therefore be able to execute individual Spoofax stages as
-needed, instead of being limited to running the whole build process at
-once.
-%- wat er gebeurt als je een stuk AST transplanteert waardoor een method ineens invalid return type heeft
 
 %%% Local Variables:
 %%% mode: latex
