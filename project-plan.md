@@ -48,13 +48,13 @@ specified following the MoSCoW method:
 	* Environment inspection
 	* Save and load REPL state
 * Could-have
-	* (Syntactic) Code completion (Spoofax does not yet offer semantic
-	  completion)
+	* Syntactic code completion
 	* Hover over variables to see value, type and others
 	* Literate programming
 	* Integration with other IDEs (IntelliJ)
 * Won't-have
 	* GDB-style debugging and nested REPLs
+	* Semantic code completion
 
 If the above turns out to be (too) easy, the REPL can be extended into a
 language playground such as the one offered by the Swift programming language.
