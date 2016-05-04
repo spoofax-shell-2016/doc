@@ -1,0 +1,90 @@
+* Must-have
+** Interactive REPL
+*** User: I want to type in a program / expression and execute it.    :story:
+Goal: So that I can prototype and experiment with different ideas I
+have rapidly.
+**** User: I want to evaluate a complete program.
+Goal: So that I can evaluate a complete program in the same way as any
+source file would be interpreted.
+**** User: I want to evaluate an incomplete program (e.g. a single expression).
+Goal: So that I don't have to provide unecessary and verbose details
+which are already implicit in the current environment I am working in.
+** Works with any language defined in Spoofax
+*** Optionally recognizes language-specific REPL commands defined in an esv file
+**** User: I want to define a REPL command specific to my language.   :story:
+Goal: So that I can provide more support that is tailored to my
+language, without having to extend my language outside of the context
+of a REPL.
+** Input history
+*** User: I want to access the history of previously entered expressions (input history) :story:
+Goal: So that I can modify expressions without having to rewrite
+everything.
+*** User: I want to access the input history of a previous REPL session. :story:
+Goal: So that I can keep the history when I quit and resume my session
+later.
+** Automatic binding of previously yielded values
+*** User: I want to be able to reference the result of a previous evaluation. :story:
+Goal: So that I can easily reuse them in future expressions, and don't
+have to assign them myself if I forgot to do that after entering it.
+** Multiline input editing
+*** User: I want to be able to enter multiline constructs.          :story:
+Goal: So that I can enter more complex language constructs than just
+expressions that fit on a single line.
+*** User: I want to be able to see in which mode I am typing (single-/multiline). :story:
+Goal: So that I can distinguish between the different mode. So that I
+can have feedback from the interface of what I am doing.
+*** User: I want to have access to keyboard shortcuts.              :story:
+Goal: So that I can edit the input efficiently.
+** Error reporting
+*** User: I want to see errors of the input I have entered before.  :story:
+Goal: So that I can correct my program.
+** Syntax checked expressions
+*** User: I want to see errors in the input as I type it.           :story:
+Goal: So that I can correct my input and the feedback is more rapid,
+to support rapid prototyping.
+** Syntax highlighting
+*** User: I want to see syntax highlighting in the input as I type it. :story:
+Goal: So that I can distinguish between different syntactical elements.
+** Integration with Eclipse
+*** User: I want to have back-and-forth interaction with the Eclipse while using the REPL :story:
+Goal: So that I can quickly see additional code information, such as
+the type or value of a variable.
+*** User: I want to use the REPL as plugin in Eclipse               :story:
+Goal: So that I don't have to switch from the IDE to the REPL, but can
+use it in the same session.
+* Should-have
+** Ability to redefine identifiers
+*** User: I want to be able to redefine terms that are bound to identifiers. :story:
+Goal: So that I can change definitions inside my REPL when I change my
+mind.
+** Environment inspection
+*** User: I want to list the current environment.                     :story:
+Goal: So that I can the context in which I am typing the current
+input.
+*** User: I want to show the type of variables in the environment.    :story:
+Goal: So that I can have more information what kind of values are in
+the environment.
+** Save and load REPL state
+*** User: I want to have a persistent session.                        :story:
+Goal: So that I can resume my work without having to reevaluate
+everything.
+* Could-have
+** (Syntactic) Code completion (Spoofax does not yet offer semantic completion)
+*** User: I want to have code completed when I press TAB.           :story:
+Goal: So that I don't have to type everything myself, and don't have
+to remember exactly how to type it
+** Hover over variables to see value, type and others
+*** User: I want to see the value and type of a term when hovering over it. :story:
+Goal: So that I can use the REPL in the same way as I use the editor
+in the IDE as I expect it to, and without listing the entire
+environment.
+** Literate programming
+*** User: I want to combine my code with documentation and the results of their execution. :story:
+Goal: So that I can make note documents which I can share with
+others and save for later.
+** Integration with other IDEs (IntelliJ)
+*** User: I want to be able to use the REPL in a IDE other than Eclipse :story:
+Goal: So that I am not tied to using Eclipse because the REPL is not
+available somewhere else.
+* Won't-have
+** GDB-style debugging and nested REPLs
