@@ -19,13 +19,18 @@ defined with Spoofax. This means that no assumptions can be made about any
 language constructs or syntax.
 
 \paragraph{Autogeneration} The REPL should be automatically provided, just like
-all of Spoofax's other services. This means that providing access to the shell
+all of Spoofax's other services. This means that providing access to the REPL
 should be integrated into Spoofax's build system and not require any additional
 steps from the user.
 
 \paragraph{Maintainability} Spoofax is an already existing, open source project
 managed by several people. When the product is delivered, it will have to be
 maintained by others. Therefore, it is important that the code is maintainable.
+
+\paragraph{IDE-agnostic} Current releases of Spoofax integrate solely with
+Eclipse. An effort is underway currently to make Spoofax IDE-agnostic and to
+provide separate modules to tie Spoofax to IDEs. The REPL should keep this in
+mind from the start and not tie itself to any IDE.
 
 \paragraph{Performance} Spoofax's developers already focus quite a bit on
 performance: both the generation and the use of the services are performant.
@@ -90,10 +95,7 @@ currently being entered, displayed as previously entered input or displayed as
 previously yieled results) should be syntax highlighted.
 
 \paragraph{Integration with Eclipse} As first implementation, the REPL should
-integrate with Eclipse to provide an interface to the users. It is important to
-note that while integration with Eclipse is a requirement, Spoofax itself is
-moving to be IDE-agnostic. As such, the implementation of the REPL's core
-should not be tied to Eclipse.
+integrate with Eclipse to provide an interface to the users.
 
 \subsubsection{Should have}
 
@@ -105,14 +107,13 @@ REPLs provide the ability to explore unknown problem domains. It is not a
 far-fetched idea that a developer would want to change function implementations
 or the types of certain variables. To support this, a REPL should allow users to
 redefine identifiers. This might mean that the REPL needs different semantics
-than the language it operates on, slightly contrasting the requirement that the
-REPLs should be language-agnostic.
+than the language it operates on, contrasting the requirement that the REPLs
+should be language-agnostic.
 
-\paragraph{Environment inspection} The argument of the previous requirements can
-be repeated for this one: the exploratory and interactive nature of REPLs call
-for the ability to inspect the current environment. This is to replace the files
-with source code that a developer could otherwise inspect and an initial step
-towards offering debugging features in a REPL.
+\paragraph{Environment inspection} The exploratory and interactive nature of
+REPLs call for the ability to inspect the current environment. This is to
+replace the files with source code that a developer could otherwise inspect and
+an initial step towards offering debugging features in a REPL.
 
 \paragraph{Save and load REPL state} Often, developers want to save the current
 state of their IDE and return to it later. As such, the REPLs should allow their
@@ -141,10 +142,9 @@ Spoofax to document and illustrate their language simultaneously with the
 development: documentation and examples can never be outdated, because outdated
 example code will halt the execution.
 
-\paragraph{Integration with other IDEs (IntelliJ)} As mentioned before, Spoofax
-is currently undergoing a transition not to be tied to a specific IDE.
-Generating Spoofax's editor services for IntelliJ is currently a work in
-progress and it would be nice if the REPL works in IntelliJ from the start.
+\paragraph{Integration with other IDEs (IntelliJ)} Generating Spoofax's editor
+services for IntelliJ is currently a work in progress and it would be nice if
+the REPL works in IntelliJ from the start.
 
 \subsubsection{Won't have}
 
