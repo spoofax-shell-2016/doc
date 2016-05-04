@@ -221,9 +221,9 @@ The strategy \texttt{innermost} in this example is used to apply the strategy
 given as parameter (a composition of rewrite rules) in a specific
 traversal order on the AST nodes.
 
-The Spoofax API provides the \texttt{TranformService} for performing
-Transformation. Internally the \texttt{TransformService} access the Stratego
-runtime, which is accessed through the
+The Spoofax API provides the \texttt{TranformService} for performing program
+transformation. Internally the \texttt{TransformService} accesses the
+Stratego runtime, which is retrieved from the
 \texttt{StrategoRuntimeService}. Stratego also has support for \emph{native}
 strategies, which are specified in Java instead.
 \subsection{Dynamic Semantics}
@@ -283,17 +283,18 @@ This section concludes with a brief description of editor services,
 which provide the IDE support for languages defined in
 Spoofax. Examples of such services include an outline view, menus in
 which one can bind actions to menu buttons (see figure
-\ref{fig:menu-actions}), but also syntax highlighting, syntactic completion
-and code folding rules\footnote{More services are listed on
-the Spoofax website:
+\ref{fig:menu-actions}), but also syntax highlighting, syntactic code
+completion and code folding rules\footnote{More services are
+listed on the Spoofax website:
 \url{http://www.metaborg.org/spoofax/editor-services/}}.
 
 The Spoofax API provides the editor services with similar naming. For
 example, the outline can be retrieved from the \texttt{OutlineService}, the
 syntax highlighting can be accessed through the \texttt{StylerService} and
-syntactic completion is accessed with the \texttt{CompletionService}. The
-defined menus for a particular language can be retrieved with the
-\texttt{MenuService}, from which the menu actions can be retrieved and used.
+syntactic code completion is accessed with the
+\texttt{CompletionService}. The defined menus for a particular language can
+be retrieved with the \texttt{MenuService}, from which the menu actions can
+be retrieved and used.
 
 \begin{figure}[htb]
 \centering
