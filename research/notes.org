@@ -88,6 +88,9 @@ its declarative nature, SDF3 is not limited to generating parsers and
 pretty printers: it can also be used for error recovery
 rules\nbsp\cite{deJonge12}, syntax highlighting rules and folding
 rules for editors (see section [[#sec:editor-serv]]).
+
+The Spoofax API gives access to the generated parser through the
+=SyntaxService=.
 *** AST-based rules
 The meta-languages that will be discussed in the coming sections all
 have one property in common: all of them use /rules/ based on the AST
@@ -113,6 +116,9 @@ high-level DSLs exist for specifying static semantics declaratively:
 NaBL and TS. The two DSLs can work together: for instance, the type of
 a variable can be set with NaBL, so that TS can be used to make
 assertions on the type of that variable.
+
+The static analysis step of a language is exposed through the Spoofax
+API by the =AnalysisService=.
 *** NaBL: the Name Binding Language
 :PROPERTIES:
 :CUSTOM_ID: sec:nabl
@@ -229,6 +235,12 @@ strategies
 The strategy =innermost= in this example is used to apply the strategy
 given as parameter (a composition of rewrite rules) in a specific
 traversal order on the AST nodes.
+
+The Spoofax API provides the =TranformService= for performing
+Transformation. Internally the =TransformService= access the Stratego
+runtime, which is accessed through the
+=StrategoRuntimeService=. Stratego also has support for /native/
+strategies, which are specified in Java instead.
 ** Dynamic Semantics
 :PROPERTIES:
 :CUSTOM_ID: sec:dynamic-semantics
@@ -277,8 +289,14 @@ The example applies the standard rules for boolean operators, and is
 sufficient to specify the behaviour of these operators. The rules are
 recursively applied to the expression $e$ on the right-hand side of
 the rule until it eventually converges.
-#+LATEX: \lstset{numbers=none}
 
+DynSem generated interpreters can be accessed through the same APIs as
+those of Stratego, because the interpreter is a native Stratego
+strategy. Therefore, alternatively, the generated interpreter can also
+be accessed directly from Java provided that one has the AST of the
+program to interpret.
+
+#+LATEX: \lstset{numbers=none}
 ** Editor Services
 :PROPERTIES:
 :CUSTOM_ID: sec:editor-serv
@@ -287,9 +305,17 @@ This section concludes with a brief description of editor services,
 which provide the IDE support for languages defined in
 Spoofax. Examples of such services include an outline view, menus in
 which one can bind actions to menu buttons (see figure
-[[fig:menu-actions]]), but also syntax highlighting and code folding
-rules[fn:editor-serv-web:More services are listed on the Spoofax
-website: http://www.metaborg.org/spoofax/editor-services/].
+[[fig:menu-actions]]), but also syntax highlighting, syntactic completion
+and code folding rules[fn:editor-serv-web:More services are listed on
+the Spoofax website:
+http://www.metaborg.org/spoofax/editor-services/].
+
+The Spoofax API provides the editor services with similar naming. For
+example, the outline can be retrieved from the =OutlineService=, the
+syntax highlighting can be accessed through the =StylerService= and
+syntactic completion is accessed with the =CompletionService=. The
+defined menus for a particular language can be retrieved with the
+=MenuService=, from which the menu actions can be retrieved and used.
 
 #+ATTR_LATEX: :width 0.6\textwidth
 #+CAPTION: A menu action for the paplj language defined using Spoofax. The bottom window shows the menu definition, the top window shows a program written in paplj.
@@ -298,9 +324,9 @@ website: http://www.metaborg.org/spoofax/editor-services/].
 
 Editor services are defined using a DSL, shown in the bottom window of
 figure [[fig:menu-actions]]. In the case of menus, their actions are
-specified using Stratego. Via Stratego these actions can even be
-specified in Java. As such, Spoofax allows for defining arbitrarily
-complex IDE actions.
+specified using Stratego. Since Stratego supports native strategies,
+these actions can also be specified in Java. As such, Spoofax allows
+for defining arbitrarily complex IDE actions.
 
 Many of these editor services such as syntax highlighting and code
 folding rules can be derived from the syntax
