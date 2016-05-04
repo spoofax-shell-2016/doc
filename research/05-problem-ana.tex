@@ -31,7 +31,7 @@ expression like \texttt{int x = 2 + 2;}, JShell generates the surrounding class 
 method body needed for this expression to be valid.
 
 This technique cannot be directly applied to Spoofax, since the language
-constructs needed to sucessfully ``wrap'' other constructs is not known in
+constructs needed to sucessfully ``wrap'' other constructs are not known in
 advance. A first approach to solve this problem could be to require that the
 language designer provides a program template in an esv file, in which they can
 indicate the various types of language constructs that are valid from within
@@ -48,13 +48,11 @@ run
 
 The illustrated solution could later be extended to eliminate the need for
 manual specification, by reusing the SDF syntax definitions for the language:
-given an invalid partial program as typed in by the user, the REPL should then
-try to determine whether this partial program is valid somewhere within the
-parse tree resulting from the language definition. By doing a breadth-first
-search, starting from the context-free start symbols of the language, the REPL
-could prepend symbols from the syntax definition until the program is valid.
-This suggestion can then be shown to the user, after which the resulting
-program is executed.
+given a partial program as typed in by the user, the REPL should then try to
+determine whether it is valid somewhere within some syntactically valid AST
+resulting from the language definition. By doing a breadth-first search,
+starting from the context-free start symbols of the language, the REPL could
+prepend symbols from the syntax definition until the program is valid.
 
 When a compiler or an interpreter is invoked, the program is a complete and
 static unit of source code that will not change during execution. In contrast,
