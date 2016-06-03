@@ -1,0 +1,57 @@
+\makecover
+
+\begin{titlepage}
+  \begin{center}
+    %% Print the title.
+    {\makeatletter
+    \largetitlestyle\fontsize{64}{94}\selectfont\@title
+    \makeatother}
+
+    %% Print the optional subtitle in black.
+    {\makeatletter
+    \ifx\@subtitle\undefined\else
+        \bigskip
+       {\tudsffamily\fontsize{22}{32}\selectfont\@subtitle}
+    \fi
+    \makeatother}
+
+    \bigskip
+    \bigskip
+
+    by
+
+    \bigskip
+    \bigskip
+
+    {\makeatletter
+    \largetitlestyle\fontsize{26}{26}\selectfont\@author
+    \makeatother}
+
+    \bigskip
+    \bigskip
+    \vfill
+
+    {\makeatletter\large
+    Compiled with \XeLaTeX\ on \@date\par
+    \makeatother}
+
+    \bigskip
+    \bigskip
+    \vfill
+
+    \begin{tabular}{lll}
+      Authors:             & Gerlof Fokkema             & 4257286 \\
+                           & Jente Hidskes              & 4335732 \\
+                           & Skip Lentz                 & 4334051 \\
+      Client:              & Prof.~dr.~Eelco~Visser,    & Technische Universiteit Delft \\
+      Coach:               & Hendrik van Antwerpen,     & Technische Universiteit Delft
+    \end{tabular}
+
+    \vfill
+    \includegraphics[trim=0 5mm 0 0, width=40mm]{TU_Delft_logo_Black.eps}
+  \end{center}
+\end{titlepage}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: main
+%%% End:
