@@ -9,7 +9,6 @@
 \usepackage{enumitem}
 \usepackage{listings}
 \graphicspath{{img/}}
-\PassOptionsToPackage{sectionbib}{natbib}
 
 % Source code listing style.
 \lstset{%
@@ -31,12 +30,7 @@
 \usepackage{booktabs}
 
 \input{title_preamble}
-%% Comment out to show headerinfo.
-%\pagestyle{headings}
 
-% Don't show chapter numbers, we don't use chapters for the research
-% report.
-\renewcommand\thesection{\arabic{section}}
 \lstdefinelanguage{nabl}{
   % list of keywords
   morekeywords={
@@ -100,27 +94,29 @@
 
 \input{title}
 
+\input{preface}
+
+\input{summary}
+
 \tableofcontents{}
 
 \mainmatter
 
-%\input{00-introduction}
-%
-%\input{01-spoofax}
-%
-%\input{02-repl}
-%
-%\input{03-literate-prog}
-%
-%\input{04-problem-def}
-%
-%\input{05-problem-ana}
-%
-%\input{06-require-ana}
-%
-%\input{07-realisation}
-%
-%\input{08-conclusion}
+\input{introduction}
+
+\input{background}
+
+\input{problem-def-ana}
+
+\input{design}
+
+\input{implementation}
+
+\input{evaluation}
+
+\input{discuss-recommend}
+
+\input{conclusion}
 
 \appendix
 

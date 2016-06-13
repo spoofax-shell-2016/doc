@@ -1,0 +1,121 @@
+\section{Problem Analysis}
+\label{sec:problem-analysis}
+This section gives an analysis of the problem defined in the previous section.
+More specifically, this section describes the problems that are expected and
+that will have to be solved while incorporating a REPL
+within the larger context of Spoofax.
+
+A language can have many different language constructs. The REPL for Spoofax,
+however, should not be constrained to any particular language constructs.
+Rather, it should operate on any defined language. For this reason the
+implementation and particularly the interaction with the user needs to be
+carefully considered.
+
+\subsubsection{Execution model of the REPL}
+\label{ssec:execution-model-repl}
+As illustrated in \cref{ssec:execution-model}, a major difference in the
+execution model of a non-interactive interpreter and a REPL is concerned with
+what an indivisable unit of execution is. The build process as implemented in
+Eclipse uses a ``BuildInputBuilder'' to transform and build a (valid) program
+as a whole. While this is quite a convenient way to quickly create a compiled
+program; for a REPL to really offer an interactive experience to the user, the
+REPL should be able to execute smaller units of work than a complete program.
+
+An example implementation that solves this problem is the Java Shell (JShell)
+REPL~\cite{jshell-repl} currently under development for OpenJDK. The OpenJDK
+team introduces a concept called ``wrapping'' to achieve this: \textit{``if X
+is an input that JShell accepts (as opposed to rejects with error) then there
+is an A and B such that AXB is a valid program in the Java programming
+language.''}. More specifically, this says that when a user types in an
+expression like \texttt{int x = 2 + 2;}, JShell generates the surrounding class and
+method body needed for this expression to be valid.
+
+This technique cannot be directly applied to Spoofax, since the language
+constructs needed to sucessfully ``wrap'' other constructs are not known in
+advance. A first approach to solve this problem could be to require that the
+language designer provides a program template in an esv file, in which they can
+indicate the various types of language constructs that are valid from within
+the REPL and where they would be inserted in this template. The REPL should
+then be able to distinguish the language constructs defined in the esv file as
+the user types them in. A template for a complete paplj program could look
+like this:
+\begin{lstlisting}
+program
+  $classes
+run
+  $expressions
+\end{lstlisting}
+
+The illustrated solution could later be extended to eliminate the need for
+manual specification, by reusing the SDF syntax definitions for the language:
+given a partial program as typed in by the user, the REPL should then try to
+determine whether it is valid somewhere within some syntactically valid AST
+resulting from the language definition. By doing a breadth-first search,
+starting from the context-free start symbols of the language, the REPL could
+prepend symbols from the syntax definition until the program is valid.
+
+When a compiler or an interpreter is invoked, the program is a complete and
+static unit of source code that will not change during execution. In contrast,
+when a REPL is invoked, often the user wants to alter or add code to previously
+executed expressions. This means the REPL needs to form ``programs'' in memory
+by combining all the entered expressions.  Thus the REPL should have a way of
+combining previously entered expressions to form a program. JShell does this by
+keeping the wrapped source and generated class files in memory and importing
+previously defined classes~\cite{jshell-repl}. The concept of imports is
+however very language specific and it cannot be assumed to exist.  Therefore,
+another way of combining entered expressions into one program needs to be
+found.
+
+\subsubsection{Detecting unfinished expressions for multiline editing}
+\label{sec:detect-unfin-expr}
+To support multiline editing, the REPL should detect that the
+expression or statement is unfinished when the user presses the
+``Return'' key for the next line, instead of trying to parse and
+execute it. An obvious part of Spoofax that is relevant for this
+problem, is the syntax definition in SDF3 (see
+\cref{sec:orgheadline1}).
+
+\subsubsection{Language specific additional commands}
+\label{sec:lang-spec-addit}
+Another problem is when some additional command can be useful for a
+REPL of a particular language, but would not make any sense within the
+context of other languages. For example, some languages such as Python
+allow for loading a file, which brings all of the definitions inside
+of it into scope. An additional command to load a file could in that
+case be useful, but would not make any sense in languages that have no
+concept of definitions that can be imported.
+
+This problem could be solved by the language designer by extending
+their language with reflective capabilities. However, the language
+designer might not want to extend the language with reflective
+capabilities outside of the context of a REPL, for example when the
+language is a DSL. It is clear therefore that a different approach
+should be considered.
+
+One possible solution is to allow for language specific configurations
+that are loaded with the language definition of that language. This
+can be done by extending the editor services discussed in
+\cref{sec:editor-serv} with REPL commands: similar to menu actions,
+where one can define menu button ``Run'' to run a program, one may
+define a ``load-file'' command and bind it to an action.
+
+\subsubsection{Redefining terms bound to names}
+\label{sec:redef-cont-bound}
+When the user is prototyping methods inside the REPL, they would
+likely want to be able to redefine that method to be of a different
+implementation. However, this poses a similar problem as in the
+previous section: for some languages it may not be possible nor
+desirable to do so outside of the context of a REPL. Thus requiring
+the language designer to extend the language with such abilities is
+again an inadequate solution.
+
+One could propose the same solution as in the previous section, namely to
+define an additional command for redefining a class or method. Another possible
+and maybe more adequate solution for redefining a term bound to a name, is to
+allow the user to give the name and the new term. The name can then be used to
+find the old term, so that it can be replaced with the new one.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
