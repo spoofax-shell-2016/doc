@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>828</x>
+      <y>444</y>
+      <w>96</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;IReplCommand&gt;&gt;/
+--
+execute(...): IResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>642</x>
+      <y>630</y>
+      <w>96</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;IResultVisitor&gt;&gt;/
+--
++visitExcception(...)
++visitFailure(...)
++visitMessage(...)
++visitResult(...)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>468</y>
+      <w>66</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; executes</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>684</x>
+      <y>576</y>
+      <w>78</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1
+
+   result output &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>798</x>
+      <y>540</y>
+      <w>156</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;ICommandInvoker&gt;&gt;/
+--
++addCommand(name, desc, cmd)
++execute(name): IResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>642</x>
+      <y>540</y>
+      <w>96</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;IRepl&gt;&gt;/
+--
++eval(input): IResult
++getInvoker()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>732</x>
+      <y>546</y>
+      <w>78</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+user input &gt;</panel_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>636</x>
+      <y>444</y>
+      <w>102</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;IResult&gt;&gt;/
+--
++accept(visitor)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>732</x>
+      <y>444</y>
+      <w>108</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; returns</panel_attributes>
+    <additional_attributes>160.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>504</x>
+      <y>540</y>
+      <w>84</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;IEditor&gt;&gt;/
+--
++getInput()
++history()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>504</x>
+      <y>630</y>
+      <w>84</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;IInputHistory&gt;&gt;/
+--
+append(entry)
+entries(): List</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>570</y>
+      <w>18</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>492</x>
+      <y>516</y>
+      <w>258</w>
+      <h>186</h>
+    </coordinates>
+    <panel_attributes>org.metaborg.spoofax.shell.client
+--
+bg=orange
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>492</x>
+      <y>420</y>
+      <w>258</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>org.metaborg.spoofax.shell.output
+--
+bg=orange
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>504</x>
+      <y>444</y>
+      <w>102</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;ISpoofaxResult&gt;&gt;/
+--
++ast()
++styled()
++unit(): T</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>792</x>
+      <y>516</y>
+      <w>168</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>org.metaborg.spoofax.shell.invoker
+--
+bg=orange
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>792</x>
+      <y>420</y>
+      <w>168</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>org.metaborg.spoofax.shell.commands
+--
+bg=orange
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>450</y>
+      <w>48</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+</diagram>
