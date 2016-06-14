@@ -1,5 +1,6 @@
 \section{Problem Analysis}
 \label{sec:problem-analysis}
+
 This section gives an analysis of the problem defined in the previous section.
 More specifically, this section describes the problems that are expected and
 that will have to be solved while incorporating a REPL
@@ -37,8 +38,8 @@ language designer provides a program template in an esv file, in which they can
 indicate the various types of language constructs that are valid from within
 the REPL and where they would be inserted in this template. The REPL should
 then be able to distinguish the language constructs defined in the esv file as
-the user types them in. A template for a complete paplj program could look
-like this:
+the user types them. A template for a complete paplj program could look like
+this:
 \begin{lstlisting}
 program
   $classes
@@ -80,8 +81,8 @@ problem, is the syntax definition in SDF3 (see
 Another problem is when some additional command can be useful for a
 REPL of a particular language, but would not make any sense within the
 context of other languages. For example, some languages such as Python
-allow for loading a file, which brings all of the definitions inside
-of it into scope. An additional command to load a file could in that
+allow for loading modules, which brings all of the definitions inside
+of these modules into scope. An additional command to load a module could in that
 case be useful, but would not make any sense in languages that have no
 concept of definitions that can be imported.
 
@@ -95,9 +96,9 @@ should be considered.
 One possible solution is to allow for language specific configurations
 that are loaded with the language definition of that language. This
 can be done by extending the editor services discussed in
-\cref{ssec:editor-serv} with REPL commands: similar to menu actions,
-where one can define menu button ``Run'' to run a program, one may
-define a ``load-file'' command and bind it to an action.
+\cref{ssec:editor-serv} with REPL commands. Similar to menu actions,
+where one can define menu buttons such as ``Run'' to run a program, one may
+then even bind the ``load-file'' command to an action.
 
 \subsubsection{Redefining terms bound to names}
 \label{sec:redef-cont-bound}
@@ -114,6 +115,9 @@ define an additional command for redefining a class or method. Another possible
 and maybe more adequate solution for redefining a term bound to a name, is to
 allow the user to give the name and the new term. The name can then be used to
 find the old term, so that it can be replaced with the new one.
+
+It should be noted, however, that implementing this can slightly change the
+semantics of the language when it is run inside the REPL.
 
 %%% Local Variables:
 %%% mode: latex
