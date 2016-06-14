@@ -4,31 +4,36 @@
 Defining requirements upfront is important for several reasons: it is a contract
 between the developers and the client, it guides the product development, it
 enables the client to track the progress and finally it allows validation of the
-deliverable. These requirements are listed in this section.
+deliverable. The requirements are listed in this section.
 
 \subsection{Design goals}
 \label{ssec:goals}
 
 The client has expressed some high-level requirements, which are listed in this
 subsection as design goals in order of priority. The design goals serve as an
-important guideline when defining and implement the invidual requirements. As
+important guideline when defining and implementing the invidual requirements. As
 such, they can be considered the bounds within which all requirements must fit.
 
-\paragraph{Language-agnostic} The REPL should work with all languages
-defined with Spoofax. This means that no assumptions can be made about any
-language constructs or syntax.
+\paragraph{Language-agnostic} The REPL should not make any assumptions about its
+host language: it must work with all languages defined with Spoofax. This also
+means that a language designer should not have to do any additional work to get
+a REPL for their language. However, if required, the language designer should be
+able to provide REPL-specific configuration.
 
+% FIXME: what to do with this one? We don't generate a REPL: it is always there.
 \paragraph{Autogeneration} The REPL should be automatically provided, just like
 all of Spoofax's other services. This means that providing access to the REPL
 should be integrated into Spoofax's build system and not require any additional
 steps from the user.
 
 \paragraph{Maintainability} Spoofax is an already existing, open source project
-managed by several people. When the product is delivered, it will have to be
-maintained by others. Therefore, it is important that the code is maintainable.
+managed by several people. When the product is delivered, these people will take
+over the maintainership. Therefore, it is important that the code is
+maintainable. This means that the code should be well-documented, with low
+coupling and high cohesion in the code's modules.
 
-\paragraph{IDE-agnostic} Current releases of Spoofax integrate solely with
-Eclipse. An effort is underway currently to make Spoofax IDE-agnostic and to
+\paragraph{IDE-agnostic} Current stable releases of Spoofax integrate solely with
+Eclipse. An effort is underway to make Spoofax IDE-agnostic and to
 provide separate modules to tie Spoofax to IDEs. The REPL should keep this in
 mind from the start and not tie itself to any IDE.
 
@@ -46,11 +51,11 @@ should be a standalone module.
 
 Under the guidance of the design goals listed in the previous subsection, the
 requirements compiled from the feature matrix discussed in \cref{sec:repl} and
-meetings with the client are discussed below, under the MoSCoW method.
+meetings with the client are discussed below using the MoSCoW method.
 
 \subsubsection{Must have}
 
-Requirements listed under ``must haves'' are of critical importance to the
+Requirements listed under ``must have'' are of critical importance to the
 usability and success of the deliverable. Without these, the product is not in a
 workable state and is not likely to be accepted by the client. \emph{Must} can
 also be considered an acronym for the Minimum Usable SubseT.
@@ -60,10 +65,10 @@ also be considered an acronym for the Minimum Usable SubseT.
 statements and expressions typed in by the user and print the results back to
 them.
 
-\paragraph{Operates with language definitions} Every service in Spoofax operates
+\paragraph{Works with any language defined in Spoofax} Every service in Spoofax operates
 from language definitions. It is evident that the REPL should work with these
 definitions if it is to fit within Spoofax. An optional feature is to allow
-language-specific definition of REPL commands, defined in an esv file.
+language-specific configuration and language-specific commands, defined in an esv file.
 
 \paragraph{Input history} Users should be able to retrieve previously
 typed expressions and statements to support the explorative and interactive
@@ -73,6 +78,8 @@ nature of a REPL.
 previously yielded results should be implicitly bound to automatically generated
 identifiers to make their values available in future expressions.
 
+% FIXME: what to do with the explanation here? Personally I think it should just
+% say that multiline input should be available.
 \paragraph{Multiline input editing} Multiline input editing is a crucial feature
 for user satisfaction. The input editor should start in single line editing mode
 and recognise when an expression or statement is part of a multiline
@@ -81,6 +88,8 @@ multiline input editing mode, wherein the prompt character indicates this new
 mode. This mode's behavior (e.g. keyboard shortcuts) is different from the
 single line editing mode.
 
+% TODO: expand and say that analysis/interpreter errors should be printed, as
+% opposed to only interpreter errors?
 \paragraph{Error reporting} To support the interactivity of the REPL, error
 reporting should be available in two ways: while typing an expression or a
 statement, on-the-fly error reporting should indicate wrongly typed items. The
@@ -88,41 +97,41 @@ interpreter that evaluates syntactically correct input should also be able to
 display its error messages to the user in case of an error during the dynamic
 semantics phase.
 
-\paragraph{Syntax checked input} Supporting the above requirement, all
+\paragraph{Syntax checked expressions} Supporting the above requirement, all
 input should have its syntax checked on the fly.
 
 \paragraph{Syntax highlighting} All expressions and statements (whether they are
 currently being entered, displayed as previously entered input or displayed as
 previously yieled results) should be syntax highlighted.
 
-\paragraph{Integration with Eclipse} As first implementation, the REPL should
+\paragraph{Integration with Eclipse} As a first implementation, the REPL should
 integrate with Eclipse to provide an interface to the users.
 
 \subsubsection{Should have}
 
-Requirements listed under ``should-haves'' are important, but not necessary for
+Requirements listed under ``should-have'' are important, but not required for
 a working product.
 
-\paragraph{Ability to redefine identifiers} As explained in \cref{sec:repl},
+\paragraph{Ability to redefine identifiers} As explained in \cref{ssec:repl-functionality},
 REPLs provide the ability to explore unknown problem domains. It is not a
 far-fetched idea that a developer would want to change function implementations
 or the types of certain variables. To support this, a REPL should allow users to
 redefine identifiers. This might mean that the REPL needs different semantics
-than the language it operates on, contrasting the requirement that the REPLs
+than the language it operates on, contrasting the design goal that the REPL
 should be language-agnostic.
 
 \paragraph{Environment inspection} The exploratory and interactive nature of
-REPLs call for the ability to inspect the current environment. This is to
+REPLs calls for the ability to inspect the current environment. This is to
 replace the files with source code that a developer could otherwise inspect and
-an initial step towards offering debugging features in a REPL.
+an initial step towards offering debugging features in the REPL.
 
 \paragraph{Save and load REPL state} Often, developers want to save the current
-state of their IDE and return to it later. As such, the REPLs should allow their
+state of their IDE and return to it later. As such, the REPL should allow their
 state to be saved and restored.
 
 \subsubsection{Could have}
 
-Requirements listed under ``could-haves'' are desirable, but not necessary.
+Requirements listed under ``could-have'' are desirable, but not necessary.
 These requirements often improve usability or customer satisfaction and are
 included only if time permits.
 
@@ -149,7 +158,7 @@ the REPL works in IntelliJ from the start.
 
 \subsubsection{Won't have}
 
-Requirements listed under ``won't-haves'' are not for implementation in this
+Requirements listed under ``won't-have'' are not to be implemented during this
 project. They have been identified as possible features, but are outside of the
 scope of this project and listed only as possible suggestions for further work.
 
@@ -162,6 +171,8 @@ the REPL is something to consider for a later version.
 \subsection{Minimal viable product}
 \label{ssec:mvp}
 
+% FIXME: if we remove the second design goal, this section needs to updated
+% accordingly.
 The design goals and requirements listed in the previous subsections give a good
 idea of what the deliverable should look like. It is possible, however, that due
 to unforeseen problems, not all the listed requirements and design goals can be
