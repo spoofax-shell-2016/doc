@@ -1,6 +1,255 @@
 \chapter{Evaluation}
 \label{cha:evaluation}
 
+Two evaluations are made in this chapter. The first section of this chapter,
+\cref{sec:product-evaluation}, evaluates the product. This is done firstly by
+looking at the requirements and secondly by looking at the design goals, both as
+described in \cref{sec:requirement-analysis}. The end of this section concludes
+with an evaluation of the product as a whole in \cref{ssec:eval-product}. The
+second section of this chapter, \cref{sec:process-evaluation}, evaluates the
+process by which the product came to be. It discusses the development
+methodologies used and the feedback as received by the Software Improvement
+Group.
+
+\section{Product Evaluation}
+\label{sec:product-evaluation}
+
+\Cref{sec:requirement-analysis} describes the requirements and the design goals
+that were agreed upon with the client at the start of the project. This section
+evaluates how these are met by the product. \Cref{ssec:eval-requirements}
+discusses each requirement and decides whether or not it has been met and how.
+\Cref{ssec:eval-design-goals} does the same for the design goals.  Finally, this
+section concludes with a short discussion to see if the minimal viable product
+as defined in \cref{ssec:mvp} has been met.
+
+\subsection{Evaluation of the Requirements}
+\label{ssec:eval-requirements}
+
+This subsection discusses all the requirements as set out in
+\cref{ssec:requirements}. All the requirements are listed in
+\cref{table:requirements}. Per requirement, the table lists whether it has been
+met, including an explanation as to how it has been met or why it has not been
+met.
+
+% TODO: update history when PR is accepted.
+\begin{table}[]
+\centering
+\begin{tabular}{|l||l||l|}
+\hline
+\textbf{Requirement}                                                                         & \textbf{Met?} & \textbf{Explanation} \\ \hline
+Interactive REPL                                                                             & Yes           & \begin{tabular}[c]{@{}l@{}}Two interactive REPLs have been created:\\ one for the console and another in Eclipse.\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}}Works with any language\\ defined in Spoofax\end{tabular}         & Yes           & \begin{tabular}[c]{@{}l@{}}The backend retrieves the information it\\ needs from Spoofax's services. A language\\ developer is able to define REPL-specific\\ configuration in an esv file, as well.\end{tabular} \\ \hline
+Input history                                                                                & Yes           & \begin{tabular}[c]{@{}l@{}}An interface has been created in the\\ backend, allowing frontends to implement\\ history as they see fit. Both the console-\\ and the Eclipse frontend implement this\\ interface.\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Automatic binding of \\ previously yielded values\end{tabular}    & Yes           & \begin{tabular}[c]{@{}l@{}}The language designer can specify these\\ semantics in DynSem.\end{tabular} \\ \hline
+Multiline input editing                                                                      & Yes           & \begin{tabular}[c]{@{}l@{}}The way in which input is given is not\\ enforced by the backend. However, both\\ the console- and the Eclipse frontend\\ implement multiline input editing.\end{tabular}\\ \hline
+Error reporting                                                                              & Yes           & \begin{tabular}[c]{@{}l@{}}Both the console- and the Eclipse frontend\\ print errors to the user. The characters to\\ which these errors belong are highlighted\\ in red. Error reporting is not yet enabled\\ during typing.\end{tabular}\\ \hline
+Syntax-checked expressions                                                                   & Yes           & \begin{tabular}[c]{@{}l@{}}The backend parses the input with the\\ services provided by Spoofax. As such,\\ syntax-checked input was given for free.\\ However, this feedback is not yet enabled\\ during typing.\end{tabular}\\ \hline
+Syntax highlighting                                                                          & No            & \begin{tabular}[c]{@{}l@{}}The Spoofax services to provide syntax\\ highlighting are difficult to fit into the\\ architecture of the REPL. For this reason,\\ syntax highlighting is not yet completed.\end{tabular}\\ \hline
+Integration with Eclipse                                                                     & Yes           & \begin{tabular}[c]{@{}l@{}}A REPL has been implemented in Eclipse,\\ allowing the user to give input and see output.\end{tabular}\\ \hhline{|=|=|=|}
+Ability to redefine identifiers                                                              & Yes           & \begin{tabular}[c]{@{}l@{}}The language designer can speficy these\\ semantics in DynSem.\end{tabular} \\ \hline
+Environment inspection                                                                       & No            & \begin{tabular}[c]{@{}l@{}}In the current DynSem implementation, this\\ is impossible to do because the environment\\ is captured in an object of type \texttt{Object}\\ and therefore unprintable.\end{tabular} \\ \hline
+Save and load REPL state                                                                     & No            & \begin{tabular}[c]{@{}l@{}}Due to limitations in time, this feature has\\ not been implemented.\end{tabular}\\ \hhline{|=|=|=|}
+Syntactic code completion                                                                    & No            & \begin{tabular}[c]{@{}l@{}}Spoofax's code completion services do not\\ yet work with all languages and are in\\ process of a rewrite. As such, code completion\\ has not yet been attempted.\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}}Hover over variables to see\\ value, type and others\end{tabular} & No            & \begin{tabular}[c]{@{}l@{}}Due to limitations in time and the fact that\\ the environment is captured in a variable\\ of type \texttt{Object}, this feature has not been\\ implemented.\end{tabular}\\ \hline
+Literate programming                                                                         & No            & \begin{tabular}[c]{@{}l@{}}An attempt has been made at writing an\\ IPython frontend for the REPL backend.\\ However, due to limitations in time and the\\ pressure of finishing more important features,\\ this work has not been finished.\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Integration with other\\ IDEs (IntelliJ)\end{tabular}             & No            & \begin{tabular}[c]{@{}l@{}}The Eclipse frontend is not completely done\\ yet, which was a requirement before starting\\ on implementing a frontend for IntelliJ. As such,\\ this feature has not been attempted.\end{tabular}\\ \hline
+\end{tabular}
+\caption{Evaluation of the requirements, separated per MoSCoW category}
+\label{table:requirements}
+\end{table}
+
+\subsection{Evaluation of the Design Goals}
+\label{ssec:eval-design-goals}
+
+In this subsection the design goals as set out in \cref{ssec:goals} are
+discussed. Each design goal is listed below, along with an explanation as to how
+it has been met.
+
+\paragraph{Language-agnostic} This design goal stated that no assumptions should
+be made on the host language. The REPL should work for any language, without the
+language designer having to configure it. However, should the language designer
+want additional commands or language-specific configuration of the REPL, this
+should be possible.
+
+Both the frontends and the backend place no assumptions on the language:
+everything automatically works for any language defined in Spoofax. If wanted,
+the language designer can specify REPL-specific configuration in an esv file.
+Currently, however, only DynSem-based interpreters are supported, as opposed to
+Java- and Stratego-based interpreters. Despite this, care has been taken to make
+this easily extendable. This design goal, therefore, is met.
+
+\paragraph{Autogeneration} This design goal stated that the REPL should
+automatically be provided, just like all of Spoofax's other services.
+
+The REPL exists automatically for all languages, due to it reusing the existing
+services offered by Spoofax. This means that it is automatically provided,
+without any effort at the hands of the language designer or -user. Therefore,
+this design goal is met.
+
+% TODO: niet echt tevreden met deze paragraaf. Suggesties?
+\paragraph{Maintainability} This design goal stated that the code should be
+maintainable, because maintainership will be transferred to the people already
+working on Spoofax.
+
+Various static analysis tools, up-to-date documentation, proper software design
+and a received 4,5 out of 5 stars during the first round of feedback from the
+Software Improvement Group (see \cref{ssec:sig} below), are good indications that
+this design goal is met.
+
+\paragraph{IDE-agnostic} This design goal stated that the REPL should place no
+assumptions on the environment it runs in, since an effort is underway to do the
+same for Spoofax itself.
+
+The backend is agnostic to any frontend, no assumptions are made whatsoever:
+console or graphical, blocking or unblocking user input, single-threaded or
+multi-threaded, et cetera. This design goals is met.
+
+\paragraph{Performance} This design goal stated that the REPL should be
+performant, because care is taken to ensure that Spoofax itself is performant.
+
+Launching the REPL is near instantaneous. Commands and expressions are evaluated
+in real time, without noticable delay. This design goals is thus met.
+
+\paragraph{Modify Spoofax's existing codebase as little as possible} This design
+goal stated that the REPL should be an extension to Spoofax, which means that
+the existing codebase should be modified as little as possible.
+
+The REPL is developed into a standalone repository. It uses the same API exposed
+by Spoofax as any other extension would use. Minimal changes have been made to
+Spoofax itself: the only large change that went upstream is the ability to
+configure the REPL in an esv file. However, DynSem had to be significantly
+modified after its rewrite to support the use case of a REPL. These changes were
+made in cooperation with its maintainer, and most were features that had to be
+implemented regardless. As such, this design goal is also met.
+
+\subsection{Evaluation of the Product}
+\label{ssec:eval-product}
+
+This subsection evaluates whether the minimal viable product, as defined in
+\cref{ssec:mvp}, has been delivered. The minimal viable product has been defined
+as all the ``must have'' requirements (see \cref{ssec:requirements}), including
+the design goals of being language-agnostic and having the REPL being generated
+automatically.
+
+The previous section concluded that all the design goals have been met.
+\Cref{ssec:eval-requirements} and \cref{table:requirements} show that all the
+``must have'' requirements have been implemented, except one: syntax
+highlighting.
+
+% TODO: finish this section.
+
+\section{Process Evaluation}
+\label{sec:process-evaluation}
+
+This section gives an evaluation of the process by which the delivered product
+came to be. First, the methodologies used during development are discussed in
+\cref{ssec:dev-meth}. \Cref{ssec:sig} shows the feedback received from the
+Software Improvement Group and discusses the changes that were made to the code
+accordingly.
+
+\subsection{Development Methodologies}
+\label{ssec:dev-meth}
+
+In the beginning of the project, agreements were made on the development
+methodologies that were to be used. Throughout the duration of the project, some
+of these methodologies turned out to work well, whilst others were less
+effective than anticipated. This section discusses these agreements.
+
+The Scrum methodology was chosen to manage the product development. Previous
+experience showed that one week sprints are often too short, so for this project
+biweekly sprints were decided. This worked well: there was enough time to make
+informed decisions and to evaluate or rework certain things. Sprints were
+managed flexibly: if the sprint plan needed to change due to unexpected issues,
+biweekly sprints allow for an easier revision of the sprint plan.
+
+Sprints were evaluated with a meeting with the client, during which the progress
+was demoed. The feedback received during these meetings was valuable and taken
+into account to guide the next sprint.
+
+The client mandated the use of Trello to manage the sprints, which has been a
+positive experience as well. Trello makes it easy to manage deadlines and to
+know what has to be done at what time. Managing a backlog of user stories and
+moving them around from, for example, ``developing'' to ``testing'', is
+straightforward and helps to keep everyone, including the client, updated on the
+progress.
+The pull-based development model worked well, as was anticipated from previous
+experience. The continuous integration, in combination with a set of strict
+static analysis tools, ensured that the code review process had a positive
+influence on the quality of the code.\\
+
+Naturally, there were also things that could have gone better. It is easy to
+underestimate the amount of work when putting together a sprint plan, which has
+been a source of problems. The solution for this issue is to deliberately plan
+less: it is easier to move new user stories to the sprint plan than it is to decide
+which user stories not to complete.
+
+Another issue is that the development was struck with two sources of delay.
+Spoofax changes fast, thus several times development had to stop to catch up
+with these changes. The second source of delay was the integration with the
+Eclipse IDE, which led to several unforeseen issues. Some time could have been
+saved if the client had been asked for advice sooner.\\
+
+To conclude, the process by which the product came to be went predominantly
+well, despite some issues that can be improved during future projects.
+
+\subsection{Software Improvement Group}
+\label{ssec:sig}
+
+The code was sent to the Software Improvement
+Group\footnote{\url{https://www.sig.eu/}} for review on May 27th. The following
+feedback was received on the third of June:
+
+\begin{quotation}
+[Analyse]
+
+De code van het systeem scoort 4,5 ster op ons onderhoudbaarheidsmodel, wat
+betekent dat de code bovengemiddeld onderhoudbaar is. De hoogste score is niet
+behaald door een lagere score voor Unit Interfacing.
+
+Voor Unit Interfacing wordt er gekeken naar het percentage code in units met een
+bovengemiddeld aantal parameters. Doorgaans duidt een bovengemiddeld aantal
+parameters op een gebrek aan abstractie. Daarnaast leidt een groot aantal
+parameters nogal eens tot verwarring in het aanroepen van de methode en in de
+meeste gevallen ook tot langere en complexere methoden.
+
+In jullie geval heeft de constructor van \texttt{Data} een enorm aantal
+parameters. Er zijn grofweg twee manieren om dat te addresseren: de eerste is
+het groeperen van velden in sub-types. Een flauw voorbeeld is het groeperen van
+\texttt{``width''} en \texttt{``height''} in een type \texttt{``Dimensions''}.
+Dit voorbeeld is natuurlijk triviaal, maar je ziet wel vaak dat studenten aan
+het begin wat huiverig zijn om kleine classes voor alleen een type te
+introduceren, terwijl dit op de lange termijn vaak wel degelijk zin heeft. De
+tweede manier is niet meer alle parameters in de constructor meegeven, maar via
+setter-methodes. Dat leidt tot meer code, maar maakt het intialiseren van een
+object wel leesbaarder.
+
+Een ander voorbeeld van dezelfde situatie is de constructor van
+\texttt{TransformCommand} (zo te zien krijgen jullie daar ook al een
+waarschuwing vanuit CheckStyle). Dit geval is wat moeilijker op te lossen,
+aangezien jullie hier van dependency injection gebruik maken en de methode
+daardoor wat moeilijker kunnen refactoren.
+
+Het is goed om te zien dat jullie naast productiecode ook veel testcode hebben
+geschreven. De verhouding tussen de hoeveelheid productiecode en testcode is met
+bijna 1 op 1 ook zeer gezond. Hopelijk lukt het jullie om dat vast te houden
+tijdens het vervolg van het project.
+\end{quotation}
+
+This analysis says that the code scored bad on unit interfacing, because there
+were quite a few classes that had an above average amount of constructor
+parameters. The reason that this came to be is the fact that dependency
+injection is used, as opposed to the traditional way of managing dependencies.
+This fact is also mentioned in the analysis itself.
+
+Two suggestions were given as a possible solution to this problem: create new
+classes that encapsulate several parameters, or use \texttt{``setter''} methods
+to pass parameters this way. However, neither solution was satisfactory as-is:
+data classes are often considered to be a code smell, and \texttt{setter}
+methods risk not fully initialising an object. The classes to which the
+criticism applied have been refactored into smaller, more managable units.
+Ultimately, this not only led to resolving the only negative feedback made by
+the Software Improvement Group, it also led to a better architecture.
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "main"
