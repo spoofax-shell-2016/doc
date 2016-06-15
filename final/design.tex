@@ -32,68 +32,11 @@ such as Stratego. \cref{sec:eval-strat} then concludes with an overview of the
 changes a language designer should make to its syntax and semantics to
 accomodate a fully functioning REPL.
 
-\section{Overview}
-\label{sec:overview}
+\input{design/overview}
 
-As stated in \cref{ssec:goals} one of the design goals during the project was
-to keep the implementation of the REPL IDE-agnostic. To achieve this goal the
-product has been split into several individual modules, most notably one
-reusable core module. This core module then interacts with the Spoofax services
-on behalf of the client. An overview of its design can be found in
-\cref{fig:uml-overview}. To request and receive results from the core module
-every client should at least implement the ``IResultVisitor'' interface in the
-``client'' package of the core module and acquire an instance of a class
-implementing the ``ICommandInvoker'' interface.
+\input{design/commands}
 
-The ``ICommandInvoker'' instance maintains a map from command names to
-corresponding ``IReplCommand'' instances. A client can thus send input directly
-to the execute method, after which the command corresponding with the input
-will be resolved and executed. The executed command will return an instance of
-a class implementing the ``IResult'' interface. The actual type of the returned
-result depends on the command and on whether executing the command succeeded or
-failed.
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.75\textwidth]{uml-overview}
-  \caption{An overview of the most relevant components of the product.}
-  \label{fig:uml-overview}
-\end{figure}
-
-\section{REPL commands}
-\label{sec:commands}
-
-To separate the implementation of user operations into logical units each user
-operation is encapsulated within a class implementing the ``IReplCommand''
-interface. See \cref{fig:uml-commands} for the design of the commands package.
-After aquiring an invoker instance, the client has 2 commands available to him
-by default:
-
-\begin{itemize}
-  \item :load - Implemented by LanguageCommand, loads a language from a file path.
-  \item :help - Implemented by HelpCommand, prints descriptions of all available commands.
-\end{itemize}
-
-The client can define additional commands by implementing the ``IReplCommand''
-interface. These commands can then be made available to the invoker by either
-binding them in the default map of available commands in a guice module or by
-adding the entry to the invoker at runtime using the ``addCommand'' method.
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{uml-commands}
-  \caption{UML of the various commands clients can execute.}
-  \label{fig:uml-commands}
-\end{figure}
-
-\section{}
-\label{sec:function-comp}
-
-\begin{figure}[h]
-  \includegraphics[width=\textwidth]{unit-flow}
-  \caption{Processing steps for a language }
-  \label{fig:unit-flow}
-\end{figure}
+\input{design/function-comp}
 
 \section{}
 \label{sec:visitor}
