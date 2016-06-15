@@ -913,7 +913,7 @@ layer=-1</panel_attributes>
     <panel_attributes>/&lt;&lt;FailableFunction&gt;&gt;/
 --
 +apply(input)
-+kleisliCompose(other)</panel_attributes>
++compose(other)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
