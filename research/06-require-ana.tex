@@ -1,5 +1,5 @@
 \section{Requirements Analysis}
-\label{sec:requirement-analysis}
+\label{sec:a-requirement-analysis}
 
 Defining requirements upfront is important for several reasons: it is a contract
 between the developers and the client, it guides the product development, it
@@ -7,7 +7,7 @@ enables the client to track the progress and finally it allows validation of the
 deliverable. The requirements are listed in this section.
 
 \subsection{Design goals}
-\label{ssec:goals}
+\label{ssec:a-goals}
 
 The client has expressed some high-level requirements, which are listed in this
 subsection as design goals in order of priority. The design goals serve as an
@@ -46,10 +46,10 @@ Spoofax codebase should be as small as possible. Preferably, the REPL service
 should be a standalone module.
 
 \subsection{Requirements}
-\label{ssec:requirements}
+\label{ssec:a-requirements}
 
 Under the guidance of the design goals listed in the previous subsection, the
-requirements compiled from the feature matrix discussed in \cref{sec:repl} and
+requirements compiled from the feature matrix discussed in \cref{sec:a-repl} and
 meetings with the client are discussed below using the MoSCoW method.
 
 \subsubsection{Must have}
@@ -60,7 +60,7 @@ workable state and is not likely to be accepted by the client. \emph{Must} can
 also be considered an acronym for the Minimum Usable SubseT.
 
 \paragraph{Interactive REPL} Per the definition of a REPL given in
-\cref{sec:repl}, the REPL has to be interactive. It should evaluate single
+\cref{sec:a-repl}, the REPL has to be interactive. It should evaluate single
 statements and expressions typed in by the user and print the results back to
 them.
 
@@ -107,7 +107,7 @@ integrate with Eclipse to provide an interface to the users.
 Requirements listed under ``should-have'' are important, but not required for
 a working product.
 
-\paragraph{Ability to redefine identifiers} As explained in \cref{ssec:repl-functionality},
+\paragraph{Ability to redefine identifiers} As explained in \cref{ssec:a-repl-functionality},
 REPLs provide the ability to explore unknown problem domains. It is not a
 far-fetched idea that a developer would want to change function implementations
 or the types of certain variables. To support this, a REPL should allow users to
@@ -141,7 +141,7 @@ between this feature and the previously mentioned environment inspection is that
 this feature works per variable.
 
 \paragraph{Literate programming} As explained in
-\cref{sec:literate-programming}, literate programming offers the advantage that
+\cref{sec:a-literate-programming}, literate programming offers the advantage that
 code and documentation go hand in hand. This allows developers of languages in
 Spoofax to document and illustrate their language simultaneously with the
 development: documentation and examples can never be outdated, because outdated
@@ -164,7 +164,7 @@ the scope of this project and thus offering debugging capabilities inside
 the REPL is something to consider for a later version.
 
 \subsection{Minimal viable product}
-\label{ssec:mvp}
+\label{ssec:a-mvp}
 
 The design goals and requirements listed in the previous subsections give a good
 idea of what the deliverable should look like. It is possible, however, that due
