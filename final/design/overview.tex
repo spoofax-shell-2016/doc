@@ -1,28 +1,28 @@
 \section{Overview}
 \label{sec:overview}
 
-As stated in \cref{ssec:goals} one of the design goals during the project was
-to keep the implementation of the REPL IDE-agnostic. To achieve this goal the
-product has been split into several individual modules, most notably one
-reusable core module. This core module then interacts with the Spoofax services
-on behalf of the client. An overview of its design can be found in
-\cref{fig:uml-overview}. To request and receive results from the core module
-every client should at least implement the ``IResultVisitor'' interface in the
-``client'' package of the core module and acquire an instance of a class
-implementing the ``ICommandInvoker'' interface.
+As stated in \cref{ssec:goals}, one of the design goals during the project was
+to keep the implementation of the REPL IDE-agnostic. To achieve this goal, the
+product has been split into a backend and several frontends. This backend
+interacts with the Spoofax services on behalf of the frontends. An overview of
+its design can be found in \cref{fig:uml-overview}. To request and receive
+results from the backend, every frontend should at least implement the
+\texttt{``IResultVisitor''} interface in the \texttt{``client''} package and
+acquire an instance of a class implementing the \texttt{``ICommandInvoker''}
+interface.
 
-The ``ICommandInvoker'' instance maintains a map from command names to
-corresponding ``IReplCommand'' instances. A client can thus send input directly
-to the execute method, after which the command corresponding with the input
-will be resolved and executed. The executed command will return an instance of
-a class implementing the ``IResult'' interface. The actual type of the returned
-class depends on the executed command and whether the command was successful or
-not. The client is itself responsible for deciding how to present the various
-result types to the user.
+The \texttt{``ICommandInvoker''} instance maintains a map from command names to
+corresponding \texttt{``IReplCommand''} instances. A frontend can thus send
+input directly to the \texttt{execute} method, after which the command
+corresponding to the input will be resolved and executed. The executed command
+will return an instance of a class implementing the \texttt{``IResult''}
+interface. The actual type of the returned class depends on the executed command
+and whether the command was successful or not. The frontend is itself
+responsible for deciding how to present the various result types to the user.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.75\textwidth]{uml-overview}
-  \caption{An overview of the most relevant components of the product.}
+  \caption{An overview of the most relevant components of the backend.}
   \label{fig:uml-overview}
 \end{figure}
