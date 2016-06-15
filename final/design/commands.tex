@@ -19,10 +19,15 @@ by default:
   \label{fig:uml-commands}
 \end{figure}
 
-The client can define additional commands by implementing the ``IReplCommand''
+Every command returns an instance of a class implementing the ``IResult''
+interface. The type of the returned class depends on the executed command and
+whether the command was successful or not. The result classes will be explained
+in more depth in \cref{sec:visitor}.
+
+Clients can define additional commands by implementing the ``IReplCommand''
 interface. These commands can then be made available to the invoker by either
-binding them in the default map of available commands in a guice module or by
-adding the entry to the invoker at runtime using the ``addCommand'' method.
+binding them in the default map of available commands via a guice module or by
+adding an entry to the invoker at runtime using the ``addCommand'' method.
 
 As explained in the introduction of \cref{cha:design}, there are almost no
 commands that work across all languages, since every language can define its
