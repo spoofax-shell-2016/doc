@@ -1,0 +1,60 @@
+\chapter{Project Infosheet}
+\label{cha:infosheet}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+
+\textbf{Title of the project:} Spoofax Shell\\
+\textbf{Name of the client organization:} SLDE group, Delft University of Technology\\
+\textbf{Date of the final presentation:} July 1st, 2016\\
+\textbf{Description:} Create a command-line shell interface for the Spoofax
+Language Workbench\\
+
+The TU Delft SLDE group conducts research into concepts and techniques for
+programming language design and implementation. The flagship product of the
+group is the Spoofax Language Workbench.
+
+The deliverable for this project was to create a REPL for the Spoofax Language
+Workbench. The challenge was to figure out how such a REPL fits within the larger
+context of Spoofax. In order to integrate the REPL, the students not only had
+to learn what Spoofax is and how it works, but also how it is build and how the
+different parts fit together. The existing architecture of Spoofax directed the
+architecture of the product.
+
+The development process was managed with the Scrum software development
+framework. The source code was managed using Git, using the pull-based
+development methodology.
+
+The largest unexpected challenge faced during the project is the rewrite DynSem
+halfway through the project. This new version of DynSem did not expose the
+required functionality for a REPL. Collaborating with its developer, these
+features were implemented over the course of two weeks.
+
+The delivered product consists of a backend, providing a means of parsing,
+analyzing and evaluating expressions using Spoofax's services. Two frontends
+were delivered: one running in the console and the other inside the Eclipse IDE.
+Both the frontends and the backend are tested with unit- and integration tests.
+
+TODO: Outlook: Describe the outlook of the product. Did the team make recommendations to the 
+client? (if so, briefly summarize) Will the product be used?\\
+
+\noindent\textbf{Members of the project team}\\
+\textbf{Gerlof Fokkema}\\
+\textbf{Jente Hidskes' }interests are Operating Systems and programming
+languages. Jente mainly worked on the frontends of the REPL.\\
+\textbf{Skip Lentz}\\
+
+\noindent All team members contributed to the reports and the final
+presentation.\\
+
+\noindent\textbf{Client:} Eelco Visser, SLDE group TU Delft\\
+\textbf{Coach:} Hendrik van Antwerpen, SLDE group TU Delft\\
+\textbf{Contact:}
+\href{mailto:gerlof.fokkema@gmail.com}{gerlof.fokkema@gmail.com},
+\href{mailto:hjdskes@gmail.com}{hjdskes@gmail.com},
+\href{mailto:skippetie@gmail.com}{skippetie@gmail.com}\\
+
+\noindent The final report for this project can be found at: \url{http://repository.tudelft.nl}.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
