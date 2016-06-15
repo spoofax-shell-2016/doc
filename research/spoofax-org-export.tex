@@ -24,33 +24,34 @@ construction course at the TU Delft. The slides can be found here:
 specification consists of the following conceptual steps:
 
 \begin{enumerate}
-\item \hyperref[sec:syntax-def]{Syntax Definition}: The first step defines what textual
+\item \hyperref[ssec:syntax-def]{Syntax Definition}: The first step defines what textual
 representations of a program are syntactically valid. A parser
 provides an implementation of this definition, by mapping a textual
 representation of a program to an abstract syntax tree (AST)
 representation. In Spoofax, the syntax is declared with a domain
 specific language (DSL) called SDF.
-\item \hyperref[sec:static-analysis]{Static Semantics}: The AST then goes through static analysis (type
+\item \hyperref[ssec:static-analysis]{Static Semantics}: The AST then goes through static analysis (type
 checking, name binding and variable scoping), to test if the
 program is well-formed. Static semantics describe the rules for the
-static analysis step. Spoofax provides two DSLs for the
-specification of this step: the TS type specification language and
+static analysis step. Spoofax provides two DSLs that can specify the two
+distinct parts of this step: the TS Type Specification language and
 the NaBL name binding language.
-\item \hyperref[sec:term-rewrite]{Term Rewriting and Program Transformation}: Optionally, a
+\item \hyperref[ssec:term-rewrite]{Term Rewriting and Program Transformation}: Optionally, a
 well-formed AST can then be transformed, for example for desugaring
 or optimization. Spoofax provides Stratego for this step.
-\item \hyperref[sec:dynamic-semantics]{Dynamic Semantics}: Next the optionally transformed AST is either
+\item \hyperref[ssec:dynamic-semantics]{Dynamic Semantics}: Next the optionally transformed AST is either
 compiled or interpreted, thereby providing a means of
 execution. Dynamic semantics define what the behaviour is of a
 program upon execution. In Spoofax, the dynamic semantics can be
 defined with either Stratego or a DSL called DynSem.
 \end{enumerate}
 
-After that, this section concludes with a discussion on the other
+This section concludes with a discussion on the other
 aspect of a language: its integrated development environment
 (IDE). Spoofax provides IDE support by means of its Editor Services.
+
 \subsection{Syntax Definition}
-\label{sec:syntax-def}
+\label{ssec:syntax-def}
 The first part of the specification of a language is its syntax. The
 syntax of a language is often specified by means of a \emph{lexical
 grammar} and a \emph{context-free grammar}, as can be seen in the
@@ -61,7 +62,7 @@ identifiers and numeric constants. The context-free grammar then
 defines syntactically valid sentences made up of words.
 
 \subsubsection{SDF3: syntax definition in Spoofax}
-\label{sec:orgheadline1}
+\label{ssec:orgheadline1}
 To specify a syntax definition declaratively in Spoofax, a DSL called
 \emph{SDF3}~\cite{Vollebregt12} is used.  SDF3 is the third generation
 of the \emph{Syntax Definition Formalism} (SDF)~\cite{Heering89}. It
@@ -78,12 +79,13 @@ AST and pretty-printers for mapping ASTs back to text. However, due to
 its declarative nature, SDF3 is not limited to generating parsers and
 pretty printers: it can also be used for error recovery
 rules~\cite{deJonge12}, syntax highlighting rules and folding
-rules for editors (see section \ref{sec:editor-serv}).
+rules for editors (see \cref{ssec:editor-serv}).
 
 The Spoofax API gives access to the generated parser through the
 \texttt{SyntaxService}.
+
 \subsubsection{AST-based rules}
-\label{sec:orgheadline2}
+\label{ssec:orgheadline2}
 The meta-languages that will be discussed in the coming sections all
 have one property in common: all of them use \emph{rules} based on the AST
 in order to specify one of the parts of a language definition. The
@@ -91,18 +93,20 @@ rules are said to be \emph{syntax-directed}: the specification for one AST
 node (whether it be a static semantics, rewriting or dynamic semantics
 specification) is done by the specification of the children of that
 AST node~\cite{Winskel93}.
+
 \subsection{Static Semantics}
-\label{sec:static-analysis}
+\label{ssec:static-analysis}
 Static semantics refer to the meaning of what a well-formed program is
 for a particular language~\cite{Milner97}. This imposes more
 constraints than syntax definition, such as name binding, scoping
 rules and type checking. These cannot be specified by a syntax
 definition alone and are thus considered separately.
+
 \subsubsection{Declarative static semantics specification in Spoofax}
-\label{sec:orgheadline3}
+\label{ssec:orgheadline3}
 In Spoofax, all the static semantics as well as the dynamic semantics
 used to be specified with the \emph{Stratego} transformation language
-(which is discussed in section \ref{sec:term-rewrite}). Nowadays, two
+(which is discussed in \cref{ssec:term-rewrite}). Nowadays, two
 high-level DSLs exist for specifying static semantics declaratively:
 NaBL and TS. The two DSLs can work together: for instance, the type of
 a variable can be set with NaBL, so that TS can be used to make
@@ -110,13 +114,14 @@ assertions on the type of that variable.
 
 The static analysis step of a language is exposed through the Spoofax
 API by the \texttt{AnalysisService}.
+
 \subsubsection{NaBL: the Name Binding Language}
-\label{sec:nabl}
+\label{ssec:nabl}
 With \emph{NaBL} (pronounced \emph{enable}), name binding and scoping can be
 specified declaratively using AST-based
-rules~\cite{KonatKWV12}. Here is an example of the name binding
+rules~\cite{KonatKWV12}. Here is an example of name binding
 and scoping rules for a class, from the \emph{paplj}
-language\footnote{paplj is used as an exercise language for the
+language.\footnote{paplj is used as an exercise language for the
 ``Declare Your Language'' book, which is a work-in-progress at the time
 of writing. More information can be found here:
 \url{https://github.com/MetaBorgCube/declare-your-language}}
@@ -142,10 +147,10 @@ referring back to the scope definition.
 
 As can be seen from line 8, it can also associate type information
 with names to interplay with TS. The type annotations can also be used
-for instance when desugaring or rewriting with Stratego (see section
-\ref{sec:term-rewrite}).
+for instance when desugaring or rewriting with Stratego (see \cref{ssec:term-rewrite}).
+
 \subsubsection{TS: the Type Specification language}
-\label{sec:orgheadline4}
+\label{ssec:orgheadline4}
 Type checking can be done by specifying typing rules with the \emph{TS}
 DSL. Again an example of the paplj language:
 \lstset{language=type-spec,numbers=left}
@@ -169,17 +174,19 @@ recursively.
 
 Again, in line 6, interplay can be seen between TS an NaBL. Here the
 type of a variable can be accessed, which is set in the NaBL
-specification (see the previous section \ref{sec:nabl}).
+specification (see the previous subsection, \cref{ssec:nabl}).
+
 \subsection{Term Rewriting and Program Transformation}
-\label{sec:term-rewrite}
+\label{ssec:term-rewrite}
 Sometimes the AST needs some form of transformation before it is to be
 compiled or executed, for example to transform it to a canonical form,
 or to perform optimizations such as constant folding. Program
 transformations are specified by \emph{term rewrite rules}: The left-hand
 side of a rule introduces a pattern (for example \(x + x\)), and the
 right-hand side specifies a replacement for it (e.g. \(2\cdot x\)).
+
 \subsubsection{Rewriting using Stratego}
-\label{sec:orgheadline5}
+\label{ssec:orgheadline5}
 Spoofax offers a DSL called \emph{Stratego} for specifying program
 transformation with rewrite rules~\cite{Visser01}. Stratego can be
 seen as the most general part of Spoofax: before NaBL and TS, Stratego
@@ -229,19 +236,21 @@ the previous section: it too uses the Stratego runtime.
 Stratego furthermore has support for \emph{native} strategies, which are
 specified in Java instead. Therefore the interface is bidirectional:
 Stratego can hook into Java, and Java can use the Stratego API.
+
 \subsection{Dynamic Semantics}
-\label{sec:dynamic-semantics}
+\label{ssec:dynamic-semantics}
 Dynamic semantics refers to how a program written in some language
 behaves~\cite{Winskel93}. There are many approaches to formally
 specify the dynamic semantics of a programming language (for an
 extensive treatment, see~\cite{Winskel93}). For this section only
 one sort of approach called \emph{operational semantics} is relevant.
+
 \subsubsection{DynSem: rule-based dynamic semantics}
 \label{ssec:dynsem}
 Aside from Stratego, the Spoofax team has developed an additional
 method to declare the dynamic semantics of a language, namely a DSL
 called \emph{DynSem}~\cite{VerguNV15}. DynSem allows for an operational
-semantics specification from which a Java-based AST interpreter can be
+semantics specification from which a Java-based AST interpreter is
 automatically generated.
 
 In DynSem, like other meta-languages in Spoofax, the dynamic semantics
@@ -255,7 +264,7 @@ parameter \(x\) with the argument \(e_2\), within the expression \(e_1\):
 (\lambda x.e_1) e_2 \rightarrow e_1[x := e_2]
 \end{equation}
 
-In a similar way, dynamic semantics can be specified in DynSem, in a
+In a similar way, dynamic semantics can be specified in DynSem using a
 syntax very similar to the formal syntax used in the literature. Take
 here the example of defining the behaviour of some boolean operators
 in paplj:
@@ -280,13 +289,14 @@ be accessed directly from Java provided that one has the AST of the
 program to interpret.
 
 \lstset{numbers=none}
+
 \subsection{Editor Services}
-\label{sec:editor-serv}
+\label{ssec:editor-serv}
 This section concludes with a brief description of editor services,
 which provide the IDE support for languages defined in
 Spoofax. Examples of such services include an outline view, menus in
-which one can bind actions to menu buttons (see figure
-\ref{fig:menu-actions}), but also syntax highlighting, syntactic code
+which one can bind actions to menu buttons (see
+\cref{fig:menu-actions}), but also syntax highlighting, syntactic code
 completion and code folding rules\footnote{More services are
 listed on the Spoofax website:
 \url{http://www.metaborg.org/spoofax/editor-services/}}.
@@ -307,7 +317,7 @@ A menu action for the paplj language defined using Spoofax. The bottom window sh
 \end{figure}
 
 Editor services are defined using a DSL, shown in the bottom window of
-figure \ref{fig:menu-actions}. In the case of menus, their actions are
+\cref{fig:menu-actions}. In the case of menus, their actions are
 specified using Stratego. Since Stratego supports native strategies,
 these actions can also be specified in Java. As such, Spoofax allows
 for defining arbitrarily complex IDE actions.
