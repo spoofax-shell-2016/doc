@@ -45,6 +45,14 @@ every client should at least implement the ``IResultVisitor'' interface in the
 ``client'' package of the core module and acquire an instance of a class
 implementing the ``ICommandInvoker'' interface.
 
+The ``ICommandInvoker'' instance maintains a map from command names to
+corresponding ``IReplCommand'' instances. A client can thus send input directly
+to the execute method, after which the command corresponding with the input
+will be resolved and executed. The executed command will return an instance of
+a class implementing the ``IResult'' interface. The actual type of the returned
+result depends on the command and on whether executing the command succeeded or
+failed.
+
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.75\textwidth]{uml-overview}
@@ -57,7 +65,19 @@ implementing the ``ICommandInvoker'' interface.
 
 To separate the implementation of user operations into logical units each user
 operation is encapsulated within a class implementing the ``IReplCommand''
-interface.
+interface. See \cref{fig:uml-commands} for the design of the commands package.
+After aquiring an invoker instance, the client has 2 commands available to him
+by default:
+
+\begin{itemize}
+  \item :load - Implemented by LanguageCommand, loads a language from a file path.
+  \item :help - Implemented by HelpCommand, prints descriptions of all available commands.
+\end{itemize}
+
+The client can define additional commands by implementing the ``IReplCommand''
+interface. These commands can then be made available to the invoker by either
+binding them in the default map of available commands in a guice module or by
+adding the entry to the invoker at runtime using the ``addCommand'' method.
 
 \begin{figure}[h]
   \centering
@@ -72,6 +92,7 @@ interface.
 \begin{figure}[h]
   \includegraphics[width=\textwidth]{unit-flow}
   \caption{Processing steps for a language }
+  \label{fig:unit-flow}
 \end{figure}
 
 \section{}
