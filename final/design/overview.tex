@@ -16,8 +16,9 @@ corresponding ``IReplCommand'' instances. A client can thus send input directly
 to the execute method, after which the command corresponding with the input
 will be resolved and executed. The executed command will return an instance of
 a class implementing the ``IResult'' interface. The actual type of the returned
-result depends on the command and on whether executing the command succeeded or
-failed.
+class depends on the executed command and whether the command was successful or
+not. The client is itself responsible for deciding how to present the various
+result types to the user.
 
 \begin{figure}[h!]
   \centering
