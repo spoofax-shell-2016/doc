@@ -157,10 +157,9 @@ reimplement a method. In this way, a REPL can be different than its host
 language, especially if the host language is a functional language that does not
 allow variables' values to change once initiated.
 
-% FIXME: shows a requirement between the lines.
-\paragraph{Error reporting} A REPL should provide the same error reporting
-capabilities as an IDE; preferably while typing input but at the very least it
-should be able to report errors during the reading and evaluation phases.
+\paragraph{Error reporting} A REPL typically has the same error reporting
+functionality as an interpreter or a compiler, meaning it prints the error
+message accompanied by the corresponding section of the source code.
 
 \paragraph{Semantic code completion} Semantic code completion is a helpful tool
 to provide an overview of the often many APIs a developer works with, adding to
