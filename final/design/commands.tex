@@ -7,15 +7,27 @@ interface. See \cref{fig:uml-commands} for the design of the commands package.
 After aquiring an invoker instance, the client has 2 commands available to him
 by default:
 
-\begin{itemize}
-  \item :load - Implemented by LanguageCommand, loads a language from a file path.
-  \item :help - Implemented by HelpCommand, prints descriptions of all available commands.
-\end{itemize}
+\begin{description}
+  \item [:load] LanguageCommand, loads a language from a file path.
+  \item [:help] HelpCommand, prints descriptions of all available commands.
+\end{description}
 
 The client can define additional commands by implementing the ``IReplCommand''
 interface. These commands can then be made available to the invoker by either
 binding them in the default map of available commands in a guice module or by
 adding the entry to the invoker at runtime using the ``addCommand'' method.
+
+As explained in the introduction of \cref{cha:design} there are almost no
+commands that work across all languages, since every language can define its
+own transformations or evaluation strategy. Therefore the LanguageCommand tries
+to determine several properties of the loaded language through its facets and
+adjusts the set of loaded commands to these properties.
+
+By splitting operations in small logical units the design ensures command
+classes adhere to the Single Responsibility principle, which makes all REPL
+commands less complex and therefore easier to maintain. The logical units that
+make up the commands also ensure a flexible design that can be modified
+as the Spoofax architecture develops further on.
 
 \begin{figure}[h]
   \centering
@@ -23,3 +35,22 @@ adding the entry to the invoker at runtime using the ``addCommand'' method.
   \caption{UML of the various commands clients can execute.}
   \label{fig:uml-commands}
 \end{figure}
+
+% FIXME: Belongs in implementation chapter probably.
+%The ``LanguageCommand'' tries to load a language using the Spoofax services.
+%When Spoofax succeeds in loading the language, the parameters set in the
+%language facets (specifically the AnalysisFacet and the ShellFacet) are used to
+%create a set of commands that should be available for this specific language
+%through the ``CommandBuilder'' class. The resulting set of commands consists of
+%the following commands:
+%
+%\begin{description}
+%  \item [:parse] Parses the given arguments and returns a corresponding AST.
+%  \item [:analyze] Performs static analysis on the input. Not available in all languages.
+%  \item [:evaluate] Evaluates the given input and returns the execution result.
+%\end{description}
+%
+%Furthermore a command is created for each transform goal specified through the
+%Spoofax MenuService. The transform commands are identified by their name as
+%specified in ESV. The process of building commands will be explained in more
+%depth in \cref{sec:function-comp}. By making all these commands
