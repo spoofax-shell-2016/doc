@@ -14,13 +14,12 @@ subsection as design goals in order of priority. The design goals serve as an
 important guideline when defining and implementing the invidual requirements. As
 such, they can be considered the bounds within which all requirements must fit.
 
-\paragraph{Language-agnostic configuration interface} The REPL should
-provide interfaces for configuration in order to allow the language
-designer to configure and implement the language-specific parts of the
-REPL. This configuration interface should be language-agnostic, in the
-sense that the REPL should be configurable for any language. Note that
-this does not mean that the REPL is expected to work out of the box
-for any language.
+\paragraph{Language-agnostic} The REPL should not make any assumptions about its
+host language: it must work with all languages defined with Spoofax. This also
+means that a language-agnostic configuration interface must be provided, in
+order to allow the language designer to configure and implement the
+language-specific parts of the REPL. Note that this does not mean that the REPL
+is expected to work out of the box for any language.
 
 \paragraph{Minimal configuration} The REPL should require as little
 configuration as possible. This means that the REPL allows the
