@@ -1,7 +1,21 @@
 \chapter{Implementation}
 \label{cha:implementation}
 
+The previous chapter described the design of the product. During the
+implementation, issues with the design surface that have not been foreseen in
+advance. This chapter discusses these issues and the changes made to the design
+to resolve them.  \Cref{sec:dynsem-eval-strategy} discusses the implementation
+of the evaluation strategy. \Cref{sec:esv-extensions} explains the extensions
+that have been made to Spoofax's Editor Services to enable the language designer
+to configure and extend the REPL for their language. \Cref{sec:injection}
+discusses the use of dependency injection via the Guice framework.
+\Cref{sec:jline-hist} discusses the implementation of the console frontend.
+Finally, \cref{sec:eclipse} discusses the implementation of the Eclipse
+frontend.
+
 \input{implementation/guice}
+
+\input{implementation/eclipse}
 
 %%% Local Variables:
 %%% mode: latex

@@ -1,0 +1,51 @@
+\section{Eclipse}
+\label{sec:eclipse}
+
+The implementation of the Eclipse plugin has been a source of exposing many
+shortcomings in the initial designs. These shortcomings and how they have been
+resolved are discussed in this section.
+
+\subsection{Single- versus multithreading}
+\label{ssec:threading}
+
+The initial design assumed that the frontends and the backend would run in the
+same thread. For a console based REPL, this assumption holds and greatly
+simplifies the design. However, this assumption does not hold when the backend
+has a frontend using a multithreaded graphical user interface toolkit. This
+assumption resulted in two problems, which are listed separately in the next
+sections. The solution and changes made to the design are then discussed
+afterwards.
+
+\subsubsection{Blocking- versus non-blocking input}
+
+In a multi-threaded environment, asking graphical text entry widgets for the
+entered text is rarely a blocking process. The REPL backend at the time,
+however, assumed that getting the user's input was always a blocking operation.
+Therefore, when a conceptual Eclipse frontend was made, the REPL spun into an
+infinite loop trying to execute empty expressions.
+
+\subsubsection{Blocking the UI thread}
+
+Multi-threaded graphical user interface toolkits often use multiple threads. One
+of these threads is designated the ``UI thread'', or user interface thread. This
+thread is responsible for processing events (such as mouse clicks) and updating
+the graphical representation of the widgets. All tasks that perform long running
+calculations are supposed to be run in a background thread, such that the UI
+thread is free to process incoming events. Instead, if a long running
+computation is run in the UI thread, the widgets on the screen stop responding
+to the user and the program appears to be in a frozen state.  This is exactly
+what happened when the backend assumed to be run in the same thread as the
+frontend: whilst the backend was evaluation expressions, Eclipse appeared to be
+frozen due to this evaluation taking place in the UI thread from which the
+execution was started. This issue would be even worse in case non-blocking input
+were to be used.
+
+\subsubsection{Accustoming to multi-threaded frontends}
+
+As indicated in the previous sections, the only solution to these problems is to
+allow multi-threaded frontends. 
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
