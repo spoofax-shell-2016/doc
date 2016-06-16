@@ -14,17 +14,20 @@ subsection as design goals in order of priority. The design goals serve as an
 important guideline when defining and implementing the invidual requirements. As
 such, they can be considered the bounds within which all requirements must fit.
 
-\paragraph{Language-agnostic} The REPL should not make any assumptions about its
-host language: it must work with all languages defined with Spoofax. This also
-means that a language designer should not have to do any additional work to get
-a REPL for their language. However, if required, the language designer should be
-able to provide REPL-specific configuration.
+\paragraph{Language-agnostic configuration interface} The REPL should
+provide interfaces for configuration in order to allow the language
+designer to configure and implement the language-specific parts of the
+REPL. This configuration interface should be language-agnostic, in the
+sense that the REPL should be configurable for any language. Note that
+this does not mean that the REPL is expected to work out of the box
+for any language.
 
-% FIXME: what to do with this one? We don't generate a REPL: it is always there.
-\paragraph{Autogeneration} The REPL should be automatically provided, just like
-all of Spoofax's other services. This means that providing access to the REPL
-should be integrated into Spoofax's build system and not require any additional
-steps from the user.
+\paragraph{Minimal configuration} The REPL should require as little
+configuration as possible, just like all of Spoofax's other
+services. This means that the REPL allows the language designer to
+reuse existing components of his or her language definition in the
+configuration of the REPL. Moreover, the language designer should not
+have to configure areas that can instead be derived automatically.
 
 \paragraph{Maintainability} Spoofax is an already existing, open source project
 managed by several people. When the product is delivered, these people will take
@@ -65,10 +68,11 @@ also be considered an acronym for the Minimum Usable SubseT.
 statements and expressions typed in by the user and print the results back to
 them.
 
-\paragraph{Works with any language defined in Spoofax} Every service in Spoofax operates
-from language definitions. It is evident that the REPL should work with these
-definitions if it is to fit within Spoofax. An optional feature is to allow
-language-specific configuration and language-specific commands, defined in an esv file.
+\paragraph{Works with any language defined in Spoofax} Every service
+in Spoofax operates from language definitions. It is evident that the
+REPL should work with these definitions if it is to fit within
+Spoofax. As for the parts of the REPL that do require configuration,
+the REPL should provide a flexible and generic interface for that.
 
 \paragraph{Input history} Users should be able to retrieve previously
 typed expressions and statements to support the explorative and interactive
@@ -183,5 +187,5 @@ two design goals.
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "main"
+%%% TeX-master: "../main"
 %%% End:
