@@ -82,24 +82,18 @@ nature of a REPL.
 previously yielded results should be implicitly bound to automatically generated
 identifiers to make their values available in future expressions.
 
-% FIXME: what to do with the explanation here? Personally I think it should just
-% say that multiline input should be available.
-\paragraph{Multiline input editing} Multiline input editing is a crucial feature
-for user satisfaction. The input editor should start in single line editing mode
-and recognise when an expression or statement is part of a multiline
-construction. When it recognises this, it should automatically switch to its
-multiline input editing mode, wherein the prompt character indicates this new
-mode. This mode's behavior (e.g. keyboard shortcuts) is different from the
-single line editing mode.
+\paragraph{Multiline input editing} Multiline input editing is a
+crucial feature for user satisfaction. The user should be able to
+enter expressions spanning multiple lines.
 
-% TODO: expand and say that analysis/interpreter errors should be printed, as
-% opposed to only interpreter errors?
-\paragraph{Error reporting} To support the interactivity of the REPL, error
-reporting should be available in two ways: while typing an expression or a
-statement, on-the-fly error reporting should indicate wrongly typed items. The
-interpreter that evaluates syntactically correct input should also be able to
-display its error messages to the user in case of an error during the dynamic
-semantics phase.
+\paragraph{Error reporting} To support the interactivity of the REPL,
+error reporting should be available in two ways: reporting errors
+while typing an expression and reporting errors after entering the
+expression. While typing a statement, on-the-fly error reporting
+should indicate wrongly typed parts of the statement. After entering
+the statement, any errors that occurred in the execution pipeline
+should be displayed, whether they are parse errors, errors found
+during static analysis and evaluation errors.
 
 \paragraph{Syntax checked expressions} Supporting the above requirement, all
 input should have its syntax checked on the fly.
@@ -175,8 +169,6 @@ the REPL is something to consider for a later version.
 \subsection{Minimal viable product}
 \label{ssec:mvp}
 
-% FIXME: if we remove the second design goal, this section needs to updated
-% accordingly.
 The design goals and requirements listed in the previous subsections give a good
 idea of what the deliverable should look like. It is possible, however, that due
 to unforeseen problems, not all the listed requirements and design goals can be
