@@ -1348,18 +1348,6 @@ m2=1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1274</x>
-      <y>1169</y>
-      <w>91</w>
-      <h>28</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;enum&gt;&gt;
-AnsiColors</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
       <x>546</x>
       <y>805</y>
       <w>91</w>
