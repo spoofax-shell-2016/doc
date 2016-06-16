@@ -30,39 +30,45 @@ the specification of each language aspect\footnote{This section follows the
   structure of the language specification portion of the compiler construction
   course at the TU Delft. The slides can be found here:
   \url{http://tudelft-in4303.github.io/lectures/specification/}.}. A language
-commonly consists of the following aspects, also shown in
-\cref{fig:spoofax-relations}, which will be discussed in more detail throughout
-the rest of this section:
+commonly consists of the following aspects, shown also in
+\cref{fig:spoofax-relations}, of which a selection will be discussed in more
+detail throughout the rest of this section:
 
 \begin{enumerate}
-\item \hyperref[ssec:syntax-def]{Syntax Definition}: The first aspect concerns
-  what textual representations of a program are syntactically valid. Its
-  specification consists of a grammar specified with context-free grammar
-  productions. A parser provides an implementation of this specification, by
-  mapping a textual representation of a program to an abstract syntax tree (AST)
-  representation. In Spoofax, the syntax is declared with a domain specific
-  language (DSL) called SDF.
-\item \hyperref[ssec:static-analysis]{Static Semantics}: A parsed AST then
-  optionally goes through static analysis (type checking, name binding and
-  variable scoping), to test if the program is well-formed. Static analysis is
-  the implementation of an aspect called \textit{static semantics}. The static
-  semantics of a language can be formally specified by \textit{type and/or name
-    binding rules}. Spoofax provides two DSLs that can specify the two distinct
-  parts of the specification: the TS Type Specification language and the NaBL
-  name binding language.
-\item \hyperref[ssec:term-rewrite]{Term Rewriting and Program Transformation}:
-  Optionally, a well-formed AST can then be transformed, for example for
-  desugaring or optimization. This execution step falls under the aspect of
-  \textit{program transformation}. It can be formally specified by \textit{term
-    rewrite rules}. For the specification of this aspect, Spoofax provides a DSL
-  called Stratego.
-\item \hyperref[ssec:dynamic-semantics]{Dynamic Semantics}: Next the optionally
-  transformed AST is either compiled or interpreted, thereby providing a means
-  of execution. The aspect of \textit{dynamic semantics} defines what the
-  behaviour is of a program upon execution. The formal specification of this
-  aspect can be done with \textit{reduction rules}, although there are other
-  ways to accomplish this. In Spoofax, the dynamic semantics can be defined with
-  either Stratego or a DSL called DynSem.
+\item \textbf{\hyperref[ssec:syntax-def]{Syntax Definition}:} The first aspect
+  concerns what textual representations of a program are syntactically
+  valid. Its specification consists of a grammar specified with context-free
+  grammar productions. A parser provides an implementation of this
+  specification, by mapping a textual representation of a program to an abstract
+  syntax tree (AST) representation. In Spoofax, the syntax is declared with a
+  domain specific language (DSL) called SDF.
+\item \textbf{Static Semantics:} A parsed AST then optionally goes through
+  static analysis (type checking, name binding and variable scoping), to test if
+  the program is well-formed. Static analysis is the implementation of an aspect
+  called \textit{static semantics}. The static semantics of a language can be
+  formally specified by \textit{type and/or name binding rules}. Spoofax
+  provides two DSLs that can specify the two distinct parts of the
+  specification: the TS Type Specification language and the NaBL name binding
+  language.
+
+  This language aspect will not be discussed in this section. However, the
+  original research report contains a section that does discuss this aspect, and
+  can be found in \cref{ssec:a-static-analysis}.
+\item \textbf{Term Rewriting or Program Transformation:} Optionally, a
+  well-formed AST can then be transformed, for example for desugaring or
+  optimization. This execution step falls under the aspect of \textit{term
+    rewriting} and can be formally specified by \textit{term rewrite rules}. For
+  the specification of this aspect, Spoofax provides a DSL called Stratego.
+
+  This aspect, too, will not be discussed in this section. The relevant section
+  in the research report can be found in \cref{ssec:a-term-rewrite}.
+\item \textbf{\hyperref[ssec:dynamic-semantics]{Dynamic Semantics}:} Next the
+  optionally transformed AST is either compiled or interpreted, thereby
+  providing a means of execution. The aspect of \textit{dynamic semantics}
+  defines what the behaviour is of a program upon execution. The formal
+  specification of this aspect can be done with \textit{reduction rules},
+  although there are other ways to accomplish this. In Spoofax, the dynamic
+  semantics can be defined with either Stratego or a DSL called DynSem.
 \end{enumerate}
 
 \begin{figure}[t]
@@ -121,149 +127,6 @@ rules are said to be \emph{syntax-directed}: the specification for one AST
 node (whether it be a static semantics, rewriting or dynamic semantics
 specification) is done by the specification of the children of that
 AST node~\cite{Winskel93}.
-
-\subsection{Static Semantics}
-\label{ssec:static-analysis}
-Static semantics refer to the meaning of what a well-formed program is
-for a particular language~\cite{Milner97}. This imposes more
-constraints than syntax definition, such as name binding, scoping
-rules and type checking. These cannot be specified by a syntax
-definition alone and are thus considered separately.
-
-\subsubsection{Declarative static semantics specification in Spoofax}
-\label{ssec:orgheadline3}
-In Spoofax, all the static semantics as well as the dynamic semantics
-used to be specified with the \emph{Stratego} transformation language
-(which is discussed in \cref{ssec:term-rewrite}). Nowadays, two
-high-level DSLs exist for specifying static semantics declaratively:
-NaBL and TS. The two DSLs can work together: for instance, the type of
-a variable can be set with NaBL, so that TS can be used to make
-assertions on the type of that variable.
-
-The static analysis step of a language is exposed through the Spoofax
-API by the \texttt{AnalysisService}.
-
-\subsubsection{NaBL: the Name Binding Language}
-\label{ssec:nabl}
-With \emph{NaBL} (pronounced \emph{enable}), name binding and scoping can be
-specified declaratively using AST-based
-rules~\cite{KonatKWV12}. Here is an example of name binding
-and scoping rules for a class, from the \emph{paplj}
-language.\footnote{paplj is used as an exercise language for the
-``Declare Your Language'' book, which is a work-in-progress at the time
-of writing. More information can be found here:
-\url{https://github.com/MetaBorgCube/declare-your-language}}
-\lstset{language=nabl,numbers=left}
-\begin{lstlisting}
-namespaces Program Class Field Method Variable
-// ...
-binding rules
-  Class(c, _, _, _) :
-    defines Class c of type ClassT(c)
-    // Declare new scope
-    scopes Field, Method, Variable
-    implicitly defines Variable This() of type ClassT(c)
-
-  Extends(c) :
-    // Import namespaces from superclass
-    imports Field, Method from Class c
-\end{lstlisting}
-The most important concept to take away from this example is the way
-the rules are specified on the AST: new scopes for names can be
-defined on the level of an AST node, and can be imported again by
-referring back to the scope definition.
-
-As can be seen from line 8, it can also associate type information
-with names to interplay with TS. The type annotations can also be used
-for instance when desugaring or rewriting with Stratego (see \cref{ssec:term-rewrite}).
-
-\subsubsection{TS: the Type Specification language}
-\label{ssec:orgheadline4}
-Type checking can be done by specifying typing rules with the \emph{TS}
-DSL. Again an example of the paplj language:
-\lstset{language=type-spec,numbers=left}
-\begin{lstlisting}
-type rules
-  Class(c1, Extends(c2), _, _) :-
-    where store ClassT(c1) <sub: ClassT(c2)
-
-  x@This() : t
-    where definition of x : t
-// ...
-type rules
-  Add(e1, e2) : NumT()
-    where e1 : NumT() else error "number expected" on e1
-      and e2 : NumT() else error "number expected" on e2
-\end{lstlisting}
-This example shows how in TS, the rules are syntax-directed: The
-typing rule of the \texttt{Add} node is specified by the types of its
-children \(e_1\) and \(e_2\), on which the typing rules will be applied
-recursively.
-
-Again, in line 6, interplay can be seen between TS an NaBL. Here the
-type of a variable can be accessed, which is set in the NaBL
-specification (see the previous subsection, \cref{ssec:nabl}).
-
-\subsection{Term Rewriting and Program Transformation}
-\label{ssec:term-rewrite}
-Sometimes the AST needs some form of transformation before it is to be
-compiled or executed, for example to transform it to a canonical form,
-or to perform optimizations such as constant folding. Program
-transformations are specified by \emph{term rewrite rules}: The left-hand
-side of a rule introduces a pattern (for example \(x + x\)), and the
-right-hand side specifies a replacement for it (e.g. \(2\cdot x\)).
-
-\subsubsection{Rewriting using Stratego}
-\label{ssec:orgheadline5}
-Spoofax offers a DSL called \emph{Stratego} for specifying program
-transformation with rewrite rules~\cite{Visser01}. Stratego can be
-seen as the most general part of Spoofax: before NaBL and TS, Stratego
-was used for specifying the static semantics. Moreover, being a
-program transformation language, it can also serve as a compiler and
-can thus be used to specify the dynamic semantics.
-
-An example of a rewrite rule for the paplj language is given below.
-\lstset{language=stratego,numbers=left}
-\begin{lstlisting}
-rules
-  desugar-let :
-  	Let([], e) -> e
-
-  desugar-let :
-  	Let([b1, b2 | bs], e) -> Let([b1], Let([b2 | bs], e))
-\end{lstlisting}
-This desugars a \texttt{let} expression with multiple bindings into multiple
-nested \texttt{let} expressions each having just one binding. Again it can be
-seen that these are syntax-directed rules, from the way the rules are
-specified using the AST.
-
-To construct the main algorithm of the program transformation,
-Stratego has the notion of \emph{strategies}. A strategy is used to specify
-where and in what order the rewrite rules are applied to an
-AST. Another example from paplj is given below:
-\lstset{language=stratego,numbers=left}
-\begin{lstlisting}
-strategies
-  pre-desugar =
-    innermost(desugar-let <+ desugar-do)
-
-  post-desugar =
-    innermost(desugar-do <+ desugar-get <+ desugar-set);
-    resugar
-\end{lstlisting}
-The strategy \texttt{innermost} in this example is used to apply the strategy
-given as parameter (a composition of rewrite rules) in a specific
-traversal order on the AST nodes.
-
-The Spoofax API provides the \texttt{TranformService} for performing program
-transformation. Internally the \texttt{TransformService} accesses the
-Stratego runtime, which is retrieved from the
-\texttt{StrategoRuntimeService}. The same holds for the \texttt{AnalysisService} of
-the previous section: it too uses the Stratego runtime.
-
-Stratego furthermore has support for \emph{native} strategies, which are
-specified in Java instead. Therefore the interface is bidirectional:
-Stratego can hook into Java, and Java can use the Stratego API.
 
 \subsection{Dynamic Semantics}
 \label{ssec:dynamic-semantics}
