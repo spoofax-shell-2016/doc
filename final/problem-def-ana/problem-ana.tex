@@ -6,15 +6,14 @@ are expected and that will have to be solved while incorporating a
 REPL within the larger context of Spoofax.
 
 The general theme of the sub-problems that arise from the problem
-defined in the previous section, is that they are about an aspect of
-the REPL that should work with any language defined with
-Spoofax. Languages differ in what properties they have and how they
-are specified. For example, a functional programming language with no
-mutability is specified very differently from an imperative and
-mutable programming language. Finding a generic way to make the REPL
-work for all of these languages, without any configuration from the
-part of the language designer, is hard, and maybe not even
-possible.
+defined in the previous section, is that the REPL that should work
+with any language defined with Spoofax. Languages differ in what
+properties they have and how they are specified. For example, a
+functional programming language with no mutability is specified very
+differently from an imperative and mutable programming
+language. Finding a generic way to make the REPL work for all of these
+languages, without any configuration from the part of the language
+designer, is hard, and maybe not even possible.
 
 The general solution to many of the problems is to identify which
 parts of the problem can be solved generically, and which parts
@@ -24,11 +23,11 @@ language designer enough flexibility to do the configuration with the
 least amount of hassle as possible.
 
 The rest of this section analyses more concrete sub-problems and
-possible solution approaches. Each of
-\cref{sec:supp-diff-ways,sec:lang-spec-addit,sec:repl-spec-semant} of
-this section discusses a more detailed instance of this general
-problem, and explains in more detail how the general solution applies
-to that specific instance.
+possible solution. Each of
+\cref{sec:supp-diff-ways,sec:lang-spec-addit,sec:repl-spec-semant}
+discusses a more detailed instance of this general problem, and
+explains in more detail how the general solution applies to that
+specific instance.
 
 %Lastly, in \cref{sec:fitt-feat-repl}, the problem of fitting the REPL
 %within the larger scope of Spoofax is discussed.
@@ -36,26 +35,26 @@ to that specific instance.
 \subsection{Supporting different execution pipelines}
 \label{sec:supp-diff-ways}
 Different languages have different ways of executing a program in that
-language. For example, some languages have analysis step, whereas some
-do not. Moreover, specifying the dynamic semantics of a language can
-be done in multiple ways (see \cref{ssec:dynamic-semantics}): one can
-use DynSem, Stratego, and some languages even implement a Java
+language. For example, some languages have an analysis step, whereas
+some do not. Moreover, specifying the dynamic semantics of a language
+can be done in multiple ways (see \cref{ssec:dynamic-semantics}): one
+can use DynSem, Stratego, and some languages even implement a Java
 backend\footnote{See IceDust:
-  \url{https://github.com/MetaBorgCube/IceDust}}.% TODO: Java-backend example requires a cite?
+  \url{https://github.com/MetaBorgCube/IceDust}}.
 
 Some of these properties of a language should be detected by the REPL
 automatically, such as detecting whether a language has an analysis
 step.
 
-However, for some other properties of the language, they cannot be
-found automatically. For example, the REPL should be able to maintain
-an execution environment for the duration of the REPL session. But
+Other properties of a language, however, cannot be detected
+automatically. For example, the REPL should be able to maintain an
+execution environment for the duration of the REPL session, but
 precisely what an execution environment looks like differs among
 languages. This is therefore an area where the language designer
-should configure the REPL so that it does the evaluation as he or she
-wants. To accommodate for this, the REPL should provide a
-configuration interface that is generic enough, such that the REPL can
-be configured for any language.
+should configure the REPL so that it does the evaluation as they
+want. To accommodate for this, the REPL should provide a configuration
+interface that is generic enough, such that the REPL can be configured
+for any language.
 
 \subsection{Language-specific additional commands}
 \label{sec:lang-spec-addit}
