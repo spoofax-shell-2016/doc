@@ -24,7 +24,7 @@ least amount of hassle as possible.
 
 The rest of this section analyses more concrete sub-problems and
 possible solution. Each of
-\cref{sec:supp-diff-ways,sec:lang-spec-addit,sec:repl-spec-semant}
+\cref{ssec:supp-diff-ways,ssec:lang-spec-addit,ssec:repl-spec-semant}
 discusses a more detailed instance of this general problem, and
 explains in more detail how the general solution applies to that
 specific instance.
@@ -33,7 +33,7 @@ specific instance.
 %within the larger scope of Spoofax is discussed.
 
 \subsection{Supporting different execution pipelines}
-\label{sec:supp-diff-ways}
+\label{ssec:supp-diff-ways}
 Different languages have different ways of executing a program in that
 language. For example, some languages have an analysis step, whereas
 some do not. Moreover, specifying the dynamic semantics of a language
@@ -57,7 +57,7 @@ interface that is generic enough, such that the REPL can be configured
 for any language.
 
 \subsection{Language-specific additional commands}
-\label{sec:lang-spec-addit}
+\label{ssec:lang-spec-addit}
 Another problem is when some additional command can be useful for a
 REPL of a particular language, but would not make any sense within the
 context of other languages. For example, some languages such as Python
@@ -81,7 +81,7 @@ such as ``Run'' to run a program, one may then even bind the
 ``load-file'' command to an action.
 
 \subsection{REPL-specific semantics}
-\label{sec:repl-spec-semant}
+\label{ssec:repl-spec-semant}
 Sometimes a property of some language stands in the way of the rapid
 prototyping capabilities that are desirable for a REPL. For example, a
 language like Haskell does not allow for redefining a function's
