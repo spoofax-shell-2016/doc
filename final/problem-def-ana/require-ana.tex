@@ -25,7 +25,7 @@ for any language.
 \paragraph{Minimal configuration} The REPL should require as little
 configuration as possible. This means that the REPL allows the
 language designer to reuse existing components of their language
-definition in the configuration of the REPL. Moreover, the language
+definition in its configuration. Moreover, the language
 designer should not have to configure areas of the REPL that can
 instead be derived automatically.
 
@@ -93,7 +93,7 @@ expression. While typing a statement, on-the-fly error reporting
 should indicate wrongly typed parts of the statement. After entering
 the statement, any errors that occurred in the execution pipeline
 should be displayed, whether they are parse errors, errors found
-during static analysis and evaluation errors.
+during static analysis or evaluation errors.
 
 \paragraph{Syntax checked expressions} Supporting the above requirement, all
 input should have its syntax checked on the fly.
