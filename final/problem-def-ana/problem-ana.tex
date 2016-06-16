@@ -1,121 +1,110 @@
 \section{Problem Analysis}
 \label{sec:problem-analysis}
-This section gives an analysis of the problem defined in the previous section.
-More specifically, this section describes the problems that are expected and
-that will have to be solved while incorporating a REPL
-within the larger context of Spoofax.
+This section gives an analysis of the problem defined in the previous
+section. More specifically, this section describes the problems that
+are expected and that will have to be solved while incorporating a
+REPL within the larger context of Spoofax.
 
-A language can have many different language constructs. The REPL for Spoofax,
-however, should not be constrained to any particular language constructs.
-Rather, it should operate on any defined language. For this reason the
-implementation and particularly the interaction with the user needs to be
-carefully considered.
+The general theme of the sub-problems that arise from the problem
+defined in the previous section, is that the REPL that should work
+with any language defined with Spoofax. Languages differ in what
+properties they have and how they are specified. For example, a
+functional programming language with no mutability is specified very
+differently from an imperative and mutable programming
+language. Finding a generic way to make the REPL work for all of these
+languages, without any configuration from the part of the language
+designer, is hard, and maybe not even possible.
 
-\subsubsection{Execution model of the REPL}
-\label{ssec:execution-model-repl}
-As illustrated in \cref{ssec:execution-model}, a major difference in the
-execution model of a non-interactive interpreter and a REPL is concerned with
-what an indivisable unit of execution is. The build process as implemented in
-Eclipse uses a ``BuildInputBuilder'' to transform and build a (valid) program
-as a whole. While this is quite a convenient way to quickly create a compiled
-program; for a REPL to really offer an interactive experience to the user, the
-REPL should be able to execute smaller units of work than a complete program.
+The general solution to many of the problems is to identify which
+parts of the problem can be solved generically, and which parts
+warrant configuration by the language designer. When the REPL requires
+configuration by the language designer, the REPL should give the
+language designer enough flexibility to do the configuration with the
+least amount of hassle as possible.
 
-An example implementation that solves this problem is the Java Shell (JShell)
-REPL~\cite{jshell-repl} currently under development for OpenJDK. The OpenJDK
-team introduces a concept called ``wrapping'' to achieve this: \textit{``if X
-is an input that JShell accepts (as opposed to rejects with error) then there
-is an A and B such that AXB is a valid program in the Java programming
-language.''}. More specifically, this says that when a user types in an
-expression like \texttt{int x = 2 + 2;}, JShell generates the surrounding class and
-method body needed for this expression to be valid.
+The rest of this section analyses more concrete sub-problems and
+possible solution. Each of
+\cref{sec:supp-diff-ways,sec:lang-spec-addit,sec:repl-spec-semant}
+discusses a more detailed instance of this general problem, and
+explains in more detail how the general solution applies to that
+specific instance.
 
-This technique cannot be directly applied to Spoofax, since the language
-constructs needed to sucessfully ``wrap'' other constructs are not known in
-advance. A first approach to solve this problem could be to require that the
-language designer provides a program template in an esv file, in which they can
-indicate the various types of language constructs that are valid from within
-the REPL and where they would be inserted in this template. The REPL should
-then be able to distinguish the language constructs defined in the esv file as
-the user types them in. A template for a complete paplj program could look
-like this:
-\begin{lstlisting}
-program
-  $classes
-run
-  $expressions
-\end{lstlisting}
+%Lastly, in \cref{sec:fitt-feat-repl}, the problem of fitting the REPL
+%within the larger scope of Spoofax is discussed.
 
-The illustrated solution could later be extended to eliminate the need for
-manual specification, by reusing the SDF syntax definitions for the language:
-given a partial program as typed in by the user, the REPL should then try to
-determine whether it is valid somewhere within some syntactically valid AST
-resulting from the language definition. By doing a breadth-first search,
-starting from the context-free start symbols of the language, the REPL could
-prepend symbols from the syntax definition until the program is valid.
+\subsection{Supporting different execution pipelines}
+\label{sec:supp-diff-ways}
+Different languages have different ways of executing a program in that
+language. For example, some languages have an analysis step, whereas
+some do not. Moreover, specifying the dynamic semantics of a language
+can be done in multiple ways (see \cref{ssec:dynamic-semantics}): one
+can use DynSem, Stratego, and some languages even implement a Java
+backend\footnote{See IceDust:
+  \url{https://github.com/MetaBorgCube/IceDust}}.
 
-When a compiler or an interpreter is invoked, the program is a complete and
-static unit of source code that will not change during execution. In contrast,
-when a REPL is invoked, often the user wants to alter or add code to previously
-executed expressions. This means the REPL needs to form ``programs'' in memory
-by combining all the entered expressions.  Thus the REPL should have a way of
-combining previously entered expressions to form a program. JShell does this by
-keeping the wrapped source and generated class files in memory and importing
-previously defined classes~\cite{jshell-repl}. The concept of imports is
-however very language specific and it cannot be assumed to exist.  Therefore,
-another way of combining entered expressions into one program needs to be
-found.
+Some of these properties of a language should be detected by the REPL
+automatically, such as detecting whether a language has an analysis
+step.
 
-\subsubsection{Detecting unfinished expressions for multiline editing}
-\label{sec:detect-unfin-expr}
-To support multiline editing, the REPL should detect that the
-expression or statement is unfinished when the user presses the
-``Return'' key for the next line, instead of trying to parse and
-execute it. An obvious part of Spoofax that is relevant for this
-problem, is the syntax definition in SDF3 (see
-\cref{ssec:orgheadline1}).
+Other properties of a language, however, cannot be detected
+automatically. For example, the REPL should be able to maintain an
+execution environment for the duration of the REPL session, but
+precisely what an execution environment looks like differs among
+languages. This is therefore an area where the language designer
+should configure the REPL so that it does the evaluation as they
+want. To accommodate for this, the REPL should provide a configuration
+interface that is generic enough, such that the REPL can be configured
+for any language.
 
-\subsubsection{Language specific additional commands}
+\subsection{Language-specific additional commands}
 \label{sec:lang-spec-addit}
 Another problem is when some additional command can be useful for a
 REPL of a particular language, but would not make any sense within the
 context of other languages. For example, some languages such as Python
-allow for loading a file, which brings all of the definitions inside
-of it into scope. An additional command to load a file could in that
-case be useful, but would not make any sense in languages that have no
-concept of definitions that can be imported.
+allow for loading modules, which brings all of the definitions inside
+of these modules into scope. An additional command to load a module
+could in that case be useful, but would not make any sense in
+languages that have no concept of definitions that can be imported.
 
 This problem could be solved by the language designer by extending
 their language with reflective capabilities. However, the language
 designer might not want to extend the language with reflective
-capabilities outside of the context of a REPL, for example when the
-language is a DSL. It is clear therefore that a different approach
-should be considered.
+capabilities outside of the context of a REPL. It is clear therefore
+that a different approach should be considered.
 
-One possible solution is to allow for language specific configurations
-that are loaded with the language definition of that language. This
-can be done by extending the editor services discussed in
-\cref{ssec:editor-serv} with REPL commands: similar to menu actions,
-where one can define menu button ``Run'' to run a program, one may
-define a ``load-file'' command and bind it to an action.
+One possible solution is to allow for configurations of
+language-specific commands, that are loaded with the language
+definition of that language. This can be done by extending the editor
+services discussed in \cref{ssec:editor-serv} with REPL
+commands. Similar to menu actions, where one can define menu buttons
+such as ``Run'' to run a program, one may then even bind the
+``load-file'' command to an action.
 
-\subsubsection{Redefining terms bound to names}
-\label{sec:redef-cont-bound}
-When the user is prototyping methods inside the REPL, they would
-likely want to be able to redefine that method to be of a different
-implementation. However, this poses a similar problem as in the
-previous section: for some languages it may not be possible nor
-desirable to do so outside of the context of a REPL. Thus requiring
-the language designer to extend the language with such abilities is
-again an inadequate solution.
+\subsection{REPL-specific semantics}
+\label{sec:repl-spec-semant}
+Sometimes a property of some language stands in the way of the rapid
+prototyping capabilities that are desirable for a REPL. For example, a
+language like Haskell does not allow for redefining a function's
+implementation in its normal semantics, whereas in the context of a
+REPL this is usually what one wants.
 
-One could propose the same solution as in the previous section, namely to
-define an additional command for redefining a class or method. Another possible
-and maybe more adequate solution for redefining a term bound to a name, is to
-allow the user to give the name and the new term. The name can then be used to
-find the old term, so that it can be replaced with the new one.
+This poses a similar problem as in the previous section: changing the
+language for the REPL should not affect the semantics of the language
+outside of the REPL. Therefore, requiring the language designer to
+extend the language with such abilities is again an inadequate
+solution.
+
+A proper solution for this problem is to allow the language designer
+to define a different semantics in the context of a REPL session. For
+example, in the case of a language that uses DynSem for specifying its
+dynamic semantics, the language designer can provide additional rules
+that are meant only for the REPL. Again, the REPL should provide a
+flexible configuration interface for these REPL-specific
+semantics. Another desirable property of this configuration interface
+is to allow the language designer to reuse the semantics that are
+common both in the context of a REPL session and outside of it.
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "main"
+%%% TeX-master: "../main"
 %%% End:
