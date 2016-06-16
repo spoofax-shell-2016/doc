@@ -2,23 +2,23 @@
 \label{sec:injection}
 
 The design of Spoofax relies quite heavily on dependency injection by the Guice
-framework.  To achieve as much interopability as possible the final product
-tries to use dependency injection in the same spirit as Spoofax. Guice has had
-a substantial impact on the design and implementation of the final product,
-since Guice almost completely eliminates the need to create fatories for
-complex datatypes.
+framework.  To achieve as much interopability as possible, the final product
+tries to use dependency injection in the same spirit as Spoofax. Guice has had a
+substantial impact on the design and implementation of the final product, since
+Guice nearly eliminates the need to create factories for complex datatypes.
 
 Guice requires the programmer to bind implementations of dependencies in its
 module classes, thereby separating behavior and dependency resolution.  Complex
 datatypes can then accept their dependencies as constructor arguments, allowing
 Guice to resolve and inject an instance of a bound type.
 
-In the final product dependency injection is also used to supply several
-classes with a default configuration.  An example is the default list of
-commands available to a user as described in \cref{sec:commands}.  The list of
-commands is created from a Guice module by instantiating a mapbinder with
+In the final product dependency injection is also used to supply several classes
+with a default configuration.  An example is the default list of commands
+available to a user as described in \cref{sec:commands}.  The list of commands
+is created from a Guice module by instantiating a \texttt{``MapBinder''} with
 predefined bound commands. Child modules can then append extra entries to the
-mapbinder, which directly makes them available to the existing architecture.
+\texttt{``MapBinder''}, which makes them directly available to the existing
+architecture.
 
 To conclude, the described features have made it easier to create a modular
 product, mostly centered around smaller interfaces interacting with eachother.
