@@ -913,7 +913,7 @@ layer=-1</panel_attributes>
     <panel_attributes>/&lt;&lt;FailableFunction&gt;&gt;/
 --
 +apply(input)
-+kleisliCompose(other)</panel_attributes>
++compose(other)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1344,18 +1344,6 @@ layer=-1</panel_attributes>
 m1=1
 m2=1</panel_attributes>
     <additional_attributes>120.0;60.0;120.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1274</x>
-      <y>1169</y>
-      <w>91</w>
-      <h>28</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;enum&gt;&gt;
-AnsiColors</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>

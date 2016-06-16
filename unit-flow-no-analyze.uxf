@@ -4,8 +4,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>230</x>
-      <y>320</y>
+      <x>270</x>
+      <y>440</y>
       <w>130</w>
       <h>40</h>
     </coordinates>
@@ -18,8 +18,8 @@ m1pos=-16,-20</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>320</y>
+      <x>500</x>
+      <y>440</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -31,8 +31,8 @@ m1pos=-16,-20</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>60</x>
-      <y>320</y>
+      <x>100</x>
+      <y>440</y>
       <w>80</w>
       <h>40</h>
     </coordinates>
@@ -44,50 +44,24 @@ m1pos=-18,-20</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>120</x>
-      <y>330</y>
+      <x>160</x>
+      <y>450</y>
       <w>120</w>
       <h>20</h>
     </coordinates>
-    <panel_attributes>ParseFunction
-bg=white</panel_attributes>
+    <panel_attributes>ParseFunction</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>590</x>
-      <y>330</y>
+      <x>380</x>
+      <y>450</y>
       <w>130</w>
       <h>20</h>
     </coordinates>
     <panel_attributes>EvaluateFunction
 bg=gray</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLState</id>
-    <coordinates>
-      <x>340</x>
-      <y>330</y>
-      <w>130</w>
-      <h>20</h>
-    </coordinates>
-    <panel_attributes>AnalyzeFunction
-bg=light_gray</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>460</x>
-      <y>320</y>
-      <w>150</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=-&gt;&gt;&gt;
-m1=AnalyzeResult
-m1pos=-16,-20</panel_attributes>
-    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
   </element>
 </diagram>
