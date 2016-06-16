@@ -1,57 +1,82 @@
 \section{The Spoofax Language Workbench}
 \label{sec:spoofax}
 
-Spoofax is a platform that allows for giving a completely
-\emph{declarative} definition of a programming language and accompanying
-IDE support~\cite{Kats10a}. Such a platform is called a \emph{language
-workbench}. The definition of a programming language is done using
-high-level \emph{meta-languages} for each aspect of the programming
-language.
+Spoofax is a platform that allows for giving a completely \emph{declarative}
+definition of a programming language and accompanying IDE
+support~\cite{Kats10a}. Such a platform is called a \emph{language workbench}.
 
-To define a language declaratively means that one uses the
-meta-languages to specify \emph{what} the properties of a language are, not
-\emph{how} these properties are implemented. For example, instead of asking
-\emph{​``How do I implement a tokenizer and parser for my language?''​}, one
-asks \emph{​``What is the syntax of my language?''​}. From such a description
-in a meta-language, the tokenizer and parser can be derived without
-the designer of the language ever having to care about its
-implementation.
+In discussing programming languages, it is useful to distinguish the following
+three concepts: an \textit{aspect} of a language, the formal
+\textit{specification} of that aspect, and the actual \textit{implementation} of
+that aspect, which follows from the specification. Any programming language can
+be divided into multiple distinct aspects. In \cref{fig:spoofax-relations}, four
+common aspects of programming languages are shown, along with the relation
+between the formal specification and implementation for each aspect. An example
+of an aspect is the \textit{syntax definition}: its formal specification is done
+with grammar rules, and its implementation consists of both a tokenizer and
+parser.
 
-This section goes over the aspects that come into play with the
-development of a language and how Spoofax tackles each of these
-aspects. First, the section goes over the elements that make up the
-specification of a language\footnote{This section follows
-the structure of the language specification portion of the compiler
-construction course at the TU Delft. The slides can be found here:
-\url{http://tudelft-in4303.github.io/lectures/specification/}.}. A language
-specification consists of the following conceptual steps:
+A key property of Spoofax is that it allows a language designer to give a
+complete specification of each aspect of their language, and automatically
+derive the implementation of that language aspect from its
+specification. Spoofax provides a range of high-level, declarative
+\textit{meta-languages} to the language designer for declaring their language
+specification.
+
+This section goes over the aspects that come into play with the development of a
+language and how Spoofax tackles each of these aspects with its
+meta-languages. First, the section goes over some of the elements that make up
+the specification of each language aspect\footnote{This section follows the
+  structure of the language specification portion of the compiler construction
+  course at the TU Delft. The slides can be found here:
+  \url{http://tudelft-in4303.github.io/lectures/specification/}.}. A language
+commonly consists of the following aspects, also shown in
+\cref{fig:spoofax-relations}, which will be discussed in more detail throughout
+the rest of this section:
 
 \begin{enumerate}
-\item \hyperref[ssec:syntax-def]{Syntax Definition}: The first step defines what textual
-representations of a program are syntactically valid. A parser
-provides an implementation of this definition, by mapping a textual
-representation of a program to an abstract syntax tree (AST)
-representation. In Spoofax, the syntax is declared with a domain
-specific language (DSL) called SDF.
-\item \hyperref[ssec:static-analysis]{Static Semantics}: The AST then goes through static analysis (type
-checking, name binding and variable scoping), to test if the
-program is well-formed. Static semantics describe the rules for the
-static analysis step. Spoofax provides two DSLs that can specify the two
-distinct parts of this step: the TS Type Specification language and
-the NaBL name binding language.
-\item \hyperref[ssec:term-rewrite]{Term Rewriting and Program Transformation}: Optionally, a
-well-formed AST can then be transformed, for example for desugaring
-or optimization. Spoofax provides Stratego for this step.
-\item \hyperref[ssec:dynamic-semantics]{Dynamic Semantics}: Next the optionally transformed AST is either
-compiled or interpreted, thereby providing a means of
-execution. Dynamic semantics define what the behaviour is of a
-program upon execution. In Spoofax, the dynamic semantics can be
-defined with either Stratego or a DSL called DynSem.
+\item \hyperref[ssec:syntax-def]{Syntax Definition}: The first aspect concerns
+  what textual representations of a program are syntactically valid. Its
+  specification consists of a grammar specified with context-free grammar
+  productions. A parser provides an implementation of this specification, by
+  mapping a textual representation of a program to an abstract syntax tree (AST)
+  representation. In Spoofax, the syntax is declared with a domain specific
+  language (DSL) called SDF.
+\item \hyperref[ssec:static-analysis]{Static Semantics}: A parsed AST then
+  optionally goes through static analysis (type checking, name binding and
+  variable scoping), to test if the program is well-formed. Static analysis is
+  the implementation of an aspect called \textit{static semantics}. The static
+  semantics of a language can be formally specified by \textit{type and/or name
+    binding rules}. Spoofax provides two DSLs that can specify the two distinct
+  parts of the specification: the TS Type Specification language and the NaBL
+  name binding language.
+\item \hyperref[ssec:term-rewrite]{Term Rewriting and Program Transformation}:
+  Optionally, a well-formed AST can then be transformed, for example for
+  desugaring or optimization. This execution step falls under the aspect of
+  \textit{program transformation}. It can be formally specified by \textit{term
+    rewrite rules}. For the specification of this aspect, Spoofax provides a DSL
+  called Stratego.
+\item \hyperref[ssec:dynamic-semantics]{Dynamic Semantics}: Next the optionally
+  transformed AST is either compiled or interpreted, thereby providing a means
+  of execution. The aspect of \textit{dynamic semantics} defines what the
+  behaviour is of a program upon execution. The formal specification of this
+  aspect can be done with \textit{reduction rules}, although there are other
+  ways to accomplish this. In Spoofax, the dynamic semantics can be defined with
+  either Stratego or a DSL called DynSem.
 \end{enumerate}
 
-This section concludes with a discussion on the other
-aspect of a language: its integrated development environment
-(IDE). Spoofax provides IDE support by means of its Editor Services.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{spoofax-relations}
+  \caption{The relations between the aspects, specification and implementation
+    of a programming language. The dashed boxes in the bottom row refer to that
+    step being optional.}
+  \label{fig:spoofax-relations}
+\end{figure}
+
+This section concludes with a discussion on the other part of a language: its
+integrated development environment (IDE). Spoofax provides IDE support by means
+of its Editor Services.
 
 \subsection{Syntax Definition}
 \label{ssec:syntax-def}
@@ -333,5 +358,5 @@ services provide a language with a complete and state-of-the-art IDE
 experience~\cite{Kats10a}.
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "main"
+%%% TeX-master: "../main"
 %%% End:
