@@ -66,8 +66,10 @@ detail throughout the rest of this section:
   providing a means of execution. The aspect of \textit{dynamic semantics}
   defines what the behaviour is of a program upon execution. The formal
   specification of this aspect can be done with \textit{reduction rules},
-  although there are other ways to accomplish this. In Spoofax, the dynamic
-  semantics can be defined with either Stratego or a DSL called DynSem.
+  although there are other ways to accomplish this: for example, interpretation
+  can be seen as the transformation of a program to a single value. In Spoofax,
+  the dynamic semantics can be defined with either Stratego or a DSL called
+  DynSem.
 \end{enumerate}
 
 \begin{figure}[t]
@@ -138,10 +140,12 @@ pipeline depicted in \cref{fig:spoofax-relations}.
 \subsection{Dynamic Semantics}
 \label{ssec:dynamic-semantics}
 Dynamic semantics refers to how a program written in some language
-behaves~\cite{Winskel93}. There are many approaches to formally
-specify the dynamic semantics of a programming language (for an
-extensive treatment, see~\cite{Winskel93}). For this section only
-one sort of approach called \emph{operational semantics} is relevant.
+behaves~\cite{Winskel93}. There are many approaches to formally specify the
+dynamic semantics of a programming language (for an extensive treatment,
+see~\cite{Winskel93}). One way is to specify the transformation of programs
+written in the programming language to programs of another language of which the
+dynamic semantics are already known. For this section, however, only one sort of
+approach called \emph{operational semantics} is relevant.
 
 \subsubsection{DynSem: rule-based dynamic semantics}
 \label{ssec:dynsem}
