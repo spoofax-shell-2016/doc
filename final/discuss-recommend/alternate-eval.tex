@@ -1,0 +1,25 @@
+\subsection{Adding support for alternative evaluation strategies}
+\label{sec:discuss-alternate-eval}
+
+As discussed in \cref{sec:eval-strat} Spoofax languages are not limited to a
+single interpreter, but there can be different strategies for evaluation.
+While this has been taken into account for the design of the product, only
+a DynSem evaluation strategy has been implemented in the product.
+
+Languages with a Java backend, such as IceDust%
+\footnote{https://github.com/MetaBorgCube/IceDust}, therefore do not currently
+work with our REPL. To add support for specific interpreters, a language should
+provide the REPL with a named implementation of the
+\texttt{IEvaluationStrategy}. The language designer can register additional
+evaluation strategies with the REPL by extending the Guice module of the core
+project and overriding the \texttt{bindEvalStrategies} method.
+
+\begin{lstlisting}[language=esv,caption={Setting the evaluation strategy},label={lst:eval-method}]
+module editor/SL-Shell
+
+shell
+    evaluation method : "dynsem"
+\end{lstlisting}
+
+Finally, the evaluation strategy that will be used to evaluate input terms
+can be configured via the ShellFacet ESV extensions as illustrated in \cref{lst:eval-method}.
