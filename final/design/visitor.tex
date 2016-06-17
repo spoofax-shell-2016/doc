@@ -2,21 +2,21 @@
 \label{sec:visitor}
 
 As mentioned in \cref{sec:overview}, every command implementing the
-\texttt{``IReplCommand''} interface should return an instance of a class
-implementing the \texttt{``IResult''} interface. It is up to the implementing
-frontend to determine how to display the result. Since commands can fail or
-result in an exception (see \cref{sec:function-comp}), it is not always clear
-what kind of \texttt{``IResult''} the command will return.
+\texttt{``IReplCommand''} interface returns an instance of a class implementing
+the \texttt{``IResult''} interface. It is up to the frontend to determine how to
+handle the result. Since commands can result in a failure or an exception (see
+\cref{sec:function-comp}), it is not always clear what kind of
+\texttt{``IResult''} the command will return.
 
-To illustrate this, it is certainly possible that a user tries to evaluate an
-input that passes the parsing step but fails with an exception at the analyze
-step (see \cref{fig:unit-flow}).  The expected result is an
-\texttt{``EvaluateResult''}, but because an exception was thrown the
-corresponding wrapped \texttt{``AnalyzeUnit''} cannot be created. The command
-that did the evaluation will then return a \texttt{FailOrSuccessResult}
-containing the corresponding \texttt{``ExceptionResult''} that caused the
-failure. However, the caller of the command has no way of telling that the
-returned \texttt{IResult} is in fact a \texttt{FailOrSuccessResult}.
+To illustrate this, it is possible that a user tries to evaluate an input that
+passes the parsing step but fails with an exception at the analyze step (see
+\cref{fig:unit-flow}). The expected result is an \texttt{``EvaluateResult''},
+but because an exception was thrown the corresponding wrapped
+\texttt{``AnalyzeUnit''} cannot be created. The command that did the evaluation
+will then return a \texttt{FailOrSuccessResult} containing the corresponding
+\texttt{``ExceptionResult''} that caused the failure. However, the caller of the
+command has no way of telling that the returned \texttt{IResult} is in fact a
+\texttt{FailOrSuccessResult}.
 
 \begin{figure}[t]
   \centering
@@ -37,14 +37,14 @@ Any implementers of the \texttt{IResultVisitor} can then decide per result type
 how to handle the returned information. Since all commands can always return a
 result with the original exception or the failed \texttt{``ISpoofaxResult''} by
 returning a \texttt{FailOrSuccessResult}, the frontend is always provided with
-error messages as well as the results of earlier processing steps.
+error messages or the results of earlier processing steps.
 
 The frontend has the responsibility to decide how to present the returned data
-to the user, resulting in a lot of flexibility. This flexibility is not always
-required. It is not necessary, for example, for a text-based console REPL,
-although it can be used to easily highlight errors or print stack traces. When
-integrating the REPL in multithreaded GUI toolkits, however, this flexibility is
-very useful.
+to the user, resulting in a lot of flexibility. However, this flexibility is not
+always required. It is not necessary, for example, for a text-based console
+REPL, although it can be used to easily highlight errors or print stack
+traces. When integrating the REPL in multithreaded graphical user interface
+(GUI) toolkits, however, this flexibility is very useful.
 
 %%% Local Variables:
 %%% mode: latex
