@@ -65,28 +65,33 @@ In this subsection the design goals as set out in \cref{ssec:goals} are
 discussed. Each design goal is listed below, along with an explanation as to how
 it has been met.
 
-\paragraph{Language-agnostic} This design goal stated that no assumptions should
-be made on the host language. The REPL should work for any language, without the
-language designer having to configure it. However, should the language designer
-want additional commands or language-specific configuration of the REPL, this
-should be possible.
+\paragraph{Language-agnostic} This design goal stated that the REPL should work
+for any language. Additionally, the language designer should be provided with a
+language-agnostic interface to configure and implement the language-specific
+parts of the REPL.
 
-Both the frontends and the backend place no assumptions on the language:
-everything automatically works for any language defined in Spoofax. If wanted,
-the language designer can specify REPL-specific configuration in an esv file.
-Currently, however, only DynSem-based interpreters are supported, as opposed to
-Java- and Stratego-based interpreters. Despite this, care has been taken to make
-this easily extendable. This design goal, therefore, is met.
+An extension of Spoofax's Editor Services has been created, allowing language
+designers to configure certain parts of the REPL. Additionally,
+language-specific changes, such as the ability to redefine identifiers, can be
+made through DynSem. Currently, however, only DynSem-based interpreters are
+supported, as opposed to Java- and Stratego-based interpreters. Despite this,
+care has been taken to make this easily extendable. This design goal, therefore,
+is met.
 
-\paragraph{Autogeneration} This design goal stated that the REPL should
-automatically be provided, just like all of Spoofax's other services.
+\paragraph{Minimal configuration} This design goal stated that the REPL should
+require as little configuration as possible by reusing existing components of
+the language definitions and automatically deriving other settings.
 
-The REPL exists automatically for all languages, due to it reusing the existing
-services offered by Spoofax. This means that it is automatically provided,
-without any effort at the hands of the language designer or -user. Therefore,
-this design goal is met.
+The extension of the Editor Services discussed in the previous design goal is
+minimal. Three settings can be configured at the time of writing, all of which
+have sane default settings. One additional setting is mandatory and cannot be
+derived automatically (see \cref{ssec:supp-diff-ways}): the name of the
+evaluation strategy to use. Additionally, because the existing DynSem
+specification can be reused, only a minimal amount of new DynSem rules have to
+be written to specify REPL-specific semantics. Finally, the SDF3 configuration
+is reused to specify which start symbols are valid in case the language-designer
+wants to allow different start symbols. Therefore this design goal is met.
 
-% TODO: niet echt tevreden met deze paragraaf. Suggesties?
 \paragraph{Maintainability} This design goal stated that the code should be
 maintainable, because maintainership will be transferred to the people already
 working on Spoofax.
@@ -128,8 +133,7 @@ implemented regardless. As such, this design goal is also met.
 This subsection evaluates whether the minimal viable product, as defined in
 \cref{ssec:mvp}, has been delivered. The minimal viable product has been defined
 as all the ``must have'' requirements (see \cref{ssec:requirements}), including
-the design goals of being language-agnostic and having the REPL being generated
-automatically.
+the design goals of being language-agnostic and having a minimal configuration.
 
 The previous section concluded that all the design goals have been met.
 \Cref{ssec:eval-requirements} and \cref{table:requirements} show that all the
