@@ -1,6 +1,5 @@
 \section{The Spoofax Language Workbench}
 \label{sec:spoofax}
-
 Spoofax is a platform that allows for giving a completely \emph{declarative}
 definition of a programming language and accompanying IDE
 support~\cite{Kats10a}. Such a platform is called a \emph{language workbench}.
@@ -118,15 +117,23 @@ rules for editors (see \cref{ssec:editor-serv}).
 The Spoofax API gives access to the generated parser through the
 \texttt{SyntaxService}.
 
-\subsubsection{AST-based rules}
-\label{ssec:orgheadline2}
-The meta-languages that will be discussed in the coming sections all
-have one property in common: all of them use \emph{rules} based on the AST
-in order to specify one of the parts of a language definition. The
-rules are said to be \emph{syntax-directed}: the specification for one AST
-node (whether it be a static semantics, rewriting or dynamic semantics
-specification) is done by the specification of the children of that
-AST node~\cite{Winskel93}.
+\subsubsection{ASTs in Spoofax: Stratego Terms}
+\label{sec:asts-spoof-strat}
+% TODO: Reference for Stratego terms.
+In Spoofax, an AST is represented as a Stratego term, a format representing tree
+structures that comes with a textual representation similar to formats such as
+XML. As an example, a representation of the arithmetic expression $2 + 2 - 4$ is
+shown in \cref{lst:aterm-example}.
+
+\begin{lstlisting}[caption={An example AST representation of an arithmetic
+expression},language=aterm,label={lst:aterm-example}]
+Sub(Add(Int("2"), Int("2")), Int("4"))
+\end{lstlisting}
+
+Stratego terms can however represent any tree structure, not just ASTs. As such,
+when using Spoofax programmatically through its API, one sees Stratego terms
+used as an internal representation of the data going through the execution
+pipeline depicted in \cref{fig:spoofax-relations}.
 
 \subsection{Dynamic Semantics}
 \label{ssec:dynamic-semantics}

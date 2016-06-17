@@ -2,6 +2,8 @@
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage[noabbrev]{cleveref}
+\crefname{lstlisting}{listing}{listings}
+\Crefname{lstlisting}{Listing}{Listings}
 \usepackage{todonotes}
 \presetkeys{todonotes}{inline, noline}{}
 \usepackage{caption}
@@ -86,6 +88,15 @@
   sensitive=false, % keywords are not case-sensitive
   morecomment=[l]{//}, % l is for line comment
   morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+  morestring=[b]" % defines that strings are enclosed in double quotes
+}
+\lstdefinelanguage{aterm} {
+  morekeywords={Sub,Add,Int},
+  otherkeywords={non-unique,[,]}, % {+,*,?}, % ,-,>
+  literate={...}{$\ldots$}2,
+  comment=[l]{\%\%},
+  mathescape=true,
+  sensitive=true,
   morestring=[b]" % defines that strings are enclosed in double quotes
 }
 
