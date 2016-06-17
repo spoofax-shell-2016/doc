@@ -2,21 +2,15 @@
 \label{sec:frontends}
 
 \Cref{cha:design} showed that the backend places little restrictions on the
-frontends. This is illustrated by several facts, the first being that the
-evaluation pipelines that are constructed in the backend (see
-\cref{sec:function-comp}) are lazy. This allows clients to schedule and execute
-these pipelines on different threads. Secondly, the visitor pattern (see
-\cref{sec:visitor}) allows the frontends to process the results in many
-different ways.
-
-To illustrate this flexibility, two frontends have been developed that operate
-on two different spectra: a single threaded, text-based console frontend and a
-multithreaded plugin to the Eclipse IDE. Both of these are discussed next.
+frontends. A good example of this fact is the visitor pattern (see
+\cref{sec:visitor}), which allows the frontends to schedule the processing of
+the results and to display them in many different ways.  To illustrate this
+flexibility, two frontends have been developed that operate on two different
+spectra: a single threaded, text-based console frontend and a multithreaded
+plugin to the Eclipse IDE. Both of these are discussed next.
 
 \subsection{Console REPL}
 \label{ssec:consolerepl}
-
-% TODO: add note on singlehreading and blocking input?
 
 The console REPL provides the user with a text-based user interface. For users
 already accustomed to the command line, this is perhaps the most familiar
@@ -46,12 +40,15 @@ The \texttt{read} and \texttt{print} steps are provided
 the by \texttt{TerminalUserInterface} class, which, as the name implies, is
 responsible for the user interface. This class has connections to the standard
 input, -output and -error streams. It uses JLine2 to provide a blocking input
-editor. A straightforward algorithm to provide multiline
-editing capabilities is used in combination with JLine2's input buffer, which
-JLine2 does not natively support. JLine2 does support input
-history, which means only an adapter class, \texttt{``JLine2IputHistory''} had
-to be made to interoperate with the history interface that is offered by the
-backend. An extension to this class is provided to maintain persistent history.
+editor. Because the input editor is blocking, the console REPL can run in a
+single thread, thereby greatly simplifying its implementation.
+
+A straightforward algorithm to provide multiline editing capabilities is used in
+combination with JLine2's input buffer, which JLine2 does not natively support.
+JLine2 does support input history, which means only an adapter class,
+\texttt{``JLine2IputHistory''} had to be made to interoperate with the history
+interface that is offered by the backend. An extension to this class is provided
+to maintain persistent history.
 
 To provide syntax- and error highlighting, ANSI color codes are used. These
 color codes are obtained through the \texttt{``AnsiColors''} enumeration, which
