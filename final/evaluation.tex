@@ -86,9 +86,11 @@ The extension of the Editor Services discussed in the previous design goal is
 minimal. Three settings can be configured at the time of writing, all of which
 have sane default settings. One additional setting is mandatory and cannot be
 derived automatically (see \cref{ssec:supp-diff-ways}): the name of the
-evaluation strategy to use. Additionally, the SDF3 configuration is reused to
-specify which start symbols are valid in case the language-designer wants to
-allow different start symbols. Therefore this design goal is met.
+evaluation strategy to use. Additionally, because the existing DynSem
+specification can be reused, only a minimal amount of new DynSem rules have to
+be written to specify REPL-specific semantics. Finally, the SDF3 configuration
+is reused to specify which start symbols are valid in case the language-designer
+wants to allow different start symbols. Therefore this design goal is met.
 
 \paragraph{Maintainability} This design goal stated that the code should be
 maintainable, because maintainership will be transferred to the people already
