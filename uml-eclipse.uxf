@@ -1,44 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>7</zoom_level>
+  <zoom_level>11</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>525</x>
-      <y>140</y>
-      <w>112</w>
-      <h>63</h>
+      <x>1144</x>
+      <y>429</y>
+      <w>165</w>
+      <h>55</h>
     </coordinates>
-    <panel_attributes>/&lt;&lt;IResultVisitor&gt;&gt;/
+    <panel_attributes>/&lt;&lt;IDisplay&gt;&gt;/
 --
-+visitExcception(...)
-+visitFailure(...)
-+visitMessage(...)
-+visitResult(...)</panel_attributes>
+/+displayStyledText/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>567</x>
-      <y>91</y>
-      <w>91</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-m1=1
-m2=1
-
-   result output &gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>525</x>
-      <y>49</y>
-      <w>105</w>
-      <h>49</h>
+      <x>1144</x>
+      <y>341</y>
+      <w>165</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>IRepl
 --
@@ -49,10 +31,10 @@ m2=1
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>511</x>
-      <y>28</y>
-      <w>175</w>
-      <h>224</h>
+      <x>1122</x>
+      <y>308</y>
+      <w>275</w>
+      <h>231</h>
     </coordinates>
     <panel_attributes>org.metaborg.spoofax.shell.client
 --
@@ -63,12 +45,12 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>7</x>
-      <y>28</y>
-      <w>483</w>
-      <h>210</h>
+      <x>330</x>
+      <y>242</y>
+      <w>759</w>
+      <h>330</h>
     </coordinates>
-    <panel_attributes>shell.eclipse
+    <panel_attributes>org.metaborg.spoofax.shell.client.eclipse
 --
 bg=orange
 layer=-2</panel_attributes>
@@ -77,10 +59,10 @@ layer=-2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>189</x>
-      <y>196</y>
-      <w>91</w>
-      <h>21</h>
+      <x>616</x>
+      <y>506</y>
+      <w>143</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>EclipseRepl
 </panel_attributes>
@@ -89,10 +71,10 @@ layer=-2</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>14</x>
-      <y>154</y>
-      <w>469</w>
-      <h>77</h>
+      <x>341</x>
+      <y>440</y>
+      <w>737</w>
+      <h>121</h>
     </coordinates>
     <panel_attributes>org.metaborg.spoofax.shell.client.eclipse.impl
 --
@@ -103,10 +85,10 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>35</x>
-      <y>196</y>
-      <w>91</w>
-      <h>21</h>
+      <x>374</x>
+      <y>506</y>
+      <w>143</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>EclipseEditor
 </panel_attributes>
@@ -115,10 +97,10 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>343</x>
-      <y>196</y>
-      <w>91</w>
-      <h>21</h>
+      <x>858</x>
+      <y>506</y>
+      <w>143</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>EclipseDisplay
 </panel_attributes>
@@ -127,21 +109,21 @@ layer=-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>427</x>
-      <y>175</y>
-      <w>112</w>
-      <h>42</h>
+      <x>990</x>
+      <y>451</y>
+      <w>176</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>140.0;10.0;50.0;10.0;50.0;40.0;10.0;40.0</additional_attributes>
+    <additional_attributes>140.0;10.0;50.0;10.0;50.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>70</x>
-      <y>84</y>
-      <w>196</w>
-      <h>126</h>
+      <x>429</x>
+      <y>330</y>
+      <w>308</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -151,10 +133,10 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>245</x>
-      <y>84</y>
-      <w>154</w>
-      <h>126</h>
+      <x>704</x>
+      <y>330</y>
+      <w>242</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -164,10 +146,10 @@ m2=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>14</x>
-      <y>49</y>
-      <w>469</w>
-      <h>98</h>
+      <x>341</x>
+      <y>275</y>
+      <w>737</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>org.metaborg.spoofax.shell.client.eclipse
 --
@@ -178,10 +160,10 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>35</x>
-      <y>70</y>
-      <w>91</w>
-      <h>21</h>
+      <x>374</x>
+      <y>308</y>
+      <w>143</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>Activator
 </panel_attributes>
@@ -190,10 +172,10 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>21</x>
-      <y>105</y>
-      <w>119</w>
-      <h>35</h>
+      <x>352</x>
+      <y>363</y>
+      <w>187</w>
+      <h>55</h>
     </coordinates>
     <panel_attributes>This is the entrypoint
 of the Eclipse plugin
@@ -204,10 +186,10 @@ transparency=0</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>70</x>
-      <y>84</y>
-      <w>21</w>
-      <h>35</h>
+      <x>429</x>
+      <y>330</y>
+      <w>33</w>
+      <h>55</h>
     </coordinates>
     <panel_attributes>lt=-
 </panel_attributes>
@@ -216,10 +198,10 @@ transparency=0</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
-      <y>70</y>
-      <w>91</w>
-      <h>21</h>
+      <x>847</x>
+      <y>308</y>
+      <w>143</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>ColorManager
 </panel_attributes>
@@ -228,10 +210,10 @@ transparency=0</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>196</x>
-      <y>70</y>
-      <w>91</w>
-      <h>21</h>
+      <x>627</x>
+      <y>308</y>
+      <w>143</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>ReplView
 </panel_attributes>
@@ -240,10 +222,10 @@ transparency=0</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>70</y>
-      <w>70</w>
-      <h>28</h>
+      <x>759</x>
+      <y>308</y>
+      <w>110</w>
+      <h>44</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
@@ -253,10 +235,10 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>245</x>
-      <y>84</y>
-      <w>21</w>
-      <h>126</h>
+      <x>704</x>
+      <y>330</y>
+      <w>33</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -266,10 +248,10 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>119</x>
-      <y>196</y>
-      <w>84</w>
-      <h>28</h>
+      <x>506</x>
+      <y>506</y>
+      <w>132</w>
+      <h>44</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; observes</panel_attributes>
@@ -278,21 +260,21 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>259</x>
-      <y>70</y>
-      <w>280</w>
-      <h>140</h>
+      <x>726</x>
+      <y>374</y>
+      <w>440</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>380.0;10.0;340.0;10.0;340.0;130.0;10.0;130.0;10.0;180.0</additional_attributes>
+    <additional_attributes>380.0;10.0;340.0;10.0;340.0;70.0;10.0;70.0;10.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>273</x>
-      <y>196</y>
-      <w>84</w>
-      <h>28</h>
+      <x>748</x>
+      <y>506</y>
+      <w>132</w>
+      <h>44</h>
     </coordinates>
     <panel_attributes>lt=-
 output &gt;</panel_attributes>
@@ -301,35 +283,35 @@ output &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>532</x>
-      <y>217</y>
-      <w>105</w>
-      <h>21</h>
+      <x>1144</x>
+      <y>495</y>
+      <w>165</w>
+      <h>33</h>
     </coordinates>
-    <panel_attributes>IInputHistory
+    <panel_attributes>InputHistory
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>70</x>
-      <y>210</y>
-      <w>525</w>
-      <h>56</h>
+      <x>429</x>
+      <y>517</y>
+      <w>814</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
 m2=1</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0;730.0;50.0;730.0;40.0</additional_attributes>
+    <additional_attributes>10.0;20.0;10.0;60.0;720.0;60.0;720.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>119</x>
-      <y>63</y>
-      <w>91</w>
-      <h>28</h>
+      <x>506</x>
+      <y>297</y>
+      <w>143</w>
+      <h>44</h>
     </coordinates>
     <panel_attributes>lt=-
 manages &gt;</panel_attributes>
@@ -338,10 +320,10 @@ manages &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>399</x>
-      <y>84</y>
-      <w>21</w>
-      <h>126</h>
+      <x>946</x>
+      <y>330</y>
+      <w>33</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
@@ -351,10 +333,10 @@ m2=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>504</x>
-      <y>7</y>
-      <w>189</w>
-      <h>252</h>
+      <x>1111</x>
+      <y>275</y>
+      <w>297</w>
+      <h>275</h>
     </coordinates>
     <panel_attributes>shell.core
 --
