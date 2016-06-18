@@ -47,7 +47,7 @@ interchangeably.
 
 In Lisp REPLs, therefore, arbitrary data objects yielded from a previous
 expression can be used directly as input to the next expression. In programming
-languages that do not belong to the Lisp familiy, homoiconicity is an unusual
+languages that do not belong to the Lisp family, homoiconicity is an unusual
 feature. Interactive environments for these languages therefore often require
 additional steps to read and evaluate expressions. This is part of the semantic
 differences between the different names as mentioned in the introduction
@@ -71,36 +71,41 @@ tool for programmers to learn a new programming language. REPLs are also
 combined with what is called literate programming to offer notebooks or language
 playgrounds, as discussed in \cref{sec:literate-programming}.
 
-\subsection{Execution model}
+\subsection{Execution Model}
 \label{ssec:execution-model}
 
 Every programming language defines an execution model, which specifies how
-programs written in that language are executed. Amongst others, it specifies
-what an indivisable amount of work is (a \emph{compilation unit}) and in what
-order these units are executed. The implementation of an execution model is a
-compiler and/or an interpreter, often accompanied with a runtime system to
-provide features such as garbage collection.
+programs written in that language are executed. Among others, it specifies what
+an indivisible unit of work is (a \emph{compilation unit}) and in what order
+these units are executed. The implementation of an execution model is a compiler
+and/or an interpreter. The execution model of a REPL shown in
+\cref{fig:execution-model-repl} has a couple of differences with respect to that
+of an interpreter or compiler.
 
-The execution model as implemented by a REPL differs only slightly to that of an
-interpreter or compiler. A difference might be as to what is considered an
-indivisable unit of work: a REPL might accept singular expressions that a
-regular interpreter or compiler might not. 
+One difference is what is considered an indivisible unit of work: a REPL might
+accept singular expressions that a regular interpreter or compiler might
+not. Usually the program is executed as a whole, without the need for smaller
+blocks of execution. In contrast, when using a REPL, it might be desirable to be
+able to execute say only a single statement as one unit of execution. The AST
+output of the parsing step, as shown in \cref{fig:execution-model-repl}, can
+therefore be a smaller unit than an AST found in the ordinary execution model.
 
-A compiler or an interpreter reads the files that make up a program’s source
-code, after which it will go through the steps as outlined in
-\cref{sec:spoofax}. Usually the resulting program is executed as a whole,
-without the need for smaller blocks of execution. In contrast, when using a
-REPL, it might be desirable to be able to execute say only a function body as
-one unit of execution. However, breaking up a program into smaller blocks of
-execution might be quite challenging.
+Another difference between a compiler or an interpreter and a REPL is that a
+REPL needs to dynamically maintain an environment such that each new expression
+can be analyzed and evaluated within the environment of previously executed
+expressions. For every expression entered, it thus needs to apply the outlined
+steps again and update the environment it maintains in memory with the new
+results. This could result in a different order of evaluation than when say an
+interpreter executes a program as a whole.
 
-Another contrast between a compiler or an interpreter and a REPL is that a REPL
-needs to dynamically maintain an environment such that each new expression can
-be evaluated within the environment of previously executed expressions. For
-every expression entered, it thus needs to apply the outlined steps again and
-update the environment it maintains in memory with the new results. This could
-result in a different order of evaluation than when say an interpreter executes
-a program as a whole.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{execution-model-repl}
+  \caption{The execution model as shown in \cref{fig:spoofax-relations}, adapted
+    for a REPL. The analysis and evaluation is done within the incrementally
+    built environment of previously executed expressions.}
+  \label{fig:execution-model-repl}
+\end{figure}
 
 \subsection{Functionality}
 \label{ssec:repl-functionality}
@@ -186,5 +191,5 @@ parent REPL. This can go to arbitrary depths.
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "main"
+%%% TeX-master: "../main"
 %%% End:
