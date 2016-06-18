@@ -127,8 +127,8 @@ structures that comes with a textual representation similar to formats such as
 XML. As an example, a representation of the arithmetic expression $2 + 2 - 4$ is
 shown in \cref{lst:aterm-example}.
 
-\begin{lstlisting}[caption={An example AST representation of an arithmetic
-expression},language=aterm,label={lst:aterm-example}]
+\begin{lstlisting}[caption={An example Stratego term representation of an
+arithmetic expression},language=aterm,label={lst:aterm-example}]
 Sub(Add(Int("2"), Int("2")), Int("4"))
 \end{lstlisting}
 
@@ -144,8 +144,43 @@ behaves~\cite{Winskel93}. There are many approaches to formally specify the
 dynamic semantics of a programming language (for an extensive treatment,
 see~\cite{Winskel93}). One way is to specify the transformation of programs
 written in the programming language to programs of another language of which the
-dynamic semantics are already known. For this section, however, only one sort of
-approach called \emph{operational semantics} is relevant.
+dynamic semantics are already known. For this report, however, only one sort
+of approach called \emph{operational semantics} is relevant.
+
+The first part of this subsection gives a short description of operational
+semantics, and shows an example of how it can be used to specify the dynamic
+semantics of a programming language. After that, a short overview of DynSem is
+given, as well as the same example expressed in DynSem.
+
+\subsubsection{Operational semantics}
+\label{sec:oper-semant}
+In operational semantics, the dynamic semantics are specified by a set of axioms
+and reduction rules. A reduction rule consists of set of premises and a
+predicate. If all of the premises of a reduction rule hold, then the predicate
+also holds~\cite{Kahn87}. A predicate is structured as follows: the left-hand
+side of a formula introduces a pattern, and the right-hand side instantiates the
+result.
+
+To show how rules can define the dynamic semantics of a language, consider the
+classic example of the \(\beta\)-rule shown in \cref{eq:beta-reduct-structural},
+which defines function application in the lambda calculus. The rule replaces all
+the occurrences of the parameter \(x\) with the argument \(e_2\), within the
+expression \(e_1\).
+
+\begin{equation}\label{eq:beta-reduct-structural}
+(\lambda x.e_1) e_2 \xrightarrow{\beta} e_1[x := e_2]
+\end{equation}
+
+\begin{equation*}\label{eq:beta-reduct-natural}
+\infer{%
+  E \vdash e_1 e_2 \rightarrow v%
+  }{%
+    \begin{split}
+      E \vdash e_1 \rightarrow (\lambda x.b, E') \\
+      (x \mapsto e_2) \circ E' \vdash b \rightarrow v
+    \end{split}%
+}
+\end{equation*}
 
 \subsubsection{DynSem: rule-based dynamic semantics}
 \label{ssec:dynsem}
@@ -155,42 +190,67 @@ called \emph{DynSem}~\cite{VerguNV15}. DynSem allows for an operational
 semantics specification from which a Java-based AST interpreter is
 automatically generated.
 
-In DynSem, like other meta-languages in Spoofax, the dynamic semantics
-are specified by means of syntax-directed rules. To show how rules can
-define the dynamic semantics of a language, consider the classic
-example of the \(\beta\)-reduction, which defines function application in
-the lambda calculus. The rule replaces all the occurences of the
-parameter \(x\) with the argument \(e_2\), within the expression \(e_1\):
+\paragraph{Reduction rules} In DynSem, reduction rules are used to specify the
+dynamic semantics of a language, in a syntax similar to the formal syntax like
+shown in \cref{eq:beta-reduct-natural}. A reduction rule in DynSem takes the
+following form~\cite{VerguNV15}:
 
-\begin{equation}
-(\lambda x.e_1) e_2 \rightarrow e_1[x := e_2]
-\end{equation}
-
-In a similar way, dynamic semantics can be specified in DynSem using a
-syntax very similar to the formal syntax used in the literature. Take
-here the example of defining the behaviour of some boolean operators
-in paplj:
-\lstset{language=dynsem,numbers=left}
-\begin{lstlisting}
-rules
-  And(BoolV(false), _) --> BoolV(false).
-  And(BoolV(true), e)  --> e.
-
-  Or(BoolV(true), _)  --> BoolV(true).
-  Or(BoolV(false), e) --> e.
+\begin{minipage}[t]{\linewidth}
+\begin{lstlisting}[language=dynsem,numbers=left,caption={The syntactic structure
+of a reduction rule in DynSem.},label={lst:dynsem-rule-syntax}]
+  Rs |- <term1> :: RWs --> <term2> :: RWs'
+  where <premise1>;
+        <premise2>.
 \end{lstlisting}
-The example applies the standard rules for boolean operators, and is
-sufficient to specify the behaviour of these operators. The rules are
-recursively applied to the expression \(e\) on the right-hand side of
-the rule until it eventually converges.
+\end{minipage}
 
-DynSem generated interpreters can be accessed through the same APIs as
-those of Stratego, because the interpreter is a native Stratego
-strategy. Therefore, alternatively, the generated interpreter can also
-be accessed directly from Java provided that one has the AST of the
-program to interpret.
+The rule as shown in \cref{lst:dynsem-rule-syntax} is read as follows: given
+that the conditions \texttt{premise1} and \texttt{premise2} can be satisfied,
+perform a pattern-match on \texttt{term1} and instantiate the pattern
+\texttt{term2} as the result of the reduction.
 
-\lstset{numbers=none}
+\paragraph{Semantic components} The variables \texttt{Rs}, \texttt{RWs} and
+\texttt{RWs'} shown in \cref{lst:dynsem-rule-syntax} are called \textit{semantic
+  components}: they represent the context in which the reduction takes place. An
+example of a semantic component is that of an environment, which maps variable
+names to their values. Another example is that of a store, which maps addresses
+of values to the values themselves. There are two kinds of semantic components:
+\textit{read-only} semantic components and \textit{read-write} semantic
+components. An environment is a read-only semantic component: a variable is
+bound only within a certain scope, and any other reduction rules that are
+applied outside of that scope don't see this environment. A store is a
+read-write semantic component: changes in the store are visible everywhere, as
+it represents mutable state.
+
+\paragraph{Function application in DynSem} Two examples of reduction rules are
+shown in \cref{lst:dynsem}. Taken together the rules specify the semantics of
+function application by using an environment, rather than replacement as done in
+\cref{eq:beta-reduct-structural}:
+
+\begin{minipage}[t]{\linewidth}
+\begin{lstlisting}[language=dynsem,numbers=left,caption={Specifying function
+application through the use of an environment.},label={lst:dynsem}]
+rules
+  E |- Fun(x, e) --> ClosV(x, e, E).
+
+  App(ClosV(x, e, E), v1) --> v2
+  where
+    E  |- bindVar(x, v1) --> E';
+    E' |- e --> v2.
+\end{lstlisting}
+\end{minipage}
+
+The first rule, shown in line 2, captures the notion of a closure, which is
+merely a function together with the environment it is defined in. The
+environment variable \texttt{E} is matched on the left-hand side, and used in
+the result of the rule on the right-hand side.
+
+The second rule, corresponding to lines 4 to 7, first introduces a pattern-match
+on a term representing function application. In line 6, the environment
+\texttt{E} is extended with a variable binding \texttt{x -> v1} to form a new
+environment \texttt{E'}. Then in line 7 the function body \texttt{e} is reduced
+to the value \texttt{v2}, within the context of the newly extended environment
+\texttt{E'}.
 
 \subsection{Editor Services}
 \label{ssec:editor-serv}
@@ -211,7 +271,7 @@ syntactic code completion is accessed with the
 be retrieved with the \texttt{MenuService}, from which the menu actions can
 be retrieved and used.
 
-\begin{figure}[htb]
+\begin{figure}[bt]
 \centering
 \includegraphics[width=0.6\textwidth]{./img/menu-actions.png}
 \caption{\label{fig:menu-actions}
