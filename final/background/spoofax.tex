@@ -173,12 +173,9 @@ expression \(e_1\).
 
 \begin{equation*}\label{eq:beta-reduct-natural}
 \infer{%
-  E \vdash e_1 e_2 \rightarrow v%
+    \left(\lambda x.e, E\right)~e_1 \longrightarrow v%
   }{%
-    \begin{split}
-      E \vdash e_1 \rightarrow (\lambda x.b, E') \\
-      (x \mapsto e_2) \circ E' \vdash b \rightarrow v
-    \end{split}%
+    (x \mapsto e_1) \circ E \longrightarrow E' &\quad E' \vdash e \longrightarrow v
 }
 \end{equation*}
 
