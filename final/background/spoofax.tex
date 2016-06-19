@@ -1,57 +1,88 @@
 \section{The Spoofax Language Workbench}
 \label{sec:spoofax}
+Spoofax is a platform that allows for giving a completely \emph{declarative}
+definition of a programming language and accompanying integrated development
+environment (IDE) support~\cite{Kats10a}. Such a platform is called a
+\emph{language workbench}.
 
-Spoofax is a platform that allows for giving a completely
-\emph{declarative} definition of a programming language and accompanying
-IDE support~\cite{Kats10a}. Such a platform is called a \emph{language
-workbench}. The definition of a programming language is done using
-high-level \emph{meta-languages} for each aspect of the programming
-language.
+In discussing programming languages, it is useful to distinguish the following
+three concepts: an \textit{aspect} of a language, the formal
+\textit{specification} of that aspect, and the actual \textit{implementation} of
+that aspect, which follows from the specification. Any programming language can
+be divided into multiple distinct aspects. In \cref{fig:spoofax-relations}, four
+common aspects of programming languages are shown, along with the relation
+between the formal specification and implementation for each aspect. An example
+of an aspect is the \textit{syntax definition}: its formal specification is done
+with grammar rules, and its implementation consists of both a tokenizer and
+parser.
 
-To define a language declaratively means that one uses the
-meta-languages to specify \emph{what} the properties of a language are, not
-\emph{how} these properties are implemented. For example, instead of asking
-\emph{​``How do I implement a tokenizer and parser for my language?''​}, one
-asks \emph{​``What is the syntax of my language?''​}. From such a description
-in a meta-language, the tokenizer and parser can be derived without
-the designer of the language ever having to care about its
-implementation.
+A key property of Spoofax is that it allows a language designer to give a
+complete specification of each aspect of their language, and automatically
+derives the implementations of those aspects from their respective
+specifications. Spoofax provides a range of high-level, declarative
+\textit{meta-languages} to declare language specifications.
 
-This section goes over the aspects that come into play with the
-development of a language and how Spoofax tackles each of these
-aspects. First, the section goes over the elements that make up the
-specification of a language\footnote{This section follows
-the structure of the language specification portion of the compiler
-construction course at the TU Delft. The slides can be found here:
-\url{http://tudelft-in4303.github.io/lectures/specification/}.}. A language
-specification consists of the following conceptual steps:
+This section goes over the aspects that come into play with the development of a
+language and how Spoofax tackles each of these aspects with its
+meta-languages. First, the section goes over some of the elements that make up
+the specification of each language aspect\footnote{This section follows the
+  structure of the language specification portion of the compiler construction
+  course at the TU Delft. The slides can be found here:
+  \url{http://tudelft-in4303.github.io/lectures/specification/}.}. A language
+commonly consists of the following aspects, shown also in
+\cref{fig:spoofax-relations}, of which a selection will be discussed in more
+detail throughout the rest of this section:
 
 \begin{enumerate}
-\item \hyperref[ssec:syntax-def]{Syntax Definition}: The first step defines what textual
-representations of a program are syntactically valid. A parser
-provides an implementation of this definition, by mapping a textual
-representation of a program to an abstract syntax tree (AST)
-representation. In Spoofax, the syntax is declared with a domain
-specific language (DSL) called SDF.
-\item \hyperref[ssec:static-analysis]{Static Semantics}: The AST then goes through static analysis (type
-checking, name binding and variable scoping), to test if the
-program is well-formed. Static semantics describe the rules for the
-static analysis step. Spoofax provides two DSLs that can specify the two
-distinct parts of this step: the TS Type Specification language and
-the NaBL name binding language.
-\item \hyperref[ssec:term-rewrite]{Term Rewriting and Program Transformation}: Optionally, a
-well-formed AST can then be transformed, for example for desugaring
-or optimization. Spoofax provides Stratego for this step.
-\item \hyperref[ssec:dynamic-semantics]{Dynamic Semantics}: Next the optionally transformed AST is either
-compiled or interpreted, thereby providing a means of
-execution. Dynamic semantics define what the behaviour is of a
-program upon execution. In Spoofax, the dynamic semantics can be
-defined with either Stratego or a DSL called DynSem.
+\item \textbf{\hyperref[ssec:syntax-def]{Syntax Definition}:} The first aspect
+  concerns what textual representations of a program are syntactically
+  valid. Its specification consists of a grammar specified with context-free
+  grammar productions. A parser provides an implementation of this
+  specification, by mapping a textual representation of a program to an abstract
+  syntax tree (AST) representation. In Spoofax, the syntax is declared with a
+  domain specific language (DSL) called SDF.
+\item \textbf{Static Semantics:} A parsed AST then optionally goes through
+  static analysis (type checking, name binding and variable scoping), to test if
+  the program is well-formed. Static analysis is the implementation of an aspect
+  called \textit{static semantics}. The static semantics of a language can be
+  formally specified by \textit{type and/or name binding rules}. Spoofax
+  provides two DSLs that can specify the two distinct parts of the
+  specification: the TS Type Specification language and the NaBL name binding
+  language.
+
+  This language aspect will not be discussed in this section. However, the
+  original research report contains a section that does discuss this aspect. It
+  can be found in \cref{ssec:a-static-analysis}.
+\item \textbf{Term Rewriting or Program Transformation:} Optionally, a
+  well-formed AST can then be transformed, for example for desugaring or
+  optimization. This execution step falls under the aspect of \textit{term
+    rewriting} and can be formally specified by \textit{term rewrite rules}. For
+  the specification of this aspect, Spoofax provides a DSL called Stratego.
+
+  This aspect, too, will not be discussed in this section. The relevant section
+  in the research report can be found in \cref{ssec:a-term-rewrite}.
+\item \textbf{\hyperref[ssec:dynamic-semantics]{Dynamic Semantics}:} Next the
+  optionally transformed AST is either compiled or interpreted, thereby
+  providing a means of execution. The aspect of \textit{dynamic semantics}
+  defines what the behaviour is of a program upon execution. The formal
+  specification of this aspect can be done with \textit{reduction rules},
+  although there are other ways to accomplish this: for example, interpretation
+  can be seen as the transformation of a program to a single value. In Spoofax,
+  the dynamic semantics can be defined with either Stratego or a DSL called
+  DynSem.
 \end{enumerate}
 
-This section concludes with a discussion on the other
-aspect of a language: its integrated development environment
-(IDE). Spoofax provides IDE support by means of its Editor Services.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{spoofax-relations}
+  \caption{The relations between the aspects of a programming language, their
+    specifications and their implementations. The dashed boxes in the bottom row
+    indicate optional steps.}
+  \label{fig:spoofax-relations}
+\end{figure}
+
+This section concludes with a discussion on the other part of a language: its
+IDE. Spoofax provides IDE support by means of its Editor Services.
 
 \subsection{Syntax Definition}
 \label{ssec:syntax-def}
@@ -85,213 +116,141 @@ rules~\cite{deJonge12}, syntax highlighting rules and folding
 rules for editors (see \cref{ssec:editor-serv}).
 
 The Spoofax API gives access to the generated parser through the
-\texttt{SyntaxService}.
+\texttt{SyntaxService}. The results obtained by executing the parser results in,
+among other information, an AST represented as an internal data structure. This
+data structure will be briefly highlighted in the following section
 
-\subsubsection{AST-based rules}
-\label{ssec:orgheadline2}
-The meta-languages that will be discussed in the coming sections all
-have one property in common: all of them use \emph{rules} based on the AST
-in order to specify one of the parts of a language definition. The
-rules are said to be \emph{syntax-directed}: the specification for one AST
-node (whether it be a static semantics, rewriting or dynamic semantics
-specification) is done by the specification of the children of that
-AST node~\cite{Winskel93}.
+\subsubsection{ASTs in Spoofax: Stratego terms}
+\label{sec:asts-spoof-strat}
+In Spoofax, an AST is represented as a Stratego term~\cite{Kats10a}. Terms in
+Spoofax come with a textual format, ATerms, which is similar to formats such as
+XML~\cite{Brand00}. As an example, a term representation of the arithmetic
+expression $2 + 2 - 4$ is shown in \cref{lst:aterm-example}.
 
-\subsection{Static Semantics}
-\label{ssec:static-analysis}
-Static semantics refer to the meaning of what a well-formed program is
-for a particular language~\cite{Milner97}. This imposes more
-constraints than syntax definition, such as name binding, scoping
-rules and type checking. These cannot be specified by a syntax
-definition alone and are thus considered separately.
-
-\subsubsection{Declarative static semantics specification in Spoofax}
-\label{ssec:orgheadline3}
-In Spoofax, all the static semantics as well as the dynamic semantics
-used to be specified with the \emph{Stratego} transformation language
-(which is discussed in \cref{ssec:term-rewrite}). Nowadays, two
-high-level DSLs exist for specifying static semantics declaratively:
-NaBL and TS. The two DSLs can work together: for instance, the type of
-a variable can be set with NaBL, so that TS can be used to make
-assertions on the type of that variable.
-
-The static analysis step of a language is exposed through the Spoofax
-API by the \texttt{AnalysisService}.
-
-\subsubsection{NaBL: the Name Binding Language}
-\label{ssec:nabl}
-With \emph{NaBL} (pronounced \emph{enable}), name binding and scoping can be
-specified declaratively using AST-based
-rules~\cite{KonatKWV12}. Here is an example of name binding
-and scoping rules for a class, from the \emph{paplj}
-language.\footnote{paplj is used as an exercise language for the
-``Declare Your Language'' book, which is a work-in-progress at the time
-of writing. More information can be found here:
-\url{https://github.com/MetaBorgCube/declare-your-language}}
-\lstset{language=nabl,numbers=left}
-\begin{lstlisting}
-namespaces Program Class Field Method Variable
-// ...
-binding rules
-  Class(c, _, _, _) :
-    defines Class c of type ClassT(c)
-    // Declare new scope
-    scopes Field, Method, Variable
-    implicitly defines Variable This() of type ClassT(c)
-
-  Extends(c) :
-    // Import namespaces from superclass
-    imports Field, Method from Class c
+\begin{lstlisting}[caption={An example ATerm representation of an arithmetic
+expression.},language=aterm,label={lst:aterm-example}]
+Sub(Add(Int("2"), Int("2")), Int("4"))
 \end{lstlisting}
-The most important concept to take away from this example is the way
-the rules are specified on the AST: new scopes for names can be
-defined on the level of an AST node, and can be imported again by
-referring back to the scope definition.
 
-As can be seen from line 8, it can also associate type information
-with names to interplay with TS. The type annotations can also be used
-for instance when desugaring or rewriting with Stratego (see \cref{ssec:term-rewrite}).
-
-\subsubsection{TS: the Type Specification language}
-\label{ssec:orgheadline4}
-Type checking can be done by specifying typing rules with the \emph{TS}
-DSL. Again an example of the paplj language:
-\lstset{language=type-spec,numbers=left}
-\begin{lstlisting}
-type rules
-  Class(c1, Extends(c2), _, _) :-
-    where store ClassT(c1) <sub: ClassT(c2)
-
-  x@This() : t
-    where definition of x : t
-// ...
-type rules
-  Add(e1, e2) : NumT()
-    where e1 : NumT() else error "number expected" on e1
-      and e2 : NumT() else error "number expected" on e2
-\end{lstlisting}
-This example shows how in TS, the rules are syntax-directed: The
-typing rule of the \texttt{Add} node is specified by the types of its
-children \(e_1\) and \(e_2\), on which the typing rules will be applied
-recursively.
-
-Again, in line 6, interplay can be seen between TS an NaBL. Here the
-type of a variable can be accessed, which is set in the NaBL
-specification (see the previous subsection, \cref{ssec:nabl}).
-
-\subsection{Term Rewriting and Program Transformation}
-\label{ssec:term-rewrite}
-Sometimes the AST needs some form of transformation before it is to be
-compiled or executed, for example to transform it to a canonical form,
-or to perform optimizations such as constant folding. Program
-transformations are specified by \emph{term rewrite rules}: The left-hand
-side of a rule introduces a pattern (for example \(x + x\)), and the
-right-hand side specifies a replacement for it (e.g. \(2\cdot x\)).
-
-\subsubsection{Rewriting using Stratego}
-\label{ssec:orgheadline5}
-Spoofax offers a DSL called \emph{Stratego} for specifying program
-transformation with rewrite rules~\cite{Visser01}. Stratego can be
-seen as the most general part of Spoofax: before NaBL and TS, Stratego
-was used for specifying the static semantics. Moreover, being a
-program transformation language, it can also serve as a compiler and
-can thus be used to specify the dynamic semantics.
-
-An example of a rewrite rule for the paplj language is given below.
-\lstset{language=stratego,numbers=left}
-\begin{lstlisting}
-rules
-  desugar-let :
-  	Let([], e) -> e
-
-  desugar-let :
-  	Let([b1, b2 | bs], e) -> Let([b1], Let([b2 | bs], e))
-\end{lstlisting}
-This desugars a \texttt{let} expression with multiple bindings into multiple
-nested \texttt{let} expressions each having just one binding. Again it can be
-seen that these are syntax-directed rules, from the way the rules are
-specified using the AST.
-
-To construct the main algorithm of the program transformation,
-Stratego has the notion of \emph{strategies}. A strategy is used to specify
-where and in what order the rewrite rules are applied to an
-AST. Another example from paplj is given below:
-\lstset{language=stratego,numbers=left}
-\begin{lstlisting}
-strategies
-  pre-desugar =
-    innermost(desugar-let <+ desugar-do)
-
-  post-desugar =
-    innermost(desugar-do <+ desugar-get <+ desugar-set);
-    resugar
-\end{lstlisting}
-The strategy \texttt{innermost} in this example is used to apply the strategy
-given as parameter (a composition of rewrite rules) in a specific
-traversal order on the AST nodes.
-
-The Spoofax API provides the \texttt{TranformService} for performing program
-transformation. Internally the \texttt{TransformService} accesses the
-Stratego runtime, which is retrieved from the
-\texttt{StrategoRuntimeService}. The same holds for the \texttt{AnalysisService} of
-the previous section: it too uses the Stratego runtime.
-
-Stratego furthermore has support for \emph{native} strategies, which are
-specified in Java instead. Therefore the interface is bidirectional:
-Stratego can hook into Java, and Java can use the Stratego API.
+Terms can however represent any tree structure, not just ASTs. For example, a
+term may just as well represent a value. As such, when using Spoofax
+programmatically through its API, one sees terms used as an internal
+representation of the data going through the execution pipeline as depicted in
+\cref{fig:spoofax-relations}.
 
 \subsection{Dynamic Semantics}
 \label{ssec:dynamic-semantics}
 Dynamic semantics refers to how a program written in some language
-behaves~\cite{Winskel93}. There are many approaches to formally
-specify the dynamic semantics of a programming language (for an
-extensive treatment, see~\cite{Winskel93}). For this section only
-one sort of approach called \emph{operational semantics} is relevant.
+behaves~\cite{Winskel93}. There are many approaches to formally specify the
+dynamic semantics of a programming language (for an extensive treatment, see
+``\usebibentry{Winskel93}{title}''~\cite{Winskel93}). One way, for example, is
+to specify the transformation of programs written in one programming language to
+programs of another language of which the dynamic semantics are already known.
+
+DynSem uses an approach called \textit{operational semantics}. The rest of this
+section discusses how DynSem (and operational semantics) is used to specify the
+dynamic semantics of a language in Spoofax.
 
 \subsubsection{DynSem: rule-based dynamic semantics}
 \label{ssec:dynsem}
-Aside from Stratego, the Spoofax team has developed an additional
-method to declare the dynamic semantics of a language, namely a DSL
-called \emph{DynSem}~\cite{VerguNV15}. DynSem allows for an operational
-semantics specification from which a Java-based AST interpreter is
-automatically generated.
+Aside from Stratego, the Spoofax team has developed an additional method to
+declare the dynamic semantics of a language, namely a DSL called
+DynSem~\cite{VerguNV15}. DynSem allows for an operational semantics
+specification from which a Java-based AST interpreter can be automatically
+derived.
 
-In DynSem, like other meta-languages in Spoofax, the dynamic semantics
-are specified by means of syntax-directed rules. To show how rules can
-define the dynamic semantics of a language, consider the classic
-example of the \(\beta\)-reduction, which defines function application in
-the lambda calculus. The rule replaces all the occurences of the
-parameter \(x\) with the argument \(e_2\), within the expression \(e_1\):
+\paragraph{Reduction rules} In DynSem and operational semantics, reduction rules
+are used to specify the dynamic semantics of a language. The syntax of a DynSem
+specification is similar to the formal syntax as shown in
+equation~(\ref{eq:formal-spec}). \Cref{lst:dynsem-rule-syntax} shows the syntax
+of a reduction rule as specified in DynSem.
+% NOTE: do _not_ change the above \ref to \cref, as it will render the label as
+% figure. See the hack below for more info.
 
-\begin{equation}
-(\lambda x.e_1) e_2 \rightarrow e_1[x := e_2]
-\end{equation}
-
-In a similar way, dynamic semantics can be specified in DynSem using a
-syntax very similar to the formal syntax used in the literature. Take
-here the example of defining the behaviour of some boolean operators
-in paplj:
-\lstset{language=dynsem,numbers=left}
-\begin{lstlisting}
-rules
-  And(BoolV(false), _) --> BoolV(false).
-  And(BoolV(true), e)  --> e.
-
-  Or(BoolV(true), _)  --> BoolV(true).
-  Or(BoolV(false), e) --> e.
+\begin{minipage}[t]{\linewidth}
+\begin{lstlisting}[language=dynsem,numbers=left,caption={The syntactic structure
+of a reduction rule in DynSem.},label={lst:dynsem-rule-syntax}]
+  Rs |- <term1> :: RWs --> <term2> :: RWs'
+  where <premise1>;
+        <premise2>.
 \end{lstlisting}
-The example applies the standard rules for boolean operators, and is
-sufficient to specify the behaviour of these operators. The rules are
-recursively applied to the expression \(e\) on the right-hand side of
-the rule until it eventually converges.
+\end{minipage}
 
-DynSem generated interpreters can be accessed through the same APIs as
-those of Stratego, because the interpreter is a native Stratego
-strategy. Therefore, alternatively, the generated interpreter can also
-be accessed directly from Java provided that one has the AST of the
-program to interpret.
+A reduction rule consists of a set of premises (lines 2 and 3) and a conclusion
+(line 1). Put simply, the conclusion of a reduction rule holds if all of its
+premises hold~\cite{Kahn87}. Thus, the rule shown in
+\cref{lst:dynsem-rule-syntax} is read as follows: given that the premises
+\textit{premise1} and \textit{premise2} hold, the conclusion in line 1 holds.
 
-\lstset{numbers=none}
+The left-hand side of the conclusion, the terms to the left of the arrow,
+represents a pattern match on terms, matching variables that can be referenced
+in other places of the rule. The right-hand side of the conclusion represents an
+instantiation of terms, and is called the result of the
+reduction~\cite{VerguNV15}.
+
+\paragraph{Semantic components} The variables \texttt{Rs}, \texttt{RWs} and
+\texttt{RWs'} shown in \cref{lst:dynsem-rule-syntax} are called \textit{semantic
+  components}: they represent the context in which the reduction takes place. An
+example of a semantic component is that of an environment, which maps variable
+names to their values. Another example is that of a store, which maps addresses
+of values to the values themselves. There are two kinds of semantic components:
+\textit{read-only} semantic components and \textit{read-write} semantic
+components. An environment is a read-only semantic component: a variable is
+bound only within a certain scope, and any other reduction rules that are
+applied outside of that scope do not see this environment. A store is a
+read-write semantic component: changes in the store are visible everywhere, as
+it represents mutable state.
+
+\paragraph{Specifying function application in DynSem} An example of a reduction
+rule specified in DynSem is shown in \cref{lst:dynsem}. The rule specifies the
+semantics of function application by using an environment. Next to it, in
+equation~(\ref{eq:formal-spec}), the same rule is shown in a formal syntax, to
+highlight the similarity of DynSem's syntax with that of a formal one.
+
+\begin{minipage}[t]{\linewidth}
+\begin{minipage}{0.45\textwidth}
+\begin{lstlisting}[language=dynsem,numbers=left]
+rules
+  App(ClosV(x, e, E), v1) --> v2
+  where
+    E  |- bindVar(x, v1) --> E';
+    E' |- e --> v2.
+\end{lstlisting}
+\end{minipage}
+\begin{minipage}{0.55\textwidth}
+  \centering
+  \begin{equation*}
+    \infer{%
+      \left(\lambda x.e, E\right)~e_1 \longrightarrow v%
+    }{%
+      (x \mapsto e_1) \circ E \longrightarrow E' &\quad E' \vdash e \longrightarrow v
+    }
+  \end{equation*}
+\end{minipage}
+\\
+\begin{minipage}[t]{0.45\textwidth}
+  \captionof{lstlisting}{Specifying function application through the use of an
+    environment.}\label{lst:dynsem}
+\end{minipage}
+\hspace{0.05\textwidth}
+\begin{minipage}[t]{0.45\textwidth}
+  % Hack: Locally change to use figure counter and label.
+  \renewcommand*\figurename{Equation}
+  \makeatletter
+    \let\c@figure\c@equation
+  \makeatother
+  \captionof{figure}{The same rule in a formal specification. Here, the premises
+  are shown on top.}\label{eq:formal-spec}
+\end{minipage}
+\end{minipage}
+
+The rule first introduces a pattern-match on a term representing function
+application on a closure (i.e. a function together with its enclosing
+environment \textit{E}). In line 4, the environment \textit{E} (a semantic
+component) is extended with a variable binding \textit{x $\mapsto$ v1} to form a
+new environment \textit{E'}. Then, in line 5, the function body \textit{e} is
+reduced to the value \textit{v2}, within the context of the newly extended
+environment \textit{E'}.
 
 \subsection{Editor Services}
 \label{ssec:editor-serv}
@@ -312,7 +271,7 @@ syntactic code completion is accessed with the
 be retrieved with the \texttt{MenuService}, from which the menu actions can
 be retrieved and used.
 
-\begin{figure}[htb]
+\begin{figure}[bt]
 \centering
 \includegraphics[width=0.6\textwidth]{./img/menu-actions.png}
 \caption{\label{fig:menu-actions}
@@ -333,5 +292,5 @@ services provide a language with a complete and state-of-the-art IDE
 experience~\cite{Kats10a}.
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "main"
+%%% TeX-master: "../main"
 %%% End:
