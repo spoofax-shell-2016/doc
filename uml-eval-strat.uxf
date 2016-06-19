@@ -4,8 +4,8 @@
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>450</x>
-      <y>320</y>
+      <x>440</x>
+      <y>290</y>
       <w>320</w>
       <h>120</h>
     </coordinates>
@@ -18,8 +18,8 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>360</y>
+      <x>450</x>
+      <y>330</y>
       <w>300</w>
       <h>70</h>
     </coordinates>
@@ -32,33 +32,34 @@ evaluate(IStrategoTerm): IStrategoTerm</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>320</x>
-      <y>400</y>
-      <w>160</w>
+      <x>390</x>
+      <y>370</y>
+      <w>80</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>240</y>
-      <w>200</w>
-      <h>70</h>
+      <x>140</x>
+      <y>170</y>
+      <w>250</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>/&lt;&lt;FailableFunction&gt;&gt;/
+    <panel_attributes>template=In, Out, Fail
+/&lt;&lt;FailableFunction&gt;&gt;/
 --
-+apply(input)
-+compose(other)</panel_attributes>
++apply(input: In)
+      : FailOrSuccessResult</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>340</y>
+      <x>140</x>
+      <y>280</y>
       <w>200</w>
       <h>30</h>
     </coordinates>
@@ -68,8 +69,8 @@ evaluate(IStrategoTerm): IStrategoTerm</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>300</y>
+      <x>230</x>
+      <y>240</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -79,21 +80,24 @@ evaluate(IStrategoTerm): IStrategoTerm</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>160</x>
-      <y>400</y>
-      <w>170</w>
-      <h>30</h>
+      <x>140</x>
+      <y>340</y>
+      <w>260</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>EvaluateFunction</panel_attributes>
+    <panel_attributes>EvaluateFunction
+--
++apply(input: ISpoofaxTermResult)
+      : FailOrSuccessResult</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>140</x>
-      <y>210</y>
+      <x>130</x>
+      <y>140</y>
       <w>290</w>
-      <h>230</h>
+      <h>270</h>
     </coordinates>
     <panel_attributes>org.metaborg.spoofax.shell.functions
 --
@@ -104,8 +108,8 @@ layer=-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>360</y>
+      <x>230</x>
+      <y>300</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
