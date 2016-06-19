@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="13.3">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>260</x>
-      <y>30</y>
-      <w>440</w>
-      <h>480</h>
+      <x>60</x>
+      <y>190</y>
+      <w>860</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>org.metaborg.spoofax.shell.output
 --
@@ -18,19 +18,21 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>510</x>
-      <y>150</y>
+      <x>310</x>
+      <y>400</y>
       <w>170</w>
-      <h>30</h>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>/AbstractSpoofaxResult/</panel_attributes>
+    <panel_attributes>/ISpoofaxTermResult/
+--
++ast(): IStrategoTerm</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>120</y>
+      <x>80</x>
+      <y>410</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -40,58 +42,57 @@ layer=-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>150</y>
-      <w>90</w>
-      <h>50</h>
+      <x>240</x>
+      <y>410</y>
+      <w>60</w>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>70.0;10.0;40.0;10.0;40.0;30.0;10.0;30.0</additional_attributes>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>120</y>
-      <w>90</w>
-      <h>60</h>
+      <x>240</x>
+      <y>360</y>
+      <w>60</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>70.0;40.0;40.0;40.0;40.0;10.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>40.0;60.0;40.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>150</y>
-      <w>90</w>
-      <h>100</h>
+      <x>240</x>
+      <y>410</y>
+      <w>60</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>70.0;10.0;40.0;10.0;40.0;80.0;10.0;80.0</additional_attributes>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>40.0;10.0;40.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>70</y>
-      <w>90</w>
-      <h>110</h>
+      <x>240</x>
+      <y>310</y>
+      <w>60</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>70.0;90.0;40.0;90.0;40.0;10.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>40.0;60.0;40.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>510</x>
-      <y>260</y>
+      <x>310</x>
+      <y>250</y>
       <w>170</w>
-      <h>80</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>/&lt;&lt;ISpoofaxResult&gt;&gt;/
 --
-+ast()
 +styled()
 +unit(): T</panel_attributes>
     <additional_attributes/>
@@ -99,19 +100,19 @@ layer=-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>170</y>
+      <x>380</x>
+      <y>300</y>
       <w>30</w>
-      <h>110</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=.&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>270</y>
+      <x>80</x>
+      <y>260</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -121,8 +122,8 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>220</y>
+      <x>80</x>
+      <y>310</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -132,8 +133,8 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>170</y>
+      <x>80</x>
+      <y>360</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -144,7 +145,7 @@ layer=-1</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>510</x>
-      <y>400</y>
+      <y>250</y>
       <w>170</w>
       <h>50</h>
     </coordinates>
@@ -156,8 +157,8 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>360</y>
+      <x>740</x>
+      <y>230</y>
       <w>160</w>
       <h>30</h>
     </coordinates>
@@ -167,19 +168,19 @@ layer=-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>430</x>
-      <y>360</y>
-      <w>100</w>
+      <x>700</x>
+      <y>230</y>
+      <w>60</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;40.0;10.0;40.0;60.0;80.0;60.0</additional_attributes>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>410</y>
+      <x>740</x>
+      <y>280</y>
       <w>160</w>
       <h>30</h>
     </coordinates>
@@ -189,30 +190,30 @@ layer=-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>430</x>
-      <y>410</y>
-      <w>100</w>
+      <x>700</x>
+      <y>280</y>
+      <w>60</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>430</x>
-      <y>410</y>
-      <w>100</w>
+      <x>700</x>
+      <y>280</y>
+      <w>60</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;60.0;40.0;60.0;40.0;10.0;80.0;10.0</additional_attributes>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>40.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>460</y>
+      <x>740</x>
+      <y>330</y>
       <w>160</w>
       <h>30</h>
     </coordinates>
@@ -222,8 +223,8 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>70</y>
+      <x>80</x>
+      <y>460</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -233,65 +234,74 @@ layer=-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>150</y>
+      <x>240</x>
+      <y>260</y>
       <w>90</w>
-      <h>150</h>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>70.0;10.0;40.0;10.0;40.0;130.0;10.0;130.0</additional_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>260</y>
+      <w>60</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>510</x>
+      <y>380</y>
+      <w>320</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;IResultVisitor&gt;&gt;/
+--
++visitException(t: Throwable)
++visitFailure(f: FailResult)
++visitMessage(s: StyledText)
++visitResult(s: ISpoofaxResult)
++visitTermResult(s: ISpoofaxTermResult)</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>580</x>
-      <y>330</y>
-      <w>30</w>
-      <h>90</h>
+      <y>290</y>
+      <w>80</w>
+      <h>110</h>
     </coordinates>
-    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <panel_attributes>lt=-
+&lt; visits</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
-    <id>UMLPackage</id>
+    <id>Relation</id>
     <coordinates>
-      <x>780</x>
-      <y>350</y>
-      <w>270</w>
-      <h>160</h>
+      <x>270</x>
+      <y>420</y>
+      <w>60</w>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>org.metaborg.spoofax.shell.client
---
-bg=orange
-layer=-1</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>800</x>
-      <y>390</y>
-      <w>230</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>/&lt;&lt;IResultVisitor&gt;&gt;/
---
-+visitExcception(t: Throwable)
-+visitFailure(f: FailResult)
-+visitMessage(s: StyledText)
-+visitResult(s: ISpoofaxresult)</panel_attributes>
-    <additional_attributes/>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>670</x>
-      <y>410</y>
-      <w>150</w>
-      <h>40</h>
+      <y>270</y>
+      <w>60</w>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>lt=-
-&lt; visits</panel_attributes>
-    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
