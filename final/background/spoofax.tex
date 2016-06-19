@@ -116,25 +116,27 @@ rules~\cite{deJonge12}, syntax highlighting rules and folding
 rules for editors (see \cref{ssec:editor-serv}).
 
 The Spoofax API gives access to the generated parser through the
-\texttt{SyntaxService}.
+\texttt{SyntaxService}. The results obtained by executing the parser results in,
+among other information, an AST represented as an internal data structure. This
+data structure will be briefly highlighted in the following section
 
-\subsubsection{ASTs in Spoofax: Stratego Terms}
+\subsubsection{ASTs in Spoofax: Stratego terms}
 \label{sec:asts-spoof-strat}
-% TODO: Reference for Stratego terms.
-In Spoofax, an AST is represented as a Stratego term, a format representing tree
-structures that comes with a textual representation similar to formats such as
-XML. As an example, a representation of the arithmetic expression $2 + 2 - 4$ is
-shown in \cref{lst:aterm-example}.
+In Spoofax, an AST is represented as a Stratego term~\cite{Kats10a}. Terms in
+Spoofax come with a textual format, ATerms, which is similar to formats such as
+XML~\cite{Brand00}. As an example, a term representation of the arithmetic
+expression $2 + 2 - 4$ is shown in \cref{lst:aterm-example}.
 
-\begin{lstlisting}[caption={An example Stratego term representation of an
-arithmetic expression},language=aterm,label={lst:aterm-example}]
+\begin{lstlisting}[caption={An example ATerm representation of an arithmetic
+expression.},language=aterm,label={lst:aterm-example}]
 Sub(Add(Int("2"), Int("2")), Int("4"))
 \end{lstlisting}
 
-Stratego terms can however represent any tree structure, not just ASTs. As such,
-when using Spoofax programmatically through its API, one sees Stratego terms
-used as an internal representation of the data going through the execution
-pipeline as depicted in \cref{fig:spoofax-relations}.
+Terms can however represent any tree structure, not just ASTs. For example, a
+term may just as well represent a value. As such, when using Spoofax
+programmatically through its API, one sees terms used as an internal
+representation of the data going through the execution pipeline as depicted in
+\cref{fig:spoofax-relations}.
 
 \subsection{Dynamic Semantics}
 \label{ssec:dynamic-semantics}
