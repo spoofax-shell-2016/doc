@@ -1,8 +1,9 @@
 \section{The Spoofax Language Workbench}
 \label{sec:spoofax}
 Spoofax is a platform that allows for giving a completely \emph{declarative}
-definition of a programming language and accompanying IDE
-support~\cite{Kats10a}. Such a platform is called a \emph{language workbench}.
+definition of a programming language and accompanying integrated development
+environment (IDE) support~\cite{Kats10a}. Such a platform is called a
+\emph{language workbench}.
 
 In discussing programming languages, it is useful to distinguish the following
 three concepts: an \textit{aspect} of a language, the formal
@@ -17,10 +18,9 @@ parser.
 
 A key property of Spoofax is that it allows a language designer to give a
 complete specification of each aspect of their language, and automatically
-derive the implementation of that language aspect from its
-specification. Spoofax provides a range of high-level, declarative
-\textit{meta-languages} to the language designer for declaring their language
-specification.
+derives the implementations of those aspects from their respective
+specifications. Spoofax provides a range of high-level, declarative
+\textit{meta-languages} to declare language specifications.
 
 This section goes over the aspects that come into play with the development of a
 language and how Spoofax tackles each of these aspects with its
@@ -51,7 +51,7 @@ detail throughout the rest of this section:
   language.
 
   This language aspect will not be discussed in this section. However, the
-  original research report contains a section that does discuss this aspect, and
+  original research report contains a section that does discuss this aspect. It
   can be found in \cref{ssec:a-static-analysis}.
 \item \textbf{Term Rewriting or Program Transformation:} Optionally, a
   well-formed AST can then be transformed, for example for desugaring or
@@ -75,15 +75,14 @@ detail throughout the rest of this section:
 \begin{figure}[t]
   \centering
   \includegraphics[width=\textwidth]{spoofax-relations}
-  \caption{The relations between the aspects, specification and implementation
-    of a programming language. The dashed boxes in the bottom row refer to that
-    step being optional.}
+  \caption{The relations between the aspects of a programming language, their
+    specifications and their implementations. The dashed boxes in the bottom row
+    indicate optional steps.}
   \label{fig:spoofax-relations}
 \end{figure}
 
 This section concludes with a discussion on the other part of a language: its
-integrated development environment (IDE). Spoofax provides IDE support by means
-of its Editor Services.
+IDE. Spoofax provides IDE support by means of its Editor Services.
 
 \subsection{Syntax Definition}
 \label{ssec:syntax-def}
@@ -135,21 +134,20 @@ Sub(Add(Int("2"), Int("2")), Int("4"))
 Stratego terms can however represent any tree structure, not just ASTs. As such,
 when using Spoofax programmatically through its API, one sees Stratego terms
 used as an internal representation of the data going through the execution
-pipeline depicted in \cref{fig:spoofax-relations}.
+pipeline as depicted in \cref{fig:spoofax-relations}.
 
 \subsection{Dynamic Semantics}
 \label{ssec:dynamic-semantics}
 Dynamic semantics refers to how a program written in some language
 behaves~\cite{Winskel93}. There are many approaches to formally specify the
-dynamic semantics of a programming language (for an extensive treatment,
-see~\cite{Winskel93}). One way, for example, is to specify the transformation of
-programs written in the programming language to programs of another language of
-which the dynamic semantics are already known.
+dynamic semantics of a programming language (for an extensive treatment, see
+``\usebibentry{Winskel93}{title}''~\cite{Winskel93}). One way, for example, is
+to specify the transformation of programs written in one programming language to
+programs of another language of which the dynamic semantics are already known.
 
-DynSem~\cite{VerguNV15}, a DSL for the specification of dynamic semantics, uses
-an approach called \textit{operational semantics}. The rest of this section
-discusses how DynSem (and operational semantics) is used to specify the dynamic
-semantics of a language.
+DynSem uses an approach called \textit{operational semantics}. The rest of this
+section discusses how DynSem (and operational semantics) is used to specify the
+dynamic semantics of a language in Spoofax.
 
 \subsubsection{DynSem: rule-based dynamic semantics}
 \label{ssec:dynsem}
@@ -159,9 +157,9 @@ DynSem~\cite{VerguNV15}. DynSem allows for an operational semantics
 specification from which a Java-based AST interpreter can be automatically
 derived.
 
-\paragraph{Reduction rules} In DynSem and in operational semantics, reduction
-rules are used to specify the dynamic semantics of a language, in a syntax
-similar to the formal syntax like shown in
+\paragraph{Reduction rules} In DynSem and operational semantics, reduction rules
+are used to specify the dynamic semantics of a language. The syntax of a DynSem
+specification is similar to the formal syntax as shown in
 equation~(\ref{eq:formal-spec}). \Cref{lst:dynsem-rule-syntax} shows the syntax
 of a reduction rule as specified in DynSem.
 % NOTE: do _not_ change the above \ref to \cref, as it will render the label as
@@ -176,16 +174,15 @@ of a reduction rule in DynSem.},label={lst:dynsem-rule-syntax}]
 \end{lstlisting}
 \end{minipage}
 
-A reduction rule consists of set of premises (lines 2 and 3) and a conclusion
-(line 1). Put simply, the conclusion of a reduction rule holds, if all of its
+A reduction rule consists of a set of premises (lines 2 and 3) and a conclusion
+(line 1). Put simply, the conclusion of a reduction rule holds if all of its
 premises hold~\cite{Kahn87}. Thus, the rule shown in
 \cref{lst:dynsem-rule-syntax} is read as follows: given that the premises
-\textit{premise1} and \textit{premise2} hold, the conclusion in line 1
-holds.
+\textit{premise1} and \textit{premise2} hold, the conclusion in line 1 holds.
 
 The left-hand side of the conclusion, the terms to the left of the arrow,
-represent a pattern match on terms, matching variables that can be referenced in
-other places of the rule. The right-hand side of the conclusion represents an
+represents a pattern match on terms, matching variables that can be referenced
+in other places of the rule. The right-hand side of the conclusion represents an
 instantiation of terms, and is called the result of the
 reduction~\cite{VerguNV15}.
 
@@ -198,7 +195,7 @@ of values to the values themselves. There are two kinds of semantic components:
 \textit{read-only} semantic components and \textit{read-write} semantic
 components. An environment is a read-only semantic component: a variable is
 bound only within a certain scope, and any other reduction rules that are
-applied outside of that scope don't see this environment. A store is a
+applied outside of that scope do not see this environment. A store is a
 read-write semantic component: changes in the store are visible everywhere, as
 it represents mutable state.
 
