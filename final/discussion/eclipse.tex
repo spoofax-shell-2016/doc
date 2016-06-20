@@ -1,6 +1,77 @@
 \subsection{Eclipse multithreading issues}
 \label{ssec:eclipse-multithread}
 
+The implementation of the Eclipse frontend has been a source of exposing many
+shortcomings in the initial designs. These shortcomings and how they have been
+resolved are discussed in this subsection.
+
+\subsubsection{Single- versus multithreading}
+\label{ssec:threading}
+
+The initial design assumed that the frontends and the backend would run in the
+same thread. For a console based REPL, this assumption holds and greatly
+simplifies the design. However, this assumption does not hold when the backend
+has a frontend using a multithreaded GUI toolkit. This
+assumption resulted in two problems, which are listed separately in the next
+sections. The solution and changes made to the design are then discussed
+afterwards.
+
+\subsubsection{Blocking- versus non-blocking input}
+
+In a multi-threaded environment, asking graphical text entry widgets for the
+entered text is rarely a blocking process. The REPL backend at the time,
+however, assumed that getting the user's input was always a blocking operation.
+Therefore, when a conceptual Eclipse frontend was made, the REPL spun into an
+infinite loop trying to execute empty expressions.
+
+\subsubsection{Evaluating on the UI thread}
+
+As explained in \cref{ssec:eclipse-plugin}, multi-threaded graphical user
+interface toolkits often use multiple threads. One of these threads is
+designated the ``UI thread'', or user interface thread. This thread is
+responsible for processing events (such as mouse clicks) and updating the
+graphical representation of the widgets. All tasks that perform long running
+calculations are supposed to be run in a background thread, such that the UI
+thread is free to process incoming events. Instead, if a long running
+computation is run in the UI thread, the widgets on the screen stop responding
+to the user and the program appears to be in a frozen state.  This is exactly
+what happened when the backend assumed to be run in the same thread as the
+frontend: whilst the backend was evaluation expressions, Eclipse appeared to be
+frozen due to this evaluation taking place in the UI thread from which the
+execution was started. This issue would be worse in case blocking input
+were to be used.
+
+\subsubsection{Accustoming to multi-threaded frontends}
+
+As indicated in the previous sections, the only solution to these problems is to
+allow multi-threaded frontends. This meant that the assumption of every
+operation running in the same thread no longer held. As a result, several
+changes had to be made:
+
+\begin{enumerate}
+  \item Initially, a \texttt{``Repl''} class was present in the backend to
+  centralize a REPL implementation. This class made too many assumptions on
+  behalf of the frontends, among which blocking user input and the entire main
+  loop of a REPL. The alternative is the \texttt{``IRepl''} interface (see
+  \cref{sec:overview}), which defines the only method each frontend has in
+  common: the \texttt{eval} method to evaluate input. It is now entirely up to
+  the frontend on how to implement the read, print and loop steps, allowing for
+  much more freedom.
+  \item The initial design provided \texttt{``hooks''} to the frontend to process
+  results or errors. A frontend would register itself to process certain hooks,
+  after which the registered method would be called. This is akin to the visitor
+  design pattern. The registered methods would be called immediately after the
+  evaluation was done, and on the same thread. In the conceptual Eclipse
+  frontend, these hooks updated the widgets running in the UI thread. This then
+  led to widgets being updated from a thread other than the UI thread.
+  The solution, discussed in \cref{sec:visitor}, was to return the result to the
+  frontend, allowing it to process the result whenever and on whichever thread.
+\end{enumerate}
+
+Not only did these changes resolve the threading issues, they also made for a
+cleaner architecture overall. An additional advantage is that a much wider scala
+of possible frontends is now supported.
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
