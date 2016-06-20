@@ -30,21 +30,16 @@ faster way to interact with the REPL, enhancing the explorative nature.
 
 \subsection{Analysis in context}
 
-In \cref{sec:dynsem-refactor} it was explained how DynSem was refactored to
-allow passing in an existing context in which REPL commands should be
-evaluated. Besides evaluating a complete or partial program, the REPL also
-offers the user a command to analyze a program without evaluating it.
+\Cref{sec:dynsem-refactor} explained how DynSem was refactored to allow passing
+in an existing context in which REPL commands should be evaluated. As explained
+in \cref{sec:spoofax}, some languages also define rules for static analysis.
+While support for evaluating an expression in a given context has been added to
+DynSem, Spoofax's \textit{``AnalysisService''} currently does not support this
+use case.
 
-The analysis step is invoked using Spoofax's own \textit{``AnalysisService''}.
-This service refers to a method defined in Stratego, which has a predefined
-set of input and output parameters. Since the current execution context has
-to be passed to the analysis step in order to determine whether a program is
-valid when evaluated in a certain context, the discussed refactoring of
-DynSem therefore can not take this scenario into account.
-
-To add the ability to analyze a program within a given context, the analyze
-step should be altered such that it allows passing a predefined context.
-This means the implementing Stratego method should be altered accordingly.
+To support analyzing a program within a given context both TS and NABL should
+be updated accordingly, after which support to pass an existing analysis
+context should also be added to the \textit{``AnalysisService''}.
 
 %%% Local Variables:
 %%% mode: latex
