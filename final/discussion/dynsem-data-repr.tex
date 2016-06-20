@@ -1,0 +1,22 @@
+\section{DynSem Data Types for Rule Results}
+\label{sec:dynsem-data-repr}
+The data type of the results of the invocation of a reduction rule, are
+currently just \texttt{Object}. The actual type of the semantic components is
+unknown, as a semantic component can be of any type defined in the DynSem
+specification.
+
+As such, it is hard to perform operations such as printing on the returned
+data. One could simply call the `toString` method, but often more control is
+needed, for example if one wants to provide a graphical view of the environment
+in the form of a tree structure.
+
+Furthermore, there is at the time of writing an open issue in DynSem to support
+conversion of its internal term representation to a Stratego term
+representation. The result of evaluation can then be treated just as any other
+Stratego term, giving more control to the client in deciding how to present the
+result to the user.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
