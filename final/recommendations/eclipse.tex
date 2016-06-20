@@ -9,9 +9,18 @@ into Eclipse and Spoofax Eclipse.
 
 \subsection{Building languages and projects}
 
-TODO: write this when the discussion on classpath issues has been written.
-Mention that there should be a button to build the language/project, put it on
-the classpath and launch it in a REPL.
+To start a REPL session in the delivered project, the language designer has to
+build the language, start the REPL and issue a \texttt{``:load''} command to
+load the language. It is desirable if all this could be done automatically at
+the press of a button. Such a \textit{``Run in REPL''} button can be added to the
+``Spoofax (meta)'' submenu and inside the project- and package explorer context
+menus.
+
+When the REPL gains the ability to load existing files, such a button can also
+be added to the ``Spoofax'' submenu to assist a language user.
+
+An obstacle in implementing this feature is the classpath issue as described in
+\cref{sec:classpath}.
 
 \subsection{Back and forth interaction between Eclipse and the REPL}
 
@@ -28,10 +37,12 @@ file as well.
 
 The user interface currenty offered by the Eclipse frontend does not resemble a
 typical REPL: the input and output views are separated. To improve the user
-experience, these two views could be merged into one. TODO: expand and give
-pointers as to how this might be possible?
+experience, these two views could be merged into one. This would require the use
+of a widget or text representation that can be \textit{``semi-read-only''}, as
+the previously entered text and results should not be editable, while the
+current input should be.
 
-TODO: recommend missed features such as autocompletion et cetera?
+TODO: recommend missed features such as autocompletion, hovers, et cetera?
 
 %%% Local Variables:
 %%% mode: latex
