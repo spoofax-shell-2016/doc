@@ -2,25 +2,38 @@
 \label{sec:wrapping}
 
 During the research phase of the project the investigated solutions were
-primarily focused on ``wrapping'' a partial program such that it becomes a
+primarily focused on ``wrapping'' an incomplete program such that it becomes a
 valid program as a whole, as the OpenJDK team has done for JShell (see
 \cref{ssec:a-execution-model-repl}). A solution using templates for various
 language constructs was proposed to keep this approach generic across all
-languages supported by Spoofax.
+languages supported by Spoofax. \Cref{fig:wrapping} shows a diagram which
+describes this idea. The diagram shows both the wrapping of environment
+definitions and of the incomplete program AST. The environment definitions, in
+this case, refer to the language-specific constructs such as class definitions,
+function definitions and variable declarations.
 
-However, as the project developed and DynSem was reimplemented significantly,
-the implemented solution has changed quite drastically. Since the
-parser employed by Spoofax uses integrated error recovery and can therefore
-automatically complement incomplete programs, ``wrapping'' turned out to be
-unnecessary. Instead, the ``ShellFacet'' introduced in \cref{sec:esv-extensions}
-allows the language designer to configure several symbols which are
-considered valid start symbols in the context of a REPL.
+\begin{figure}[b]
+  \centering
+  \includegraphics[width=0.5\textwidth]{wrapping}
+  \caption{Wrapping the environment definitions and an incomplete program AST
+    inside of a template to form a complete and valid program AST.}
+  \label{fig:wrapping}
+\end{figure}
 
-Since individual DynSem rules can be retrieved from the language specification,
-these rules can then already be used to interpret the results of partial ASTs.
-The custom start symbols together with the REPL-specific rules used to obtain
-and pass execution contexts to DynSem then already results in a fully functional
-REPL, without the need to wrap partial programs inside predefined templates.
+However, as the project developed and the entry point to DynSem was refactored
+significantly (see \cref{sec:dynsem-refactor}), wrapping turned out to be an
+unnecessary and inadequate solution for two reasons. Firstly, the ability to
+invoke a rule corresponding to any AST, both complete and incomplete,
+automatically allows for evaluating incomplete programs without wrapping them
+first to form a complete program. Secondly, due to the ability to pass the
+semantic components as arguments to a reduction rule, the need of wrapping the
+environment definitions (such as functions and variables) became unnecessary
+too.
+
+The custom start symbol as described in \cref{sec:esv-extensions} together with
+the REPL-specific rules used to obtain and pass execution contexts to DynSem
+then already results in a fully functional REPL, without the need to wrap
+partial programs inside predefined templates.
 
 %%% Local Variables:
 %%% mode: latex
