@@ -1,6 +1,27 @@
 \section{Wrapping}
 \label{sec:wrapping}
 
+During the research phase of the project the investigated solutions were
+primarily focused on ``wrapping'' a partial program such that it becomes a
+valid program as a whole, as the OpenJDK team has done for JShell (see
+\cref{ssec:a-execution-model-repl}). A solution using templates for various
+language constructs was proposed to keep this approach generic across all
+languages supported by Spoofax.
+
+However, as the project developed and DynSem was reimplemented significantly,
+the implemented solution has changed quite drastically. Since the
+parser employed by Spoofax uses integrated error recovery and can therefore
+automatically complement incomplete programs, ``wrapping'' turned out to be
+unnecessary. Instead, the ``ShellFacet'' introduced in \cref{sec:esv-extensions}
+allows the language designer to configure several symbols which are
+considered valid start symbols in the context of a REPL.
+
+Since individual DynSem rules can be retrieved from the language specification,
+these rules can then already be used to interpret the results of partial ASTs.
+The custom start symbols together with the REPL-specific rules used to obtain
+and pass execution contexts to DynSem then already results in a fully functional
+REPL, without the need to wrap partial programs inside predefined templates.
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
