@@ -2,12 +2,12 @@
 \label{sec:esv-extensions}
 
 REPL-specific extensions have been made available to the ESV language to
-configure language specific features, such as the backend used to specify the
-dynamic semantics of a language (see \cref{sec:eval-strat}) and the start
-symbols valid within the context of a REPL. The newly added configuration
-settings are illustrated in \cref{lst:eval-method}. After loading a language
-that defines these additional settings, they will be available via the
-ShellFacet.
+configure language specific features. Currrently, the backend used to specify
+the dynamic semantics of a language (see \cref{sec:eval-strat}) and the start
+symbols valid within the context of a REPL can be configured. The newly added
+configuration settings are illustrated in \cref{lst:eval-method}. After loading
+a language that defines these additional settings, they will be available via
+the ShellFacet.
 
 \begin{lstlisting}[language=esv,caption={Configuring language specific settings.},label={lst:eval-method}]
 module editor/SL-Shell
