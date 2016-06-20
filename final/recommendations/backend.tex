@@ -1,0 +1,36 @@
+\subsection{More extensive history functionality}
+
+The current input history implementation provides a means of iterating the
+previously entered expressions in a linear way: a user can scroll back and forth
+through the old entries. It would be nice if the history was searchable, too.
+When implementing this, one could turn to existing command-line shells for
+inspiration. The GNU readline library, for example, has two ways of searching
+through the input history: via a keyboard shortcut, which when pressed allows
+the user to enter a word that they remember is in the entry they are looking
+for, or via an always-on setting that allows the user to enter the beginning of
+the expression which will in turn filter the linear iteration over the
+history to only those entries starting with the entered input.
+
+Another limitation of the current history implementation is the fact that it is
+recorded per session. This means that when a user uses several languages in the
+same session, the history will contain entries from both languages. Instead,
+history should perhaps be kept not only per session, but also per language.
+
+Related to the above, is implementing persistent history. The Eclipse frontend
+currently only provides volatile history, which means that history is thrown
+away when Eclipse is closed. The console plugin does provide persistent history,
+but this implementation also leaves things to be desired: all history is saved
+into the same file, resulting again in a mixed history. The recommendation that
+is made here is to provide the ability to have separate, per language
+persistent history. If the frontend is an IDE, these files can perhaps be saved
+inside the language project's directory structure.
+
+Improving the history implementation should result in a smoother and
+faster way to interact with the REPL, enhancing the explorative nature.
+
+\subsection{Analysis in context}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
