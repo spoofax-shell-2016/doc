@@ -1,12 +1,11 @@
-\subsection{Eclipse multithreading issues}
-\label{ssec:eclipse-multithread}
+\section{Eclipse multithreading issues}
+\label{sec:eclipse-multithread}
 
 The implementation of the Eclipse frontend has been a source of exposing many
 shortcomings in the initial designs. These shortcomings and how they have been
 resolved are discussed in this subsection.
 
-\subsubsection{Single- versus multithreading}
-\label{ssec:threading}
+\subsection{Single- versus multithreading}
 
 The initial design assumed that the frontends and the backend would run in the
 same thread. For a console based REPL, this assumption holds and greatly
@@ -16,7 +15,7 @@ assumption resulted in two problems, which are listed separately in the next
 sections. The solution and changes made to the design are then discussed
 afterwards.
 
-\subsubsection{Blocking- versus non-blocking input}
+\subsection{Blocking- versus non-blocking input}
 
 In a multi-threaded environment, asking graphical text entry widgets for the
 entered text is rarely a blocking process. The REPL backend at the time,
@@ -24,7 +23,7 @@ however, assumed that getting the user's input was always a blocking operation.
 Therefore, when a conceptual Eclipse frontend was made, the REPL spun into an
 infinite loop trying to execute empty expressions.
 
-\subsubsection{Evaluating on the UI thread}
+\subsection{Evaluating on the UI thread}
 
 As explained in \cref{ssec:eclipse-plugin}, multi-threaded graphical user
 interface toolkits often use multiple threads. One of these threads is
@@ -41,7 +40,7 @@ frozen due to this evaluation taking place in the UI thread from which the
 execution was started. This issue would be worse in case blocking input
 were to be used.
 
-\subsubsection{Accustoming to multi-threaded frontends}
+\subsection{Accustoming to multi-threaded frontends}
 
 As indicated in the previous sections, the only solution to these problems is to
 allow multi-threaded frontends. This meant that the assumption of every
