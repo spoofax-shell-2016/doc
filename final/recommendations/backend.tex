@@ -31,15 +31,15 @@ faster way to interact with the REPL, enhancing the explorative nature.
 \subsection{Analysis in context}
 
 \Cref{sec:dynsem-refactor} explained how DynSem was refactored to allow passing
-in an existing context in which REPL commands should be evaluated. As explained
+in an existing context in which REPL commands are evaluated. As explained
 in \cref{sec:spoofax}, some languages also define rules for static analysis.
 While support for evaluating an expression in a given context has been added to
 DynSem, Spoofax's \textit{``AnalysisService''} currently does not support this
 use case.
 
-To support analyzing a program within a given context both TS and NABL should
-be updated accordingly, after which support to pass an existing analysis
-context should also be added to the \textit{``AnalysisService''}.
+Providing analysis in the context of previous expressions is a desirable
+feature that would enhance the REPL significantly. Currently, however,
+Spoofax does not provide the means to support this.
 
 %%% Local Variables:
 %%% mode: latex
