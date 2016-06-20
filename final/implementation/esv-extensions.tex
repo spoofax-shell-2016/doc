@@ -1,0 +1,20 @@
+\section{ESV extensions}
+\label{sec:esv-extensions}
+
+To configure language specific features, such as the backend used to specify
+the dynamic semantics of a language (see \cref{sec:eval-strat}) and the start
+symbols valid within the context of a REPL, some REPL-specific extensions have
+been made available in the ESV language.
+
+\begin{lstlisting}[language=esv,caption={Configuring language specific settings.},label={lst:eval-method}]
+module editor/SL-Shell
+
+shell
+    evaluation method : "dynsem"
+    shell start symbol : Expr
+    command prefix : ":"
+\end{lstlisting}
+
+The newly added configuration settings are illustrated in \cref{lst:eval-method}.
+After loading a language that defines these additional settings, they will
+be available via the ShellFacet, available through the language implementation.
