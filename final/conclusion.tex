@@ -1,6 +1,36 @@
 \chapter{Conclusion}
 \label{cha:conclusion}
 
+Over the course of the last quarter our project team has explored the Spoofax
+language workbench and created a read-eval-print-loop that operates with any
+language defined in the Spoofax workbench.
+
+During the research phase of the project it became apparent that the project
+team needed to gain quite extensive knowledge about both the conceptual ideas
+of language transformation and the Spoofax API implementing these concepts
+before a successful product would become feasible. Due to this knowledge gap,
+development progress has unfortunately been slower than anticipated for several
+features.
+
+Furthermore the Spoofax project is developing in a fast pace as it is preparing
+for their new 2.0 release. A consequence of this has been the complete
+replacement of the interpreter backend. This replacement meant that the
+interaction of our REPL with the interpreter needed to be completely rewritten
+halfway during the project.
+
+After the project team gained the required knowledge and learnt how the new
+interpreter backend was designed with some help from the client, ultimately
+significant changes have been contributed upstream. This has resulted in the
+ability to facilitate a real, functioning REPL, executing within a modifiable
+context.
+
+Despite the significant challenges the project team faced during the start of
+the project, most goals set forth in the problem description have been
+achieved. Therefore the project team is still quite satisfied with the end
+result. While not all requested features have been implemented, we have shown
+that it is possible to create a functioning REPL for any language defined in
+Spoofax, requiring only minimal changes to the language definition.
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "main"
