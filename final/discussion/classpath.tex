@@ -1,10 +1,10 @@
 \section{Language interpreters have to be on the classpath}
 \label{sec:classpath}
 
-In \cref{ssec:implementation} the implementation of the DynSem evaluation
-strategy was outlined, together with its backend, the Truffle VM.
-From the DynSem specification of a language an interpreter can be generated,
-which uses Truffle's \texttt{``PolyglotEngine''} for its implementation.
+In \cref{sec:dynsem-eval-strat} the implementation of the DynSem evaluation
+strategy was outlined, together with its backend, the Truffle VM.  From the
+DynSem specification of a language an interpreter can be generated, which uses
+Truffle's \texttt{``PolyglotEngine''} for its implementation.
 
 As any other Truffle language, the language of the interpreter has to be
 registered with Truffle by annotating it correctly\footnote{See:
