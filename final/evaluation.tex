@@ -38,7 +38,7 @@ met.
 \hline
 \textbf{Requirement}                                                                         & \textbf{Met?} & \textbf{Explanation} \\ \hline
 Interactive REPL                                                                             & Yes           & \begin{tabular}[c]{@{}l@{}}Two interactive REPLs have been created:\\ one for the console and another in Eclipse.\end{tabular}\\ \hline
-\begin{tabular}[c]{@{}l@{}}Works with any language\\ defined in Spoofax\end{tabular}         & Yes           & \begin{tabular}[c]{@{}l@{}}The backend retrieves the information it\\ needs from Spoofax's services. A language\\ developer is able to define REPL-specific\\ configuration in an esv file, as well.\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Works with any language\\ defined in Spoofax\end{tabular}         & Yes           & \begin{tabular}[c]{@{}l@{}}The backend retrieves the information it\\ needs from Spoofax's services. A language\\ developer is able to define REPL-specific\\ configuration in an ESV file, as well.\end{tabular} \\ \hline
 Input history                                                                                & Yes           & \begin{tabular}[c]{@{}l@{}}An interface has been created in the\\ backend, allowing frontends to implement\\ history as they see fit. Both the console-\\ and the Eclipse frontend implement this\\ interface.\end{tabular} \\ \hline
 \begin{tabular}[c]{@{}l@{}}Automatic binding of \\ previously yielded values\end{tabular}    & Yes           & \begin{tabular}[c]{@{}l@{}}The language designer can specify these\\ semantics in DynSem.\end{tabular} \\ \hline
 Multiline input editing                                                                      & Yes           & \begin{tabular}[c]{@{}l@{}}The way in which input is given is not\\ enforced by the backend. However, both\\ the console- and the Eclipse frontend\\ implement multiline input editing.\end{tabular}\\ \hline
@@ -122,7 +122,7 @@ the existing codebase should be modified as little as possible.
 The REPL is developed into a standalone repository. It uses the same API exposed
 by Spoofax as any other extension would use. Minimal changes have been made to
 Spoofax itself: the only large change that went upstream is the ability to
-configure the REPL in an esv file. However, DynSem had to be significantly
+configure the REPL in an ESV file. However, DynSem had to be significantly
 modified after its rewrite to support the use case of a REPL. These changes were
 made in cooperation with its maintainer, and most were features that had to be
 implemented regardless. As such, this design goal is also met.
