@@ -1,33 +1,32 @@
 \chapter{Conclusion}
 \label{cha:conclusion}
 
-Over the course of the last quarter our project team has explored the Spoofax
-language workbench and created a read-eval-print-loop that operates with any
-language defined in the Spoofax workbench.
+Over the course of the last quarter the Spoofax Language Workbench has been
+explored and a read-eval-print-loop has been created that operates with any
+language defined in the Spoofax Language Workbench.
 
-During the research phase of the project it became apparent that the project
-team needed to gain quite extensive knowledge about both the conceptual ideas
-of language transformation and the Spoofax API implementing these concepts
-before a successful product would become feasible. Due to this knowledge gap,
-development progress has unfortunately been slower than anticipated for several
-features.
+\Cref{cha:introduction} gave the required background knowledge needed to
+understand the problem domain. \Cref{cha:probl-defin-analys} framed the problem
+definition in the context of this background. \Cref{cha:design} and
+\cref{cha:implementation} discussed the design and the implementation of the
+final product. \Cref{cha:evaluation} evaluated both the final product and the
+process by which it came to be. \Cref{cha:discussion} reflected upon the
+project, after which \cref{cha:recommendations} made recommendations to improve
+the final product.
 
-Furthermore the Spoofax project is developing in a fast pace as it is preparing
-for their new 2.0 release. A consequence of this has been the complete
-replacement of the interpreter backend. This replacement meant that the
-interaction of our REPL with the interpreter needed to be completely rewritten
-halfway during the project.
+To successfully complete the project, extensive knowledge needed to be gained of both the conceptual
+ideas behind programming language implementations and of the Spoofax API
+implementing these concepts. This resulted in a slower pace than anticipated.
 
-After the project team gained the required knowledge and learnt how the new
-interpreter backend was designed with some help from the client, ultimately
-significant changes have been contributed upstream. This has resulted in the
-ability to facilitate a real, functioning REPL, executing within a modifiable
-context.
+Once the required knowledge was attained, worthwhile features have been
+contributed upstream. First and foremost, a properly functioning REPL,
+comparable in features to those of popular programming languages. Secondly,
+significant changes have been contributed to DynSem.
 
-Despite the significant challenges the project team faced during the start of
-the project, most goals set forth in the problem description have been
-achieved. Therefore the project team is still quite satisfied with the end
-result. While not all requested features have been implemented, we have shown
+Despite having faced significant challenges during the start of the project,
+the most important goals as set forth in the problem description have been
+achieved. Therefore, the project team is still quite satisfied with the end
+result: while not all requested features have been implemented, it has been shown
 that it is possible to create a functioning REPL for any language defined in
 Spoofax, requiring only minimal changes to the language definition.
 
