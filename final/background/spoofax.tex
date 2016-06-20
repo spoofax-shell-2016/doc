@@ -261,7 +261,7 @@ which one can bind actions to menu buttons (see
 \cref{fig:menu-actions}), but also syntax highlighting, syntactic code
 completion and code folding rules\footnote{More services are
 listed on the Spoofax website:
-\url{http://www.metaborg.org/spoofax/editor-services/}}.
+\url{https://web.archive.org/http://www.metaborg.org/spoofax/editor-services/}}.
 
 The Spoofax API provides the editor services with similar naming. For
 example, the outline can be retrieved from the \texttt{OutlineService}, the
@@ -278,11 +278,11 @@ be retrieved and used.
 A menu action for the paplj language defined using Spoofax. The bottom window shows the menu definition, the top window shows a program written in paplj.}
 \end{figure}
 
-Editor services are defined using a DSL, shown in the bottom window of
-\cref{fig:menu-actions}. In the case of menus, their actions are
-specified using Stratego. Since Stratego supports native strategies,
-these actions can also be specified in Java. As such, Spoofax allows
-for defining arbitrarily complex IDE actions.
+Editor services are defined using a DSL called \textit{ESV}, shown in the bottom
+window of \cref{fig:menu-actions}. In the case of menus, their actions are
+specified using Stratego. Since Stratego supports native strategies, these
+actions can also be specified in Java. As such, Spoofax allows for defining
+arbitrarily complex IDE actions.
 
 Many of these editor services such as syntax highlighting and code
 folding rules can be derived from the syntax
