@@ -1,0 +1,22 @@
+\subsubsection{More extensive history functionality}
+
+The current input history implementation provides a means of iterating the
+previously entered expressions in a linear way: a user can scroll back and forth
+through the old entries. It would be nice if the history was searchable, too.
+When implementing this, one could turn to existing command-line shells for
+inspiration. The GNU Bash shell, for example, has two ways of searching through
+the input history: via a keyboard shortcut, which when pressed allows the user
+to enter a word that they remember is in the entry they are looking for, or via
+an always-on setting that allows the user to enter the beginning of the
+expression which will in turn filter the linear iteration over the history to
+only those entries starting with the entered input.
+Improving the history implementation should result in a smoother and faster way
+to interact with the REPL, enhancing the explorative nature.
+
+TODO: discuss central history that could be turned into history per language?
+TODO: recommend missed features such as esv commands?
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
