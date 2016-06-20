@@ -3,7 +3,7 @@
 
 The implementation of the Eclipse frontend has been a source of exposing many
 shortcomings in the initial designs. These shortcomings and how they have been
-resolved are discussed in this subsection.
+resolved are discussed in this section.
 
 \subsection{Single- versus multithreading}
 
@@ -33,7 +33,7 @@ graphical representation of the widgets. All tasks that perform long running
 calculations are supposed to be run in a background thread, such that the UI
 thread is free to process incoming events. Instead, if a long running
 computation is run in the UI thread, the widgets on the screen stop responding
-to the user and the program appears to be in a frozen state.  This is exactly
+to the user and the program appears to be in a frozen state. This is exactly
 what happened when the backend assumed to be run in the same thread as the
 frontend: whilst the backend was evaluation expressions, Eclipse appeared to be
 frozen due to this evaluation taking place in the UI thread from which the
@@ -56,15 +56,15 @@ changes had to be made:
   common: the \texttt{eval} method to evaluate input. It is now entirely up to
   the frontend on how to implement the read, print and loop steps, allowing for
   much more freedom.
-  \item The initial design provided \texttt{``hooks''} to the frontend to process
-  results or errors. A frontend would register itself to process certain hooks,
-  after which the registered method would be called. This is akin to the visitor
-  design pattern. The registered methods would be called immediately after the
-  evaluation was done, and on the same thread. In the conceptual Eclipse
-  frontend, these hooks updated the widgets running in the UI thread. This then
-  led to widgets being updated from a thread other than the UI thread.
-  The solution, discussed in \cref{sec:visitor}, was to return the result to the
-  frontend, allowing it to process the result whenever and on whichever thread.
+  \item	The initial design provided ``hooks'' to the frontend to process results or
+  errors. A frontend would register itself to process certain hooks, after which
+  the registered method would be called. The registered methods would be called
+  immediately after the evaluation was done, and on the same thread. In the
+  conceptual Eclipse frontend, these hooks updated the widgets running in the UI
+  thread. This then led to widgets being updated from a thread other than the UI
+  thread. The solution, discussed in \cref{sec:visitor}, was to return the
+  result to the frontend, allowing it to process the result whenever and however
+  it needs.
 \end{enumerate}
 
 Not only did these changes resolve the threading issues, they also made for a
