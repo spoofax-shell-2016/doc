@@ -8,12 +8,12 @@ inspiration. The GNU readline library, for example, has two ways of searching
 through the input history: via a keyboard shortcut, which when pressed allows
 the user to enter a word that they remember is in the entry they are looking
 for, or via an always-on setting that allows the user to enter the beginning of
-the expression which will in turn filter the linear iteration over the
+the expression which in turn filters the linear iteration over the
 history to only those entries starting with the entered input.
 
 Another limitation of the current history implementation is the fact that it is
 recorded per session. This means that when a user uses several languages in the
-same session, the history will contain entries from both languages. Instead,
+same session, the history contains entries from both languages. Instead,
 history should perhaps be kept not only per session, but also per language.
 
 Related to the above, is implementing persistent history. The Eclipse frontend

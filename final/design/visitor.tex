@@ -6,14 +6,14 @@ As mentioned in \cref{sec:overview}, every command implementing the
 the \texttt{``IResult''} interface. It is up to the frontend to determine how to
 handle the result. Since commands can result in a failure or an exception (see
 \cref{sec:function-comp}), it is not always clear what kind of
-\texttt{``IResult''} the command will return.
+\texttt{``IResult''} the command returns.
 
 To illustrate this, it is possible that a user tries to evaluate an input that
 passes the parsing step but fails with an exception at the analyze step (see
 \cref{fig:unit-flow}). The expected result is an \texttt{``EvaluateResult''},
 but because an exception was thrown the corresponding wrapped
 \texttt{``AnalyzeUnit''} cannot be created. The command that did the evaluation
-will then return a \texttt{FailOrSuccessResult} containing the corresponding
+then returns a \texttt{FailOrSuccessResult} containing the corresponding
 \texttt{``ExceptionResult''} that caused the failure. However, the caller of the
 command has no way of telling that the returned \texttt{IResult} is in fact a
 \texttt{FailOrSuccessResult}.
