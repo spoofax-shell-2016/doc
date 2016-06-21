@@ -3,7 +3,7 @@
 
 To separate the implementation of user operations into logical units, each user
 operation is encapsulated within a class implementing the
-\texttt{``IReplCommand''} interface. See \cref{fig:uml-commands} for the design
+\texttt{IReplCommand} interface. See \cref{fig:uml-commands} for the design
 of the \texttt{commands} package. After acquiring an invoker instance, the
 frontend has two commands available by default:
 
@@ -21,10 +21,10 @@ frontend has two commands available by default:
 \end{figure}
 
 Frontends can define additional commands by implementing the
-\texttt{``IReplCommand''} interface. These commands can then be made available
+\texttt{IReplCommand} interface. These commands can then be made available
 to the invoker by either binding them in the default map of available commands
 via a Guice module or by adding an entry to the invoker at runtime using the
-\texttt{``addCommand''} method.
+\texttt{addCommand} method.
 
 As explained in the introduction of this chapter, there are only a few
 commands that work across all languages, since every language can define its

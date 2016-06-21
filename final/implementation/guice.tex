@@ -15,9 +15,9 @@ Guice to resolve and inject an instance of a bound type.
 In the final product dependency injection is also used to supply several classes
 with a default configuration.  An example is the default list of commands
 available to a user as described in \cref{sec:commands}.  The list of commands
-is created from a Guice module by instantiating a \texttt{``MapBinder''} with
+is created from a Guice module by instantiating a \texttt{MapBinder} with
 predefined bound commands. Child modules can then append extra entries to the
-\texttt{``MapBinder''}, which makes them directly available to the existing
+\texttt{MapBinder}, which makes them directly available to the existing
 architecture.
 
 To conclude, the described features have made it easier to create a modular

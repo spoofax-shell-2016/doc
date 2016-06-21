@@ -227,7 +227,7 @@ meeste gevallen ook tot langere en complexere methoden.
 In jullie geval heeft de constructor van \texttt{Data} een enorm aantal
 parameters. Er zijn grofweg twee manieren om dat te addresseren: de eerste is
 het groeperen van velden in sub-types. Een flauw voorbeeld is het groeperen van
-\texttt{``width''} en \texttt{``height''} in een type \texttt{``Dimensions''}.
+\texttt{width} en \texttt{height} in een type \texttt{Dimensions}.
 Dit voorbeeld is natuurlijk triviaal, maar je ziet wel vaak dat studenten aan
 het begin wat huiverig zijn om kleine classes voor alleen een type te
 introduceren, terwijl dit op de lange termijn vaak wel degelijk zin heeft. De
@@ -254,7 +254,7 @@ injection is used, as opposed to the traditional way of managing dependencies.
 This fact is also mentioned in the analysis itself.
 
 Two suggestions were given as a possible solution to this problem: create new
-classes that encapsulate several parameters, or use \texttt{``setter''} methods
+classes that encapsulate several parameters, or use \texttt{setter} methods
 to pass parameters this way. However, neither solution was satisfactory as-is:
 data classes are often considered to be a code smell, and \texttt{setter}
 methods risk not fully initialising an object. The classes to which the

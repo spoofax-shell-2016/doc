@@ -48,10 +48,10 @@ operation running in the same thread no longer held. As a result, several
 changes had to be made:
 
 \begin{enumerate}
-  \item Initially, a \texttt{``Repl''} class was present in the backend to
+  \item Initially, a \texttt{Repl} class was present in the backend to
   centralize a REPL implementation. This class made too many assumptions on
   behalf of the frontends, among which blocking user input and the entire main
-  loop of a REPL. The alternative is the \texttt{``IRepl''} interface (see
+  loop of a REPL. The alternative is the \texttt{IRepl} interface (see
   \cref{sec:overview}), which defines the only method each frontend has in
   common: the \texttt{eval} method to evaluate input. It is now entirely up to
   the frontend on how to implement the read, print and loop steps, allowing for
