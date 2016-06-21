@@ -34,14 +34,14 @@ commonly consists of the following aspects, shown also in
 detail throughout the rest of this section:
 
 \begin{enumerate}
-\item \textbf{\hyperref[ssec:syntax-def]{Syntax Definition}:} The first aspect
+\item \textbf{\hyperref[ssec:syntax-def]{Syntax definition}:} The first aspect
   concerns what textual representations of a program are syntactically
   valid. Its specification consists of a grammar specified with context-free
   grammar productions. A parser provides an implementation of this
   specification, by mapping a textual representation of a program to an abstract
   syntax tree (AST) representation. In Spoofax, the syntax is declared with a
   domain specific language (DSL) called SDF.
-\item \textbf{Static Semantics:} A parsed AST then optionally goes through
+\item \textbf{Static semantics:} A parsed AST then optionally goes through
   static analysis (type checking, name binding and variable scoping), to test if
   the program is well-formed. Static analysis is the implementation of an aspect
   called \textit{static semantics}. The static semantics of a language can be
@@ -53,7 +53,7 @@ detail throughout the rest of this section:
   This language aspect will not be discussed in this section. However, the
   original research report contains a section that does discuss this aspect. It
   can be found in \cref{ssec:a-static-analysis}.
-\item \textbf{Term Rewriting or Program Transformation:} Optionally, a
+\item \textbf{Term rewriting or program transformation:} Optionally, a
   well-formed AST can then be transformed, for example for desugaring or
   optimization. This execution step falls under the aspect of \textit{term
     rewriting} and can be formally specified by \textit{term rewrite rules}. For
@@ -61,7 +61,7 @@ detail throughout the rest of this section:
 
   This aspect, too, will not be discussed in this section. The relevant section
   in the research report can be found in \cref{ssec:a-term-rewrite}.
-\item \textbf{\hyperref[ssec:dynamic-semantics]{Dynamic Semantics}:} Next the
+\item \textbf{\hyperref[ssec:dynamic-semantics]{Dynamic semantics}:} Next the
   optionally transformed AST is either compiled or interpreted, thereby
   providing a means of execution. The aspect of \textit{dynamic semantics}
   defines what the behaviour is of a program upon execution. The formal
@@ -84,7 +84,7 @@ detail throughout the rest of this section:
 This section concludes with a discussion on the other part of a language: its
 IDE. Spoofax provides IDE support by means of its Editor Services.
 
-\subsection{Syntax Definition}
+\subsection{Syntax definition}
 \label{ssec:syntax-def}
 The first part of the specification of a language is its syntax. The
 syntax of a language is often specified by means of a \emph{lexical
@@ -138,7 +138,7 @@ programmatically through its API, one sees terms used as an internal
 representation of the data going through the execution pipeline as depicted in
 \cref{fig:spoofax-relations}.
 
-\subsection{Dynamic Semantics}
+\subsection{Dynamic semantics}
 \label{ssec:dynamic-semantics}
 Dynamic semantics refers to how a program written in some language
 behaves~\cite{Winskel93}. There are many approaches to formally specify the
@@ -252,7 +252,7 @@ new environment \textit{E'}. Then, in line 5, the function body \textit{e} is
 reduced to the value \textit{v2}, within the context of the newly extended
 environment \textit{E'}.
 
-\subsection{Editor Services}
+\subsection{Editor services}
 \label{ssec:editor-serv}
 This section concludes with a brief description of editor services,
 which provide the IDE support for languages defined in
