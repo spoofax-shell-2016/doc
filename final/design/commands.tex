@@ -38,25 +38,6 @@ commands less complex and therefore easier to maintain. The logical units that
 make up the commands also ensure a flexible design that can be modified
 as the Spoofax architecture develops further on.
 
-% FIXME: Belongs in implementation chapter probably.
-%The ``LanguageCommand'' tries to load a language using the Spoofax services.
-%When Spoofax succeeds in loading the language, the parameters set in the
-%language facets (specifically the AnalysisFacet and the ShellFacet) are used to
-%create a set of commands that should be available for this specific language
-%through the ``CommandBuilder'' class. The resulting set of commands consists of
-%the following commands:
-%
-%\begin{description}
-%  \item [:parse] Parses the given arguments and returns a corresponding AST.
-%  \item [:analyze] Performs static analysis on the input. Not available in all languages.
-%  \item [:evaluate] Evaluates the given input and returns the execution result.
-%\end{description}
-%
-%Furthermore a command is created for each transform goal specified through the
-%Spoofax MenuService. The transform commands are identified by their name as
-%specified in ESV. The process of building commands is explained in more
-%depth in \cref{sec:function-comp}. By making all these commands
-
 %%% Local Variables:
 %%% TeX-master: "../main"
 %%% End:
