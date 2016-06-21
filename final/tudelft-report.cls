@@ -567,8 +567,8 @@
 \pagestyle{mainmatter}
 
 %% Print the current chapter and section at the top of the page in cyan.
-\renewcommand*\chaptermark[1]{\markboth{\thechapter.\ \color{title}#1}{}}
-\renewcommand*\sectionmark[1]{\markright{\thesection.\ \color{title}#1}}
+\renewcommand*\chaptermark[1]{\markboth{\thechapter\ \color{title}#1}{}}
+\renewcommand*\sectionmark[1]{\markright{\thesection\ \color{title}#1}}
 \newcommand*\setheader[1]{\markboth{\color{title}#1}{\color{title}#1}}
 
 %% Change the headrule command (from fancyhdr.sty) to draw the line below the
@@ -616,7 +616,7 @@
 %% in the title color.
 \titleformat{\section}
     {\LARGE\sectitlestyle}
-    {\bfseries\thesection.\ }
+    {\bfseries\thesection\ }
     {0pt}
     {\color{title}}
 %% Sections are preceded by an empty line.
@@ -629,7 +629,7 @@
 %% font.
 \titleformat{\subsection}
     {\Large\sectitlestyle}
-    {\bfseries\thesubsection.\ }
+    {\bfseries\thesubsection\ }
     {0pt}
     {\color{title}}
 \titlespacing{\subsection}{0pt}{\baselineskip}{0pt}
@@ -639,7 +639,7 @@
 %% are not preceded by a number.
 \titleformat{\subsubsection}
     {\large\sectitlestyle}
-    {\bfseries\thesubsubsection.\ }
+    {\bfseries\thesubsubsection\ }
     {0pt}
     {\color{title}}
 %% Subsubsections are preceded by an empty line and do not appear in the table
