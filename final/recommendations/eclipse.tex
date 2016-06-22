@@ -24,14 +24,18 @@ An obstacle in implementing this feature is the classpath issue as described in
 
 \subsection{Back and forth interaction between Eclipse and the REPL}
 
-A feature the REPL does not yet support is loading existing files into the
-evaluation context (see \cref{ssec:discuss-repl}). When it does, this interaction
-could provide deeper integration between the REPL and Spoofax Eclipse. For
-example, hovering over variables could indicate from where they originate, or
+The REPL backend supports loading individual files to bring the definitions
+inside these files into scope. This functionality, however, is not yet provided
+in Eclipse by means of menu items or buttons, nor is there a deeper integration
+between the REPL and Spoofax Eclipse.
+
+Deeper integration improves the interaction between Spoofax Eclipse and the
+REPL. For example, hovering over variables could indicate where they are defined, or
 changes in a currently loaded file could be automatically picked up. Changes in
-the other direction are interesting, too: when a loaded function is overridden
-inside the REPL, an option could be provided to apply this change to the loaded
-file as well.
+the other direction are interesting, too: when a function definition is overridden
+inside the REPL, an option could be provided to apply this change to its
+originating file as well. This could even be extended to write (parts of) the current
+environment to a new file.
 
 \subsection{Improving the UI of the Eclipse REPL}
 
