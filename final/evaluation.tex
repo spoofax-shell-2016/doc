@@ -26,35 +26,66 @@ as defined in \cref{ssec:mvp} has been delivered.
 \label{ssec:eval-requirements}
 
 This section discusses all the requirements as set out in
-\cref{ssec:requirements}. All the requirements are listed in
-\cref{table:requirements}. Per requirement, the table lists whether it has been
-met, including an explanation as to how it has been met or why it has not been
-met.
+\cref{ssec:requirements}. All the ``must have'', ``should have'' and ``could
+have'' requirements are listed in \cref{table:requirements}. Per requirement,
+the table lists whether it has been met, including an explanation as to how it
+has been met or why it has not been met.
 
-% TODO: update history when PR is accepted.
 \begin{table}[]
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|l||l||l|}
 \hline
-\textbf{Requirement}                                                                         & \textbf{Met?} & \textbf{Explanation} \\ \hline
-Interactive REPL                                                                             & Yes           & \begin{tabular}[c]{@{}l@{}}Two interactive REPLs have been created:\\ one for the console and another in Eclipse.\end{tabular}\\ \hline
-\begin{tabular}[c]{@{}l@{}}Works with any language\\ defined in Spoofax\end{tabular}         & Yes           & \begin{tabular}[c]{@{}l@{}}The backend retrieves the information it\\ needs from Spoofax's services. A language\\ developer is able to define REPL-specific\\ configuration in an ESV file, as well.\end{tabular} \\ \hline
-Input history                                                                                & Yes           & \begin{tabular}[c]{@{}l@{}}An interface has been created in the\\ backend, allowing frontends to implement\\ history as they see fit. Both the console\\ and the Eclipse frontend implement this\\ interface.\end{tabular} \\ \hline
-\begin{tabular}[c]{@{}l@{}}Automatic binding of \\ previously yielded values\end{tabular}    & Yes           & \begin{tabular}[c]{@{}l@{}}The language designer can specify these\\ semantics in DynSem.\end{tabular} \\ \hline
-Multiline input editing                                                                      & Yes           & \begin{tabular}[c]{@{}l@{}}The way in which input is given is not\\ enforced by the backend. However, both\\ the console and the Eclipse frontend\\ implement multiline input editing.\end{tabular}\\ \hline
-Error reporting                                                                              & Yes           & \begin{tabular}[c]{@{}l@{}}Both the console and the Eclipse frontend\\ print errors to the user. The characters to\\ which these errors belong are highlighted\\ in red. Error reporting is not yet enabled\\ during typing.\end{tabular}\\ \hline
-Syntax-checked expressions                                                                   & Yes           & \begin{tabular}[c]{@{}l@{}}The backend parses the input with the\\ services provided by Spoofax. As such,\\ syntax-checked input was given for free.\\ However, this feedback is not yet enabled\\ during typing.\end{tabular}\\ \hline
-Syntax highlighting                                                                          & No            & \begin{tabular}[c]{@{}l@{}}The Spoofax services to provide syntax\\ highlighting are difficult to fit into the\\ architecture of the REPL. For this reason,\\ syntax highlighting is not yet completed.\end{tabular}\\ \hline
-Integration with Eclipse                                                                     & Yes           & \begin{tabular}[c]{@{}l@{}}A REPL has been implemented in Eclipse,\\ allowing the user to give input and see output.\end{tabular}\\ \hhline{|=|=|=|}
-Ability to redefine identifiers                                                              & Yes           & \begin{tabular}[c]{@{}l@{}}The language designer can specify these\\ semantics in DynSem.\end{tabular} \\ \hline
-Environment inspection                                                                       & No            & \begin{tabular}[c]{@{}l@{}}In the current DynSem implementation, this\\ is impossible to do because the environment\\ is captured in an object of type \texttt{Object}\\ and therefore unprintable.\end{tabular} \\ \hline
-Save and load REPL state                                                                     & No            & \begin{tabular}[c]{@{}l@{}}Due to limitations in time, this feature has\\ not been implemented.\end{tabular}\\ \hhline{|=|=|=|}
-Syntactic code completion                                                                    & No            & \begin{tabular}[c]{@{}l@{}}Spoofax's code completion services do not\\ yet work with all languages and are in\\ process of a rewrite. As such, code completion\\ has not yet been attempted.\end{tabular}\\ \hline
-\begin{tabular}[c]{@{}l@{}}Hover over variables to see\\ value, type and others\end{tabular} & No            & \begin{tabular}[c]{@{}l@{}}Due to limitations in time and the fact that\\ the environment is captured in a variable\\ of type \texttt{Object}, this feature has not been\\ implemented.\end{tabular}\\ \hline
-Literate programming                                                                         & No            & \begin{tabular}[c]{@{}l@{}}An attempt has been made at writing an\\ IPython frontend for the REPL backend.\\ However, due to limitations in time and the\\ pressure of finishing more important features,\\ this work has not been finished.\end{tabular} \\ \hline
-\begin{tabular}[c]{@{}l@{}}Integration with other\\ IDEs (IntelliJ)\end{tabular}             & No            & \begin{tabular}[c]{@{}l@{}}The Eclipse frontend is not completely done\\ yet, which was a requirement before starting\\ on implementing a frontend for IntelliJ. As such,\\ this feature has not been attempted.\end{tabular}\\ \hline
+\textbf{Requirement} & \textbf{Met?} & \textbf{Explanation} \\ \hline
+Interactive REPL     & Yes           & \begin{tabular}[c]{@{}l@{}}Two interactive REPLs have been created: one for the console\\
+								  and another in Eclipse.\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}}Works with any language\\ defined in
+Spoofax\end{tabular} & Yes           & \begin{tabular}[c]{@{}l@{}}The backend retrieves the information it needs from Spoofax's\\
+								  services. A language developer is able to define REPL-specific\\
+					  			  configuration in an ESV file, as well.\end{tabular} \\ \hline
+Input history        & Yes           & \begin{tabular}[c]{@{}l@{}}An interface with a corresponding client-agnostic implementation\\
+								  has been created in the backend, allowing frontends to either use\\
+								  the implementation or implement the interface as they see fit.\\
+				  				  Both the console and the Eclipse frontend provide input history.\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Automatic binding of\\
+previously yielded values\end{tabular} & Yes & \begin{tabular}[c]{@{}l@{}}The language designer can specify these semantics in DynSem.\end{tabular} \\ \hline
+Multiline input editing                & Yes & \begin{tabular}[c]{@{}l@{}}The way in which input is given is not enforced by the backend.\\
+									  However, both the console and the Eclipse frontend implement\\
+					  				  multiline input editing.\end{tabular}\\ \hline
+Error reporting      & Yes           & \begin{tabular}[c]{@{}l@{}}Both the console and the Eclipse frontend print errors to the user.\\
+								  The characters to which these errors belong are highlighted in red.\\
+							  	  Error reporting is not yet enabled during typing.\end{tabular}\\ \hline
+Syntax-checked expressions             & Yes & \begin{tabular}[c]{@{}l@{}}The backend parses the input with the services provided by Spoofax.\\
+							  		  As such, syntax-checked input was given for free. However, this\\
+								  	  feedback is not yet enabled during typing.\end{tabular}\\ \hline
+Syntax highlighting & No             & \begin{tabular}[c]{@{}l@{}}A working prototype has been implemented. Due to the nature of\\
+								  console-based user interfaces, the console frontend cannot support\\
+								  this feature. The Eclipse frontend has most of the required\\
+							   	  functionality.\end{tabular}\\ \hline
+Integration with Eclipse               & Yes & \begin{tabular}[c]{@{}l@{}}A REPL has been implemented in Eclipse, allowing the user to give\\
+							  		  input and see output.\end{tabular}\\ \hhline{|=|=|=|}
+Ability to redefine identifiers        & Yes & \begin{tabular}[c]{@{}l@{}}The language designer can specify these semantics in DynSem.\end{tabular} \\ \hline
+Environment inspection                 & No  & \begin{tabular}[c]{@{}l@{}}This is impossible to do in the current DynSem implementation,\\
+								  	  because the environment is captured in an object of type \texttt{Object}\\
+								  	  and is therefore unprintable.\end{tabular} \\ \hline
+Save and load REPL state               & No  & \begin{tabular}[c]{@{}l@{}}Due to limitations in time, this feature has not been implemented.\end{tabular}\\ \hhline{|=|=|=|}
+Syntactic code completion              & No  & \begin{tabular}[c]{@{}l@{}}Spoofax's code completion services do not yet work with all\\
+								  	  languages and are in process of a rewrite. As such, code\\
+								 	  completion has not been attempted.\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}}Hover over variables to see\\
+value, type and others\end{tabular}    & No  & \begin{tabular}[c]{@{}l@{}}Due to limitations in time and the fact that the environment is\\
+					    			          captured in an object of type \texttt{Object}, this feature has\\
+									  not been implemented.\end{tabular}\\ \hline
+Literate programming                   & No  & \begin{tabular}[c]{@{}l@{}}An attempt has been made at writing an IPython frontend for the\\
+								 	  REPL backend. However, due to limitations in time and the pressure\\
+								  	  of finishing more important features, this work has not been finished.\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Integration with other\\
+IDEs (IntelliJ)\end{tabular}           & No  & \begin{tabular}[c]{@{}l@{}}The Eclipse frontend is not entirely done yet, which was a\\
+									  requirement before starting on implementing a frontend for\\
+									  IntelliJ. As such, this feature has not been attempted.\end{tabular}\\ \hline
 \end{tabular}
-\caption{Evaluation of the requirements, separated per MoSCoW category}
+}
+\caption{Evaluation of the requirements, separated per MoSCoW category.}
 \label{table:requirements}
 \end{table}
 
@@ -138,9 +169,24 @@ the design goals of being language-agnostic and having a minimal configuration.
 The previous section concluded that all the design goals have been met.
 \Cref{ssec:eval-requirements} and \cref{table:requirements} show that all the
 ``must have'' requirements have been implemented, except one: syntax
-highlighting.
+highlighting. The backend is ready to provide this functionality, and a working
+prototype has been developed.
 
-% TODO: finish this section.
+It is currently impossible to provide syntax highlighting in the console
+frontend. The text-only environment is the limiting factor: once text has been
+printed, it cannot be changed. This means that text would have to be printed
+twice: once as it is typed in by the user, and again with syntax highlighting
+applied.
+
+The Eclipse frontend has the required functionality to provide syntax
+highlighting. The backend, however, has no way of telling which widget (see
+\cref{fig:frontend-eclipse}) to send the resulting text to. This means that as
+of yet, only text in the output buffer can be highlighted.
+
+As one might conclude, much of the code to implement syntax highlighting is
+present. Finishing this work would not take much more effort. As such, this must
+have requirement is close to being met. The minimal viable product is therefore
+deemed to be delivered.
 
 \section{Process Evaluation}
 \label{sec:process-evaluation}
