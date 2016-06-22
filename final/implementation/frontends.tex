@@ -1,7 +1,7 @@
 \section{Frontends}
 \label{sec:frontends}
 
-\Cref{cha:design} showed that the backend places little restrictions on the
+\Cref{cha:design} showed that the backend places few restrictions on the
 frontends. A good example of this fact is the visitor pattern (see
 \cref{sec:visitor}), which allows the frontends to schedule the processing of
 the results and to display them in many different ways.  To illustrate this
@@ -16,7 +16,7 @@ The console REPL provides the user with a text-based user interface. For users
 already accustomed to the command line, this is perhaps the most familiar
 looking interface. A REPL running in the console requires a means of getting
 user input from the standard input stream and printing results and error
-messages to the standard output and -error streams.
+messages to the standard output and error streams.
 
 An excellent, BSD-licensed library that features these requirements is JLine2.
 JLine2 is a library for handling console input, similar to GNU readline and BSD
@@ -39,7 +39,7 @@ Read-Eval-Print Loop and thus contains the \texttt{read}, \texttt{eval} and
 The \texttt{read} and \texttt{print} steps are provided
 the by \texttt{TerminalUserInterface} class, which, as the name implies, is
 responsible for the user interface. This class has connections to the standard
-input, -output and -error streams. It uses JLine2 to provide a blocking input
+input, output and error streams. It uses JLine2 to provide a blocking input
 editor. Because the input editor is blocking, the console REPL can run in a
 single thread, thereby greatly simplifying its implementation.
 
@@ -50,7 +50,7 @@ JLine2 does support input history, which means only an adapter class,
 interface that is offered by the backend. An extension to this class is provided
 to maintain persistent history.
 
-To provide syntax- and error highlighting, ANSI color codes are used. These
+To provide syntax and error highlighting, ANSI color codes are used. These
 color codes are obtained through the \texttt{AnsiColors} enumeration, which
 maps colors as returned by the \texttt{IResult} interface to their closest
 ANSI equivalent.

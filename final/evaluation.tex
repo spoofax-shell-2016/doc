@@ -39,10 +39,10 @@ met.
 \textbf{Requirement}                                                                         & \textbf{Met?} & \textbf{Explanation} \\ \hline
 Interactive REPL                                                                             & Yes           & \begin{tabular}[c]{@{}l@{}}Two interactive REPLs have been created:\\ one for the console and another in Eclipse.\end{tabular}\\ \hline
 \begin{tabular}[c]{@{}l@{}}Works with any language\\ defined in Spoofax\end{tabular}         & Yes           & \begin{tabular}[c]{@{}l@{}}The backend retrieves the information it\\ needs from Spoofax's services. A language\\ developer is able to define REPL-specific\\ configuration in an ESV file, as well.\end{tabular} \\ \hline
-Input history                                                                                & Yes           & \begin{tabular}[c]{@{}l@{}}An interface has been created in the\\ backend, allowing frontends to implement\\ history as they see fit. Both the console-\\ and the Eclipse frontend implement this\\ interface.\end{tabular} \\ \hline
+Input history                                                                                & Yes           & \begin{tabular}[c]{@{}l@{}}An interface has been created in the\\ backend, allowing frontends to implement\\ history as they see fit. Both the console\\ and the Eclipse frontend implement this\\ interface.\end{tabular} \\ \hline
 \begin{tabular}[c]{@{}l@{}}Automatic binding of \\ previously yielded values\end{tabular}    & Yes           & \begin{tabular}[c]{@{}l@{}}The language designer can specify these\\ semantics in DynSem.\end{tabular} \\ \hline
-Multiline input editing                                                                      & Yes           & \begin{tabular}[c]{@{}l@{}}The way in which input is given is not\\ enforced by the backend. However, both\\ the console- and the Eclipse frontend\\ implement multiline input editing.\end{tabular}\\ \hline
-Error reporting                                                                              & Yes           & \begin{tabular}[c]{@{}l@{}}Both the console- and the Eclipse frontend\\ print errors to the user. The characters to\\ which these errors belong are highlighted\\ in red. Error reporting is not yet enabled\\ during typing.\end{tabular}\\ \hline
+Multiline input editing                                                                      & Yes           & \begin{tabular}[c]{@{}l@{}}The way in which input is given is not\\ enforced by the backend. However, both\\ the console and the Eclipse frontend\\ implement multiline input editing.\end{tabular}\\ \hline
+Error reporting                                                                              & Yes           & \begin{tabular}[c]{@{}l@{}}Both the console and the Eclipse frontend\\ print errors to the user. The characters to\\ which these errors belong are highlighted\\ in red. Error reporting is not yet enabled\\ during typing.\end{tabular}\\ \hline
 Syntax-checked expressions                                                                   & Yes           & \begin{tabular}[c]{@{}l@{}}The backend parses the input with the\\ services provided by Spoofax. As such,\\ syntax-checked input was given for free.\\ However, this feedback is not yet enabled\\ during typing.\end{tabular}\\ \hline
 Syntax highlighting                                                                          & No            & \begin{tabular}[c]{@{}l@{}}The Spoofax services to provide syntax\\ highlighting are difficult to fit into the\\ architecture of the REPL. For this reason,\\ syntax highlighting is not yet completed.\end{tabular}\\ \hline
 Integration with Eclipse                                                                     & Yes           & \begin{tabular}[c]{@{}l@{}}A REPL has been implemented in Eclipse,\\ allowing the user to give input and see output.\end{tabular}\\ \hhline{|=|=|=|}
@@ -89,7 +89,7 @@ derived automatically (see \cref{ssec:supp-diff-ways}): the name of the
 evaluation strategy to use. Additionally, because the existing DynSem
 specification can be reused, only a minimal amount of new DynSem rules have to
 be written to specify REPL-specific semantics. Finally, the SDF3 configuration
-is reused to specify which start symbols are valid in case the language-designer
+is reused to specify which start symbols are valid in case the language designer
 wants to allow different start symbols. Therefore this design goal is met.
 
 \paragraph{Maintainability} This design goal stated that the code should be
@@ -106,8 +106,8 @@ assumptions on the environment it runs in, since an effort is underway to do the
 same for Spoofax itself.
 
 The backend is agnostic to any frontend, no assumptions are made whatsoever:
-console or graphical, blocking or unblocking user input, single-threaded or
-multi-threaded, et cetera. This design goals is met.
+console or graphical, blocking or unblocking user input, single- or
+multithreaded, et cetera. This design goals is met.
 
 \paragraph{Performance} This design goal stated that the REPL should be
 performant, because care is taken to ensure that Spoofax itself is performant.
@@ -162,12 +162,12 @@ effective than anticipated. This section discusses these agreements.
 The Scrum methodology was chosen to manage the product development. Previous
 experience showed that one week sprints are often too short, so for this project
 biweekly sprints were decided. This worked well: there was enough time to make
-informed decisions and to evaluate or rework certain things. Sprints were
-managed flexibly: if the sprint plan needed to change due to unexpected issues,
-biweekly sprints allow for an easier revision of the sprint plan.
+informed decisions and to evaluate or rework certain things. Biweekly sprints
+also allow for an easier revision for the sprint plan if changes need to be
+made due to unexpected issues.
 
 Sprints were evaluated with a meeting with the client, during which the progress
-was demoed. The feedback received during these meetings was valuable and taken
+was demonstrated. The feedback received during these meetings was valuable and taken
 into account to guide the next sprint.
 
 The client mandated the use of Trello to manage the sprints, which has been a

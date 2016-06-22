@@ -17,7 +17,7 @@ afterwards.
 
 \subsection{Blocking- versus non-blocking input}
 
-In a multi-threaded environment, asking graphical text entry widgets for the
+In a multithreaded environment, asking graphical text entry widgets for the
 entered text is rarely a blocking process. The REPL backend at the time,
 however, assumed that getting the user's input was always a blocking operation.
 Therefore, when a conceptual Eclipse frontend was made, the REPL spun into an
@@ -25,7 +25,7 @@ infinite loop trying to execute empty expressions.
 
 \subsection{Evaluating on the UI thread}
 
-As explained in \cref{ssec:eclipse-plugin}, multi-threaded graphical user
+As explained in \cref{ssec:eclipse-plugin}, multithreaded graphical user
 interface toolkits often use multiple threads. One of these threads is
 designated the ``UI thread'', or user interface thread. This thread is
 responsible for processing events (such as mouse clicks) and updating the
@@ -40,10 +40,10 @@ frozen due to this evaluation taking place in the UI thread from which the
 execution was started. This issue would be worse in case blocking input
 were to be used.
 
-\subsection{Accustoming to multi-threaded frontends}
+\subsection{Accustoming to multithreaded frontends}
 
 As indicated in the previous sections, the only solution to these problems is to
-allow multi-threaded frontends. This meant that the assumption of every
+allow multithreaded frontends. This meant that the assumption of every
 operation running in the same thread no longer held. As a result, several
 changes had to be made:
 
