@@ -98,7 +98,7 @@ defines syntactically valid sentences made up of words.
 \subsubsection{SDF3: syntax definition in Spoofax}
 \label{ssec:orgheadline1}
 To specify a syntax definition declaratively in Spoofax, a DSL called
-\emph{SDF3}~\cite{Vollebregt12} is used.  SDF3 is the third generation
+SDF3~\cite{Vollebregt12} is used.  SDF3 is the third generation
 of the \emph{Syntax Definition Formalism} (SDF)~\cite{Heering89}. It
 uses only context-free grammar productions for the specification of
 both the lexical syntax and the context-free syntax, a feature that
@@ -180,7 +180,7 @@ A reduction rule consists of a set of premises (lines 2 and 3) and a conclusion
 (line 1). Put simply, the conclusion of a reduction rule holds if all of its
 premises hold~\cite{Kahn87}. Thus, the rule shown in
 \cref{lst:dynsem-rule-syntax} is read as follows: given that the premises
-\textit{premise1} and \textit{premise2} hold, the conclusion in line 1 holds.
+\texttt{premise1} and \texttt{premise2} hold, the conclusion in line 1 holds.
 
 The left-hand side of the conclusion, the terms to the left of the arrow,
 represents a pattern match on terms, matching variables that can be referenced
@@ -279,7 +279,7 @@ be retrieved and used.
 A menu action for the paplj language defined using Spoofax. The bottom window shows the menu definition, the top window shows a program written in paplj.}
 \end{figure}
 
-Editor services are defined using a DSL called \textit{ESV}, shown in the bottom
+Editor services are defined using a DSL called ESV, shown in the bottom
 window of \cref{fig:menu-actions}. In the case of menus, their actions are
 specified using Stratego. Since Stratego supports native strategies, these
 actions can also be specified in Java. As such, Spoofax allows for defining
