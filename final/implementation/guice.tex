@@ -1,11 +1,11 @@
 \section{Dependency Injection}
 \label{sec:injection}
 
-The design of Spoofax relies quite heavily on dependency injection by the Guice
-framework.  To achieve as much interopability as possible, the final product
-uses dependency injection in the same spirit as Spoofax. Guice has had a
+The design of Spoofax makes extensive use of dependency injection, specifically
+by using the Guice framework.  To achieve as much interopability as possible, the final product
+uses dependency injection in the same manner as Spoofax. Guice had a
 substantial impact on the design and implementation of the final product, since
-Guice nearly eliminates the need to create factories for complex datatypes.
+it nearly eliminates the need to create factories for complex datatypes.
 
 Guice requires the programmer to bind implementations of dependencies in its
 module classes, thereby separating behavior and dependency resolution.  Complex
