@@ -20,9 +20,9 @@ for those that deal with the execution model as described in
 \cref{cha:background}. This is because the specific
 execution steps that are needed for the evaluation of a program in one language
 can differ from those of other languages. For example, some languages
-have no analysis stage, whereas some do. The \texttt{LanguageCommand} as
-explained in the previous section should then create different
-commands depending on whether the language to be loaded has an
+have no analysis stage, whereas some do. The \texttt{LanguageCommand}, as
+explained in the previous section, should thus create different
+commands depending on whether the loaded language has an
 analysis step. See \cref{fig:unit-flow} for a schematic example.
 
 To accommodate for this, commands dealing with the execution model are
@@ -53,13 +53,12 @@ This design decision brings several benefits:
 \item It allows for composing and defining commands at runtime.
 \end{enumerate}
 
-There remains one problem in this design, which is how to handle
-failures that occur somewhere in the execution pipeline: for example,
-analysis should not be executed when parsing has failed. Solving this
-problem by using Java's exceptions is not desirable, as one would like
-to handle failures as any other result of an execution step. This
-has been solved by using monadic composition as opposed to regular function
-composition.
+One problem remains in this design, which is how to handle failures that occur
+somewhere in the execution pipeline. For example, analysis should not be
+done when parsing has failed. Using Java's exceptions to solve this problem
+is not desirable, as one would like to handle failures as any other result of an
+execution step. The solution to this problem is to apply monadic composition, as
+opposed to regular function composition.
 
 \subsection{Monadic composition}
 \label{sec:monadic-composition}
