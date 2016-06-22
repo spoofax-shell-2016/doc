@@ -228,12 +228,12 @@ rules
   \end{equation*}
 \end{minipage}
 \\
-\begin{minipage}[t]{0.45\textwidth}
+\begin{minipage}[t]{0.47\textwidth}
   \captionof{lstlisting}{Specifying function application through the use of an
     environment.}\label{lst:dynsem}
 \end{minipage}
-\hspace{0.05\textwidth}
-\begin{minipage}[t]{0.45\textwidth}
+\hspace{0.02\textwidth}
+\begin{minipage}[t]{0.5\textwidth}
   % Hack: Locally change to use figure counter and label.
   \renewcommand*\figurename{Equation}
   \makeatletter
@@ -246,11 +246,11 @@ rules
 
 The rule first introduces a pattern-match on a term representing function
 application on a closure (i.e. a function together with its enclosing
-environment \textit{E}). In line 4, the environment \textit{E} (a semantic
-component) is extended with a variable binding \textit{x $\mapsto$ v1} to form a
-new environment \textit{E'}. Then, in line 5, the function body \textit{e} is
-reduced to the value \textit{v2}, within the context of the newly extended
-environment \textit{E'}.
+environment \texttt{E}). In line 4, the environment \texttt{E} (a semantic
+component) is extended with a variable binding \texttt{x $\mapsto$ v1} to form a
+new environment \texttt{E'}. Then, in line 5, the function body \texttt{e} is
+reduced to the value \texttt{v2}, within the context of the newly extended
+environment \texttt{E'}.
 
 \subsection{Editor services}
 \label{ssec:editor-serv}
