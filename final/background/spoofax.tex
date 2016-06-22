@@ -147,10 +147,6 @@ dynamic semantics of a programming language (for an extensive treatment, see
 to specify the transformation of programs written in one programming language to
 programs of another language of which the dynamic semantics are already known.
 
-DynSem uses an approach called \textit{operational semantics}. The rest of this
-section discusses how DynSem (and operational semantics) is used to specify the
-dynamic semantics of a language in Spoofax.
-
 \subsubsection{DynSem: rule-based dynamic semantics}
 \label{ssec:dynsem}
 Aside from Stratego, the Spoofax team has developed an additional method to
@@ -158,6 +154,10 @@ declare the dynamic semantics of a language, namely a DSL called
 DynSem~\cite{VerguNV15}. DynSem allows for an operational semantics
 specification from which a Java-based AST interpreter can be automatically
 derived.
+
+DynSem uses an approach called \textit{operational semantics}. The rest of this
+section discusses how DynSem (and operational semantics) is used to specify the
+dynamic semantics of a language in Spoofax.
 
 \paragraph{Reduction rules} In DynSem and operational semantics, reduction rules
 are used to specify the dynamic semantics of a language. The syntax of a DynSem

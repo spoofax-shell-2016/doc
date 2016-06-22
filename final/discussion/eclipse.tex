@@ -9,10 +9,10 @@ resolved are discussed in this section.
 
 The initial design assumed that the frontends and the backend would run in the
 same thread. For a console based REPL, this assumption holds and greatly
-simplifies the design. However, this assumption does not hold when the backend
-has a frontend using a multithreaded GUI toolkit. This
+simplifies the design. However, this assumption does not hold when the frontend 
+uses a multithreaded GUI toolkit. This
 assumption resulted in two problems, which are listed separately in the next
-sections. The solution and changes made to the design are then discussed
+sections. The solution and changes made to the design are discussed
 afterwards.
 
 \subsection{Blocking- versus non-blocking input}

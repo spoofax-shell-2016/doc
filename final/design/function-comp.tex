@@ -56,7 +56,7 @@ This design decision brings several benefits:
 One problem remains in this design, which is how to handle failures that occur
 somewhere in the execution pipeline. For example, analysis should not be
 done when parsing has failed. Using Java's exceptions to solve this problem
-is not desirable, as one would like to handle failures as any other result of an
+is not desirable, as one would like to treat failures as any other result of an
 execution step. The solution to this problem is to apply monadic composition, as
 opposed to regular function composition.
 
