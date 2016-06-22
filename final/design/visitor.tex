@@ -33,7 +33,7 @@ implementing the \texttt{IResultVisitor} interface. Each subclass of
 by means of double-dispatch. Furthermore, the \texttt{FailOrSuccessResult}
 delegates the visitor to its wrapped \texttt{IResult}.
 
-Any implementers of the \texttt{IResultVisitor} can then decide per result type
+Implementations of the \texttt{IResultVisitor} can then decide per result type
 how to handle the returned information. Since all commands can always return a
 result with the original exception or the failed \texttt{ISpoofaxResult} by
 returning a \texttt{FailOrSuccessResult}, the frontend is always provided with

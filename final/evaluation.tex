@@ -46,7 +46,7 @@ Error reporting                                                                 
 Syntax-checked expressions                                                                   & Yes           & \begin{tabular}[c]{@{}l@{}}The backend parses the input with the\\ services provided by Spoofax. As such,\\ syntax-checked input was given for free.\\ However, this feedback is not yet enabled\\ during typing.\end{tabular}\\ \hline
 Syntax highlighting                                                                          & No            & \begin{tabular}[c]{@{}l@{}}The Spoofax services to provide syntax\\ highlighting are difficult to fit into the\\ architecture of the REPL. For this reason,\\ syntax highlighting is not yet completed.\end{tabular}\\ \hline
 Integration with Eclipse                                                                     & Yes           & \begin{tabular}[c]{@{}l@{}}A REPL has been implemented in Eclipse,\\ allowing the user to give input and see output.\end{tabular}\\ \hhline{|=|=|=|}
-Ability to redefine identifiers                                                              & Yes           & \begin{tabular}[c]{@{}l@{}}The language designer can speficy these\\ semantics in DynSem.\end{tabular} \\ \hline
+Ability to redefine identifiers                                                              & Yes           & \begin{tabular}[c]{@{}l@{}}The language designer can specify these\\ semantics in DynSem.\end{tabular} \\ \hline
 Environment inspection                                                                       & No            & \begin{tabular}[c]{@{}l@{}}In the current DynSem implementation, this\\ is impossible to do because the environment\\ is captured in an object of type \texttt{Object}\\ and therefore unprintable.\end{tabular} \\ \hline
 Save and load REPL state                                                                     & No            & \begin{tabular}[c]{@{}l@{}}Due to limitations in time, this feature has\\ not been implemented.\end{tabular}\\ \hhline{|=|=|=|}
 Syntactic code completion                                                                    & No            & \begin{tabular}[c]{@{}l@{}}Spoofax's code completion services do not\\ yet work with all languages and are in\\ process of a rewrite. As such, code completion\\ has not yet been attempted.\end{tabular}\\ \hline
@@ -93,7 +93,7 @@ is reused to specify which start symbols are valid in case the language designer
 wants to allow different start symbols. Therefore this design goal is met.
 
 \paragraph{Maintainability} This design goal stated that the code should be
-maintainable, because maintainership will be transferred to the people already
+maintainable, because ownership will be transferred to the people already
 working on Spoofax.
 
 Various static analysis tools, up-to-date documentation, proper software design
@@ -113,7 +113,7 @@ multithreaded, et cetera. This design goals is met.
 performant, because care is taken to ensure that Spoofax itself is performant.
 
 Launching the REPL is near instantaneous. Commands and expressions are evaluated
-in real time, without noticable delay. This design goals is thus met.
+in real time, without noticeable delay. This design goals is thus met.
 
 \paragraph{Modify Spoofax's existing codebase as little as possible} This design
 goal stated that the REPL should be an extension to Spoofax, which means that
@@ -257,8 +257,8 @@ Two suggestions were given as a possible solution to this problem: create new
 classes that encapsulate several parameters, or use \texttt{setter} methods
 to pass parameters this way. However, neither solution was satisfactory as-is:
 data classes are often considered to be a code smell, and \texttt{setter}
-methods risk not fully initialising an object. The classes to which the
-criticism applied have been refactored into smaller, more managable units.
+methods risk not fully initializing an object. The classes to which the
+criticism applied have been refactored into smaller, more manageable units.
 Ultimately, this not only led to resolving the only negative feedback made by
 the Software Improvement Group, it also led to a better architecture.
 
