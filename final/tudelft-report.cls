@@ -425,7 +425,7 @@
 %% right, followed by the part name on the next line in the title color.
 \titleformat{\part}[display]
     {\flushright}
-    {\fontsize{\@largetitlesize}{\@largetitlesize}\selectfont\bfseries\thepart}
+    {\fontsize{96}{96}\selectfont\bfseries\thepart}
     {0pt}
     {\Huge\color{title}}
 %% Separate the title from the text by two empty lines.
@@ -447,37 +447,22 @@
 
 %% Section titles start with the number in bold, followed by the name printed
 %% in the title color.
-\titleformat{\section}
+\titleformat*{\section}
     {\Large\sectitlestyle}
-    {\bfseries\thesection\ }
-    {0pt}
-    {\color{title}}
-%% Sections are preceded by an empty line.
-\titlespacing{\section}{0pt}{\baselineskip}{0pt}
 %% In the table of contents, section names are followed by a line of dots 8pt
 %% apart.
 \dottedcontents{section}[3.8em]{\titlefont}{2.3em}{8pt}
 
 %% Subsection titles have the same layout as section titles, except in a smaller
 %% font.
-\titleformat{\subsection}
+\titleformat*{\subsection}
     {\large\sectitlestyle}
-    {\bfseries\thesubsection\ }
-    {0pt}
-    {\color{title}}
-\titlespacing{\subsection}{0pt}{\baselineskip}{0pt}
 \dottedcontents{subsection}[7em]{\titlefont}{3.2em}{8pt}
 
 %% Subsubsections have the same font and color as sections and subsections, but
 %% are not preceded by a number.
-\titleformat{\subsubsection}
+\titleformat*{\subsubsection}
     {\sectitlestyle}
-    {\bfseries\thesubsubsection\ }
-    {0pt}
-    {\color{title}}
-%% Subsubsections are preceded by an empty line and do not appear in the table
-%% of contents.
-\titlespacing{\subsubsection}{0pt}{\bigskipamount}{0pt}
 
 %% Color the bullets of the itemize environment and make the symbol of the third
 %% level a diamond instead of an asterisk.
