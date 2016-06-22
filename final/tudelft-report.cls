@@ -21,8 +21,7 @@
 \RequirePackage[nooneline,small]{caption}
 \let\footruleskip\undefined %for loading fancyhdr
 \RequirePackage{fancyhdr}
-\RequirePackage[flushmargin,hang]{footmisc}
-\RequirePackage{ifpdf}
+\RequirePackage[flushmargin,hang,bottom]{footmisc}
 \RequirePackage{metalogo}
 \RequirePackage[numbers,sort&compress]{natbib}
 \RequirePackage{tikz}
