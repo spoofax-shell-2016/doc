@@ -12,7 +12,7 @@ module classes, thereby separating behavior and dependency resolution.  Complex
 datatypes can then accept their dependencies as constructor arguments, allowing
 Guice to resolve and inject an instance of a bound type.
 
-In the final product dependency injection is also used to supply several classes
+In the final product dependency injection is also used to supply classes
 with a default configuration.  An example is the default list of commands
 available to a user as described in \cref{sec:commands}.  The list of commands
 is created from a Guice module by instantiating a \texttt{MapBinder} with
@@ -21,6 +21,6 @@ predefined bound commands. Child modules can then append extra entries to the
 architecture.
 
 Using dependency injection has made it easier to create a modular product,
-mostly centered around smaller interfaces interacting with each other. All these
+centered around smaller interfaces interacting with each other. All these
 interfaces can easily be bound to new implementations, thereby extending the
 functionality of the REPL.

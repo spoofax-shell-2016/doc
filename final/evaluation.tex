@@ -153,7 +153,7 @@ the existing codebase should be modified as little as possible.
 The REPL is developed into a standalone repository. It uses the same API exposed
 by Spoofax as any other extension would use. Minimal changes have been made to
 Spoofax itself: the only large change that went upstream is the ability to
-configure the REPL in an ESV file. However, DynSem had to be significantly
+configure the REPL in an ESV file. However, DynSem had to be 
 modified after its rewrite to support the use case of a REPL. These changes were
 made in cooperation with its maintainer, and most were features that had to be
 implemented regardless. As such, this design goal is also met.
@@ -241,7 +241,7 @@ Spoofax.
 
 The biggest issue that occurred during the development is the fact that Spoofax
 is a moving target. Halfway through the allotted time for development, DynSem
-was significantly rewritten. After this rewrite, the functionality required for
+was rewritten. After this rewrite, the functionality required for
 a REPL was no longer present. To resolve this, considerable effort has been spent
 to add these features to DynSem in cooperation with DynSem's maintainer. All of
 this work has been accepted upstream and has now been published in the latest
@@ -294,13 +294,13 @@ tijdens het vervolg van het project.
 \end{quotation}
 
 This analysis says that the code scored bad on unit interfacing, because there
-were quite a few classes that had an above average amount of constructor
+were classes that had an above average amount of constructor
 parameters. The reason that this came to be is the fact that dependency
 injection is used, as opposed to the traditional way of managing dependencies.
 This fact is also mentioned in the analysis itself.
 
 Two suggestions were given as a possible solution to this problem: create new
-classes that encapsulate several parameters, or use \texttt{setter} methods
+classes that encapsulate parameters, or use \texttt{setter} methods
 to pass parameters this way. However, neither solution was satisfactory as-is:
 data classes are often considered to be a code smell, and \texttt{setter}
 methods risk not fully initializing an object. The classes to which the
