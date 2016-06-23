@@ -1,6 +1,6 @@
 \section{Refactoring DynSem's Entry Point}
 \label{sec:dynsem-refactor}
-During the project, the implementation of DynSem changed significantly:
+The implementation of DynSem changed during the project:
 instead of letting the generated interpreters be defined on their own, they now
 use the Truffle language implementation framework for their
 implementation~\cite{Humer14}. Due to this change, the interface of the entry
@@ -10,7 +10,7 @@ Initially, the only available rule was the ``main'' rule for evaluating complete
 programs, rather than any rule. Furthermore, the evaluation of a program was
 tied to the parsing of that program's original source text, even if the parsing
 step had already been executed before by the REPL. Lastly, the entry point did
-not allow for the evaluation in an existing context, a very important
+not allow for the evaluation in an existing context, an important
 requirement for the REPL. The new entry point therefore required a refactor, so
 that firstly rules could be looked up and invoked individually in an existing
 evaluation context, and secondly so that evaluation could be done on ASTs rather
