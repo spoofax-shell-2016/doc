@@ -36,9 +36,8 @@ can use DynSem, Stratego, and some languages even implement a Java
 backend\footnote{See IceDust:
   \url{https://github.com/MetaBorgCube/IceDust}}.
 
-Some of these properties of a language should be detected by the REPL
-automatically, such as detecting whether a language has an analysis
-step.
+Some of these properties of a language can be detected by the REPL
+automatically, such as detecting whether a language has an analysis step.
 
 Other properties of a language, however, cannot be detected
 automatically. For example, the REPL should be able to maintain an
@@ -50,7 +49,7 @@ want. To accommodate for this, the REPL should provide a configuration
 interface that is generic enough for the REPL to be configured
 for any language.
 
-\subsection{Language-specific additional commands}
+\subsection{Language-specific commands}
 \label{ssec:lang-spec-addit}
 Another problem is when some additional command can be useful for a
 REPL of a particular language, but would not make any sense within the

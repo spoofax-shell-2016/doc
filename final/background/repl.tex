@@ -7,11 +7,10 @@ engine. One common form of such an environment is an interface in which
 expressions in a programming language are typed by the user, after which the
 results of that expression are printed back to the user. Such an environment is
 called a Read-Eval-Print Loop (REPL), although different names are known,
-including but not limited to \emph{language shell},
-\emph{command-line interpreter} or \emph{interactive interpreter}. There
-are subtle differences between these names and the name REPL. These are,
-however, of semantic value. In this report the term REPL is chosen,
-because it conveys the notion of such an interactive environment well.
+including but not limited to \emph{language shell}, \emph{command-line
+  interpreter} or \emph{interactive interpreter}. In this report the term REPL
+is chosen, because it conveys the notion of such an interactive environment
+well.
 
 \subsection{Origin of REPLs}
 \label{ssec:repl-origin}
@@ -122,8 +121,7 @@ discussed below.
 \begin{tabular}{lccccccccc}
                                   & \rot{Python} & \rot{R} & \rot{\shortstack[c]{Common\\Lisp}} & \rot{\shortstack[c]{Haskell\\(GHCi)}} & \rot{Swift} \\
 \toprule
-Executes single expressions       & \cmark       & \cmark  & \cmark                             & \cmark                                & \cmark      \\
-Executes statements               & \cmark       & \cmark  & \cmark                             & \cmark                                & \cmark      \\
+Executes expressions              & \cmark       & \cmark  & \cmark                             & \cmark                                & \cmark      \\
 Input history                     & \cmark       & \cmark  & \cmark                             & \cmark                                & \cmark      \\
 Automatic binding of previously yielded values & \xmark & \xmark & N/A                          & \xmark                                & \cmark      \\
 Persistent input history          & \cmark       & \cmark  & \xmark                             & \cmark                                & \cmark      \\
@@ -139,6 +137,8 @@ Nested REPLs to enable debugging  & \xmark       & \xmark  & \cmark             
 \caption{A feature comparison of several well-known REPLs.}
 \label{table:feature-matrix}
 \end{table}
+
+\paragraph{Executes expressions} %TODO
 
 \paragraph{Input history} REPLs keep a history of inputs, such that previously
 entered expressions can be retrieved.

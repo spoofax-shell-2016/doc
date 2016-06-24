@@ -15,6 +15,7 @@
   \label{fig:unit-flow}
 \end{figure}
 
+% More clear about "dealing with execution model".
 There was a need for a more fine-grained and flexible way of defining commands
 for those that deal with the execution model as described in
 \cref{cha:background}. This is because the specific
@@ -25,14 +26,13 @@ explained in the previous section, should thus create different
 commands depending on whether the loaded language has an
 analysis step. See \cref{fig:unit-flow} for a schematic example.
 
-To accommodate for this, commands dealing with the execution model are
-built by composing functions using a \texttt{CommandBuilder}, a class
-following the builder pattern. In this context, a function represents a
-step in the execution model, whereas the composition represents the
-execution model as a whole. The builder has methods for composing
-functions and a method for building a command like the one described
-in the previous section out of the composition. A UML diagram is shown
-in \cref{fig:uml-function-comp}.
+To accommodate for this, commands dealing with the execution model are built by
+composing functions using a \texttt{CommandBuilder}, a class following the
+builder pattern. In this context, a function represents a step in the execution
+model, whereas the composition represents the execution model as a whole. The
+builder has methods for composing functions and a method for building a command
+like the one described in the previous section out of the composition. A UML
+diagram of function composition is shown in \cref{fig:uml-function-comp}.
 
 \begin{figure}[b]
   \centering

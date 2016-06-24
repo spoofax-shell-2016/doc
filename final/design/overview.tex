@@ -4,12 +4,14 @@
 As stated in \cref{ssec:goals}, one of the design goals during the project was
 to keep the implementation of the REPL IDE-agnostic. To achieve this goal, the
 product has been split into a backend and several frontends. This backend
-interacts with the Spoofax services on behalf of the frontends. An overview of
-its design can be found in \cref{fig:uml-overview}. To request and receive
-results from the backend, every frontend should at least implement the
-\texttt{IResultVisitor} interface in the \texttt{client} package and
-acquire an instance of a class implementing the \texttt{ICommandInvoker}
-interface.
+interacts with the Spoofax services on behalf of the frontends.
+
+% high-level concepten ~2 paragrafen.
+
+An overview of its design can be found in \cref{fig:uml-overview}. To request
+and receive results from the backend, every frontend should at least implement
+the \texttt{IResultVisitor} interface in the \texttt{client} package and acquire
+an instance of a class implementing the \texttt{ICommandInvoker} interface.
 
 The \texttt{ICommandInvoker} instance maintains a map from command names to
 corresponding \texttt{IReplCommand} instances. A frontend can thus send
