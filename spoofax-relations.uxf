@@ -133,7 +133,8 @@ m1pos=-16,-20</panel_attributes>
       <w>130</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>Implementation and Execution
+    <panel_attributes>Implementation
+and Execution
 halign=right
 valign=center</panel_attributes>
     <additional_attributes/>
@@ -251,7 +252,8 @@ bg=white</panel_attributes>
       <w>110</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>Language Specification
+    <panel_attributes>Language
+Specification
 halign=right
 valign=center</panel_attributes>
     <additional_attributes/>
@@ -264,7 +266,8 @@ valign=center</panel_attributes>
       <w>110</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>Language Aspects
+    <panel_attributes>Language
+Aspects
 halign=right
 valign=center</panel_attributes>
     <additional_attributes/>
