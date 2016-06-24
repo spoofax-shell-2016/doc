@@ -52,11 +52,11 @@ detail throughout the rest of this section:
 
   This language aspect is not discussed in this section, but it is explained in
   the research report in \cref{ssec:a-static-analysis}.
-\item \textbf{Term rewriting or program transformation:} A well-formed AST can
-  then be transformed, for example for desugaring or optimization. This
-  execution step falls under the aspect of \textit{term rewriting} and can be
-  formally specified by \textit{term rewrite rules}. For the specification of
-  this aspect, Spoofax provides a DSL called Stratego.
+\item \textbf{Program transformation:} A well-formed AST can then be
+  transformed, for example for desugaring or optimization. This execution step
+  falls under the aspect of \textit{program transformation} and can be formally
+  specified by \textit{term rewrite rules}. For the specification of this
+  aspect, Spoofax provides a DSL called Stratego.
 
   This aspect is also not discussed in this section, the relevant section from
   the research report can be found in \cref{ssec:a-term-rewrite}.
@@ -103,16 +103,15 @@ uses only context-free grammar productions for the specification of
 both the lexical syntax and the context-free syntax, a feature that
 was introduced in SDF2~\cite{Visser97}.
 
-The declarative nature of SDF3 allows for thinking in terms of the
-structure (the \emph{what}), instead of in terms of parser algorithms (the
-\emph{how}) as is the case with many current parser generators such as
-ANTLR and YACC~\cite{Kats10b}. The syntax definition is used to
-make parsers that parse a textual representation of a program into its
-AST and pretty-printers for mapping ASTs back to text. However, due to
-its declarative nature, SDF3 is not limited to generating parsers and
-pretty printers: it can also be used for error recovery
-rules~\cite{deJonge12}, syntax highlighting rules and folding
-rules for editors (see \cref{ssec:editor-serv}).
+The declarative nature of SDF3 allows for thinking in terms of the structure
+(the \emph{what}), instead of in terms of parser algorithms (the \emph{how}) as
+is the case with many current parser generators such as ANTLR and
+YACC~\cite{Kats10b}. The syntax definition is used to make parsers that parse a
+textual representation of a program into its AST and pretty-printers for mapping
+ASTs back to text. However, due to its declarative nature, SDF3 is not limited
+to generating parsers and pretty printers: it can also be used for error
+recovery rules~\cite{deJonge12}, syntax highlighting rules and folding rules for
+editors (see \cref{fig:spoofax-relations} and \cref{ssec:editor-serv}).
 
 The Spoofax API gives access to the generated parser through the
 \texttt{SyntaxService}. The results obtained by executing the parser results in,
@@ -285,10 +284,9 @@ specified using Stratego. Since Stratego supports native strategies, these
 actions can also be specified in Java. As such, Spoofax allows for defining
 arbitrarily complex IDE actions.
 
-Many of these editor services such as syntax highlighting and code
-folding rules can be derived from the syntax
-definition~\cite{Kats10c} and can be further customized if
-needed. Taken together with the language definition, the editor
+Many of these editor services such as syntax highlighting and code folding rules
+can be derived from the syntax definition~\cite{Kats10c} and can be further
+customized if needed. Taken together with the language definition, the editor
 services provide a language with a complete and state-of-the-art IDE
 experience~\cite{Kats10a}.
 %%% Local Variables:
