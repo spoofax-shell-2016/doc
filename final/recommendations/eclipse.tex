@@ -22,22 +22,22 @@ be added to the ``Spoofax'' submenu to assist a language user.
 An obstacle in implementing this feature is the classpath issue as described in
 \cref{sec:classpath}.
 
-\subsection{Back and forth interaction between Eclipse and the REPL}
+\subsection{Interaction between Spoofax Eclipse and the Eclipse plugin}
 
 The REPL backend supports loading individual files to bring the definitions
 inside these files into scope. This functionality, however, is not yet provided
-in Eclipse by means of menu items or buttons, nor is there a deeper integration
-between the REPL and Spoofax Eclipse.
+by the Eclipse plugin by means of menu items or buttons, nor is there a deeper integration
+between the Eclipse plugin and Spoofax Eclipse.
 
 Deeper integration improves the interaction between Spoofax Eclipse and the
-REPL. For example, hovering over variables could indicate where they are defined, or
+Eclipse frontend. For example, hovering over variables could indicate where they are defined, or
 changes in a currently loaded file could be automatically picked up. Changes in
 the other direction are interesting, too: when a function definition is overridden
 inside the REPL, an option could be provided to apply this change to its
 originating file as well. This could even be extended to write (parts of) the current
 environment to a new file.
 
-\subsection{Improving the UI of the Eclipse REPL}
+\subsection{Improving the UI}
 
 The user interface currently offered by the Eclipse frontend does not resemble a
 typical REPL: the input and output views are separated. To improve the user

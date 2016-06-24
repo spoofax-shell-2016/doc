@@ -1,16 +1,17 @@
-\section{Wrapping}
+\section{Partial Program Evaluation by Wrapping}
 \label{sec:wrapping}
 
-During the research phase of the project the investigated solutions were
-primarily focused on ``wrapping'' an incomplete program such that it becomes a
-valid program as a whole, as the OpenJDK team has done for JShell (see
-\cref{ssec:a-execution-model-repl}). A solution using templates for various
-language constructs was proposed to keep this approach generic across all
-languages supported by Spoofax. \Cref{fig:wrapping} shows a diagram which
-describes this idea. The diagram shows the wrapping of both the environment
-definitions and the incomplete program AST. The environment definitions, in
-this case, refer to the language-specific constructs such as class definitions,
-function definitions and variable declarations.
+During the research phase of the project, the investigated solutions to the
+problem of partial program evaluation were primarily focused on ``wrapping'' an
+incomplete program such that it becomes a valid program as a whole, as the
+OpenJDK team has done for JShell (see \cref{ssec:a-execution-model-repl}). A
+solution using templates for various language constructs was proposed to keep
+this approach generic across all languages supported by Spoofax.
+\Cref{fig:wrapping} shows a diagram which describes this idea. The diagram shows
+the wrapping of both the environment definitions and the incomplete program AST.
+The environment definitions, in this case, refer to the language-specific
+constructs such as class definitions, function definitions and variable
+declarations.
 
 \begin{figure}[b]
   \centering
@@ -21,7 +22,7 @@ function definitions and variable declarations.
 \end{figure}
 
 However, as the project developed and the entry point to DynSem was refactored
-significantly (see \cref{sec:dynsem-refactor}), wrapping turned out to be an
+(see \cref{sec:dynsem-refactor}), wrapping turned out to be an
 unnecessary and inadequate solution for two reasons. Firstly, the ability to
 invoke a rule corresponding to any AST, both complete and incomplete,
 automatically allows for evaluating incomplete programs without wrapping them

@@ -15,16 +15,13 @@ frontend has two commands available by default:
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{uml-commands}
-  \caption{UML of the various commands frontends can execute and the
+  \caption{UML of the commands frontends can execute and the
            corresponding result interfaces.}
   \label{fig:uml-commands}
 \end{figure}
 
 Frontends can define additional commands by implementing the
-\texttt{IReplCommand} interface. These commands can then be made available
-to the invoker by either binding them in the default map of available commands
-via a Guice module or by adding an entry to the invoker at runtime using the
-\texttt{addCommand} method.
+\texttt{IReplCommand} interface.
 
 As explained in the introduction of this chapter, there are only a few
 commands that work across all languages, since every language can define its
