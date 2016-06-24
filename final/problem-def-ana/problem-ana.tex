@@ -1,6 +1,6 @@
 \section{Problem Analysis}
 \label{sec:problem-analysis}
-This section section describes the problems that need to be solved while
+This section describes the sub-problems that need to be solved while
 incorporating a REPL within the larger context of Spoofax.
 
 The general theme of the sub-problems that arise from the problem
@@ -31,13 +31,9 @@ can use DynSem, Stratego, and some languages even implement a Java
 backend\footnote{See IceDust:
   \url{https://github.com/MetaBorgCube/IceDust}}.
 
-Some of these properties of a language should be detected by the REPL
-automatically, such as whether a language has an analysis step.
-Other properties of a language, however, cannot be detected
-automatically. For example, the REPL should be able to maintain an
-execution environment for the duration of the REPL session, but
-precisely what an execution environment looks like differs among
-languages.
+Furthermore, a REPL maintains an execution environment for the duration of the
+REPL session, but precisely what an execution environment looks like differs
+among languages.
 
 \subsection{Language-specific commands}
 \label{ssec:lang-spec-addit}
