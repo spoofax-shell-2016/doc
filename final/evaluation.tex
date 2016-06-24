@@ -101,7 +101,7 @@ for any language. Additionally, the language designer should be provided with a
 language-agnostic interface to configure and implement the language-specific
 parts of the REPL.
 
-An extension of Spoofax's Editor Services has been created, allowing language
+An extension of Spoofax's editor services has been created, allowing language
 designers to configure certain parts of the REPL. Additionally,
 language-specific changes, such as the ability to redefine identifiers, can be
 made through DynSem. Currently, however, only DynSem-based interpreters are
@@ -113,7 +113,7 @@ is met.
 require as little configuration as possible by reusing existing components of
 the language definitions and automatically deriving other settings.
 
-The extension of the Editor Services discussed in the previous design goal is
+The extension of the editor services discussed in the previous design goal is
 minimal. Three settings can be configured at the time of writing, all of which
 have sane default settings. One additional setting is mandatory and cannot be
 derived automatically (see \cref{ssec:supp-diff-ways}): the name of the
