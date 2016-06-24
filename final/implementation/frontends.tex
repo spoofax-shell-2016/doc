@@ -92,14 +92,14 @@ The \texttt{EclipseRepl} class is the central element in the Eclipse plugin.
 It is instantiated by the \texttt{ReplView} class, which in turn is
 instantiated by Eclipse when the user requests the REPL to be opened. This
 \texttt{ReplView} class also instantiates the input editor widget,
-\texttt{EclipseEditor} and the \texttt{IResultVisitor} implementation,
+\texttt{EclipseEditor} and the \texttt{IDisplay} implementation,
 \texttt{EclipseDisplay}.
 In a multithreaded graphical user interface environment, asking text entry
 widgets for the entered text is rarely a blocking process. This is no different
 in Eclipse. For this reason, the \texttt{EclipseRepl} cannot simply loop as the
 console frontend does. The solution is to use reactive programming through RxJava:
 the \texttt{EclipseRepl} is registered as an observer to the
-\texttt{EclipseEditor}. Then, when the user presses the Return key,
+\texttt{EclipseEditor}. When the user presses the Return key,
 \texttt{EclipseEditor} notifies \texttt{EclipseRepl} with the contents of its
 text buffer. \texttt{EclipseRepl} in turn launches a background job in which the
 evaluation takes place, so as to not block the UI thread. Since the backend
