@@ -198,8 +198,13 @@ There are two kinds of semantic components: \textit{read-only} semantic
 components and \textit{read-write} semantic components. An environment is a
 read-only semantic component: a variable is bound only within a certain scope,
 and any other reduction rules that are applied outside of that scope do not see
-this environment. A store is a read-write semantic component: changes in the
-store are visible everywhere, as it represents mutable state.
+this environment. Read-only semantic components therefore are only propagated
+downwards into the premises: the changed read-only semantic component does not
+appear in the result of the premise, and therefore cannot be propagated again in
+the next premise. A store is a read-write semantic component: changes in the
+store are visible everywhere, as it represents mutable state. In contrast with a
+read-only semantic component, a read-write semantic component does appear in the
+result of a rule and can thus be threaded from one premise to the next.
 
 \paragraph{Specifying function application in DynSem} An example of a reduction
 rule specified in DynSem is shown in \cref{lst:dynsem}. The rule specifies the
