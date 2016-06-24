@@ -106,19 +106,17 @@ designers to configure certain parts of the REPL. Additionally,
 language-specific changes, such as the ability to redefine identifiers, can be
 made through DynSem. Currently, however, only DynSem-based interpreters are
 supported, as opposed to Java- and Stratego-based interpreters. Despite this,
-care has been taken to make this easily extendable. This design goal, therefore,
+care has been taken to make this extendable. This design goal, therefore,
 is met.
 
 \paragraph{Minimal configuration} This design goal stated that the REPL should
-require as little configuration as possible by reusing existing components of
+require only additive configuration, by reusing existing components of
 the language definitions and automatically deriving other settings.
 
 The extension of the editor services discussed in the previous design goal is
-minimal. Three settings can be configured at the time of writing, all of which
-have sane default settings. One additional setting is mandatory and cannot be
-derived automatically (see \cref{ssec:supp-diff-ways}): the name of the
-evaluation strategy to use. Additionally, because the existing DynSem
-specification can be reused, only a minimal amount of new DynSem rules have to
+only additive. Three settings can be configured at the time of writing, all of which
+have sane default settings. Furthermore, because the existing DynSem
+specification can be reused, only new DynSem rules have to
 be written to specify REPL-specific semantics. Finally, the SDF3 configuration
 is reused to specify which start symbols are valid in case the language designer
 wants to allow different start symbols. Therefore this design goal is met.
@@ -164,7 +162,7 @@ implemented regardless. As such, this design goal is also met.
 This section evaluates whether the minimal viable product, as defined in
 \cref{ssec:mvp}, has been delivered. The minimal viable product has been defined
 as all the ``must have'' requirements (see \cref{ssec:requirements}), including
-the design goals of being language-agnostic and having a minimal configuration.
+the design goals of being language-agnostic and requiring only additive configuration.
 
 The previous section concluded that all the design goals have been met.
 \Cref{ssec:eval-requirements} and \cref{table:requirements} show that all the
@@ -195,7 +193,7 @@ viable product is therefore deemed to be delivered.
 \label{sec:process-evaluation}
 
 This section gives an evaluation of the process by which the delivered product
-came to be. First, the methodologies used during development are discussed in
+came to be. The methodologies used during development are discussed in
 \cref{ssec:dev-meth}. \Cref{ssec:sig} shows the feedback received from the
 Software Improvement Group and discusses the changes that were made to the code
 accordingly.
