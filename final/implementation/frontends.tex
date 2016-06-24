@@ -14,7 +14,15 @@ are discussed next.
 
 The console frontend provides the user with a text-based user interface. For users
 already accustomed to the command line, this is perhaps the most familiar
-looking interface. A REPL running in the console requires a means of getting
+looking interface, see \cref{fig:frontend-console}.
+
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{console-frontend}
+  \caption{The console frontend.}
+  \label{fig:frontend-console}
+\end{figure}
+
+A REPL running in the console requires a means of getting
 user input from the standard input stream and printing results and error
 messages to the standard output and error streams.
 
@@ -65,7 +73,13 @@ Spoofax currently features extensive integration in the Eclipse IDE. The client
 expressed their interest to have this same level of integration for the REPL. A
 plugin to the Eclipse IDE has been developed, which exposes the REPL
 functionality through a graphical user interface that is familiar to anyone
-working in Eclipse.
+working in Eclipse, see \cref{fig:frontend-eclipse}.
+
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{frontend-eclipse}
+  \caption{The Eclipse plugin.}
+  \label{fig:frontend-eclipse}
+\end{figure}
 
 As is customary for a graphical user interface toolkit, the toolkit offered by
 Eclipse uses multiple threads. One such thread is designated the ``UI thread'',
