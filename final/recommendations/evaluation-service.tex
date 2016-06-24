@@ -1,0 +1,16 @@
+\section{Integrating Evaluation with DynSem in Spoofax}
+\label{sec:adding-an-eval}
+Most of the execution steps as outlined in \cref{sec:spoofax} have a
+corresponding API in Spoofax to provide programmatic access to those
+aspects. For example, for parsing there exists a
+\texttt{SyntaxService}. However, currently Spoofax lacks an
+\texttt{EvaluationService} to perform evaluation with DynSem's generated
+interpreters. Such an interface could hide the implementation details of Truffle
+and class loaders (see \cref{sec:classpath}). Instead it can provide an API for
+performing evaluations in context. The existing evaluation backend for DynSem
+could then be adapted to use the \texttt{EvaluationService} instead.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

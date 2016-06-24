@@ -17,11 +17,11 @@ loader and make them available for later evaluation\footnote{See:
 \url{http://lafo.ssw.jku.at/javadoc/truffle/latest/com/oracle/truffle/api/vm/PolyglotEngine.html}}''}.
 
 As a consequence, interpreters for languages to be used inside the REPL need to
-be on the classpath of the system classloader before instantiating a
+be on the classpath of the system class loader before instantiating a
 \texttt{PolyglotEngine}, which implies that a REPL user should specify the path to
 the desired language interpreter before starting the REPL. Since Truffle
-enforces the use of the system classloader, attempts to load the
-\texttt{PolyglotEngine} using a custom classloader unfortunately did not solve this
+enforces the use of the system class loader, attempts to load the
+\texttt{PolyglotEngine} using a custom class loader unfortunately did not solve this
 issue. It is suspected that this issue will become apparent in Spoofax as well
 once the new DynSem implementation will be integrated more tightly.
 
