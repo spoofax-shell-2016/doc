@@ -23,9 +23,8 @@ frontends by encapsulating operations in commands. \Cref{sec:function-comp}
 details how commands have been decomposed into smaller functions, which allows
 frontends to build their own transformation pipeline. \Cref{sec:visitor}
 explains how transformation results are returned to the REPL frontends.
-\Cref{sec:eval-strat} discusses the DynSem evaluation strategy. An explanation
-is given as to how other evaluation strategies can be added to the existing
-design to support other interpreter backends, such as Stratego.
+\Cref{sec:eval-strat} discusses how the strategy pattern is applied to allow
+future support for other evaluation backends, such as Stratego.
 
 \input{design/overview}
 
