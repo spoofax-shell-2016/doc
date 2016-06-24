@@ -21,14 +21,13 @@ order to allow the language designer to configure and implement the
 language-specific parts of the REPL. Note that this does not mean that the REPL
 is expected to work out of the box for any language.
 
-\paragraph{Minimal configuration} The REPL should require as little
-configuration as possible. This means that the REPL allows the
-language designer to reuse existing components of their language
-definition in its configuration. Moreover, the language
-designer should not have to configure areas of the REPL that can
+\paragraph{Minimal configuration} The REPL should require only additional
+configuration. This means that the REPL allows the language designer to reuse
+existing components of their language definition in its configuration. Moreover,
+the language designer should not have to configure areas of the REPL that can
 instead be derived automatically.
 
-\paragraph{Maintainability} Spoofax is an already existing, open source project
+\paragraph{Maintainability} Spoofax is an existing open source project,
 managed by several people. When the product is delivered, these people will take
 over the ownership. Therefore, it is important that the code is
 maintainable. This means that the code should be well-documented, with low

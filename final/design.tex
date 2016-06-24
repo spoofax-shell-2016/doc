@@ -10,23 +10,22 @@ and see their results.
 An example is the various transformation goals made available to the user by a
 language designer. There is no such thing as a uniform ``evaluation command''
 that works across all languages. Instead, each language defines its own
-transform goals, of which one is an evaluation goal.  Furthermore, the sequence
+transform goals, of which one is an evaluation goal. Furthermore, the sequence
 of processing steps needed to go from source to parsed source to a transformed
 result also varies between languages. One of the main goals that the design had to
 accomplish, therefore, was to expose a uniform interface for the various
 transformation stages to REPL frontends.
 
-In \cref{sec:overview} an overview of the product design and its
-components is given first. Afterwards, the individual components are explained
-in more depth. In \cref{sec:commands} the presentation of a uniform interface to
-frontends by encapsulating operations in commands is addressed.
-\Cref{sec:function-comp} details how commands have been decomposed into smaller
-functions, which allows frontend to build their own transformation pipeline.
-\Cref{sec:visitor} then explains how this transformation result is returned to
-the REPL frontends. Finally, in \cref{sec:eval-strat}, the DynSem evaluation
-strategy is outlined.  An explanation is given as to how other evaluation
-strategies can be added to the existing design to support other interpreter
-backends, such as Stratego.
+\Cref{sec:overview} gives an overview of the product design and its components.
+Afterwards, the individual components are explained in more depth.
+\Cref{sec:commands} addresses the presentation of a uniform interface to
+frontends by encapsulating operations in commands. \Cref{sec:function-comp}
+details how commands have been decomposed into smaller functions, which allows
+frontends to build their own transformation pipeline. \Cref{sec:visitor}
+explains how transformation results are returned to the REPL frontends.
+\Cref{sec:eval-strat} discusses the DynSem evaluation strategy. An explanation
+is given as to how other evaluation strategies can be added to the existing
+design to support other interpreter backends, such as Stratego.
 
 \input{design/overview}
 
