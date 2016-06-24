@@ -13,8 +13,8 @@ divided into multiple distinct aspects. In \cref{fig:spoofax-relations}, four
 common aspects of programming languages are shown, along with the relation
 between the formal specification and implementation for each aspect. An example
 of an aspect is the \textit{syntax}: its formal specification is done with
-grammar rules, and its implementation traditionally consists of both a tokenizer
-and parser.
+grammar rules, and its implementation traditionally consists of a tokenizer and
+a parser.
 
 A key property of Spoofax is that it allows a language designer to give a
 complete specification of each aspect of their language, and automatically
@@ -58,7 +58,7 @@ detail throughout the rest of this section:
   specified by \textit{term rewrite rules}. For the specification of this
   aspect, Spoofax provides a DSL called Stratego.
 
-  This aspect is also not discussed in this section, the relevant section from
+  This aspect is also not discussed in this section. The relevant section from
   the research report can be found in \cref{ssec:a-term-rewrite}.
 \item \textbf{\hyperref[ssec:dynamic-semantics]{Dynamic semantics}:} Next the
   transformed AST is either compiled or interpreted, thereby providing a means
@@ -79,9 +79,9 @@ detail throughout the rest of this section:
   \label{fig:spoofax-relations}
 \end{figure}
 
-After the explanation of the language aspects, this section concludes with a
-discussion on the other part of a language: its IDE. Spoofax provides IDE
-support by means of its \textit{editor services}.
+After explaining the language aspects, this section concludes with a discussion
+on the other part of a language: its IDE. Spoofax provides IDE support by means
+of its \textit{editor services}.
 
 \subsection{Syntax}
 \label{ssec:syntax-def}
@@ -121,9 +121,9 @@ data structure is briefly highlighted in the following section.
 \subsubsection{ASTs in Spoofax: Stratego terms}
 \label{sec:asts-spoof-strat}
 In Spoofax, an AST is represented as a Stratego term~\cite{Kats10a}. Terms in
-Spoofax come with a textual format called the ATerm Format~\cite{Brand00}. As an
-example, a term representation of the arithmetic expression $2 + 2 - 4$ is shown
-in \cref{lst:aterm-example}.
+Spoofax comes with a textual format called the ATerm Format~\cite{Brand00}. As
+an example, a term representation of the arithmetic expression $2 + 2 - 4$ is
+shown in \cref{lst:aterm-example}.
 
 \begin{lstlisting}[caption={An example ATerm representation of an arithmetic
 expression.},language=aterm,label={lst:aterm-example}]
@@ -142,8 +142,8 @@ Dynamic semantics refers to how a program written in some language
 behaves~\cite{Winskel93}. There are many approaches to formally specify the
 dynamic semantics of a programming language (for an extensive treatment, see
 ``\usebibentry{Winskel93}{title}''~\cite{Winskel93}). One way, for example, is
-to specify the compilation to a different high-level language of which the
-dynamic semantics are already known.
+to specify the compilation to a different language of which the dynamic
+semantics are already known.
 
 \subsubsection{DynSem: rule-based dynamic semantics}
 \label{ssec:dynsem}
@@ -202,7 +202,7 @@ this environment. Read-only semantic components therefore are only propagated
 downwards into the premises: the changed read-only semantic component does not
 appear in the result of the premise, and therefore cannot be propagated again in
 the next premise. A store is a read-write semantic component: changes in the
-store are visible everywhere, as it represents mutable state. In contrast with a
+store are visible everywhere, as it represents mutable state. In contrast to a
 read-only semantic component, a read-write semantic component does appear in the
 result of a rule and can thus be threaded from one premise to the next.
 
