@@ -129,7 +129,7 @@ execute(...): IResult</panel_attributes>
     </coordinates>
     <panel_attributes>org.metaborg.spoofax.shell.client
 --
-bg=orange
+bg=light_Gray
 layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
@@ -143,7 +143,7 @@ layer=-1</panel_attributes>
     </coordinates>
     <panel_attributes>org.metaborg.spoofax.shell.output
 --
-bg=orange
+bg=light_Gray
 layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
@@ -172,7 +172,7 @@ layer=-1</panel_attributes>
     </coordinates>
     <panel_attributes>org.metaborg.spoofax.shell.invoker
 --
-bg=orange
+bg=light_Gray
 layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
@@ -186,7 +186,7 @@ layer=-1</panel_attributes>
     </coordinates>
     <panel_attributes>org.metaborg.spoofax.shell.commands
 --
-bg=orange
+bg=light_Gray
 layer=-1</panel_attributes>
     <additional_attributes/>
   </element>
