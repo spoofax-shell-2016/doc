@@ -1,4 +1,4 @@
-\section{ESV extensions}
+\section{ESV Extensions}
 \label{sec:esv-extensions}
 
 REPL-specific extensions have been made available to the ESV configuration
@@ -6,9 +6,9 @@ language (see \cref{ssec:editor-serv}) to configure language-specific
 features. Currently, the backend used to specify the dynamic semantics of a
 language (see \cref{sec:eval-strat}) and the start symbols valid within the
 context of a REPL can be configured. The newly added configuration settings are
-illustrated in \cref{lst:eval-method}. After loading a language that defines
-these additional settings, they will be available through Spoofax's API as a
-\texttt{``ShellFacet''}.
+illustrated in \cref{lst:eval-method}. They are available through Spoofax's API
+as a \texttt{ShellFacet}, after loading a language that defines these additional
+settings.
 
 \begin{lstlisting}[language=esv,caption={Configuring language specific settings.},label={lst:eval-method}]
 module editor/SL-Shell
@@ -22,7 +22,6 @@ shell
 This ESV configuration can be extended in the future to allow the specification
 of language-specific additional commands, as discussed in
 \cref{ssec:lang-spec-addit}.
-
 
 %%% Local Variables:
 %%% mode: latex

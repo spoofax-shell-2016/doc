@@ -1,69 +1,27 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{tudelft-report}[2013/06/22 v1.0 TU Delft thesis class]
 
-\newif\if@dutch
-\newif\if@english
-\newif\if@nativefonts
-\newif\if@print
-\newif\if@roman
-\@romantrue
-%\newif\if@whitetitle
-% \newif\if@whitelogo
-\DeclareOption{dutch}{\@dutchtrue\@englishfalse}
-\DeclareOption{roman}{\@romantrue}
-\DeclareOption{noroman}{\@romanfalse}
-\DeclareOption{english}{\@dutchfalse\@englishtrue}
-\DeclareOption{nativefonts}{\@nativefontstrue}
-\DeclareOption{print}{\@printtrue}
-%\DeclareOption{whitetitle}{\@whitetitletrue}
-% \DeclareOption{whitelogo}{\@whitelogotrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
-\ExecuteOptions{english}
 \ProcessOptions\relax
 
-\LoadClass[10pt]{book}
+\LoadClass{book}
 
-\RequirePackage{ifxetex}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
+\RequirePackage{geometry}
+\RequirePackage{hyperref}
+\RequirePackage{fontspec}
 
-%% English is the default language, but this can be changed to Dutch by
-%% specifying the 'dutch' option to the document class.
-\ifxetex
-    \RequirePackage{polyglossia}
-    \if@dutch
-        \setdefaultlanguage{dutch}
-    \else
-        \setdefaultlanguage{english}
-        \setotherlanguage{dutch}
-    \fi
-\else
-    \if@dutch
-        \RequirePackage[dutch]{babel}
-    \else
-        \RequirePackage[dutch,english]{babel}
-    \fi
-\fi
-\RequirePackage[nooneline,footnotesize]{caption}
+\DeclareTextCommandDefault{\nobreakspace}{\leavevmode\nobreak\ } 
+\defaultfontfeatures{Ligatures=TeX}
+
+\RequirePackage{polyglossia}
+\setdefaultlanguage{english}
+
+\RequirePackage[nooneline,small]{caption}
+\let\footruleskip\undefined %for loading fancyhdr
 \RequirePackage{fancyhdr}
-\RequirePackage[flushmargin,hang]{footmisc}
-\RequirePackage{ifpdf}
-\ifxetex
-    \RequirePackage{geometry}
-    \RequirePackage{hyperref}
-    \RequirePackage{fontspec}
-    \defaultfontfeatures{Ligatures=TeX}
-\else
-    \ifpdf
-        \RequirePackage[pdftex]{geometry}
-        \RequirePackage[pdftex]{graphicx}
-        \RequirePackage[pdftex]{hyperref}
-    \else
-        \RequirePackage[dvips]{geometry}
-        \RequirePackage[dvips]{graphicx}
-        \RequirePackage[hypertex]{hyperref}
-    \fi
-\fi
+\RequirePackage[flushmargin,hang,bottom]{footmisc}
 \RequirePackage{metalogo}
 \RequirePackage[numbers,sort&compress]{natbib}
 \RequirePackage{tikz}
@@ -74,141 +32,55 @@
 \RequirePackage{xkeyval}
 \RequirePackage[export]{adjustbox}
 
-\ifxetex
-    %% If the document is compiled with XeLaTeX, we load the TU Delft house
-    %% style fonts: Bookman Old Style (serif) for titles and Arial (sans-serif)
-    %% for text. Even if the nativefonts option was specified, we need these
-    %% fonts for the cover.
-    \newfontfamily\tudtitlefamily[
-        Path = fonts/,
-        Extension = .ttf%,
-    ]{TUDelft-UltraLight}
-    \newfontfamily\tudrmfamily[
-        Path = fonts/,
-        Extension = .ttf,
-        BoldFont = *_Bold,
-        ItalicFont = *_Italic,
-        BoldItalicFont = *_Bold_Italic]{Georgia}
-    \newfontfamily\tudsffamily[
-        Path = fonts/,
-        Extension = .ttf,
-        BoldFont = *_Bold,
-        ItalicFont = *_Italic,
-        BoldItalicFont = *_Bold_Italic]{Arial}
-\else
-    \@nativefontstrue
-%    \newfontfamily\tudtitlefamily{roboto-thin}
-    \newcommand*\tudrmfamily{\rmfamily}
-    \newcommand*\tudsffamily{\sffamily}
-\fi
+\newfontfamily{\tudtitlefamily}[
+    Path = fonts/,
+    Extension = .ttf]{Roboto-Thin}
+\newfontfamily{\tudsffamily}[
+    Path = fonts/,
+    Extension = .ttf]{Roboto-Regular}
 
+\setmainfont[
+    Path = fonts/,
+    Extension = .ttf,
+    UprightFont = {*R},
+    BoldFont = {*B},
+    ItalicFont = {*I},
+    BoldItalicFont = {*BI},
+    Ligatures=TeX, % supposed to replace Mapping=tex-text
+    ]{GenBkBas} % Gentium Book Basic
+\setsansfont[
+    Path = fonts/,
+    Extension = .ttf,
+    UprightFont = {*-Regular},
+    BoldFont = {*-Bold},
+    ItalicFont = {*-Italic},
+    BoldItalicFont = {*-BoldItalic},
+    Ligatures=TeX,
+    Numbers=OldStyle]{OpenSans}
+\setmonofont[
+    Path = fonts/,
+    Extension = .ttf,
+    UprightFont = {*-Regular},
+    BoldFont = {*-Bold},
+    Scale=MatchLowercase]{FiraMono}
+%\RequirePackage[bigdelims,vvarbb]{newpxmath}
+\RequirePackage[libertine,bigdelims,vvarbb]{newtxmath}
+%\setmathfont[math-style=ISO,bold-style=ISO,vargreek-shape=TeX]{TeX Gyre Pagella Math} 
 
-\if@nativefonts
-    %% The native font is Utopia Regular with Fourier math. We use Latin Modern
-    %% as a fallback, since Utopia lacks support for sans-serif and monospace.
-    \RequirePackage[T1]{fontenc}
-    \RequirePackage[utf8]{inputenc}
-%    \RequirePackage{lmodern}
-    \if@roman
-%      \RequirePackage{lato}
-%      \RequirePackage{helvet}
-      \RequirePackage[thin]{roboto}
-      \RequirePackage{fourier}
-    \else
-      \RequirePackage[thin]{roboto}
-%      \RequirePackage[default]{lato}
-      \RequirePackage{helvet}
-      \renewcommand{\familydefault}{\sfdefault}
-    \fi
-    \def\largetitlefont{\fontfamily{Roboto-LF}}
-    \def\largetitleseries{\fontseries{t}}
-    \def\largetitleshape{\fontshape{n}}
-    \def\largetitlestyle{\largetitlefont\largetitleseries\largetitleshape}
-    \def\titleshape{\fontshape{n}}
-    \if@roman
-        \renewcommand{\familydefault}{\rmdefault}
-        \def\titlefont{\fontfamily{fla}}
-        \def\sectitleshape{\fontshape{n}}
-        \def\sectitlestyle{\rmfamily\titleshape\bfseries}%{\familydefault\bfseries}
-        \def\chaptitlestyle{\rmfamily\titleshape}
-    \else
-%        \renewcommand{\familydefault}{\tudsffamily}
-%        \def\titleshape{\fontshape{n}}
-        \def\titlefont{\fontfamily{fla}}
-        \def\sectitlestyle{\sffamily\titleshape\bfseries}%        \def\sectitlestyle{\titleshape\bfseries}
-        \def\chaptitlestyle{\sffamily\titleshape}
-    \fi
-%    \def\largetitleshape{\upshape}
-%    \if@print
-    \def\titlestyle{\titlefont\titleshape}
-%    \else
-%        \def\titlestyle{\titlefont\titleshape}
-%        \def\sectitlestyle{\sffamily\titleshape\bfseries}
-%    \fi
-%    \def\titlestyle{\titlefont\titleshape\bfseries}
-%    \if@print
-%        \def\headerstyle{\titlefont\titleshape\bfseries}
-%    \else
-        \def\headerstyle{\titlefont}
-%    \fi
-\else
-    %% Apart from Bookman Old Style and Arial, we use Courier New for monospace
-    %% and Cambria for math.
-    \RequirePackage{unicode-math}
-    \setmainfont[
-        Path = fonts/,
-        Extension = .ttf,
-        BoldFont = *-Bold,
-        ItalicFont = *-Italic,
-        BoldItalicFont = *-BoldItalic
-    ]{BookmanOldStyle}
-    \setsansfont[
-        Path = fonts/,
-        Extension = .ttf,
-        BoldFont = *_Bold,
-        ItalicFont = *_Italic,
-        BoldItalicFont = *_Bold_Italic]{Arial}
-    \setmonofont[
-        Path = fonts/,
-        Extension = .ttf,
-        UprightFont = *MT,
-        BoldFont = *-BoldMT,
-        ItalicFont = *-ItalicMT,
-        BoldItalicFont = *-BoldItalicMT
-    ]{CourierNewPS}
-    \setmathfont[
-        Path = fonts/,
-        Extension = .ttf
-    ]{CambriaMath}
-    %% The default style for text is Tahoma (sans-serif).
-%    \setlength\@largetitlesize{96pt}
-    \renewcommand*\familydefault{\sfdefault}
-    %% The default style for titles is Bookman Old Style (serif). 
-    \def\titlefont{\tudsffamily}
-    \def\largetitlefont{\tudtitlefamily}
-    \def\titleshape{}
-    \def\largetitleshape{\titleshape}
-    \def\largetitleseries{}
-    \def\largetitlestyle{\largetitlefont\largetitleseries\largetitleshape}
-    \def\chaptitlefamily{\tudsffamily}
-%    \if@print
-%        \def\titlestyle{\titlefont\titleshape}
-%%        \def\largetitlestyle{\largetitlefont\titleshape\bfseries}
-%        \def\sectitlestyle{\tudsffamily\titleshape\bfseries}
-%    \else
-        \def\titlestyle{\titlefont\titleshape}
-%        \def\largetitlestyle{\largetitlefont\titleshape}
-        \def\sectitlestyle{\tudsffamily\titleshape\bfseries}
-        \def\chaptitlestyle{\chaptitlefamily}
-%    \fi
-    \def\headerstyle{\titlestyle}
-\fi
-
-% Use roman (Georgia) in quote environment
-\renewenvironment{quote}
-               {\list{}{\rightmargin\leftmargin}\tudrmfamily\selectfont%
-                \item\relax}
-               {\endlist}
+\RequirePackage[utf8]{inputenc}
+\def\largetitlefont{\tudtitlefamily}
+\def\largetitleseries{\fontseries{t}}
+\def\largetitleshape{\fontshape{n}}
+\def\largetitlestyle{\largetitlefont\largetitleseries\largetitleshape}
+\def\titleshape{\fontshape{n}}
+\renewcommand{\familydefault}{\rmdefault}
+\def\titlefont{\sffamily}
+\def\sectitleshape{\fontshape{n}}
+\def\sectitlestyle{\sffamily\sectitleshape\bfseries}
+\def\chaptitlestyle{\sffamily\titleshape}
+\def\titlestyle{\titlefont\titleshape}
+\def\headerstyle{\titlefont}
+\def\quotestyle{\rmfamily\itshape}
 
 %% Define the TU Delft house style colors.
 \definecolor{tudelft-cyan}{cmyk}{1,0,0,0}
@@ -228,33 +100,20 @@
 \definecolor{tudelft-yellow}{cmyk}{0.02,0,0.54,0}
 
 \def\@pagecolor{tudelft-cyan}
-%\if@whitetitle
-%  \def\titlecolor{tudelft-white}
-%\else   
-%  \def\titlecolor{tudelft-black}
-%\fi
 
-%% Use TU Delft cyan as the color for titles, unless the 'print' option is
-%% specified. % JMT changed this: all titles black!
-% \if@print
-    \colorlet{title}{black}
-%\else
-%    \colorlet{title}{tudelft-cyan}
-%\fi
+\colorlet{title}{black}
 
 %% We use A4 paper with slightly smaller margins than the default (scale = 0.7).
 \geometry{a4paper,hscale=0.75,vscale=0.8}
 
 %% Redefine the title command to accept an optional subtitle.
 \renewcommand*\title[2][tudelft-white]{%
-%    \def\@subtitle{#1}%
     \def\@titlecolor{#1}%
     \def\@title{#2}%
     %% Add the title to the PDF meta data.
     \hypersetup{pdftitle=#2}%
 }
 \newcommand*\subtitle[2][tudelft-white]{%
-%    \def\@subtitle{#1}%
     \def\@subtitlecolor{#1}%
     \def\@subtitle{#2}%
     %% Add the title to the PDF meta data.
@@ -276,7 +135,6 @@
 %% cover. This text is inserted in a minipage environment and can therefore
 %% include line breaks.
 \newcommand\covertext[2][tudelft-white]{%
-%    \def\@subtitle{#1}%
     \def\@covertextcolor{#1}%
     \def\@cover@text{#2}}
 
@@ -320,8 +178,6 @@
 \define@key{cover}{spinewidth}{\setlength\@cover@spinewidth{#1}}
 \define@key{cover}{frontboxwidth}{\setlength\@cover@frontboxwidth{#1}}
 \define@key{cover}{frontboxheight}{\setlength\@cover@frontboxheight{#1}}
-%\define@key{cover}{backboxwidth}{\setlength\@cover@backboxwidth{#1}}
-%\define@key{cover}{backboxheight}{\setlength\@cover@backboxheight{#1}}
 \define@key{cover}{x}{\setlength\@cover@x{#1}}
 \define@key{cover}{y}{\setlength\@cover@y{#1}}
 \define@key{cover}{ax}{\setlength\@cover@ax{#1}}
@@ -441,13 +297,11 @@
           \addtolength\@cover@fronttextheight{-4\@cover@margin}
           \coordinate (tcorner) at ($(top left)+(2\@cover@margin,-2\@cover@margin)$);
           \coordinate (front top left) at (tcorner);
-%%          \coordinate (back top left) at ($(tcorner)+(-\@cover@backboxwidth,\@cover@backboxheight)$);     
           \node at (front top left)[anchor=north west,inner sep=\@cover@margin]{
              \begin{minipage}[t][\@cover@fronttextheight]{\@cover@fronttextwidth}
                  %% Print the title and optional subtitle at the top in white.
                    {\titlefont\color{\@titlecolor}\fontsize{58}{58}\selectfont\@title}
                     \ifx\@subtitle\undefined\else
-%                     \\[3mm]
                      \vfill
                      
                      {\titlefont\color{\@subtitlecolor}\fontsize{52}{52}\selectfont\@subtitle}
@@ -466,7 +320,6 @@
         \else
           \coordinate (tcorner) at ($(top left)+(\@cover@x,-\@cover@y)$);
           \coordinate (acorner) at ($(top left)+(\@cover@ax,-\@cover@ay)$);
-  %        \coordinate (lcorner) at ($(bottom left)+(2cm,2cm)$);
           %% Calculate the top left and bottom right coordinates of the front and
           %% back boxes.
           \ifKV@cover@frontbottom
@@ -478,8 +331,6 @@
           \fi
           \coordinate (front bottom right) at ($(front top left)+(\@cover@frontboxwidth,-\@cover@frontboxheight)$);
           \coordinate (back bottom right) at ($(back top left)+(\@cover@splitboxwidth,-\@cover@splitboxheight)$);
-          %% Draw the front box in black.
-  %        \fill[fill=tudelft-black](front top left) rectangle (front bottom right);
           %% Calculate the width and height of the front text box.
           \setlength\@cover@fronttextwidth{\@cover@frontboxwidth}
           \addtolength\@cover@fronttextwidth{-2\@cover@margin}
@@ -490,39 +341,21 @@
               \begin{minipage}[t][\@cover@fronttextheight]{\@cover@fronttextwidth}
                   %% Print the title and optional subtitle at the top in white.
                   {\largetitlestyle\color{\@titlecolor}\fontsize{96}{96}\selectfont\@title}
-  %                {\tudsffamily\color{\@titlecolor}\fontsize{96}{96}\selectfont\@title}
                   \ifx\@subtitle\undefined\else
                       \\[3mm]
                       {\tudsffamily\color{\@subtitlecolor}\fontsize{22}{32}\selectfont\@subtitle}
                   \fi
                   %% Print the author at the bottom in cyan.
                   \vfill
-  %                {\tudtitlefamily\color{\@authorcolor}\fontsize{26}{26}\selectfont\@author}
                   {\largetitlestyle\color{\@authorcolor}\fontsize{26}{26}\selectfont\@author}
               \end{minipage}
           };
-          %% Draw the back box in cyan.
-  %        \fill[fill=tudelft-cyan](back top left) rectangle (back bottom right);
           %% Print the affiliation.
           \ifx\@affiliation\undefined\else
-  %            \node at (back bottom right)[rotate=90,anchor=south west,inner sep=\@cover@margin]{
               \node at (acorner)[rotate=90,anchor=south west,inner sep=\@cover@margin]{
                   \tudsffamily\color{\@afilcolor}\@affiliation
               };
           \fi
-%          \ifKV@cover@back\ifx\@cover@text\undefined\else
-%              %% Calculate the width and height of the back text box.
-%              \setlength\@cover@backtextwidth{\@cover@backboxwidth}
-%              \addtolength\@cover@backtextwidth{-2\@cover@margin}
-%              \setlength\@cover@backtextheight{\@cover@backboxheight}
-%              \addtolength\@cover@backtextheight{-2\@cover@margin}
-%              %% Create the back text box.
-%              \node at (back top left)[anchor=north west,inner sep=\@cover@margin]{
-%                  \begin{minipage}[t][\@cover@backtextheight]{\@cover@backtextwidth}
-%                      \tudsffamily\color{tudelft-white}\@cover@text
-%                  \end{minipage}
-%              };
-%          \fi
          
        \fi
     \end{tikzpicture}
@@ -567,8 +400,8 @@
 \pagestyle{mainmatter}
 
 %% Print the current chapter and section at the top of the page in cyan.
-\renewcommand*\chaptermark[1]{\markboth{\thechapter.\ \color{title}#1}{}}
-\renewcommand*\sectionmark[1]{\markright{\thesection.\ \color{title}#1}}
+\renewcommand*\chaptermark[1]{\markboth{\thechapter\ \color{title}#1}{}}
+\renewcommand*\sectionmark[1]{\markright{\thesection\ \color{title}#1}}
 \newcommand*\setheader[1]{\markboth{\color{title}#1}{\color{title}#1}}
 
 %% Change the headrule command (from fancyhdr.sty) to draw the line below the
@@ -592,7 +425,7 @@
 %% right, followed by the part name on the next line in the title color.
 \titleformat{\part}[display]
     {\flushright}
-    {\fontsize{\@largetitlesize}{\@largetitlesize}\selectfont\bfseries\thepart}
+    {\fontsize{96}{96}\selectfont\bfseries\thepart}
     {0pt}
     {\Huge\color{title}}
 %% Separate the title from the text by two empty lines.
@@ -614,37 +447,22 @@
 
 %% Section titles start with the number in bold, followed by the name printed
 %% in the title color.
-\titleformat{\section}
-    {\LARGE\sectitlestyle}
-    {\bfseries\thesection.\ }
-    {0pt}
-    {\color{title}}
-%% Sections are preceded by an empty line.
-\titlespacing{\section}{0pt}{\baselineskip}{0pt}
+\titleformat*{\section}
+    {\Large\sectitlestyle}
 %% In the table of contents, section names are followed by a line of dots 8pt
 %% apart.
 \dottedcontents{section}[3.8em]{\titlefont}{2.3em}{8pt}
 
 %% Subsection titles have the same layout as section titles, except in a smaller
 %% font.
-\titleformat{\subsection}
-    {\Large\sectitlestyle}
-    {\bfseries\thesubsection.\ }
-    {0pt}
-    {\color{title}}
-\titlespacing{\subsection}{0pt}{\baselineskip}{0pt}
+\titleformat*{\subsection}
+    {\large\sectitlestyle}
 \dottedcontents{subsection}[7em]{\titlefont}{3.2em}{8pt}
 
 %% Subsubsections have the same font and color as sections and subsections, but
 %% are not preceded by a number.
-\titleformat{\subsubsection}
-    {\large\sectitlestyle}
-    {\bfseries\thesubsubsection.\ }
-    {0pt}
-    {\color{title}}
-%% Subsubsections are preceded by an empty line and do not appear in the table
-%% of contents.
-\titlespacing{\subsubsection}{0pt}{\bigskipamount}{0pt}
+\titleformat*{\subsubsection}
+    {\sectitlestyle}
 
 %% Color the bullets of the itemize environment and make the symbol of the third
 %% level a diamond instead of an asterisk.
@@ -652,6 +470,12 @@
 \renewcommand*\labelitemii{\color{title}--}
 \renewcommand*\labelitemiii{\color{title}$\diamond$}
 \renewcommand*\labelitemiv{\color{title}\textperiodcentered}
+
+% Use  in quote environment
+\renewenvironment{quote}
+               {\list{}{\rightmargin\leftmargin}\quotestyle\selectfont%
+                \item\relax}
+               {\endlist}
 
 %% Use a custom bibliography style based on apsrev4-1.
 \bibliographystyle{tudelft-report}

@@ -1,10 +1,10 @@
-\section{Language interpreters have to be on the classpath}
+\section{Language Interpreters on the Classpath}
 \label{sec:classpath}
 
 In \cref{sec:dynsem-eval-strat} the implementation of the DynSem evaluation
 strategy was outlined, together with its backend, the Truffle VM.  From the
 DynSem specification of a language an interpreter can be generated, which uses
-Truffle's \texttt{``PolyglotEngine''} for its implementation.
+Truffle's \texttt{PolyglotEngine} for its implementation.
 
 As any other Truffle language, the language of the interpreter has to be
 registered with Truffle by annotating it correctly\footnote{See:
@@ -12,7 +12,7 @@ registered with Truffle by annotating it correctly\footnote{See:
 DynSem generates this annotation for languages defined in Spoofax, after which
 the \texttt{PolyglotEngine} finds and registers all annotated languages when it
 is instantiated. However, according to the Truffle specification, the
-PolyglotEngine will \textit{``search for languages registered in the system class
+\texttt{PolyglotEngine} will \textit{``search for languages registered in the system class
 loader and make them available for later evaluation\footnote{See:
 \url{http://lafo.ssw.jku.at/javadoc/truffle/latest/com/oracle/truffle/api/vm/PolyglotEngine.html}}''}.
 
@@ -22,8 +22,8 @@ be on the classpath of the system classloader before instantiating a
 the desired language interpreter before starting the REPL. Since Truffle
 enforces the use of the system classloader, attempts to load the
 \texttt{PolyglotEngine} using a custom classloader unfortunately did not solve this
-issue. It is suspected that this issue will become apparent in Spoofax as well as the new
-Dynsem implementation is integrated more tightly.
+issue. It is suspected that this issue will become apparent in Spoofax as well
+once the new DynSem implementation will be integrated more tightly.
 
 %%% Local Variables:
 %%% mode: latex

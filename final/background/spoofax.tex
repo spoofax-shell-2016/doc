@@ -30,18 +30,18 @@ the specification of each language aspect\footnote{This section follows the
   course at the TU Delft. The slides can be found here:
   \url{http://tudelft-in4303.github.io/lectures/specification/}.}. A language
 commonly consists of the following aspects, shown also in
-\cref{fig:spoofax-relations}, of which a selection will be discussed in more
+\cref{fig:spoofax-relations}, of which a selection is discussed in more
 detail throughout the rest of this section:
 
 \begin{enumerate}
-\item \textbf{\hyperref[ssec:syntax-def]{Syntax Definition}:} The first aspect
+\item \textbf{\hyperref[ssec:syntax-def]{Syntax definition}:} The first aspect
   concerns what textual representations of a program are syntactically
   valid. Its specification consists of a grammar specified with context-free
   grammar productions. A parser provides an implementation of this
   specification, by mapping a textual representation of a program to an abstract
   syntax tree (AST) representation. In Spoofax, the syntax is declared with a
   domain specific language (DSL) called SDF.
-\item \textbf{Static Semantics:} A parsed AST then optionally goes through
+\item \textbf{Static semantics:} A parsed AST then optionally goes through
   static analysis (type checking, name binding and variable scoping), to test if
   the program is well-formed. Static analysis is the implementation of an aspect
   called \textit{static semantics}. The static semantics of a language can be
@@ -50,23 +50,23 @@ detail throughout the rest of this section:
   specification: the TS Type Specification language and the NaBL name binding
   language.
 
-  This language aspect will not be discussed in this section. However, the
+  This language aspect is not discussed in this section. However, the
   original research report contains a section that does discuss this aspect. It
   can be found in \cref{ssec:a-static-analysis}.
-\item \textbf{Term Rewriting or Program Transformation:} Optionally, a
+\item \textbf{Term rewriting or program transformation:} Optionally, a
   well-formed AST can then be transformed, for example for desugaring or
   optimization. This execution step falls under the aspect of \textit{term
     rewriting} and can be formally specified by \textit{term rewrite rules}. For
   the specification of this aspect, Spoofax provides a DSL called Stratego.
 
-  This aspect, too, will not be discussed in this section. The relevant section
-  in the research report can be found in \cref{ssec:a-term-rewrite}.
-\item \textbf{\hyperref[ssec:dynamic-semantics]{Dynamic Semantics}:} Next the
+  This aspect, too, is not discussed in this section. The relevant section
+  from the research report can be found in \cref{ssec:a-term-rewrite}.
+\item \textbf{\hyperref[ssec:dynamic-semantics]{Dynamic semantics}:} Next the
   optionally transformed AST is either compiled or interpreted, thereby
   providing a means of execution. The aspect of \textit{dynamic semantics}
-  defines what the behaviour is of a program upon execution. The formal
+  defines what the behavior is of a program upon execution. The formal
   specification of this aspect can be done with \textit{reduction rules},
-  although there are other ways to accomplish this: for example, interpretation
+  although there are other ways to accomplish this. For example, interpretation
   can be seen as the transformation of a program to a single value. In Spoofax,
   the dynamic semantics can be defined with either Stratego or a DSL called
   DynSem.
@@ -84,7 +84,7 @@ detail throughout the rest of this section:
 This section concludes with a discussion on the other part of a language: its
 IDE. Spoofax provides IDE support by means of its Editor Services.
 
-\subsection{Syntax Definition}
+\subsection{Syntax definition}
 \label{ssec:syntax-def}
 The first part of the specification of a language is its syntax. The
 syntax of a language is often specified by means of a \emph{lexical
@@ -98,9 +98,9 @@ defines syntactically valid sentences made up of words.
 \subsubsection{SDF3: syntax definition in Spoofax}
 \label{ssec:orgheadline1}
 To specify a syntax definition declaratively in Spoofax, a DSL called
-\emph{SDF3}~\cite{Vollebregt12} is used.  SDF3 is the third generation
+SDF3~\cite{Vollebregt12} is used.  SDF3 is the third generation
 of the \emph{Syntax Definition Formalism} (SDF)~\cite{Heering89}. It
-uses only context-free grammer productions for the specification of
+uses only context-free grammar productions for the specification of
 both the lexical syntax and the context-free syntax, a feature that
 was introduced in SDF2~\cite{Visser97}.
 
@@ -118,7 +118,7 @@ rules for editors (see \cref{ssec:editor-serv}).
 The Spoofax API gives access to the generated parser through the
 \texttt{SyntaxService}. The results obtained by executing the parser results in,
 among other information, an AST represented as an internal data structure. This
-data structure will be briefly highlighted in the following section
+data structure is briefly highlighted in the following section.
 
 \subsubsection{ASTs in Spoofax: Stratego terms}
 \label{sec:asts-spoof-strat}
@@ -138,7 +138,7 @@ programmatically through its API, one sees terms used as an internal
 representation of the data going through the execution pipeline as depicted in
 \cref{fig:spoofax-relations}.
 
-\subsection{Dynamic Semantics}
+\subsection{Dynamic semantics}
 \label{ssec:dynamic-semantics}
 Dynamic semantics refers to how a program written in some language
 behaves~\cite{Winskel93}. There are many approaches to formally specify the
@@ -147,10 +147,6 @@ dynamic semantics of a programming language (for an extensive treatment, see
 to specify the transformation of programs written in one programming language to
 programs of another language of which the dynamic semantics are already known.
 
-DynSem uses an approach called \textit{operational semantics}. The rest of this
-section discusses how DynSem (and operational semantics) is used to specify the
-dynamic semantics of a language in Spoofax.
-
 \subsubsection{DynSem: rule-based dynamic semantics}
 \label{ssec:dynsem}
 Aside from Stratego, the Spoofax team has developed an additional method to
@@ -158,6 +154,10 @@ declare the dynamic semantics of a language, namely a DSL called
 DynSem~\cite{VerguNV15}. DynSem allows for an operational semantics
 specification from which a Java-based AST interpreter can be automatically
 derived.
+
+DynSem uses an approach called \textit{operational semantics}. The rest of this
+section discusses how DynSem (and operational semantics) is used to specify the
+dynamic semantics of a language in Spoofax.
 
 \paragraph{Reduction rules} In DynSem and operational semantics, reduction rules
 are used to specify the dynamic semantics of a language. The syntax of a DynSem
@@ -180,7 +180,7 @@ A reduction rule consists of a set of premises (lines 2 and 3) and a conclusion
 (line 1). Put simply, the conclusion of a reduction rule holds if all of its
 premises hold~\cite{Kahn87}. Thus, the rule shown in
 \cref{lst:dynsem-rule-syntax} is read as follows: given that the premises
-\textit{premise1} and \textit{premise2} hold, the conclusion in line 1 holds.
+\texttt{premise1} and \texttt{premise2} hold, the conclusion in line 1 holds.
 
 The left-hand side of the conclusion, the terms to the left of the arrow,
 represents a pattern match on terms, matching variables that can be referenced
@@ -193,13 +193,14 @@ reduction~\cite{VerguNV15}.
   components}: they represent the context in which the reduction takes place. An
 example of a semantic component is that of an environment, which maps variable
 names to their values. Another example is that of a store, which maps addresses
-of values to the values themselves. There are two kinds of semantic components:
-\textit{read-only} semantic components and \textit{read-write} semantic
-components. An environment is a read-only semantic component: a variable is
-bound only within a certain scope, and any other reduction rules that are
-applied outside of that scope do not see this environment. A store is a
-read-write semantic component: changes in the store are visible everywhere, as
-it represents mutable state.
+of values to the values themselves.
+
+There are two kinds of semantic components: \textit{read-only} semantic
+components and \textit{read-write} semantic components. An environment is a
+read-only semantic component: a variable is bound only within a certain scope,
+and any other reduction rules that are applied outside of that scope do not see
+this environment. A store is a read-write semantic component: changes in the
+store are visible everywhere, as it represents mutable state.
 
 \paragraph{Specifying function application in DynSem} An example of a reduction
 rule specified in DynSem is shown in \cref{lst:dynsem}. The rule specifies the
@@ -228,12 +229,12 @@ rules
   \end{equation*}
 \end{minipage}
 \\
-\begin{minipage}[t]{0.45\textwidth}
+\begin{minipage}[t]{0.47\textwidth}
   \captionof{lstlisting}{Specifying function application through the use of an
     environment.}\label{lst:dynsem}
 \end{minipage}
-\hspace{0.05\textwidth}
-\begin{minipage}[t]{0.45\textwidth}
+\hspace{0.02\textwidth}
+\begin{minipage}[t]{0.5\textwidth}
   % Hack: Locally change to use figure counter and label.
   \renewcommand*\figurename{Equation}
   \makeatletter
@@ -246,13 +247,13 @@ rules
 
 The rule first introduces a pattern-match on a term representing function
 application on a closure (i.e. a function together with its enclosing
-environment \textit{E}). In line 4, the environment \textit{E} (a semantic
-component) is extended with a variable binding \textit{x $\mapsto$ v1} to form a
-new environment \textit{E'}. Then, in line 5, the function body \textit{e} is
-reduced to the value \textit{v2}, within the context of the newly extended
-environment \textit{E'}.
+environment \texttt{E}). In line 4, the environment \texttt{E} (a semantic
+component) is extended with a variable binding \texttt{x $\mapsto$ v1} to form a
+new environment \texttt{E'}. Then, in line 5, the function body \texttt{e} is
+reduced to the value \texttt{v2}, within the context of the newly extended
+environment \texttt{E'}.
 
-\subsection{Editor Services}
+\subsection{Editor services}
 \label{ssec:editor-serv}
 This section concludes with a brief description of editor services,
 which provide the IDE support for languages defined in
@@ -278,7 +279,7 @@ be retrieved and used.
 A menu action for the paplj language defined using Spoofax. The bottom window shows the menu definition, the top window shows a program written in paplj.}
 \end{figure}
 
-Editor services are defined using a DSL called \textit{ESV}, shown in the bottom
+Editor services are defined using a DSL called ESV, shown in the bottom
 window of \cref{fig:menu-actions}. In the case of menus, their actions are
 specified using Stratego. Since Stratego supports native strategies, these
 actions can also be specified in Java. As such, Spoofax allows for defining

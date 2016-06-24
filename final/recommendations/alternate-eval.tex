@@ -11,6 +11,6 @@ Languages with a Java backend (such as IceDust%
 \footnote{https://github.com/MetaBorgCube/IceDust}) therefore do not currently
 work with the REPL. To add support for specific interpreters, a language should
 provide the REPL with a named implementation of the
-\texttt{``IEvaluationStrategy''}. The language designer can register alternative
+\texttt{IEvaluationStrategy}. The language designer can register alternative
 evaluation strategies with the REPL by extending the Guice module of the backend
 and overriding the \texttt{bindEvalStrategies} method.

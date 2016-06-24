@@ -1,17 +1,14 @@
-\documentclass{tudelft-report}
-\usepackage{geometry}
+\documentclass[12pt,a4paper,twoside]{tudelft-report}
 \usepackage{hyperref}
 \usepackage[noabbrev]{cleveref}
 \crefname{lstlisting}{listing}{listings}
 \Crefname{lstlisting}{Listing}{Listings}
 \usepackage{todonotes}
 \presetkeys{todonotes}{inline, noline}{}
-\usepackage{caption}
 \usepackage{subcaption}
 \usepackage{enumitem}
 \usepackage{listings}
 \usepackage{hhline}
-\usepackage{amsmath}
 \usepackage{proof}
 \usepackage{usebib} % Use data defined in the bib file.
 \bibinput{references}
@@ -24,7 +21,8 @@
   captionpos=b,
   frame=none,
   keepspaces=true,
-  numberstyle=\ttfamily
+  numberstyle=\ttfamily,
+  basicstyle=\ttfamily
 }
 
 % Table markup:
