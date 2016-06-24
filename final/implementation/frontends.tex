@@ -9,10 +9,10 @@ flexibility, two frontends have been developed that operate on two different
 spectra: a single threaded, text-based console frontend and a multithreaded
 plugin to the Eclipse IDE. Both of these are discussed next.
 
-\subsection{Console REPL}
+\subsection{Console frontend}
 \label{ssec:consolerepl}
 
-The console REPL provides the user with a text-based user interface. For users
+The console frontend provides the user with a text-based user interface. For users
 already accustomed to the command line, this is perhaps the most familiar
 looking interface. A REPL running in the console requires a means of getting
 user input from the standard input stream and printing results and error
@@ -40,7 +40,7 @@ The \texttt{read} and \texttt{print} steps are provided
 the by \texttt{TerminalUserInterface} class, which, as the name implies, is
 responsible for the user interface. This class has connections to the standard
 input, output and error streams. It uses JLine2 to provide a blocking input
-editor. Because the input editor is blocking, the console REPL can run in a
+editor. Because the input editor is blocking, the console frontend can run in a
 single thread, thereby greatly simplifying its implementation.
 
 A straightforward algorithm to provide multiline editing capabilities is used in
@@ -97,7 +97,7 @@ instantiated by Eclipse when the user requests the REPL to be opened. This
 In a multithreaded graphical user interface environment, asking text entry
 widgets for the entered text is rarely a blocking process. This is no different
 in Eclipse. For this reason, the \texttt{EclipseRepl} cannot simply loop as the
-console REPL does. The solution is to use reactive programming through RxJava:
+console frontend does. The solution is to use reactive programming through RxJava:
 the \texttt{EclipseRepl} is registered as an observer to the
 \texttt{EclipseEditor}. Then, when the user presses the Return key,
 \texttt{EclipseEditor} notifies \texttt{EclipseRepl} with the contents of its
