@@ -33,13 +33,13 @@ provides an implementation of this definition, by mapping a textual
 representation of a program to an abstract syntax tree (AST)
 representation. In Spoofax, the syntax is declared with a domain
 specific language (DSL) called SDF.
-\item \hyperref[ssec:static-analysis]{Static Semantics}: The AST then goes through static analysis (type
+\item \hyperref[ssec:a-static-analysis]{Static Semantics}: The AST then goes through static analysis (type
 checking, name binding and variable scoping), to test if the
 program is well-formed. Static semantics describe the rules for the
 static analysis step. Spoofax provides two DSLs that can specify the two
 distinct parts of this step: the TS Type Specification language and
 the NaBL name binding language.
-\item \hyperref[ssec:term-rewrite]{Term Rewriting and Program Transformation}: Optionally, a
+\item \hyperref[ssec:a-term-rewrite]{Term Rewriting and Program Transformation}: Optionally, a
 well-formed AST can then be transformed, for example for desugaring
 or optimization. Spoofax provides Stratego for this step.
 \item \hyperref[ssec:dynamic-semantics]{Dynamic Semantics}: Next the optionally transformed AST is either
