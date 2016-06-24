@@ -19,13 +19,13 @@ To request and receive results from the backend, a frontend can invoke commands
 by sending the command name and its parameters to the \texttt{ICommandInvoker}
 in the backend. The \texttt{ICommandInvoker} will then execute the
 \texttt{IReplCommand} corresponding to the command name. Every executed command
-returns an \texttt{IResult}. Since execution of different commands can have
-varying types of results, the actual returned type of \texttt{IResult} can
-vary.
+returns an \texttt{IResult}.
 
 To execute a command, the frontend thus only has to implement a way of querying
 the user for input, after which it can send this input to the
-\texttt{ICommandInvoker}. The returned \texttt{IResult} can then be visited
-by the frontend, thereby dispatching results based on their specific types.
+\texttt{ICommandInvoker}. Since execution of different commands can have
+varying types of results, the actual returned type of \texttt{IResult} can
+vary. The returned \texttt{IResult} can be visited by the frontend, thereby
+dispatching results based on their specific types.
 
 
