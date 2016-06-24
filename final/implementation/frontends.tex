@@ -44,9 +44,9 @@ editor. Because the input editor is blocking, the console frontend can run in a
 single thread, thereby greatly simplifying its implementation.
 
 A straightforward algorithm to provide multiline editing capabilities is used in
-combination with JLine2's input buffer, which JLine2 does not natively support.
+combination with JLine2's input buffer.
 JLine2 does support input history, which means only an adapter class,
-\texttt{JLine2InputHistory} had to be made to interoperate with the history
+\texttt{JLine2InputHistory}, had to be made to interoperate with the history
 interface that is offered by the backend. An extension to this class is provided
 to maintain persistent history.
 
