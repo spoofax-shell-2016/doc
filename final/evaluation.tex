@@ -307,7 +307,34 @@ data classes are often considered to be a code smell, and \texttt{setter}
 methods risk not fully initializing an object. The classes to which the
 criticism applied have been refactored into smaller, more manageable units.
 Ultimately, this not only led to resolving the only negative feedback made by
-the Software Improvement Group, it also led to a better architecture.
+the Software Improvement Group, it also led to a better architecture.\\
+
+On June 28th, the second round of feedback was received:
+
+\begin{quotation}
+[Hermeting]
+
+In de tweede upload zien we dat de omvang van het systeem flink is gestegen. Er
+is ook een lichte stijging te zien bij de score voor onderhoudbaarheid.
+
+Die stijging komt voornamelijk door de verbetering van Unit Interfacing. Dit is
+zeer positief, aangezien dat Unit Interfacing het meest kritische punt was bij
+de vorige evaluatie. De score voor Unit Interfacing is op dit moment
+marktgemiddeld.
+
+We zien ook stijging in het volume van de testcode. De verhouding tussen nieuwe
+geschreven productiecode en testcode is bijna 1:1, wat optimaal is.
+
+Uit deze observaties kunnen we concluderen dat de aanbevelingen van de vorige
+evaluatie zijn meegenomen in het ontwikkeltraject.
+\end{quotation}
+
+This analysis says that the size of the codebase has increased significantly.
+The maintainability score has improved slightly, primarily because the score for
+Unit Interfacing increased. The ratio between production and test code is almost
+one to one, which is an optimal score. From these observations, the Software
+Improvement Group concluded that the recommendations made in the first round of
+feedback have been taken into account.
 
 %%% Local Variables:
 %%% mode: latex
